@@ -1,0 +1,113 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Map key
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader=","
+
+:imap jk <Esc>
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" NERDTree
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark<Space>
+map <leader>nf :NERDTreeFind<cr>
+map <leader>nr :NERDTreeRefreshRoot<cr>
+
+" Useful mappings for managing tabs
+map <leader>tc :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tx :tabclose<cr>
+map <leader>tn :tabnext<cr>
+
+" Map leader split windows
+map <leader>wv <C-W>v
+map <leader>ws <C-W>s
+
+" Turn off search highlight
+map <silent> <leader><cr> :noh<cr>     
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General config 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=UTF-8
+
+set number relativenumber     " turn hybrid line numbers on
+set autoread                  " Set to auto read when a file is changed from the outside
+set noswapfile
+set clipboard=unnamed         " Use the OS clipboard by default 
+set backspace=indent,eol,start    " Allow backspace in insert mode
+set cursorline                " Highlight cursorline
+
+filetype on
+filetype indent on            " Enable filetype plugins
+filetype plugin on
+syntax on
+
+set textwidth=120             " Make it obvious where 80 characters is
+set colorcolumn=+1
+
+set autoindent                " Auto-indent new lines
+set expandtab                 " Use spaces instead of tabs
+set shiftwidth=2              " Number of auto-indent spaces
+set smartindent               " Enable smart-indent
+set smarttab                  " Enable smart-tabs
+set softtabstop=2             " Number of spaces per Tab
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+set hlsearch                  " Highlight all search results
+set smartcase                 " Enable smart-case search
+set ignorecase                " Always case-insensitive
+set incsearch                 " Searches for strings incrementally
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+Plug 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin config 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Scheme
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
+set background=dark
+
+" Airline config
+let g:airline_theme='gruvbox'
+let g:airline_powerline_fonts = 1
+
+" NERDTree
+let g:NERDTreeMouseMode=3
+let NERDTreeShowHidden=1      " Show hidden file
+let NERDTreeIgnore=['.git']
+let g:NERDTreeMapJumpPrevSibling=""
+let g:NERDTreeMapJumpNextSibling=""
+
+" Open NERDTree when open directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" CtrlP Fuzzy Search
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }

@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/hoang.nguyen.luat/.bundle/cache/compact_index'
+let g:netrw_dirhist_3='/home/hoang.nguyen.luat/.bundle/cache'
+let g:netrw_dirhist_2='/home/hoang.nguyen.luat/.bundle'
+let g:netrw_dirhist_1='/home/hoang.nguyen.luat'
