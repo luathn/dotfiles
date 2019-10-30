@@ -1,2 +1,9 @@
 vim/plugged
 .directory
+
+mpd/*
+!mpd/mpd.conf
+
+ncmpcpp/*
+!ncmpcpp/config
+!ncmpcpp/bindings

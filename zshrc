@@ -8,7 +8,7 @@
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="amuse"
+ZSH_THEME="spaceship"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -74,8 +74,12 @@ plugins=(rails git ruby zsh-autosuggestions tmux zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
 bindkey '^ ' autosuggest-accept
+
+# App alias
+alias yt='mpsyt'
+alias ms='ncmpcpp'
+alias gg='googler -n 7'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
