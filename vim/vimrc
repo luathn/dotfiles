@@ -91,6 +91,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
@@ -122,7 +124,11 @@ set background=dark
 " Airline config
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='deus'
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
+let g:airline_left_sep = '▓▒░'
+let g:airline_left_alt_sep = '▒'
+let g:airline_right_sep = '░▒▓'
+let g:airline_right_alt_sep = '░'
 
 " NERDTree
 let g:NERDTreeMouseMode=3
