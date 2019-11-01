@@ -1,0 +1,8 @@
+CURRENT_SONG=$(ncmpcpp --current-song "%t - %a")
+if [ -z $CURRENT_SONG ]; then
+  echo "&#xf28b;  Stop"
+  exit 1
+else
+  echo "&#xf001;  $CURRENT_SONG"
+  exit 0
+fi

@@ -1,0 +1,3 @@
+#!/bin/sh
+# this is ubuntu sound
+paplay ~/.config/dunst/complete.oga

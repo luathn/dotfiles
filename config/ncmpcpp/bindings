@@ -10,9 +10,9 @@ def_key "ctrl-d"
     page_down
 #push_characters "jjjjjjjjjjjjjjj"
 
-def_key "l"
+def_key "L"
     seek_forward
-def_key "h"
+def_key "H"
     seek_backward
 
 def_key "n"
@@ -20,9 +20,9 @@ def_key "n"
 def_key "N"
     previous_found_item
 
-def_key "H"
+def_key "h"
     previous_column
-def_key "L"
+def_key "l"
     next_column
 
 # not used but bound

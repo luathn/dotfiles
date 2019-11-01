@@ -50,10 +50,11 @@ map <silent> <leader><cr> :noh<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=UTF-8
 
+set mouse=a
 set number relativenumber     " turn hybrid line numbers on
 set autoread                  " Set to auto read when a file is changed from the outside
 set noswapfile
-set clipboard=unnamed         " Use the OS clipboard by default 
+set clipboard=unnamedplus     " Use the OS clipboard by default 
 set backspace=indent,eol,start    " Allow backspace in insert mode
 set cursorline                " Highlight cursorline
 

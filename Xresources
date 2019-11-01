@@ -1,0 +1,109 @@
+! ------------------------------------------------------------------------------
+! URxvt configs
+! ------------------------------------------------------------------------------
+
+! font spacing
+URxvt*letterSpace:		0
+URxvt.lineSpace:		0
+
+! general settings
+URxvt*saveline:			15000
+URxvt*termName:			rxvt-256color
+URxvt*iso14755:			false
+URxvt*urgentOnBell:		true
+
+! appearance
+URxvt*depth:			24
+URxvt*scrollBar:		false
+URxvt*scrollBar_right:	false
+URxvt*internalBorder:	14
+URxvt*externalBorder:	0
+URxvt.geometry:			84x22
+
+! perl extensions
+URxvt*perl-ext-common:  default,matcher,clipboard,url-select,keyboard-select,-tabbed,resize-font
+
+! macros for clipboard and selection
+URxvt*copyCommand:      xclip -i -selection clipboard
+URxvt*pasteCommand:     xclip -o -selection clipboard
+URxvt*keysym.M-c:       perl:clipboard:copy
+URxvt*keysym.m-v:       perl:clipboard:paste
+URxvt*keysym.M-C-v:     perl:clipboard:paste_escaped
+URxvt*keysym.M-Escape:  perl:keyboard-select:activate
+URxvt*keysym.M-s:       perl:keyboard-select:search
+URxvt*keysym.M-u:       perl:url-select:select_next
+URxvt*resize-font.smaller:	C-Down
+URxvt*resize-font.bigger:	C-Up
+URxvt*geometry: 		70x24
+
+! tabbed
+URxvt*tabbed.tabbar-fg: 	4
+URxvt*tabbed.tabbar-bg: 	16
+URxvt*tabbed.tab-fg:    	15
+URxvt*tabbed.tab-bg:    	4
+URxvt*buffered:         	false
+URxvt*keysym.Control-Shift-C: 	perl:clipboard:copy
+URxvt*keysym.Control-Shift-V: 	perl:clipboard:paste
+
+
+! ------------------------------------------------------------------------------
+! Colour Configuration
+! ------------------------------------------------------------------------------
+
+! special
+*.foreground:   #d8dee8
+*.background:   #1c1c1c
+*.cursorColor:  #b48ead
+
+! black
+*.color0  : #4b5262
+*.color8  : #434a5a
+
+! red
+*.color1  : #bf616a
+*.color9  : #b3555e
+
+! green
+*.color2  : #a3be8c
+*.color10 : #93ae7c
+
+! yellow
+*.color3  : #ebcb8b
+*.color11 : #dbbb7b
+
+! blue
+*.color4  : #81a1c1
+*.color12 : #7191b1
+
+! magenta
+*.color5  : #b48ead
+*.color13 : #a6809f
+
+! cyan
+*.color6  : #89d0bA
+*.color14 : #7dbba8
+
+! white
+*.color7  : #e5e9f0
+*.color15 : #d1d5dc
+
+! ------------------------------------------------------------------------------
+! Font configuration
+! ------------------------------------------------------------------------------
+
+URxvt*font: xft:Hack:Regular:size=11
+URxvt*boldFont: xft:Hack:Bold:size=11
+URxvt*italicFont: xft:Hack:Italic:size=11
+URxvt*boldItalicFont: xft:Hack:Bold Italic:size=11
+
+! ------------------------------------------------------------------------------
+! Xft Font Configuration
+! ------------------------------------------------------------------------------
+
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
