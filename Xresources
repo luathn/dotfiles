@@ -3,48 +3,33 @@
 ! ------------------------------------------------------------------------------
 
 ! font spacing
-URxvt*letterSpace:		0
-URxvt.lineSpace:		0
+URxvt.letterSpace: -1
+URxvt.lineSpace: 0
 
 ! general settings
-URxvt*saveline:			15000
-URxvt*termName:			rxvt-256color
-URxvt*iso14755:			false
-URxvt*urgentOnBell:		true
+URxvt*saveline:		15000
+URxvt*iso14755:		false
+URxvt*urgentOnBell:	true
 
-! appearance
-URxvt*depth:			24
-URxvt*scrollBar:		false
-URxvt*scrollBar_right:	false
+/* ! appearance */
+URxvt*depth:		24
+URxvt*scrollBar:	false
 URxvt*internalBorder:	14
 URxvt*externalBorder:	0
-URxvt.geometry:			84x22
+URxvt.geometry:	        84x22
 
 ! perl extensions
-URxvt*perl-ext-common:  default,matcher,clipboard,url-select,keyboard-select,-tabbed,resize-font
+URxvt*perl-ext-common: default,matcher,clipboard,url-select,keyboard-select,-tabbed,resize-font
 
 ! macros for clipboard and selection
 URxvt*copyCommand:      xclip -i -selection clipboard
 URxvt*pasteCommand:     xclip -o -selection clipboard
-URxvt*keysym.M-c:       perl:clipboard:copy
-URxvt*keysym.m-v:       perl:clipboard:paste
 URxvt*keysym.M-C-v:     perl:clipboard:paste_escaped
 URxvt*keysym.M-Escape:  perl:keyboard-select:activate
-URxvt*keysym.M-s:       perl:keyboard-select:search
-URxvt*keysym.M-u:       perl:url-select:select_next
-URxvt*resize-font.smaller:	C-Down
-URxvt*resize-font.bigger:	C-Up
-URxvt*geometry: 		70x24
-
-! tabbed
-URxvt*tabbed.tabbar-fg: 	4
-URxvt*tabbed.tabbar-bg: 	16
-URxvt*tabbed.tab-fg:    	15
-URxvt*tabbed.tab-bg:    	4
-URxvt*buffered:         	false
+URxvt*keysym.M-f:       perl:keyboard-select:search
+URxvt*keysym.M-n:       perl:url-select:select_next
 URxvt*keysym.Control-Shift-C: 	perl:clipboard:copy
 URxvt*keysym.Control-Shift-V: 	perl:clipboard:paste
-
 
 ! ------------------------------------------------------------------------------
 ! Colour Configuration
@@ -106,4 +91,3 @@ Xft.hintstyle: hintslight
 Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
-
