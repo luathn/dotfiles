@@ -120,7 +120,20 @@ bindsym $super+Shift+r restart
 
 # exit i3
 bindsym $super+q exec "i3-nagbar -t warning -m 'Really, exit?' -b 'Yes' 'i3-msg exit'"
-bindsym $super+Escape exec "i3-nagbar -t warning -m 'Really, suspend?' -b 'Yes' 'systemctl suspend'"
+
+# system
+set $mode_system        [L]ogout        [S]uspend        [R]eboot        [P]oweroff
+bindsym $super+Escape mode "$mode_system"
+mode "$mode_system" {
+    bindsym L exec $psst ~/.config/i3/i3exit.sh logout, mode "default"
+    bindsym S exec $psst ~/.config/i3/i3exit.sh suspend, mode "default"
+    bindsym R exec $psst ~/.config/i3/i3exit.sh reboot, mode "default"
+    bindsym P exec $psst ~/.config/i3/i3exit.sh poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

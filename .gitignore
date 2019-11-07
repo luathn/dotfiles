@@ -7,3 +7,6 @@ config/mpd/*
 config/ncmpcpp/*
 !config/ncmpcpp/config
 !config/ncmpcpp/bindings
+
+config/ranger/*
+!config/ranger/rc.conf

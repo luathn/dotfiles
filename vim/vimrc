@@ -1,4 +1,42 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General config 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=UTF-8
+let @+=42
+
+set mouse=a
+set number relativenumber     " turn hybrid line numbers on
+set autoread                  " Set to auto read when a file is changed from the outside
+set noswapfile
+set clipboard=unnamedplus         " Use the OS clipboard by default 
+set backspace=indent,eol,start    " Allow backspace in insert mode
+set cursorline                " Highlight cursorline
+
+filetype on
+filetype indent on            " Enable filetype plugins
+filetype plugin on
+syntax on
+
+set textwidth=120             " Make it obvious where 80 characters is
+set colorcolumn=+1
+
+set autoindent                " Auto-indent new lines
+set expandtab                 " Use spaces instead of tabs
+set shiftwidth=2              " Number of auto-indent spaces
+set smartindent               " Enable smart-indent
+set smarttab                  " Enable smart-tabs
+set softtabstop=2             " Number of spaces per Tab
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+set hlsearch                  " Highlight all search results
+set smartcase                 " Enable smart-case search
+set ignorecase                " Always case-insensitive
+set incsearch                 " Searches for strings incrementally
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map key
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=","
@@ -46,43 +84,6 @@ map <leader>ss <C-W>s
 map <silent> <leader><cr> :noh<cr>     
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General config 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set encoding=UTF-8
-
-set mouse=a
-set number relativenumber     " turn hybrid line numbers on
-set autoread                  " Set to auto read when a file is changed from the outside
-set noswapfile
-set clipboard=unnamedplus     " Use the OS clipboard by default 
-set backspace=indent,eol,start    " Allow backspace in insert mode
-set cursorline                " Highlight cursorline
-
-filetype on
-filetype indent on            " Enable filetype plugins
-filetype plugin on
-syntax on
-
-set textwidth=120             " Make it obvious where 80 characters is
-set colorcolumn=+1
-
-set autoindent                " Auto-indent new lines
-set expandtab                 " Use spaces instead of tabs
-set shiftwidth=2              " Number of auto-indent spaces
-set smartindent               " Enable smart-indent
-set smarttab                  " Enable smart-tabs
-set softtabstop=2             " Number of spaces per Tab
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
-set hlsearch                  " Highlight all search results
-set smartcase                 " Enable smart-case search
-set ignorecase                " Always case-insensitive
-set incsearch                 " Searches for strings incrementally
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
@@ -111,6 +112,9 @@ Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
+
+" other
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
 call plug#end()
 
