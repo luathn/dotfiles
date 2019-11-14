@@ -9,7 +9,7 @@ URxvt.lineSpace: 0
 ! general settings
 URxvt*saveline:		15000
 URxvt*iso14755:		false
-URxvt*termName:		xterm-256color
+URxvt*termName:		rxvt-unicode-256color
 URxvt*urgentOnBell:	true
 
 /* ! appearance */
@@ -20,17 +20,16 @@ URxvt*externalBorder:	0
 URxvt.geometry:	        84x22
 
 ! perl extensions
-URxvt*perl-ext-common: default,matcher,clipboard,url-select,keyboard-select,-tabbed,resize-font
+URxvt*perl-ext-common:      default,matcher,clipboard,url-select,keyboard-select,-tabbed,resize-font
+URxvt.keysym.Control-f:     perl:keyboard-select:search
+URxvt.keysym.Control-v:     perl:keyboard-select:activate
+URxvt.keysym.Control-o:     perl:url-select:select_next
+URxvt.url-select.underline: true
+URxvt.url-select.button:    1
 
 ! macros for clipboard and selection
-URxvt*copyCommand:      xclip -i -selection clipboard
-URxvt*pasteCommand:     xclip -o -selection clipboard
-URxvt*keysym.M-C-v:     perl:clipboard:paste_escaped
-URxvt*keysym.M-Escape:  perl:keyboard-select:activate
-URxvt*keysym.M-f:       perl:keyboard-select:search
-URxvt*keysym.M-n:       perl:url-select:select_next
-URxvt*keysym.Control-Shift-C: 	perl:clipboard:copy
-URxvt*keysym.Control-Shift-V: 	perl:clipboard:paste
+URxvt*keysym.Control-Shift-C: perl:clipboard:copy
+URxvt*keysym.Control-Shift-V: perl:clipboard:paste
 
 ! ------------------------------------------------------------------------------
 ! Color Configuration
@@ -39,7 +38,7 @@ URxvt*keysym.Control-Shift-V: 	perl:clipboard:paste
 ! Base16 Default Dark
 ! Scheme: Chris Kempson (http://chriskempson.com)
 
-#define base00 #181818
+#define base00 #1c1c1c
 #define base01 #282828
 #define base02 #383838
 #define base03 #585858
@@ -86,15 +85,16 @@ URxvt*keysym.Control-Shift-V: 	perl:clipboard:paste
 ! Font configuration
 ! ------------------------------------------------------------------------------
 
-URxvt*font: xft:Hack:Regular:size=11
-URxvt*boldFont: xft:Hack:Bold:size=11
-URxvt*italicFont: xft:Hack:Italic:size=11
-URxvt*boldItalicFont: xft:Hack:Bold Italic:size=11
+URxvt*font: xft:SauceCodePro Nerd Font Mono:Regular:size=10
+URxvt*boldFont: xft:SauceCodePro Nerd Font Mono:Bold:size=10
+URxvt*italicFont: xft:SauceCodePro Nerd Font Mono:Italic:size=10
+URxvt*boldItalicFont: xft:SauceCodePro Nerd Font Mono:Bold Italic:size=10
 
 ! ------------------------------------------------------------------------------
 ! Xft Font Configuration
 ! ------------------------------------------------------------------------------
 
+Xft.dpi: 110
 Xft.autohint: 0
 Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintslight

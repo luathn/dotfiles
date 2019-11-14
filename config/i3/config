@@ -2,8 +2,8 @@
 set $super Mod4
 set $alt Mod1
 
-set $ws1  "1:  "
-set $ws2  "2:  "
+set $ws1  "1:  "
+set $ws2  "2:  "
 set $ws3  "3:  "
 set $ws4  "4:  "
 set $ws5  "5:  "
@@ -98,8 +98,8 @@ bindsym $super+space floating toggle
 bindsym $super+Shift+space focus mode_toggle
 
 # switch to workspace
-bindsym $alt+Control+Right workspace next
-bindsym $alt+Control+Left workspace prev
+bindsym $super+n workspace next
+bindsym $super+p workspace prev
 bindsym $super+1 workspace $ws1
 bindsym $super+2 workspace $ws2
 bindsym $super+3 workspace $ws3
@@ -137,10 +137,10 @@ mode "$mode_system" {
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
         bindsym Return mode "default"
 }
 bindsym $super+r mode "resize"
@@ -149,17 +149,17 @@ bindsym $super+r mode "resize"
 bar {
   height 23
   strip_workspace_numbers no
-  font pango: NotoSans Nerd Font 11
+  font pango: NotoSans Nerd Font 10
   colors {
       background #1C1C1C
       statusline #000000
       # separator #4b5262
 
 # colour of border, background, and text
-      focused_workspace       #2f343f #bf616a #d8dee8
-      active_workspace        #2f343f #2f343f #d8dee8
-      inactive_workspace      #2f343f #2f343f #d8dee8
-      urgent_workspace        #2f343f #ebcb8b #2f343f
+      focused_workspace       #1c1c1c #bf616a #d8dee8
+      active_workspace        #1c1c1c #1c1c1c #d8dee8
+      inactive_workspace      #1c1c1c #1c1c1c #d8dee8
+      urgent_workspace        #1c1c1c #ebcb8b #1c1c1c
   }
   status_command i3blocks
 }
@@ -176,16 +176,13 @@ for_window [class=URxvt|Firefox|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn
 for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus
 
 # colour of border, background, text, indicator, and child_border
-client.focused              #bf616a #2f343f #d8dee8 #bf616a #d8dee8
-client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.background           #2f343f
+client.focused              #bf616a #1c1c1c #d8dee8 #bf616a #a1d569
+client.focused_inactive     #1c1c1c #1c1c1c #d8dee8 #1c1c1c #1c1c1c
+client.unfocused            #1c1c1c #1c1c1c #d8dee8 #1c1c1c #1c1c1c
+client.urgent               #1c1c1c #1c1c1c #d8dee8 #1c1c1c #1c1c1c
+client.placeholder          #1c1c1c #1c1c1c #d8dee8 #1c1c1c #1c1c1c
+client.background           #1c1c1c
 
 # I3gaps
 gaps inner 9
 gaps outer 7
-# Only enable gaps on a workspace when there is at least one container
-# smart_gaps on
-# Only enable outer gaps when there is exactly one container

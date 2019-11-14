@@ -3,11 +3,11 @@ mpd_music_dir = "~/Dropbox/Musics"
 lyrics_directory  = ~/.config/ncmpcpp/lyrics
 ncmpcpp_directory  = ~/.config/ncmpcpp
 mpd_host = "127.0.0.1"
-mpd_port = "6700"
+mpd_port = "6600"
 mpd_connection_timeout = "5"  
 external_editor = "/usr/bin/vim"
 
-# █▓▒░ Visualizer
+# Visualizer
 visualizer_type = "ellipse"
 visualizer_look = "●▮"
 visualizer_color = "cyan"
@@ -16,53 +16,46 @@ visualizer_sync_interval = "30"
 visualizer_fifo_path = "/tmp/mpd.fifo"
 visualizer_output_name = "Visualizer feed"
 
-# █▓▒░ Display Settings
-song_list_format = "{$5%t $6> $7%a} {$6$R$b} [{%l}]"
-song_status_format = "$7%a $6$b> $5%t $6$b> $2%b$6"
-statusbar_color = "white"
-main_window_color = "cyan"
-main_window_highlight_color = "magenta"
-active_column_color = "black"
-header_visibility = "no"
-statusbar_visibility = "yes"
-colors_enabled = "yes"
-now_playing_prefix = "> "
-#now_playing_suffix = ""
-autocenter_mode = "yes"
-centered_cursor = "yes"
-progressbar_color = "black"
-progressbar_elapsed_color = "yellow"
-progressbar_look = "▒▓░"
-titles_visibility = "no"
-mouse_support = "no"
-discard_colors_if_item_is_selected = "yes"
-user_interface = "classic"
+# Playlist
+song_columns_list_format = "$L(9)[white]{l} (20)[red]{a} (30)[green]{b}$R(20)[cyan]{t}"
+now_playing_prefix = "$b"
 playlist_display_mode = "classic"
+autocenter_mode = "no"
+centered_cursor = "no"
+cyclic_scrolling = "yes"
+mouse_list_scroll_whole_page = "no"
+song_list_format = " $0$8$8%l$0$8 $1|$7 $7%a$7 $1|$7 $6%t$1 $R $1%b$1"
 
-# █▓▒░ cheat sheet
-# %l - length
-# %f - filename
-# %D - directory
-# %a - artist
-# %t - title
-# %b - album
-# %y - year
-# %n - track number (01/12 -> 01)
-# %N - full track info (01/12 -> 01/12)
-# %g - genre
-# %c - composer
-# %p - performer
-# %d - disc
-# %C - comment
-# $R - begin right alignment
-# █▓▒░ colors
-# $0 - default window color
-# $1 - black
-# $2 - red
-# $3 - green
-# $4 - yellow
-# $5 - blue
-# $6 - magenta
-# $7 - cyan
-# $8 - white
-# $9 - end of current color
+song_library_format = "{%n > }{%t}|{%f}"
+
+# Bars
+song_status_format = "{%a - }{%t - }{%b}"
+#progressbar_look = "|> "
+progressbar_look = "─╼ "
+titles_visibility = "no"
+header_visibility = "no"
+statusbar_visibility = "no" 
+
+# Browser
+browser_playlist_prefix = "$2plist »$9 "
+browser_display_mode = "classic" (classic/columns)
+
+# Colors
+discard_colors_if_item_is_selected = "yes"
+header_window_color = "black"
+volume_color = "cyan"
+state_line_color = "black"
+state_flags_color = "green"
+main_window_color = "blue"
+color1 = "cyan"
+color2 = "black"
+main_window_highlight_color = "red"
+progressbar_color = "black"
+statusbar_color = "black"
+active_column_color = "red"
+
+# Others
+song_window_title_format = "MPD: {%a > }{%t}{ [%b{ Disc %d}]}|{%f}"
+search_engine_display_mode = "columns" (classic/columns)
+follow_now_playing_lyrics = "yes"
+#  vim: set ts=2 sw=2 tw=0 :

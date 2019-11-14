@@ -1,24 +1,24 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General config 
+" General config 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=UTF-8
-let @+=42
+
+set number relativenumber     " turn hybrid line numbers on
+set cursorline                " Highlight cursorline
+set textwidth=80              " Make it obvious where 80 characters is
+set colorcolumn=+1
 
 set mouse=a
-set number relativenumber     " turn hybrid line numbers on
 set autoread                  " Set to auto read when a file is changed from the outside
 set noswapfile
-set clipboard=unnamedplus         " Use the OS clipboard by default 
+set clipboard=unnamed         " Use the OS clipboard by default 
 set backspace=indent,eol,start    " Allow backspace in insert mode
-set cursorline                " Highlight cursorline
+set whichwrap+=<,>,h,l
+set hid                       " A buffer becomes hidden when it is abandoned
 
-filetype on
 filetype indent on            " Enable filetype plugins
 filetype plugin on
-syntax on
-
-set textwidth=120             " Make it obvious where 80 characters is
-set colorcolumn=+1
+syntax enable
 
 set autoindent                " Auto-indent new lines
 set expandtab                 " Use spaces instead of tabs
@@ -43,14 +43,14 @@ let mapleader=","
 
 :imap jk <Esc>
 
-" NERDTree
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
-map <leader>nr :NERDTreeRefreshRoot<cr>
+" Map key yank and paste clipboard
+:vmap <C-C> "+y
+:vmap gy "+y
+:nmap gy "+y
+:nmap gp "+p
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+map <leader>bx :Bclose<cr>:tabclose<cr>gT
 
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
@@ -81,7 +81,13 @@ map <leader>sv <C-W>v
 map <leader>ss <C-W>s
 
 " Turn off search highlight
-map <silent> <leader><cr> :noh<cr>     
+map <silent> <leader><cr> :noh<cr>
+
+" NERDTree
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark<Space>
+map <leader>nf :NERDTreeFind<cr>
+map <leader>nr :NERDTreeRefreshRoot<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin 
@@ -96,17 +102,23 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
+Plug 'dense-analysis/ale'
+Plug 'easymotion/vim-easymotion'
 
 " Small tool
-Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-system-copy'
 
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
+
+" Frontend
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'pangloss/vim-javascript'
+Plug 'ap/vim-css-color'
 
 " UI
 Plug 'vim-airline/vim-airline'
@@ -122,8 +134,8 @@ call plug#end()
 " Plugin config 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scheme
-let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
 set background=dark
 
 " Airline config
@@ -146,14 +158,52 @@ let g:NERDTreeMapJumpNextSibling=""
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+" Coc.nvim setting
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <C-j>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " CtrlP Fuzzy Search
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-" Trigger configuration for Ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" Ale plugin
+let g:ale_fix_on_save = 1
+let g:ale_linters_explicit = 1
+let g:ale_fixers = {
+  \ 'javascript': ['prettier'],
+  \ 'css': ['prettier'],
+\}
+
+" Function
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+  let l:currentBufNum = bufnr("%")
+  let l:alternateBufNum = bufnr("#")
+
+  if buflisted(l:alternateBufNum)
+    buffer #
+  else
+    bnext
+  endif
+
+  if bufnr("%") == l:currentBufNum
+    new
+  endif
+
+  if buflisted(l:currentBufNum)
+    execute("bdelete! ".l:currentBufNum)
+  endif
+endfunction

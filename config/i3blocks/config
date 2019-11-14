@@ -29,9 +29,15 @@ command=~/.config/i3blocks/scripts/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
-# Ncmpcpp
-[ncmpcpp]
-interval=10
+# # Ncmpcpp
+# [ncmpcpp]
+# interval=10
+# color=#a1d569
+
+[mediaplayer]
+instance=mpd
+interval=5
+signal=10
 color=#a1d569
 
 # Volume
