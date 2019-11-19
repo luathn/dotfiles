@@ -89,6 +89,10 @@ map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
 map <leader>nr :NERDTreeRefreshRoot<cr>
 
+" Ack
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -96,6 +100,7 @@ call plug#begin('~/.vim/plugged')
 " Main plugin
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -133,6 +138,11 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 " Scheme
 colorscheme gruvbox
 let g:gruvbox_contrast_dark='hard'
@@ -153,6 +163,8 @@ let NERDTreeShowHidden=1      " Show hidden file
 let NERDTreeIgnore=['.git']
 let g:NERDTreeMapJumpPrevSibling=""
 let g:NERDTreeMapJumpNextSibling=""
+let NERDTreeMapOpenSplit='s'
+let NERDTreeMapOpenVSplit='v'
 
 " Open NERDTree when open directory
 autocmd StdinReadPre * let s:std_in=1
@@ -177,6 +189,8 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
+
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 " Ale plugin
 let g:ale_fix_on_save = 1

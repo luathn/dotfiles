@@ -22,8 +22,8 @@ URxvt.geometry:	        84x22
 ! perl extensions
 URxvt*perl-ext-common:      default,matcher,clipboard,url-select,keyboard-select,-tabbed,resize-font
 URxvt.keysym.Control-f:     perl:keyboard-select:search
-URxvt.keysym.Control-v:     perl:keyboard-select:activate
-URxvt.keysym.Control-o:     perl:url-select:select_next
+URxvt.keysym.M-v:     perl:keyboard-select:activate
+URxvt.keysym.M-u:     perl:url-select:select_next
 URxvt.url-select.underline: true
 URxvt.url-select.button:    1
 

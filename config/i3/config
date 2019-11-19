@@ -40,7 +40,7 @@ bindsym $super+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show dru
 
 # common apps keybinds
 bindsym Print exec scrot 'Cheese_%a-%d%b%y_%H.%M.png' -e 'viewnior ~/$f'
-bindsym $alt+l exec i3lock -t -i ~/.config/i3/i3lock.png
+bindsym $alt+l exec i3lock -t -i $(find ~/dotfiles/images/ -name "lock*.png" | shuf -n1)
 bindsym $super+Shift+w exec firefox
 bindsym $super+Shift+f exec thunar;workspace 3;focus
 bindsym $super+Shift+g exec geany
