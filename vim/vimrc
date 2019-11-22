@@ -36,6 +36,8 @@ set smartcase                 " Enable smart-case search
 set ignorecase                " Always case-insensitive
 set incsearch                 " Searches for strings incrementally
 
+" Enable matchit for ruby textobject
+runtime macros/matchit.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map key
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -117,6 +119,9 @@ Plug 'christoomey/vim-system-copy'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'kana/vim-textobj-user'
+Plug 'tpope/vim-endwise'
 
 " Frontend
 Plug 'prettier/vim-prettier', {
@@ -182,7 +187,6 @@ inoremap <silent><expr> <C-j>
       \ coc#refresh()
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " CtrlP Fuzzy Search
 let g:fzf_action = {
