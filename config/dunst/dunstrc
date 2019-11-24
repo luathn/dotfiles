@@ -1,6 +1,6 @@
 [global]
 monitor = 0
-geometry = "270x50-24+24"
+geometry = "270x50-24+44"
 indicate_hidden = yes
 shrink = no
 separator_height = 4

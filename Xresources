@@ -15,13 +15,13 @@ URxvt*urgentOnBell:	true
 /* ! appearance */
 URxvt*depth:		24
 URxvt*scrollBar:	false
-URxvt*internalBorder:	14
+URxvt*internalBorder:	10
 URxvt*externalBorder:	0
 URxvt.geometry:	        84x22
 
 ! perl extensions
 URxvt*perl-ext-common:      default,matcher,clipboard,url-select,keyboard-select,-tabbed,resize-font
-URxvt.keysym.Control-f:     perl:keyboard-select:search
+URxvt.keysym.M-f:     perl:keyboard-select:search
 URxvt.keysym.M-v:     perl:keyboard-select:activate
 URxvt.keysym.M-u:     perl:url-select:select_next
 URxvt.url-select.underline: true
