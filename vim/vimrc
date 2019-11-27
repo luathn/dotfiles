@@ -1,5 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General config 
+" General config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=UTF-8
 
@@ -11,7 +11,7 @@ set colorcolumn=+1
 set mouse=a
 set autoread                  " Set to auto read when a file is changed from the outside
 set noswapfile
-set clipboard=unnamed         " Use the OS clipboard by default 
+set clipboard=unnamed         " Use the OS clipboard by default
 set backspace=indent,eol,start    " Allow backspace in insert mode
 set whichwrap+=<,>,h,l
 set hid                       " A buffer becomes hidden when it is abandoned
@@ -96,7 +96,7 @@ cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin 
+" Plugin
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 " Main plugin
@@ -109,7 +109,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
 
 " Small tool
@@ -124,11 +124,10 @@ Plug 'kana/vim-textobj-user'
 Plug 'tpope/vim-endwise'
 
 " Frontend
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'pangloss/vim-javascript'
 Plug 'ap/vim-css-color'
+" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 
 " UI
 Plug 'vim-airline/vim-airline'
@@ -139,11 +138,10 @@ Plug 'morhetz/gruvbox'
 
 " other
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin config 
+" Plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ack
 if executable('ag')
@@ -224,10 +222,13 @@ let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 " Ale plugin
 let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 1
 let g:ale_fixers = {
-  \ 'javascript': ['prettier'],
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'ruby': ['rubocop'],
+  \ 'javascript': ['eslint'],
   \ 'css': ['prettier'],
+  \ 'json': ['prettier'],
+  \ 'yaml': ['prettier'],
 \}
 
 " Function

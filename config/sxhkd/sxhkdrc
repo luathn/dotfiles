@@ -122,6 +122,10 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+#tmp shortcut
+alt + l
+	i3lock -t -i $(find ~/dotfiles/images/ -name "lock*.png" | shuf -n1)
+
 #Volume Control
 XF86AudioLowerVolume
 	amixer set Master -D pulse 5%-

@@ -1,3 +1,5 @@
 {
-  "suggest.noselect": false
+  "suggest.noselect": false,
+  "suggest.enablePreview": true,
+  "suggest.triggerAfterInsertEnter": true
 }

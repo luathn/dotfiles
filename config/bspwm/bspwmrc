@@ -1,8 +1,11 @@
 #! /bin/sh
 
+killall mpd &
+
 sxhkd &
 
-bspc monitor -d I II III IV V VI VII
+bspc monitor -d I II III IV
+bspc monitor HDMI2 -d V VI
 
 bspc config border_width         3
 bspc config window_gap          12

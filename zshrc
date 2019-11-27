@@ -105,9 +105,6 @@ alias gg='googler -n 7'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Disable Ctrl-S and Ctrl-Q in terminal
-stty -ixon
-
 # Add rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
