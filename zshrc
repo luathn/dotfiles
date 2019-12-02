@@ -76,6 +76,9 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 bindkey '^ ' autosuggest-accept
 
+# Disable Ctrl-S and Ctrl-Q in terminal
+stty -ixon
+
 # App alias
 alias yt='mpsyt'
 alias ms='ncmpcpp'

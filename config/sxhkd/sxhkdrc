@@ -128,11 +128,11 @@ alt + l
 
 #Volume Control
 XF86AudioLowerVolume
-	amixer set Master -D pulse 5%-
+	~/.config/sxhkd/volume.sh down
 XF86AudioRaiseVolume
-	amixer set Master -D pulse 5%+
+	~/.config/sxhkd/volume.sh up
 XF86AudioMute
-        amixer set Master -D pulse toggle
+	~/.config/sxhkd/volume.sh toggle
 
 #Brightness control
 XF86MonBrightnessDown
@@ -142,13 +142,13 @@ XF86MonBrightnessUp
 
 #Music control
 XF86AudioPlay
-	playerctl play-pause
+	mpc toggle
 XF86AudioNext
-	playerctl next
+	mpc next
 XF86AudioPrev
-	playerctl previous
+	mpc prev
 XF86AudioStop
-	playerctl stop
+	mpc stop
 
 #Print screen
 Print

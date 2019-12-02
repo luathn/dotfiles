@@ -1,6 +1,6 @@
 [global]
 monitor = 0
-geometry = "270x50-24+44"
+geometry = "280x50-24+44"
 indicate_hidden = yes
 shrink = no
 separator_height = 4
@@ -42,13 +42,13 @@ script = ~/.config/dunst/play_sound
 background = "#1c1c1c"
 foreground = "#d8dee8"
 frame_color = "#a1d569"
-timeout = 4
+timeout = 3
 
 [urgency_normal]
 background = "#1c1c1c"
 foreground = "#d8dee8"
 frame_color = "#a1d569"
-timeout = 7
+timeout = 6
 
 [urgency_critical]
 background = "#1c1c1c"

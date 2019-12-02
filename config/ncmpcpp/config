@@ -1,10 +1,10 @@
-# Files
-mpd_music_dir = "~/Dropbox/Musics"  
+# General
+mpd_music_dir = "~/Dropbox/Musics"
 lyrics_directory  = ~/.config/ncmpcpp/lyrics
 ncmpcpp_directory  = ~/.config/ncmpcpp
 mpd_host = "127.0.0.1"
 mpd_port = "6600"
-mpd_connection_timeout = "5"  
+mpd_connection_timeout = "5"
 external_editor = "/usr/bin/vim"
 
 # █▓▒░ Visualizer

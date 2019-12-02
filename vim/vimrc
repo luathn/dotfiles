@@ -3,13 +3,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=UTF-8
 
-set number relativenumber     " turn hybrid line numbers on
-set cursorline                " Highlight cursorline
-set textwidth=80              " Make it obvious where 80 characters is
-set colorcolumn=+1
+set history=500
 
 set mouse=a
 set autoread                  " Set to auto read when a file is changed from the outside
+au FocusGained,BufEnter * checktime
+
 set noswapfile
 set clipboard=unnamed         " Use the OS clipboard by default
 set backspace=indent,eol,start    " Allow backspace in insert mode
@@ -31,17 +30,31 @@ set softtabstop=2             " Number of spaces per Tab
 set splitbelow
 set splitright
 
+set number relativenumber     " turn hybrid line numbers on
+set cursorline                " Highlight cursorline
+
 set hlsearch                  " Highlight all search results
 set smartcase                 " Enable smart-case search
 set ignorecase                " Always case-insensitive
 set incsearch                 " Searches for strings incrementally
 
+set so=7                      " Set 7 lines to the cursor
+" Statusline
+set laststatus=2
+set ruler
+set wildmenu
+set foldcolumn=1              " Add a bit extra margin to the left
+
 " Enable matchit for ruby textobject
 runtime macros/matchit.vim
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map key
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader=","
+map s <Nop>
+"let mapleader=","
+"let mapleader="s"
+let mapleader=" "
 
 :imap jk <Esc>
 
@@ -53,10 +66,8 @@ let mapleader=","
 
 " Close the current buffer
 map <leader>bx :Bclose<cr>:tabclose<cr>gT
-
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
-
 map <leader>n :bnext<cr>
 map <leader>p :bprevious<cr>
 
@@ -92,7 +103,6 @@ map <leader>tf :NERDTreeFind<cr>
 map <leader>tr :NERDTreeRefreshRoot<cr>
 
 " Ack
-cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -109,9 +119,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
-
 " Small tool
 Plug 'christoomey/vim-system-copy'
 
@@ -144,9 +153,15 @@ call plug#end()
 " Plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ack
+" let g:ack_qhandler = "copen"
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+let g:ack_mappings = {
+  \ 'h': '<C-W>k<C-W>l<C-W>l<C-W>s<C-W>j<CR>',
+  \ 'v': '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
+  \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J',
+  \ 'q': '<C-W>p' }
 
 " Scheme
 colorscheme gruvbox
@@ -217,8 +232,11 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
-
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 " Ale plugin
 let g:ale_fix_on_save = 1
