@@ -20,12 +20,7 @@ URxvt*externalBorder:	0
 URxvt.geometry:	        84x22
 
 ! perl extensions
-URxvt*perl-ext-common:      default,matcher,clipboard,url-select,keyboard-select,-tabbed,resize-font
-URxvt.keysym.M-f:     perl:keyboard-select:search
-URxvt.keysym.M-v:     perl:keyboard-select:activate
-URxvt.keysym.M-u:     perl:url-select:select_next
-URxvt.url-select.underline: true
-URxvt.url-select.button:    1
+URxvt*perl-ext-common:      default,clipboard
 
 ! macros for clipboard and selection
 URxvt*keysym.Control-Shift-C: perl:clipboard:copy

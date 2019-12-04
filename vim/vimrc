@@ -64,6 +64,16 @@ let mapleader=" "
 :nmap gy "+y
 :nmap gp "+p
 
+" Turn off search highlight
+map <silent> <leader><cr> :noh<cr>
+
+" Map leader split windows
+map <leader>sv <C-W>v
+map <leader>ss <C-W>s
+
+" Map run file
+map <leader>r :!ruby %<cr>
+
 " Close the current buffer
 map <leader>bx :Bclose<cr>:tabclose<cr>gT
 " Close all the buffers
@@ -88,13 +98,6 @@ au TabLeave * let g:lasttab = tabpagenr()
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>"
-
-" Map leader split windows
-map <leader>sv <C-W>v
-map <leader>ss <C-W>s
-
-" Turn off search highlight
-map <silent> <leader><cr> :noh<cr>
 
 " NERDTree
 map <leader>tt :NERDTreeToggle<cr>
