@@ -73,11 +73,17 @@ plugins=(rails docker git ruby tmux zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# Key binding #################################################################
 bindkey '^ ' autosuggest-accept
-
-# Disable Ctrl-S and Ctrl-Q in terminal
 stty -ixon
+
+# vi mode
+# bindkey -v
+bindkey "^[" vi-cmd-mode
+
+# handy keybindings
+bindkey "^B" beginning-of-line
+bindkey "^E" end-of-line
 
 export EDITOR='vim'
 

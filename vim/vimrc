@@ -143,7 +143,6 @@ Plug 'ap/vim-css-color'
 
 " UI
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 " Plug 'itchyny/lightline.vim'
 " Plug 'mengelbrecht/lightline-bufferline'
 Plug 'morhetz/gruvbox'
@@ -161,10 +160,10 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 let g:ack_mappings = {
-  \ 'h': '<C-W>k<C-W>l<C-W>l<C-W>s<C-W>j<CR>',
-  \ 'v': '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
-  \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J',
-  \ 'q': '<C-W>p' }
+      \ 'h': '<C-W>k<C-W>l<C-W>l<C-W>s<C-W>j<CR>',
+      \ 'v': '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
+      \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J',
+      \ 'q': '<C-W>p' }
 
 " Scheme
 colorscheme gruvbox
@@ -174,6 +173,7 @@ set background=dark
 " Airline config
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme='gruvbox'
@@ -181,23 +181,17 @@ let g:airline_powerline_fonts = 1
 
 " " Lightline config
 " let g:lightline = {
-"   \   'colorscheme': 'gruvbox',
-"   \   'active': {
-"   \     'left':[ [ 'mode', 'paste' ],
-"   \              [ 'gitbranch', 'readonly', 'filename', 'modified' ]
-"   \     ]
-"   \   },
-" 	\   'component': {
-" 	\     'lineinfo': ' %3l:%-2v',
-" 	\   },
-"   \   'component_function': {
-"   \     'gitbranch': 'fugitive#head',
-"   \   }
-"   \ }
-" let g:lightline.tabline = {
-"   \   'left': [ ['buffers'] ],
-"   \   'right': [ ['close'] ]
-"   \ }
+"       \ 'colorscheme': 'gruvbox',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'fugitive#head',
+"       \ },
+"       \ 'separator': { 'left': ' ', 'right': ' ' },
+"       \ 'subseparator': { 'left': ' ', 'right': ' ' }
+"       \ }
 " let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 " let g:lightline.component_type   = {'buffers': 'tabsel'}
 " set showtabline=2  " Show tabline
@@ -232,9 +226,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " CtrlP Fuzzy Search
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit' }
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit' }
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
@@ -242,15 +236,15 @@ if executable('ag')
 endif
 
 " Ale plugin
-let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'ruby': ['rubocop'],
-  \ 'javascript': ['eslint'],
-  \ 'css': ['prettier'],
-  \ 'json': ['prettier'],
-  \ 'yaml': ['prettier'],
-\}
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'ruby': ['rubocop'],
+      \ 'javascript': ['eslint'],
+      \ 'css': ['prettier'],
+      \ 'json': ['prettier'],
+      \ 'yaml': ['prettier'],
+      \}
 
 " Function
 " Don't close window, when deleting a buffer
