@@ -1,61 +1,49 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General config                                                              "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=UTF-8
-
 set history=500
-
 set mouse=a
 set autoread                  " Set to auto read when a file is changed from the outside
-au FocusGained,BufEnter * checktime
-
 set noswapfile
 set clipboard=unnamed         " Use the OS clipboard by default
-set backspace=indent,eol,start    " Allow backspace in insert mode
+set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 set hid                       " A buffer becomes hidden when it is abandoned
-
 filetype indent on            " Enable filetype plugins
 filetype plugin on
 syntax enable
-
 set autoindent                " Auto-indent new lines
 set expandtab                 " Use spaces instead of tabs
 set shiftwidth=2              " Number of auto-indent spaces
 set smartindent               " Enable smart-indent
 set smarttab                  " Enable smart-tabs
 set softtabstop=2             " Number of spaces per Tab
-
-" Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
-
 set number relativenumber     " turn hybrid line numbers on
 set cursorline                " Highlight cursorline
-
 set hlsearch                  " Highlight all search results
 set smartcase                 " Enable smart-case search
 set ignorecase                " Always case-insensitive
 set incsearch                 " Searches for strings incrementally
-
 set so=7                      " Set 7 lines to the cursor
-" Statusline
 set laststatus=2
 set ruler
 set wildmenu
 set foldcolumn=1              " Add a bit extra margin to the left
+au FocusGained,BufEnter * checktime
 
 " Enable matchit for ruby textobject
 runtime macros/matchit.vim
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map key
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Map key                                                                     "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map s <Nop>
-"let mapleader=","
+" let mapleader=","
 "let mapleader="s"
 let mapleader=" "
-
 :imap jk <Esc>
 
 " Map key yank and paste clipboard
@@ -71,12 +59,8 @@ map <silent> <leader><cr> :noh<cr>
 map <leader>sv <C-W>v
 map <leader>ss <C-W>s
 
-" Map run file
-map <leader>r :!ruby %<cr>
-
 " Close the current buffer
 map <leader>bx :Bclose<cr>:tabclose<cr>gT
-" Close all the buffers
 map <leader>ba :bufdo bd<cr>
 map <leader>n :bnext<cr>
 map <leader>p :bprevious<cr>
@@ -87,14 +71,9 @@ map <leader>tx :tabclose<cr>
 map <leader>tn :tabnext<cr>
 map <leader>tm :tabmove
 map <leader>to :tabonly<cr>
-
-" Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>"
@@ -106,11 +85,16 @@ map <leader>tf :NERDTreeFind<cr>
 map <leader>tr :NERDTreeRefreshRoot<cr>
 
 " Ack
-nnoremap <Leader>a :Ack!<Space>
+nnoremap <leader>a :Ack!<Space>
+map <leader>f :CtrlPBuffer<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General leader map
+map <leader>= :ALEFix<cr>
+map <leader>r :!ruby %<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin                                                                      "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 " Main plugin
 Plug 'scrooloose/nerdtree'
@@ -124,9 +108,6 @@ Plug 'tpope/vim-repeat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
-" Small tool
-Plug 'christoomey/vim-system-copy'
-
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -134,26 +115,21 @@ Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'kana/vim-textobj-user'
 Plug 'tpope/vim-endwise'
-
 " Frontend
 Plug 'pangloss/vim-javascript'
 Plug 'ap/vim-css-color'
-" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-
 " UI
 Plug 'vim-airline/vim-airline'
-" Plug 'itchyny/lightline.vim'
-" Plug 'mengelbrecht/lightline-bufferline'
 Plug 'morhetz/gruvbox'
-
 " other
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin config                                                                "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ack
 " let g:ack_qhandler = "copen"
 if executable('ag')
@@ -178,23 +154,16 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
-
-" " Lightline config
-" let g:lightline = {
-"       \ 'colorscheme': 'gruvbox',
-"       \ 'active': {
-"       \   'left': [ [ 'mode', 'paste' ],
-"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-"       \ },
-"       \ 'component_function': {
-"       \   'gitbranch': 'fugitive#head',
-"       \ },
-"       \ 'separator': { 'left': ' ', 'right': ' ' },
-"       \ 'subseparator': { 'left': ' ', 'right': ' ' }
-"       \ }
-" let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-" let g:lightline.component_type   = {'buffers': 'tabsel'}
-" set showtabline=2  " Show tabline
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
 
 " NERDTree
 let g:NERDTreeMouseMode=3
@@ -221,7 +190,6 @@ inoremap <silent><expr> <Tab>
       \ coc#refresh()
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " CtrlP Fuzzy Search
@@ -237,8 +205,10 @@ endif
 
 " Ale plugin
 " let g:ale_fix_on_save = 1
+let b:ale_linters = ['flake8', 'pylint']
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'python': ['yapf', 'flake8'],
       \ 'ruby': ['rubocop'],
       \ 'javascript': ['eslint'],
       \ 'css': ['prettier'],
