@@ -60,8 +60,8 @@ map <leader>sv <C-W>v
 map <leader>ss <C-W>s
 
 " Close the current buffer
-map <leader>bx :Bclose<cr>:tabclose<cr>gT
-map <leader>ba :bufdo bd<cr>
+map <leader>xx :Bclose<cr>:tabclose<cr>gT
+map <leader>xa :bufdo bd<cr>
 map <leader>n :bnext<cr>
 map <leader>p :bprevious<cr>
 
@@ -86,11 +86,12 @@ map <leader>tr :NERDTreeRefreshRoot<cr>
 
 " Ack
 nnoremap <leader>a :Ack!<Space>
-map <leader>f :CtrlPBuffer<cr>
+map <leader>l :CtrlPBuffer<cr>
 
 " General leader map
 map <leader>= :ALEFix<cr>
 map <leader>r :!ruby %<cr>
+map <Leader> <Plug>(easymotion-prefix)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin                                                                      "
@@ -102,19 +103,22 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 Plug 'easymotion/vim-easymotion'
+Plug 'kana/vim-textobj-user'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'kana/vim-textobj-user'
 Plug 'tpope/vim-endwise'
+" For Python
+Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 " Frontend
 Plug 'pangloss/vim-javascript'
 Plug 'ap/vim-css-color'
