@@ -17,7 +17,7 @@ set -g status-left "#[fg=colour232,bg=green,bold] #S #[fg=green,bg=colour237,nob
 # Right side of status bar
 set -g status-right-style bg=black,fg=cyan
 set -g status-right-length 40
-set -g status-right "#H #[fg=white]« #[fg=yellow]%H:%M:%S #[fg=green]%d-%b-%y"
+set -g status-right "#H #[fg=white]« #[fg=green]%d-%b-%y"
 
 # Window status
 set -g window-status-format " #I:#W#F "

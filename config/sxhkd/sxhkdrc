@@ -152,10 +152,11 @@ XF86AudioStop
 
 #Print screen
 Print
-	scrot ~/Pictures
+	scrot -e 'mv $f ~/Pictures/screenshots'
 shift + @Print
-	scrot -s ~/Pictures
-
+	scrot -s -e 'mv $f ~/Pictures/screenshots'
+alt + Print
+	scrot -u -e 'mv $f ~/Pictures/screenshots'
 ctrl + Print
 	scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'
 ctrl + shift + @Print

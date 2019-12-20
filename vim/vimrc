@@ -1,14 +1,50 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General config                                                              "
+" Plugins                                                                     "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+" Main plugin
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'easymotion/vim-easymotion'
+Plug 'kana/vim-textobj-user'
+Plug 'christoomey/vim-tmux-navigator'
+" For Rails
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'tpope/vim-endwise'
+" For Python
+Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+" Frontend
+Plug 'pangloss/vim-javascript'
+Plug 'ap/vim-css-color'
+" UI
+Plug 'vim-airline/vim-airline'
+Plug 'morhetz/gruvbox'
+" other
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General configs                                                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=UTF-8
 set history=500
 set mouse=a
-set autoread                  " Set to auto read when a file is changed from the outside
 set noswapfile
-set clipboard=unnamed         " Use the OS clipboard by default
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
+set autoread                  " Set to auto read when a file is changed
+set clipboard=unnamed         " Use the OS clipboard by default
 set hid                       " A buffer becomes hidden when it is abandoned
 filetype indent on            " Enable filetype plugins
 filetype plugin on
@@ -19,8 +55,11 @@ set shiftwidth=2              " Number of auto-indent spaces
 set smartindent               " Enable smart-indent
 set smarttab                  " Enable smart-tabs
 set softtabstop=2             " Number of spaces per Tab
-set splitbelow
-set splitright
+set foldmethod=indent         " Fold based on indent
+set foldnestmax=5             " Deepest fold is 5 levels
+set nofoldenable              " No fold when start
+set splitbelow                " Split below
+set splitright                " Split right
 set number relativenumber     " turn hybrid line numbers on
 set cursorline                " Highlight cursorline
 set hlsearch                  " Highlight all search results
@@ -28,44 +67,49 @@ set smartcase                 " Enable smart-case search
 set ignorecase                " Always case-insensitive
 set incsearch                 " Searches for strings incrementally
 set so=7                      " Set 7 lines to the cursor
+set foldcolumn=1              " Add a bit extra margin to the left
 set laststatus=2
 set ruler
 set wildmenu
-set foldcolumn=1              " Add a bit extra margin to the left
-au FocusGained,BufEnter * checktime
+au FocusGained,BufEnter * :checktime
+
+" Scheme
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
+set background=dark
 
 " Enable matchit for ruby textobject
 runtime macros/matchit.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map key                                                                     "
+" Mappings                                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map s <Nop>
-" let mapleader=","
-"let mapleader="s"
 let mapleader=" "
-:imap jk <Esc>
+imap jk <Esc>
 
-" Map key yank and paste clipboard
-:vmap <C-C> "+y
-:vmap gy "+y
-:nmap gy "+y
-:nmap gp "+p
+vmap <C-C> "+y
+vmap gy "+y
+nmap gy "+y
+nmap gp "+p
+
+nmap ]<space> o<esc>
+nmap [<space> O<esc>
 
 " Turn off search highlight
 map <silent> <leader><cr> :noh<cr>
 
-" Map leader split windows
+" Split windows
 map <leader>sv <C-W>v
 map <leader>ss <C-W>s
 
-" Close the current buffer
+" Buffer
 map <leader>xx :Bclose<cr>:tabclose<cr>gT
 map <leader>xa :bufdo bd<cr>
 map <leader>n :bnext<cr>
 map <leader>p :bprevious<cr>
 
-" Useful mappings for managing tabs
+" Mappings for managing tabs
 map <leader>tc :tabnew<cr>
 map <leader>tx :tabclose<cr>
 map <leader>tn :tabnext<cr>
@@ -88,54 +132,16 @@ map <leader>tr :NERDTreeRefreshRoot<cr>
 nnoremap <leader>a :Ack!<Space>
 map <leader>l :CtrlPBuffer<cr>
 
-" General leader map
+" others
 map <leader>= :ALEFix<cr>
-map <leader>r :!ruby %<cr>
 map <Leader> <Plug>(easymotion-prefix)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin                                                                      "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugged')
-" Main plugin
-Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mileszs/ack.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
-Plug 'easymotion/vim-easymotion'
-Plug 'kana/vim-textobj-user'
-" For Rails
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'tpope/vim-endwise'
-" For Python
-Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-" Frontend
-Plug 'pangloss/vim-javascript'
-Plug 'ap/vim-css-color'
-" UI
-Plug 'vim-airline/vim-airline'
-Plug 'morhetz/gruvbox'
-" other
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-" Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-call plug#end()
+autocmd Filetype ruby map <leader>r :!ruby %<cr>
+autocmd Filetype python map <leader>r :!python3 %<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ack
-" let g:ack_qhandler = "copen"
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
@@ -145,20 +151,15 @@ let g:ack_mappings = {
       \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J',
       \ 'q': '<C-W>p' }
 
-" Scheme
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='hard'
-set background=dark
-
 " Airline config
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_tabs = 0
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tabs = 0
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#ale#enabled = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -171,16 +172,12 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 
 " NERDTree
 let g:NERDTreeMouseMode=3
-let NERDTreeShowHidden=1      " Show hidden file
+let NERDTreeShowHidden=1
 let NERDTreeIgnore=['.git']
 let g:NERDTreeMapJumpPrevSibling=""
 let g:NERDTreeMapJumpNextSibling=""
 let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
-
-" Open NERDTree when open directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " Coc.nvim setting
 function! s:check_back_space() abort
@@ -208,7 +205,6 @@ if executable('ag')
 endif
 
 " Ale plugin
-" let g:ale_fix_on_save = 1
 let b:ale_linters = ['flake8', 'pylint']
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -221,7 +217,7 @@ let g:ale_fixers = {
       \}
 
 " Function
-" Don't close window, when deleting a buffer
+" Don't close window when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
   let l:currentBufNum = bufnr("%")
