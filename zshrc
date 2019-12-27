@@ -74,16 +74,20 @@ plugins=(rails docker git ruby tmux zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Key binding #################################################################
-bindkey '^ ' autosuggest-accept
 stty -ixon
 
 # vi mode
-# bindkey -v
-bindkey "^[" vi-cmd-mode
-
-# handy keybindings
-bindkey "^B" beginning-of-line
-bindkey "^E" end-of-line
+bindkey -v
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+bindkey '^b' backward-char
+bindkey '^f' forward-char
+bindkey '^u' kill-whole-line
+bindkey '^w' backward-kill-word
+bindkey "^s" history-incremental-search-backward
+bindkey "^n" history-search-forward
+bindkey "^p" history-search-backward
+bindkey '^ ' autosuggest-accept
 
 export EDITOR='vim'
 
