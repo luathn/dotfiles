@@ -30,8 +30,6 @@ Plug 'ap/vim-css-color'
 " UI
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
-" other
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -105,7 +103,7 @@ map <leader>ss <C-W>s
 
 " Buffer
 map <leader>xx :Bclose<cr>:tabclose<cr>gT
-map <leader>xa :bufdo bd<cr>
+map <leader>xa :call CloseAllBuffersExceptCurrent()<cr>
 map <leader>n :bnext<cr>
 map <leader>p :bprevious<cr>
 
@@ -236,4 +234,12 @@ function! <SID>BufcloseCloseIt()
   if buflisted(l:currentBufNum)
     execute("bdelete! ".l:currentBufNum)
   endif
+endfunction
+
+function! CloseAllBuffersExceptCurrent()
+  let currentBuffer = bufnr("%")
+  let lastBuffer = bufnr("$")
+
+  if currentBuffer > 1 | silent! execute "1,".(currentBuffer-1)."bd" | endif
+  if currentBuffer < lastBuffer | silent! execute (currentBuffer+1).",".lastBuffer."bd" | endif
 endfunction
