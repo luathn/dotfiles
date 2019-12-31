@@ -132,7 +132,7 @@ map <leader>l :CtrlPBuffer<cr>
 
 " others
 map <leader>= :ALEFix<cr>
-map <Leader> <Plug>(easymotion-prefix)
+map s <Plug>(easymotion-prefix)
 autocmd Filetype ruby map <leader>r :!ruby %<cr>
 autocmd Filetype python map <leader>r :!python3 %<cr>
 
