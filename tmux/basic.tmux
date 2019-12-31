@@ -1,39 +1,22 @@
-# Status update interval
-set -g status-interval 1
-
 # Basic status bar colors
-set -g status-style bg=black,fg=cyan
-
-# # Left side of status bar
-# set -g status-left-style bg=black,fg=green
-# set -g status-left-length 40
-# set -g status-left "#S #[fg=white]» #[fg=yellow]#I #[fg=cyan]#P"
+set -g status-style bg=black,fg=colour241
 
 # Left side of status bar
 set -g status-left-style bg=black,fg=green
 set -g status-left-length 40
-set -g status-left "#[fg=colour232,bg=green,bold] #S #[fg=green,bg=colour237,nobold]#[fg=white,bg=colour237] #I:#P #[fg=colour237,bg=black,nobold]"
+set -g status-left "#[bg=yellow,fg=black,bold] #S #[bg=black] "
 
 # Right side of status bar
-set -g status-right-style bg=black,fg=cyan
-set -g status-right-length 40
-set -g status-right "#H #[fg=white]« #[fg=green]%d-%b-%y"
+set -g status-right "#H « %H:%M %d-%b-%y"
 
 # Window status
-set -g window-status-format " #I:#W#F "
-set -g window-status-current-format " #I:#W#F "
-
-# Current window status
-set -g window-status-current-style bg=yellow,fg=black
-
-# Window with activity status
-set -g window-status-activity-style bg=black,fg=yellow
+set -g window-status-format " #W "
+set -g window-status-current-format " #W:#F "
+set -g window-status-current-style bg=black,fg=white
+set -g status-justify left
 
 # Window separator
 set -g window-status-separator ""
-
-# Window status alignment
-set -g status-justify centre
 
 # Pane border
 set -g pane-border-style bg=default,fg=default
