@@ -4,7 +4,7 @@ set -g status-style bg=black,fg=colour241
 # Left side of status bar
 set -g status-left-style bg=black,fg=green
 set -g status-left-length 40
-set -g status-left "#[bg=yellow,fg=black,bold] #S #[bg=black] "
+set -g status-left "#[bg=colour109,fg=colour234,bold] #S #[bg=black] "
 
 # Right side of status bar
 set -g status-right "#H « %H:%M %d-%b-%y"
