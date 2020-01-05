@@ -71,7 +71,7 @@ set wildmenu
 au FocusGained,BufEnter * :checktime
 
 " Scheme
-colorscheme gruvbox
+colorscheme base16-default-dark
 let g:gruvbox_contrast_dark='hard'
 set background=dark
 
@@ -149,13 +149,13 @@ let g:ack_mappings = {
       \ 'q': '<C-W>p' }
 
 " Airline config
-let g:airline_theme='gruvbox'
+let g:airline_theme='base16_default'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 0
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#ale#enabled = 1
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
