@@ -35,9 +35,9 @@ let s:cterm0D = 109
 let s:cterm0E = 139
 let s:cterm0F = 131
 
-let s:N1   = [ s:gui01, s:gui0B, s:cterm01, s:cterm04 ]
+let s:N1   = [ s:gui01, s:gui04, s:cterm01, s:cterm04 ]
 let s:N2   = [ s:gui06, s:gui02, s:cterm06, s:cterm02 ]
-let s:N3   = [ s:gui09, s:gui01, s:cterm04, s:cterm01 ]
+let s:N3   = [ s:gui04, s:gui01, s:cterm04, s:cterm01 ]
 let g:airline#themes#base16_default#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 
 let s:I1   = [ s:gui01, s:gui0C, s:cterm01, s:cterm0C ]
@@ -50,7 +50,7 @@ let s:R2   = [ s:gui06, s:gui02, s:cterm06, s:cterm02 ]
 let s:R3   = [ s:gui09, s:gui01, s:cterm09, s:cterm01 ]
 let g:airline#themes#base16_default#palette.replace = airline#themes#generate_color_map(s:R1, s:R2, s:R3)
 
-let s:V1   = [ s:gui01, s:gui0E, s:cterm01, s:cterm09 ]
+let s:V1   = [ s:gui01, s:gui09, s:cterm01, s:cterm09 ]
 let s:V2   = [ s:gui06, s:gui02, s:cterm06, s:cterm02 ]
 let s:V3   = [ s:gui09, s:gui01, s:cterm09, s:cterm01 ]
 let g:airline#themes#base16_default#palette.visual = airline#themes#generate_color_map(s:V1, s:V2, s:V3)
@@ -61,10 +61,10 @@ let s:IA3   = [ s:gui05, s:gui01, s:cterm05, s:cterm01 ]
 let g:airline#themes#base16_default#palette.inactive = airline#themes#generate_color_map(s:IA1, s:IA2, s:IA3)
 
 let g:airline#themes#base16_default#palette.normal_modified = {
-      \ 'airline_c': ['', '', s:cterm0C, '']
+      \ 'airline_c': [s:gui0C, '', s:cterm0C, '']
       \ }
 let g:airline#themes#base16_default#palette.inactive_modified = {
-      \ 'airline_c': ['', '', s:cterm0C, '']
+      \ 'airline_c': [s:gui0C, '', s:cterm0C, '']
       \ }
 
 " Here we define the color map for ctrlp.  We check for the g:loaded_ctrlp

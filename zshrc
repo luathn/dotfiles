@@ -91,6 +91,9 @@ bindkey '^ ' autosuggest-accept
 
 export EDITOR='vim'
 
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -115,3 +118,5 @@ export TLDR_QUOTE='italic'
 export TLDR_DESCRIPTION='green'
 export TLDR_CODE='red'
 export TLDR_PARAM='blue'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

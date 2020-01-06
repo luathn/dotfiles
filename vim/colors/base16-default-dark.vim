@@ -1,5 +1,5 @@
 " vi:syntax=vim
-let base16colorspace=256
+" let base16colorspace=256
 
 " base16-vim (https://github.com/chriskempson/base16-vim)
 " by Chris Kempson (http://chriskempson.com)
@@ -8,12 +8,12 @@ let base16colorspace=256
 " This enables the coresponding base16-shell script to run so that
 " :colorscheme works in terminals supported by base16-shell scripts
 " User must set this variable in .vimrc
-let g:base16_shell_path="~/.config/base16-shell/scripts"
-if !has("gui_running")
-  if exists("g:base16_shell_path")
-    execute "silent !/bin/sh ".g:base16_shell_path."/base16-default-dark.sh"
-  endif
-endif
+" let g:base16_shell_path="~/.config/base16-shell/scripts"
+" if !has("gui_running")
+"   if exists("g:base16_shell_path")
+"     execute "silent !/bin/sh ".g:base16_shell_path."/base16-default-dark.sh"
+"   endif
+" endif
 
 " GUI color definitions
 let s:gui00        = "181818"
@@ -209,7 +209,7 @@ call <sid>hi("Title",         s:gui0D, "", s:cterm0D, "", "none", "")
 call <sid>hi("Conceal",       s:gui0D, s:gui00, s:cterm0D, s:cterm00, "", "")
 call <sid>hi("Cursor",        s:gui00, s:gui05, s:cterm00, s:cterm05, "", "")
 call <sid>hi("NonText",       s:gui03, "", s:cterm03, "", "", "")
-call <sid>hi("LineNr",        s:gui03, s:gui01, s:cterm03, s:cterm00, "", "")
+call <sid>hi("LineNr",        s:gui03, s:gui00, s:cterm03, s:cterm00, "", "")
 call <sid>hi("SignColumn",    s:gui03, s:gui01, s:cterm03, s:cterm01, "", "")
 call <sid>hi("StatusLine",    s:gui04, s:gui02, s:cterm04, s:cterm02, "none", "")
 call <sid>hi("StatusLineNC",  s:gui03, s:gui01, s:cterm03, s:cterm01, "none", "")

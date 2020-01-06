@@ -1,4 +1,5 @@
 vim/plugged
+vim/.netrwhist
 .directory
 
 config/mpd/*

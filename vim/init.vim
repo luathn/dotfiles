@@ -3,7 +3,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 " Main plugin
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
@@ -26,7 +27,6 @@ Plug 'tpope/vim-endwise'
 Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 " Frontend
 Plug 'pangloss/vim-javascript'
-Plug 'ap/vim-css-color'
 " UI
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
@@ -68,7 +68,10 @@ set so=7                      " Set 7 lines to the cursor
 set laststatus=2
 set ruler
 set wildmenu
-au FocusGained,BufEnter * :checktime
+
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 " Scheme
 colorscheme base16-default-dark
@@ -77,6 +80,10 @@ set background=dark
 
 " Enable matchit for ruby textobject
 runtime macros/matchit.vim
+
+" Autocmd
+au FocusGained,BufEnter * :checktime
+autocmd TermOpen * setlocal nonumber norelativenumber
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings                                                                    "
@@ -127,7 +134,10 @@ map <leader>tr :NERDTreeRefreshRoot<cr>
 
 " Ack
 nnoremap <leader>a :Ack!<Space>
-map <leader>l :CtrlPBuffer<cr>
+
+" Fzf
+nnoremap <silent> <c-p> :Files<cr>
+nnoremap <silent> <leader>l :Buffers<cr>
 
 " others
 map <leader>= :ALEFix<cr>
@@ -190,16 +200,34 @@ inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" CtrlP Fuzzy Search
+" Fzf
+let $FZF_DEFAULT_OPTS .= '--inline-info'
+let g:fzf_layout = { 'down': '~30%' }
+
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit' }
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Ale plugin
 let b:ale_linters = ['flake8', 'pylint']
