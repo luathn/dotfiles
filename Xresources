@@ -7,24 +7,24 @@ URxvt.letterSpace: -1
 URxvt.lineSpace: 0
 
 ! general settings
-URxvt*saveline:		15000
-URxvt*iso14755:		false
-URxvt*termName:		rxvt-unicode-256color
-URxvt*urgentOnBell:	true
+URxvt.saveline:		15000
+URxvt.iso14755:		false
+URxvt.termName:		rxvt-unicode-256color
+URxvt.urgentOnBell:	true
 
 /* ! appearance */
-URxvt*depth:		24
-URxvt*scrollBar:	false
-URxvt*internalBorder:	10
-URxvt*externalBorder:	0
+URxvt.depth:		24
+URxvt.scrollBar:	false
+URxvt.internalBorder:	10
+URxvt.externalBorder:	0
 URxvt.geometry:	        84x22
 
 ! perl extensions
-URxvt*perl-ext-common:      default,clipboard
+URxvt.perl-ext-common:      default,clipboard
 
 ! macros for clipboard and selection
-URxvt*keysym.Control-Shift-C: perl:clipboard:copy
-URxvt*keysym.Control-Shift-V: perl:clipboard:paste
+URxvt.keysym.Control-Shift-C: perl:clipboard:copy
+URxvt.keysym.Control-Shift-V: perl:clipboard:paste
 
 ! ------------------------------------------------------------------------------
 ! Color Configuration
@@ -33,7 +33,7 @@ URxvt*keysym.Control-Shift-V: perl:clipboard:paste
 ! Base16 Default Dark
 ! Scheme: Chris Kempson (http://chriskempson.com)
 
-#define base00 #1c1c1c
+#define base00 #181818
 #define base01 #282828
 #define base02 #383838
 #define base03 #585858
@@ -80,19 +80,19 @@ URxvt*keysym.Control-Shift-V: perl:clipboard:paste
 ! Font configuration
 ! ------------------------------------------------------------------------------
 
-URxvt*font: xft:SauceCodePro Nerd Font Mono:Regular:size=10
-URxvt*boldFont: xft:SauceCodePro Nerd Font Mono:Bold:size=10
-URxvt*italicFont: xft:SauceCodePro Nerd Font Mono:Italic:size=10
-URxvt*boldItalicFont: xft:SauceCodePro Nerd Font Mono:Bold Italic:size=10
+URxvt.font: xft:SauceCodePro Nerd Font Mono:Regular:size=11
+URxvt.boldFont: xft:SauceCodePro Nerd Font Mono:Bold:size=11
+URxvt.italicFont: xft:SauceCodePro Nerd Font Mono:Italic:size=11
+URxvt.boldItalicFont: xft:SauceCodePro Nerd Font Mono:Bold Italic:size=11
 
 ! ------------------------------------------------------------------------------
 ! Xft Font Configuration
 ! ------------------------------------------------------------------------------
 
-Xft.dpi: 105
-Xft.autohint: 0
-Xft.lcdfilter: lcddefault
-Xft.hintstyle: hintslight
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgb
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+Xft.autohint:   false
+Xft.lcdfilter:  lcddefault
