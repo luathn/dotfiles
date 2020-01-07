@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins                                                                     "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 " Main plugin
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -68,7 +68,6 @@ set so=7                      " Set 7 lines to the cursor
 set laststatus=2
 set ruler
 set wildmenu
-
 if (has("termguicolors"))
   set termguicolors
 endif
@@ -83,7 +82,9 @@ runtime macros/matchit.vim
 
 " Autocmd
 au FocusGained,BufEnter * :checktime
-autocmd TermOpen * setlocal nonumber norelativenumber
+if has('nvim')
+  autocmd TermOpen * setlocal nonumber norelativenumber
+end
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings                                                                    "
@@ -153,10 +154,10 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 let g:ack_mappings = {
-      \ 'h': '<C-W>k<C-W>l<C-W>l<C-W>s<C-W>j<CR>',
-      \ 'v': '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
-      \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J',
-      \ 'q': '<C-W>p' }
+  \ 'h': '<C-W>k<C-W>l<C-W>l<C-W>s<C-W>j<CR>',
+  \ 'v': '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
+  \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J',
+  \ 'q': '<C-W>p' }
 
 " Airline config
 let g:airline_theme='base16_default'
@@ -193,9 +194,9 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<Tab>" :
+  \ coc#refresh()
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -210,9 +211,9 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit' }
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -232,14 +233,14 @@ let g:fzf_colors =
 " Ale plugin
 let b:ale_linters = ['flake8', 'pylint']
 let g:ale_fixers = {
-      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \ 'python': ['yapf', 'flake8'],
-      \ 'ruby': ['rubocop'],
-      \ 'javascript': ['eslint'],
-      \ 'css': ['prettier'],
-      \ 'json': ['prettier'],
-      \ 'yaml': ['prettier'],
-      \}
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'python': ['yapf', 'flake8'],
+  \ 'ruby': ['rubocop'],
+  \ 'javascript': ['eslint'],
+  \ 'css': ['prettier'],
+  \ 'json': ['prettier'],
+  \ 'yaml': ['prettier'],
+  \}
 
 " Function
 " Don't close window when deleting a buffer
