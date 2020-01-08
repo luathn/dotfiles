@@ -139,16 +139,21 @@ nnoremap <leader>a :Ack!<Space>
 " Fzf
 nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <leader>l :Buffers<cr>
+nnoremap <leader>fr :Rg<cr>
 
 " others
 map <leader>= :ALEFix<cr>
 map s <Plug>(easymotion-prefix)
+map s<cr> :call OpenFloatTerm()<cr>
 autocmd Filetype ruby map <leader>r :!ruby %<cr>
 autocmd Filetype python map <leader>r :!python3 %<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Easymotion
+let g:EasyMotion_smartcase = 1
+
 " Ack
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -206,7 +211,6 @@ let $FZF_DEFAULT_OPTS .= '--inline-info'
 let g:fzf_layout = { 'down': '~30%' }
 
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
-autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
@@ -229,6 +233,11 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 " Ale plugin
 let b:ale_linters = ['flake8', 'pylint']
@@ -270,4 +279,37 @@ function! CloseAllBuffersExceptCurrent()
 
   if currentBuffer > 1 | silent! execute "1,".(currentBuffer-1)."bd" | endif
   if currentBuffer < lastBuffer | silent! execute (currentBuffer+1).",".lastBuffer."bd" | endif
+endfunction
+
+function! OpenFloatTerm()
+  let height = float2nr((&lines - 2) / 1.5)
+  let row = float2nr((&lines - height) / 2)
+  let width = float2nr(&columns / 1.5)
+  let col = float2nr((&columns - width) / 2)
+  " Border Window
+  let border_opts = {
+    \ 'relative': 'editor',
+    \ 'row': row - 1,
+    \ 'col': col - 2,
+    \ 'width': width + 4,
+    \ 'height': height + 2,
+    \ 'style': 'minimal'
+    \ }
+  let border_buf = nvim_create_buf(v:false, v:true)
+  let s:border_win = nvim_open_win(border_buf, v:true, border_opts)
+  " Main Window
+  let opts = {
+    \ 'relative': 'editor',
+    \ 'row': row,
+    \ 'col': col,
+    \ 'width': width,
+    \ 'height': height,
+    \ 'style': 'minimal'
+    \ }
+  let buf = nvim_create_buf(v:false, v:true)
+  let win = nvim_open_win(buf, v:true, opts)
+  terminal
+  startinsert
+  " Hook up TermClose event to close both terminal and border windows
+  autocmd TermClose * ++once :q | call nvim_win_close(s:border_win, v:true)
 endfunction
