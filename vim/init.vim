@@ -111,8 +111,8 @@ map <leader>ss <C-W>s
 " Buffer
 map <leader>xx :Bclose<cr>:tabclose<cr>gT
 map <leader>xa :call CloseAllBuffersExceptCurrent()<cr>
-map <leader>n :bnext<cr>
-map <leader>p :bprevious<cr>
+map <silent> <leader>l :bnext<cr>
+map <silent> <leader>h :bprevious<cr>
 
 " Mappings for managing tabs
 map <leader>tc :tabnew<cr>
@@ -138,7 +138,7 @@ nnoremap <leader>a :Ack!<Space>
 
 " Fzf
 nnoremap <silent> <c-p> :Files<cr>
-nnoremap <silent> <leader>l :Buffers<cr>
+nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <leader>fr :Rg<cr>
 
 " others
@@ -191,6 +191,7 @@ let g:NERDTreeMapJumpPrevSibling=""
 let g:NERDTreeMapJumpNextSibling=""
 let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
+let NERDTreeMinimalUI = 1
 
 " Coc.nvim setting
 function! s:check_back_space() abort
@@ -207,7 +208,6 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Fzf
-let $FZF_DEFAULT_OPTS .= '--inline-info'
 let g:fzf_layout = { 'down': '~30%' }
 
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>

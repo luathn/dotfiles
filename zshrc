@@ -78,21 +78,22 @@ stty -ixon
 
 # vi mode
 bindkey -v
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line
-bindkey '^b' backward-char
-bindkey '^f' forward-char
-bindkey '^u' kill-whole-line
-bindkey '^w' backward-kill-word
+bindkey "^a" beginning-of-line
+bindkey "^e" end-of-line
+bindkey "^b" backward-char
+bindkey "^f" forward-char
+bindkey "^u" kill-whole-line
+bindkey "^w" backward-kill-word
 bindkey "^s" history-incremental-search-backward
 bindkey "^n" history-search-forward
 bindkey "^p" history-search-backward
-bindkey '^ ' autosuggest-accept
+bindkey "^ " autosuggest-accept
 
-export EDITOR='vim'
+export EDITOR="vim"
 
-export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_DEFAULT_COMMAND="fd --type file --follow --hidden --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--inline-info"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -108,15 +109,15 @@ export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 export PATH="$PATH:`yarn global bin`"
 
 # App alias
-alias yt='mpsyt'
-alias ms='ncmpcpp'
-alias gg='googler -n 7'
+alias yt="mpsyt"
+alias ms="ncmpcpp"
+alias gg="googler -n 7"
 
 # export
-export TLDR_HEADER='magenta bold underline'
-export TLDR_QUOTE='italic'
-export TLDR_DESCRIPTION='green'
-export TLDR_CODE='red'
-export TLDR_PARAM='blue'
+export TLDR_HEADER="magenta bold underline"
+export TLDR_QUOTE="italic"
+export TLDR_DESCRIPTION="green"
+export TLDR_CODE="red"
+export TLDR_PARAM="blue"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
