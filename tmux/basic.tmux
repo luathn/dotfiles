@@ -4,7 +4,7 @@ set -g status-style bg=black,fg=colour241
 # Left side of status bar
 set -g status-left-style bg=black,fg=green
 set -g status-left-length 40
-set -g status-left "#[bg=colour109,fg=colour234,bold] #S #[bg=black] "
+set -g status-left "#[bg=colour232,fg=white] #S #[bg=black] "
 
 # Right side of status bar
 set -g status-right "#H « %H:%M %d-%b-%y"
@@ -19,10 +19,10 @@ set -g status-justify left
 set -g window-status-separator ""
 
 # Pane border
-set -g pane-border-style bg=default,fg=default
+set -g pane-border-style bg=default,fg=colour232
 
 # Active pane border
-set -g pane-active-border-style bg=default,fg=colour215
+set -g pane-active-border-style bg=default,fg=colour247
 
 # Pane number indicator
 set -g display-panes-colour default
