@@ -17,6 +17,7 @@ Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion'
 Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'Yggdroot/indentLine'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -157,6 +158,7 @@ nnoremap <silent> <leader>fr :Rg<cr>
 map <leader>= :ALEFix<cr>
 map s <Plug>(easymotion-prefix)
 map <silent> s<cr> :call OpenFloatTerm()<cr>
+
 autocmd Filetype ruby map <leader>r :!ruby %<cr>
 autocmd Filetype python map <leader>r :!python3 %<cr>
 
@@ -262,6 +264,9 @@ let g:ale_fixers = {
   \ 'json': ['prettier'],
   \ 'yaml': ['prettier'],
   \}
+
+" Indentline
+let g:indentLine_char = '│'
 
 " Function
 " Don't close window when deleting a buffer
