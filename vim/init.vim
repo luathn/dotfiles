@@ -109,7 +109,7 @@ map <leader>sv <C-W>v
 map <leader>ss <C-W>s
 
 " Buffer
-map <leader>xx :Bclose<cr>:tabclose<cr>gT
+map <leader>xx :Bclose<cr>
 map <leader>xa :call CloseAllBuffersExceptCurrent()<cr>
 map <silent> <leader>l :bnext<cr>
 map <silent> <leader>h :bprevious<cr>
@@ -276,15 +276,23 @@ endfunction
 function! CloseAllBuffersExceptCurrent()
   let currentBuffer = bufnr("%")
   let lastBuffer = bufnr("$")
+  let nerdtreeBuffer = bufnr(t:NERDTreeBufName)
 
-  if currentBuffer > 1 | silent! execute "1,".(currentBuffer-1)."bd" | endif
-  if currentBuffer < lastBuffer | silent! execute (currentBuffer+1).",".lastBuffer."bd" | endif
+  if currentBuffer < nerdtreeBuffer
+    let midBufferBefore = currentBuffer | let midBufferAfter = nerdtreeBuffer
+  else
+    let midBufferBefore = nerdtreeBuffer | let midBufferAfter = currentBuffer
+  end
+
+  if midBufferBefore > 1 | silent! execute "1,".(midBufferBefore-1)."bd" | endif
+  if (midBufferAfter - midBufferBefore) > 2 | silent! execute (midBufferBefore+1).",".(midBufferAfter-1)."bd" | endif
+  if midBufferAfter < lastBuffer | silent! execute (midBufferAfter+1).",".lastBuffer."bd" | endif
 endfunction
 
 function! OpenFloatTerm()
-  let height = float2nr((&lines - 2) / 1.5)
+  let height = float2nr((&lines - 2) / 1.7)
   let row = float2nr((&lines - height) / 2)
-  let width = float2nr(&columns / 1.5)
+  let width = float2nr(&columns / 1.7)
   let col = float2nr((&columns - width) / 2)
   " Border Window
   let border_opts = {
@@ -311,5 +319,5 @@ function! OpenFloatTerm()
   terminal
   startinsert
   " Hook up TermClose event to close both terminal and border windows
-  autocmd TermClose * ++once :q | call nvim_win_close(s:border_win, v:true)
+  autocmd TermClose * ++once :bd! | call nvim_win_close(s:border_win, v:true)
 endfunction
