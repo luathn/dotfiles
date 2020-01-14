@@ -68,7 +68,7 @@ set so=7                      " Set 7 lines to the cursor
 set laststatus=2
 set ruler
 set wildmenu
-if (has("termguicolors"))
+if (has("termguicolors") && has("nvim"))
   set termguicolors
 endif
 
@@ -92,6 +92,18 @@ end
 map s <Nop>
 let mapleader=" "
 imap jk <Esc>
+map 0 ^
+
+" Useful saving mapping
+noremap <leader>w :w!<cr>
+noremap <C-S> :update<CR>
+vnoremap <C-S> <C-C>:update<CR>
+inoremap <C-S> <C-O>:update<CR>
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+" Visual mode pressing * or # searches for the current selection
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 vmap <C-C> "+y
 vmap gy "+y
@@ -139,12 +151,12 @@ nnoremap <leader>a :Ack!<Space>
 " Fzf
 nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <leader>b :Buffers<cr>
-nnoremap <leader>fr :Rg<cr>
+nnoremap <silent> <leader>fr :Rg<cr>
 
 " others
 map <leader>= :ALEFix<cr>
 map s <Plug>(easymotion-prefix)
-map s<cr> :call OpenFloatTerm()<cr>
+map <silent> s<cr> :call OpenFloatTerm()<cr>
 autocmd Filetype ruby map <leader>r :!ruby %<cr>
 autocmd Filetype python map <leader>r :!python3 %<cr>
 
@@ -320,4 +332,21 @@ function! OpenFloatTerm()
   startinsert
   " Hook up TermClose event to close both terminal and border windows
   autocmd TermClose * ++once :bd! | call nvim_win_close(s:border_win, v:true)
+endfunction
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
 endfunction
