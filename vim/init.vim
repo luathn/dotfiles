@@ -99,7 +99,7 @@ map 0 ^
 noremap <leader>w :w!<cr>
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <C-O>:update<CR>
+inoremap <C-S> <Esc>:update<CR>
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 " Visual mode pressing * or # searches for the current selection
@@ -203,7 +203,7 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['.git']
 let g:NERDTreeMapJumpPrevSibling=""
 let g:NERDTreeMapJumpNextSibling=""
-let NERDTreeMapOpenSplit='s'
+let NERDTreeMapOpenSplit='ss'
 let NERDTreeMapOpenVSplit='v'
 let NERDTreeMinimalUI = 1
 
