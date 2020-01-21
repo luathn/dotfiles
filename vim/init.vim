@@ -152,6 +152,11 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" ALE
+map <leader>= :ALEFix<cr>
+nmap <silent> [e <Plug>(ale_previous_wrap)
+nmap <silent> ]e <Plug>(ale_next_wrap)
+
 " NERDTree
 map <leader>tt :NERDTreeToggle<cr>
 map <leader>tb :NERDTreeFromBookmark<Space>
@@ -167,7 +172,6 @@ nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader>fr :Rg<cr>
 
 " others
-map <leader>= :ALEFix<cr>
 map s <Plug>(easymotion-prefix)
 map <silent> s<cr> :call OpenFloatTerm()<cr>
 
