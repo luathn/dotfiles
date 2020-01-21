@@ -106,7 +106,7 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
+" Move a line of text using ALT+[jk]
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
@@ -299,12 +299,16 @@ endfunction
 function! CloseAllBuffersExceptCurrent()
   let currentBuffer = bufnr("%")
   let lastBuffer = bufnr("$")
-  let nerdtreeBuffer = bufnr(t:NERDTreeBufName)
-
-  if currentBuffer < nerdtreeBuffer
-    let midBufferBefore = currentBuffer | let midBufferAfter = nerdtreeBuffer
+  if g:NERDTree.IsOpen()
+    let nerdtreeBuffer = bufnr(t:NERDTreeBufName)
+    if currentBuffer < nerdtreeBuffer
+      let midBufferBefore = currentBuffer | let midBufferAfter = nerdtreeBuffer
+    else
+      let midBufferBefore = nerdtreeBuffer | let midBufferAfter = currentBuffer
+    end
   else
-    let midBufferBefore = nerdtreeBuffer | let midBufferAfter = currentBuffer
+    let midBufferBefore = currentBuffer
+    let midBufferAfter = currentBuffer
   end
 
   if midBufferBefore > 1 | silent! execute "1,".(midBufferBefore-1)."bd" | endif
