@@ -175,8 +175,9 @@ nnoremap <silent> <leader>fr :Rg<cr>
 map s <Plug>(easymotion-prefix)
 map <silent> s<cr> :call OpenFloatTerm()<cr>
 
-autocmd Filetype ruby map <leader>r :!ruby %<cr>
-autocmd Filetype python map <leader>r :!python3 %<cr>
+autocmd Filetype ruby map <leader>rr :!ruby %<cr>
+autocmd Filetype python map <leader>rr :!python3 %<cr>
+vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config                                                                "
@@ -278,10 +279,14 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview(), <bang>0)
 
 " Ale plugin
-let b:ale_linters = ['flake8', 'pylint']
+let b:ale_linters = {
+  \ 'python': ['flake8', 'pylint'],
+  \ 'ruby': ['rubocop'],
+  \}
+
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'python': ['yapf', 'flake8'],
+  \ 'python': ['black', 'flake8'],
   \ 'ruby': ['rubocop'],
   \ 'javascript': ['eslint'],
   \ 'css': ['prettier'],
