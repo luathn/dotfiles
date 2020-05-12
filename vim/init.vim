@@ -171,6 +171,9 @@ nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <leader>b :Buffers<cr>
 nnoremap <silent> <leader>fr :Rg<cr>
 
+" Fugitive
+nnoremap <silent> <leader>gb :Git blame<cr>
+
 " others
 map s <Plug>(easymotion-prefix)
 map <silent> s<cr> :call OpenFloatTerm()<cr>
