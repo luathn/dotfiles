@@ -158,10 +158,11 @@ nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
 
 " NERDTree
-map <leader>tt :NERDTreeToggle<cr>
-map <leader>tb :NERDTreeFromBookmark<Space>
-map <leader>tf :NERDTreeFind<cr>
-map <leader>tr :NERDTreeRefreshRoot<cr>
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark<Space>
+map <leader>nf :NERDTreeFind<cr>
+map <leader>nr :NERDTreeRefreshRoot<cr>
+map <leader>ns :NERDTreeFocus<cr>:vertical resize 35<cr>
 
 " Ack
 nnoremap <leader>a :Ack!<Space>
