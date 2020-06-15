@@ -17,13 +17,27 @@
 ;==========================================================
 
 [colors]
-background = ${xrdb:color0:#222}
+background = #222222
 background-alt = #444
 foreground = #dfdfdf
 foreground-alt = #555
 primary = #ab4642
 secondary = #e60053
 alert = #bd2c40
+
+red = #F06A6A
+pink = #EC1850
+purple = #BA40A0
+blue = #427DCD
+cyan = #4DA8B9
+green = #5CAC30
+yellow = #D2A91D
+amber = #FD890F
+orange = #EA7222
+brown = #AC5C4E
+grey = #8C8C8C
+indigo = #4759C6
+blue-gray = #6D8895
 
 [bar/mybar]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -136,7 +150,7 @@ label-song-ellipsis = false
 type = internal/cpu
 interval = 2
 format-prefix = "﬙"
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.red}
 ; format-underline = #f90000
 label = %percentage:2%%
 
@@ -154,7 +168,7 @@ interface = wlo1
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
+; format-connected-underline = #9f78e1
 label-connected = %essid%
 
 format-disconnected =
@@ -168,7 +182,7 @@ ramp-signal-1 = 
 ramp-signal-2 = 直
 ramp-signal-3 = 直
 ramp-signal-4 = 直
-ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-foreground = ${colors.green}
 
 [module/eth]
 type = internal/network
@@ -177,7 +191,7 @@ interval = 3.0
 
 ; format-connected-underline = #55aa55
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-prefix-foreground = ${colors.yellow}
 label-connected = Connected
 
 format-disconnected =
@@ -196,8 +210,8 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = 
+format-prefix-foreground = ${colors.cyan}
 ; format-underline = #0a6cf5
 
 label = %date% %time%
@@ -207,10 +221,10 @@ type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
 label-volume = %percentage%%
-label-volume-foreground = ${root.foreground}
+label-volume-foreground = ${colors.foreground}
 
 label-muted =  muted
-label-muted-foreground = #666
+label-muted-foreground = ${colors.pink}
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -242,8 +256,8 @@ format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+format-full-prefix-foreground = ${colors.blue}
+; format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 

@@ -1,8 +1,13 @@
 ln -s -f ~/dotfiles/config/* ~/.config
 ln -s -f ~/dotfiles/zshrc ~/.zshrc
 ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf
-rm -rf ~/.vim
-ln -s -f ~/dotfiles/vim/ ~/.vim
+
+rm -r -f ~/.config/nvim
+ln -s -f ~/dotfiles/vim ~/.config/nvim
+
 ln -s -f ~/dotfiles/Xresources ~/.Xresources
+
+rm -r -f ~/.fonts
+ln -s -f ~/dotfiles/fonts ~/.fonts
 
 vim +PlugInstall +qall

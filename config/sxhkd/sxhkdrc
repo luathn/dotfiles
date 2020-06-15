@@ -130,7 +130,7 @@ super + {Left,Down,Up,Right}
 
 #tmp shortcut
 ctrl + alt + l
-	i3lock -t -i $(find ~/dotfiles/images/ -name "lock*.png" | shuf -n1)
+	betterlockscreen -l blur
 
 #Volume Control
 XF86AudioLowerVolume

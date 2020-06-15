@@ -1,0 +1,126 @@
+#! /bin/bash
+info () {
+  printf "\r  [\033[00;34m..\033[0m] $1\n"
+}
+
+success () {
+  printf "\r\033[2K [\033[00;32mOK\033[0m] $1\n"
+}
+
+install_chrome() {
+  read -r -p "Do you want to install chrome? [y|N] " response
+  if [[ $response =~ (y|yes|Y) ]];then
+    info "Installing Google Chrome"
+    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    sudo apt update -y
+    sudo apt install google-chrome-stable
+    success "Installed Google Chrome"
+  fi
+}
+
+install_git() {
+  read -r -p "Do you want to install Git? [y|N] " response
+  if [[ $response =~ (y|yes|Y) ]];then
+    info "Installing Git"
+    sudo add-apt-repository ppa:git-core/ppa
+    sudo apt update -y
+    sudo apt install git -y
+    git config --global user.name "luathn"
+    git config --global user.email "luat.hoangn@gmail.com"
+    success "Installed Git"
+  fi
+}
+
+install_interface_app() {
+  read -r -p "Do you want to install Bspwm, polybar, rofi,...? [y|N] " response
+  if [[ $response =~ (y|yes|Y) ]];then
+    info "Installing Bspwm, polybar, rofi,..."
+    sudo apt install bspwm rofi feh -y
+    sudo apt install build-essential cmake cmake-data pkg-config python3-sphinx libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev -y
+    mkdir ~/buildapp
+    cd ~/buildapp
+    git clone --recursive https://github.com/polybar/polybar
+    cd polybar
+    mkdir build
+    cd build
+    cmake ..
+    make -j$(nproc)
+    sudo make install
+    success "Installed"
+  fi
+}
+
+install_zsh() {
+  read -r -p "Do you want to install Zsh? [y|N] " response
+  if [[ $response =~ (y|yes|Y) ]];then
+    info "Installing Zsh"
+    sudo apt install zsh -y
+    sudo chsh -s $(which zsh)
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    success "Installed Zsh"
+  fi
+}
+
+install_docker() {
+  read -r -p "Do you want to install Docker? [y|N] " response
+  if [[ $response =~ (y|yes|Y) ]];then
+    info "Installing Docker"
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+    sudo apt-get update -y
+    sudo apt-get install \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        gnupg-agent \
+        software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+    sudo apt-get update -y
+    sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+    success "Installed Docker"
+  fi
+}
+
+install_ruby() {
+  read -r -p "Do you want to install Ruby? [y|N] " response
+  if [[ $response =~ (y|yes|Y) ]];then
+    info "Installing Ruby"
+    cd
+    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+    cd ~/.rbenv && src/configure && make -C src
+    ~/.rbenv/bin/rbenv init
+    mkdir -p "$(rbenv root)"/plugins
+    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+    success "Installed Ruby"
+  fi
+}
+
+install_node() {
+  read -r -p "Do you want to install Node? [y|N] " response
+  if [[ $response =~ (y|yes|Y) ]];then
+    info "Installing Node"
+    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    sudo apt update && sudo apt install -y yarn
+    success "Installed Node"
+  fi
+}
+
+# Install general ##############################################
+sudo apt-get install build-essential zsh vim tmux curl scrot mpd ncmpcpp -y
+
+install_chrome
+install_git
+install_interface_app
+install_zsh
+install_ruby
+install_docker
+install_node
