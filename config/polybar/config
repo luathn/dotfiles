@@ -18,12 +18,10 @@
 
 [colors]
 background = ${xrdb:color0:#222}
-;background = #222
 background-alt = #444
-;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
-primary = #dc9656
+primary = #ab4642
 secondary = #e60053
 alert = #bd2c40
 
@@ -31,8 +29,8 @@ alert = #bd2c40
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 27
-;offset-x = 0
-;offset-y = 0
+; offset-x = 0
+; offset-y = 0
 radius = 0.0
 fixed-center = false
 
@@ -42,8 +40,8 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 0
-border-color = #00000000
+border-bottom-size = 3
+border-bottom-color = ${colors.primary}
 
 padding-left = 0
 padding-right = 2
@@ -61,10 +59,9 @@ modules-right = pulseaudio cpu wlan eth battery date powermenu
 
 tray-position = right
 tray-padding = 2
-;tray-background = #0063ff
+; tray-background = ${colors.primary}
 
 wm-restack = bspwm
-;wm-restack = i3
 
 ;override-redirect = true
 
@@ -102,8 +99,8 @@ ws-icon-2 = III;
 ws-icon-3 = IV;
 
 label-focused = %icon%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-background = ${colors.primary}
+; label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
 label-occupied = %icon%
@@ -119,44 +116,6 @@ label-empty-padding = 2
 
 ; Separator in between workspaces
 ; label-separator = |
-
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = 2
-
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %index%
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-; Separator in between workspaces
-; label-separator = |
-
 
 [module/mpd]
 type = internal/mpd
@@ -178,7 +137,7 @@ type = internal/cpu
 interval = 2
 format-prefix = "﬙"
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+; format-underline = #f90000
 label = %percentage:2%%
 
 [module/memory]
@@ -216,7 +175,7 @@ type = internal/network
 interface = enp2s0
 interval = 3.0
 
-format-connected-underline = #55aa55
+; format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = Connected
@@ -239,7 +198,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+; format-underline = #0a6cf5
 
 label = %date% %time%
 
