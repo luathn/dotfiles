@@ -70,7 +70,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(rails docker git ruby tmux zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(rails docker docker-compose git ruby tmux zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -120,6 +120,5 @@ export PATH="$PATH:`yarn global bin`"
 alias yt="mpsyt"
 alias ms="ncmpcpp"
 alias gg="googler -n 7"
-alias cat="bat"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
