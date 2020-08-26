@@ -18,6 +18,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
+Plug 'maxbrunsfeld/vim-yankstack'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -94,6 +95,7 @@ map s <Nop>
 let mapleader=" "
 imap jk <Esc>
 map 0 ^
+nnoremap Y y$
 
 " Useful saving mapping
 noremap <leader>w :w!<cr>
@@ -112,10 +114,14 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
+" Copy text to clipboard
 vmap <C-C> "+y
 vmap gy "+y
 nmap gy "+y
 nmap gp "+p
+nmap gyn :let @+=expand("%:t")<CR>:echo "File name copied"<CR>
+nmap gysp :let @+=expand("%")<CR>:echo "File path copied"<CR>
+nmap gylp :let @+=expand("%:p")<CR>:echo "File full path copied"<CR>
 
 nmap ]<space> o<esc>
 nmap [<space> O<esc>
@@ -174,6 +180,11 @@ nnoremap <silent> <leader>fr :Rg<cr>
 
 " Fugitive
 nnoremap <silent> <leader>gb :Git blame<cr>
+
+" YankStack
+let g:yankstack_yank_keys = ['y', 'd']
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 " others
 map s <Plug>(easymotion-prefix)
