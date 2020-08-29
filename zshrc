@@ -70,7 +70,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(rails docker docker-compose git ruby tmux zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(vi-mode rails docker docker-compose git ruby tmux zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -89,6 +89,7 @@ bindkey "^s" history-incremental-search-backward
 bindkey "^n" history-search-forward
 bindkey "^p" history-search-backward
 bindkey "^ " autosuggest-accept
+bindkey "jk" vi-cmd-mode
 
 export EDITOR="vim"
 

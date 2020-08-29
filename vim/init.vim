@@ -19,6 +19,8 @@ Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
 Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'vim-test/vim-test'
+Plug 'skywind3000/asyncrun.vim'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -74,7 +76,7 @@ if (has("termguicolors") && has("nvim"))
   set termguicolors
 endif
 
-" Scheme
+" Scheme (base16-seti)
 colorscheme base16-default-dark
 let g:gruvbox_contrast_dark='hard'
 set background=dark
@@ -96,6 +98,10 @@ let mapleader=" "
 imap jk <Esc>
 map 0 ^
 nnoremap Y y$
+command! Source :source ~/.config/nvim/init.vim
+
+" Close quickfix
+autocmd FileType qf nnoremap <buffer> gq :cclose<CR>
 
 " Useful saving mapping
 noremap <leader>w :w!<cr>
@@ -120,7 +126,7 @@ vmap gy "+y
 nmap gy "+y
 nmap gp "+p
 nmap gyn :let @+=expand("%:t")<CR>:echo "File name copied"<CR>
-nmap gysp :let @+=expand("%")<CR>:echo "File path copied"<CR>
+nmap gysp :let @+=expand("%:")<CR>:echo "File path copied"<CR>
 nmap gylp :let @+=expand("%:p")<CR>:echo "File full path copied"<CR>
 
 nmap ]<space> o<esc>
@@ -142,11 +148,11 @@ map <silent> <leader>h :bprevious<cr>
 " Mappings for managing tabs
 map <leader>tc :tabnew<cr>
 map <leader>tx :tabclose<cr>
-map <leader>tn :tabnext<cr>
+" map <leader>tn :tabnext<cr>
 map <leader>tm :tabmove
 map <leader>to :tabonly<cr>
 let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+" nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
@@ -185,6 +191,13 @@ nnoremap <silent> <leader>gb :Git blame<cr>
 let g:yankstack_yank_keys = ['y', 'd']
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
+
+" Vim Test
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
 
 " others
 map s <Plug>(easymotion-prefix)
@@ -311,6 +324,11 @@ let g:ale_fixers = {
 
 " Indentline
 let g:indentLine_char = '│'
+
+" Vim test
+let test#strategy = "asyncrun"
+let g:asyncrun_open = 10
+let g:test#preserve_screen = 1
 
 " Function
 " Don't close window when deleting a buffer
