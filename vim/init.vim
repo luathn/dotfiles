@@ -8,7 +8,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
-Plug 'scrooloose/nerdtree'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-commentary'
@@ -169,13 +169,6 @@ map <leader>= :ALEFix<cr>
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
 
-" NERDTree
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
-map <leader>nr :NERDTreeRefreshRoot<cr>
-map <leader>ns :NERDTreeFocus<cr>:vertical resize 35<cr>
-
 " Ack
 nnoremap <leader>a :Ack!<Space>
 
@@ -198,6 +191,110 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ts :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
+
+" Defx
+nnoremap <C-n> :Defx<CR>
+nnoremap <silent> <leader>ff :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+
+" Set appearance
+call defx#custom#option('_', {
+  \ 'winwidth': 30,
+  \ 'split': 'vertical',
+  \ 'direction': 'topleft',
+  \ 'show_ignored_files': 0,
+  \ 'resume': 1,
+  \ 'columns': 'mark:indent:icon:filename',
+  \ })
+
+call defx#custom#column('icon', {
+  \ 'directory_icon': '',
+  \ 'opened_icon': 'ﱮ',
+  \ })
+
+call defx#custom#column('mark', {
+  \ 'readonly_icon': '',
+  \ 'selected_icon': '',
+  \ })
+
+autocmd FileType defx call s:defx_my_settings()
+function! s:defx_my_settings() abort
+  " Define mappings
+  nnoremap <nowait><silent><buffer><expr> c
+  \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> x
+  \ defx#do_action('move')
+  nnoremap <nowait><silent><buffer><expr> d
+  \ defx#do_action('remove')
+  nnoremap <silent><buffer><expr> p
+  \ defx#do_action('paste')
+  nnoremap <silent><buffer><expr> r
+  \ defx#do_action('rename')
+  nnoremap <silent><buffer><expr> K
+  \ defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> m
+  \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> M
+  \ defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> <CR>
+  \ defx#is_directory() ?
+  \ defx#do_action('open_or_close_tree') :
+  \ defx#do_action('drop')
+  nnoremap <silent><buffer><expr> o
+  \ defx#is_directory() ?
+  \ defx#do_action('open_or_close_tree') :
+  \ defx#do_action('drop')
+  nnoremap <silent><buffer><expr> <2-LeftMouse>
+  \ defx#is_directory() ?
+  \ defx#do_action('open_or_close_tree') :
+  \ defx#do_action('drop')
+  nnoremap <silent><buffer><expr> i
+  \ defx#do_action('close_tree')
+  nnoremap <silent><buffer><expr> l
+  \ defx#do_action('open_directory')
+  nnoremap <silent><buffer><expr> h
+  \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> v
+  \ defx#do_action('toggle_select')
+  nnoremap <silent><buffer><expr> V
+  \ defx#do_action('clear_select_all')
+  nnoremap <silent><buffer><expr> *
+  \ defx#do_action('toggle_select_all')
+  nnoremap <silent><buffer><expr> E
+  \ defx#do_action('open', 'vsplit')
+  nnoremap <silent><buffer><expr> P
+  \ defx#do_action('preview')
+  nnoremap <silent><buffer><expr> C
+  \ defx#do_action('toggle_columns', 'indent:icon:filename:type:size:time')
+  nnoremap <silent><buffer><expr> S
+  \ defx#do_action('toggle_sort', 'time')
+  nnoremap <silent><buffer><expr> s
+  \ defx#do_action('search')
+  nnoremap <silent><buffer><expr> !
+  \ defx#do_action('execute_command')
+  nnoremap <silent><buffer><expr> X
+  \ defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> yy
+  \ defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> .
+  \ defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> ;
+  \ defx#do_action('repeat')
+  nnoremap <silent><buffer><expr> ~
+  \ defx#do_action('cd')
+  nnoremap <silent><buffer><expr> q
+  \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> j
+  \ line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k
+  \ line('.') == 1 ? 'G' : 'k'
+  nnoremap <silent><buffer><expr> <C-r>
+  \ defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <C-g>
+  \ defx#do_action('print')
+  nnoremap <silent><buffer><expr> cd
+  \ defx#do_action('change_vim_cwd')
+endfunction
+
 
 " others
 map s <Plug>(easymotion-prefix)
@@ -241,16 +338,6 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
-
-" NERDTree
-let g:NERDTreeMouseMode=3
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['.git']
-let g:NERDTreeMapJumpPrevSibling=""
-let g:NERDTreeMapJumpNextSibling=""
-let NERDTreeMapOpenSplit='ss'
-let NERDTreeMapOpenVSplit='v'
-let NERDTreeMinimalUI = 1
 
 " Coc.nvim setting
 inoremap <silent><expr> <Tab>
@@ -324,6 +411,7 @@ let g:ale_fixers = {
 
 " Indentline
 let g:indentLine_char = '│'
+let g:indentLine_fileTypeExclude = ['defx']
 
 " Vim test
 let test#strategy = "asyncrun"
