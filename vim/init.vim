@@ -15,6 +15,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'Yggdroot/indentLine'
@@ -93,7 +94,6 @@ end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings                                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map s <Nop>
 let mapleader=" "
 imap jk <Esc>
 map 0 ^
@@ -133,7 +133,7 @@ nmap ]<space> o<esc>
 nmap [<space> O<esc>
 
 " Turn off search highlight
-map <silent> <leader><cr> :noh<cr>
+map <silent> <leader>/ :noh<cr>
 
 " Split windows
 map <leader>sv <C-W>v
@@ -297,8 +297,7 @@ endfunction
 
 
 " others
-map s <Plug>(easymotion-prefix)
-map <silent> s<cr> :call OpenFloatTerm()<cr>
+map <silent> <leader><cr> :call OpenFloatTerm()<cr>
 
 autocmd Filetype ruby map <leader>rr :!ruby %<cr>
 autocmd Filetype python map <leader>rr :!python3 %<cr>
@@ -307,8 +306,9 @@ vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Easymotion
-let g:EasyMotion_smartcase = 1
+" Sneak
+let g:sneak#label = 1
+let g:sneak#use_ic_scs = 1
 
 " Ack
 if executable('ag')
