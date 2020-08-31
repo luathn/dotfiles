@@ -194,7 +194,7 @@ nmap <silent> <leader>tv :TestVisit<CR>
 
 " Defx
 nnoremap <C-n> :Defx<CR>
-nnoremap <silent> <leader>ff :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+nnoremap <silent> <leader>ff :Defx -toggle=0 -search=`expand('%:p')`<CR>
 
 " Set appearance
 call defx#custom#option('_', {
@@ -203,6 +203,7 @@ call defx#custom#option('_', {
   \ 'direction': 'topleft',
   \ 'show_ignored_files': 0,
   \ 'resume': 1,
+  \ 'toggle': 1,
   \ 'columns': 'mark:indent:icon:filename',
   \ })
 
@@ -294,7 +295,6 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> cd
   \ defx#do_action('change_vim_cwd')
 endfunction
-
 
 " others
 map <silent> <leader><cr> :call OpenFloatTerm()<cr>
