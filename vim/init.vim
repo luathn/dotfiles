@@ -311,9 +311,7 @@ let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
 
 " Ack
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+let g:ackprg = "rg --vimgrep --type-not sql --smart-case"
 let g:ack_mappings = {
   \ 'h': '<C-W>k<C-W>l<C-W>l<C-W>s<C-W>j<CR>',
   \ 'v': '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
