@@ -14,7 +14,6 @@ Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'easymotion/vim-easymotion'
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
@@ -22,6 +21,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'junegunn/vim-slash'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -34,7 +36,6 @@ Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 Plug 'pangloss/vim-javascript'
 " UI
 Plug 'vim-airline/vim-airline'
-Plug 'morhetz/gruvbox'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -196,27 +197,6 @@ nmap <silent> <leader>tv :TestVisit<CR>
 nnoremap <C-n> :Defx<CR>
 nnoremap <silent> <leader>ff :Defx -toggle=0 -search=`expand('%:p')`<CR>
 
-" Set appearance
-call defx#custom#option('_', {
-  \ 'winwidth': 30,
-  \ 'split': 'vertical',
-  \ 'direction': 'topleft',
-  \ 'show_ignored_files': 0,
-  \ 'resume': 1,
-  \ 'toggle': 1,
-  \ 'columns': 'mark:indent:icon:filename',
-  \ })
-
-call defx#custom#column('icon', {
-  \ 'directory_icon': '',
-  \ 'opened_icon': 'ﱮ',
-  \ })
-
-call defx#custom#column('mark', {
-  \ 'readonly_icon': '',
-  \ 'selected_icon': '',
-  \ })
-
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
@@ -296,6 +276,22 @@ function! s:defx_my_settings() abort
   \ defx#do_action('change_vim_cwd')
 endfunction
 
+" CtrlSF
+let g:ctrlsf_mapping = {
+  \ "openb": { "key": "O", "suffix": "<C-w>p" },
+  \ "next": "n",
+  \ "prev": "N",
+  \ "vsplit": "v",
+  \ }
+nmap     <C-F>f <Plug>CtrlSFPrompt
+vmap     <C-F>f <Plug>CtrlSFVwordPath
+vmap     <C-F>F <Plug>CtrlSFVwordExec
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+nmap     <C-F>p <Plug>CtrlSFPwordPath
+nnoremap <C-F>o :CtrlSFOpen<CR>
+nnoremap <C-F>t :CtrlSFToggle<CR>
+inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
 " others
 map <silent> <leader><cr> :call OpenFloatTerm()<cr>
 
@@ -306,6 +302,11 @@ vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlsf_default_view_mode = 'compact'
+let g:ctrlsf_auto_focus = {
+  \ "at": "start"
+  \ }
+
 " Sneak
 let g:sneak#label = 1
 let g:sneak#use_ic_scs = 1
@@ -415,6 +416,27 @@ let g:indentLine_fileTypeExclude = ['defx']
 let test#strategy = "asyncrun"
 let g:asyncrun_open = 10
 let g:test#preserve_screen = 1
+
+" Defx
+call defx#custom#option('_', {
+  \ 'winwidth': 30,
+  \ 'split': 'vertical',
+  \ 'direction': 'topleft',
+  \ 'show_ignored_files': 0,
+  \ 'resume': 1,
+  \ 'toggle': 1,
+  \ 'columns': 'mark:indent:icon:filename',
+  \ })
+
+call defx#custom#column('icon', {
+  \ 'directory_icon': '',
+  \ 'opened_icon': 'ﱮ',
+  \ })
+
+call defx#custom#column('mark', {
+  \ 'readonly_icon': '',
+  \ 'selected_icon': '',
+  \ })
 
 " Function
 " Don't close window when deleting a buffer
