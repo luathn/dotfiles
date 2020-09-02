@@ -172,6 +172,8 @@ nmap <silent> ]e <Plug>(ale_next_wrap)
 
 " Ack
 nnoremap <leader>a :Ack!<Space>
+" When you press gv you Ack after the selected text
+vnoremap <leader>a :call VisualSelection('gv', '')<CR>
 
 " Fzf
 nnoremap <silent> <c-p> :Files<cr>
@@ -513,19 +515,21 @@ function! OpenFloatTerm()
   autocmd TermClose * ++once :bd! | call nvim_win_close(s:border_win, v:true)
 endfunction
 
+function! CmdLine(str)
+  call feedkeys(":" . a:str)
+endfunction
+
 function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
+  let l:saved_reg = @"
+  execute "normal! vgvy"
 
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
+  let l:pattern = escape(@", "\\/.*'$^~[]")
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
+  if a:direction == 'gv'
+    call CmdLine("Ack '" . l:pattern . "' " )
+  endif
 
-    let @/ = l:pattern
-    let @" = l:saved_reg
+  let @/ = l:pattern
+  let @" = l:saved_reg
 endfunction
