@@ -23,7 +23,6 @@ Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'junegunn/vim-slash'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -102,7 +101,7 @@ nnoremap Y y$
 command! Source :source ~/.config/nvim/init.vim
 
 " Close quickfix
-autocmd FileType qf nnoremap <buffer> gq :cclose<CR>
+autocmd FileType qf nnoremap <buffer> q :cclose<CR>
 
 " Useful saving mapping
 noremap <leader>w :w!<cr>
@@ -142,7 +141,7 @@ map <leader>ss <C-W>s
 
 " Buffer
 map <leader>xx :Bclose<cr>
-map <leader>xa :call CloseAllBuffersExceptCurrent()<cr>
+map <leader>xa :call CloseAllBuffersButCurrent()<cr>
 map <silent> <leader>l :bnext<cr>
 map <silent> <leader>h :bprevious<cr>
 
@@ -256,7 +255,7 @@ function! s:defx_my_settings() abort
   \ defx#do_action('execute_command')
   nnoremap <silent><buffer><expr> X
   \ defx#do_action('execute_system')
-  nnoremap <silent><buffer><expr> yy
+  nnoremap <silent><buffer><expr> y
   \ defx#do_action('yank_path')
   nnoremap <silent><buffer><expr> .
   \ defx#do_action('toggle_ignored_files')
@@ -462,24 +461,11 @@ function! <SID>BufcloseCloseIt()
   endif
 endfunction
 
-function! CloseAllBuffersExceptCurrent()
-  let currentBuffer = bufnr("%")
-  let lastBuffer = bufnr("$")
-  if g:NERDTree.IsOpen()
-    let nerdtreeBuffer = bufnr(t:NERDTreeBufName)
-    if currentBuffer < nerdtreeBuffer
-      let midBufferBefore = currentBuffer | let midBufferAfter = nerdtreeBuffer
-    else
-      let midBufferBefore = nerdtreeBuffer | let midBufferAfter = currentBuffer
-    end
-  else
-    let midBufferBefore = currentBuffer
-    let midBufferAfter = currentBuffer
-  end
-
-  if midBufferBefore > 1 | silent! execute "1,".(midBufferBefore-1)."bd" | endif
-  if (midBufferAfter - midBufferBefore) > 2 | silent! execute (midBufferBefore+1).",".(midBufferAfter-1)."bd" | endif
-  if midBufferAfter < lastBuffer | silent! execute (midBufferAfter+1).",".lastBuffer."bd" | endif
+function! CloseAllBuffersButCurrent()
+  let curr = bufnr("%")
+  let last = bufnr("$")
+  if curr > 1 | silent! execute "1,".(curr-1)."bd" | endif
+  if curr < last | silent! execute (curr+1).",".last."bd" | endif
 endfunction
 
 function! OpenFloatTerm()
