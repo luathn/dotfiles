@@ -1,0 +1,18 @@
+mainbox {
+  children: [listview];
+}
+
+listview {
+  cycle: false;
+  margin: 0 0 -1px 0;
+  scrollbar: false;
+}
+
+element {
+  border: 0;
+  padding: 7px;
+}
+
+element selected {
+  background-color: #222222;
+}

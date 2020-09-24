@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + d
-	rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans Regular 9'
+	rofi -show drun -theme menu -lines 7 -width 35 -location 0 -yoffset -100 -columns 1 -font 'Hack Regular 10'
 super + shift + d
 	dmenu_run
 

@@ -1,0 +1,6 @@
+* {
+  background-color: #181818;
+  border-color: #222222;
+  text-color: #bbbbbb;
+  spacing: 0;
+}

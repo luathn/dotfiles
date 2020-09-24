@@ -42,7 +42,9 @@ blue-gray = #6D8895
 [bar/mybar]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 27
+; offset-x = 0
+; offset-y = 0
+height = 24
 ; offset-x = 0
 ; offset-y = 0
 radius = 0.0
@@ -57,19 +59,18 @@ line-color = #f00
 border-bottom-size = 3
 border-bottom-color = ${colors.primary}
 
-padding-left = 0
+padding-left = 1
 padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Hack Nerd Font:style=Regular:antialias=true:pixelsize=9;1
-font-1 = Hack Nerd Font:style=Regular:antialias=true:pixelsize=9;0
-font-2 = Noto Sans Mono:size=9;1
+; font-0 = Hack Nerd Font:style=Regular:antialias=true:pixelsize=9;1
+font-0 = Iosevka:style=Bold:pixelsize=10;3
 
-modules-left = bspwm mpd
-;modules-center = mpd
-modules-right = pulseaudio cpu wlan eth battery date powermenu
+modules-left = cpu memory
+modules-center = bspwm
+modules-right = pulseaudio wlan eth battery date
 
 tray-position = right
 tray-padding = 2
@@ -107,10 +108,10 @@ label-indicator-underline = ${colors.secondary}
 [module/bspwm]
 type = internal/bspwm
 
-ws-icon-0 = I;
-ws-icon-1 = II;
-ws-icon-2 = III;
-ws-icon-3 = IV;
+ws-icon-0 = I;TERM
+ws-icon-1 = II;CHROM
+ws-icon-2 = III;FILE
+ws-icon-3 = IV;ETC
 
 label-focused = %icon%
 label-focused-background = ${colors.primary}
@@ -149,17 +150,15 @@ label-song-ellipsis = false
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "﬙"
+format-prefix = "CPU "
 format-prefix-foreground = ${colors.red}
-; format-underline = #f90000
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+format-prefix = "MEM "
+format-prefix-foreground = ${colors.red}
 label = %percentage_used%%
 
 [module/wlan]
@@ -167,30 +166,19 @@ type = internal/network
 interface = wlo1
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
-; format-connected-underline = #9f78e1
+format-connected = <label-connected>
 label-connected = %essid%
+format-connected-prefix = "WIFI: "
+format-connected-prefix-foreground = ${colors.yellow}
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 = 睊
-ramp-signal-1 = 
-ramp-signal-2 = 直
-ramp-signal-3 = 直
-ramp-signal-4 = 直
-ramp-signal-foreground = ${colors.green}
+format-disconnected = disconnected
 
 [module/eth]
 type = internal/network
 interface = enp2s0
 interval = 3.0
 
-; format-connected-underline = #55aa55
-format-connected-prefix = " "
+format-connected-prefix = "ETH: "
 format-connected-prefix-foreground = ${colors.yellow}
 label-connected = Connected
 
@@ -205,43 +193,24 @@ type = internal/date
 interval = 5
 
 date = " %m-%d"
-date-alt = " %Y-%m-%d"
 
 time = %H:%M
-time-alt = %H:%M:%S
 
-format-prefix = 
-format-prefix-foreground = ${colors.cyan}
-; format-underline = #0a6cf5
+format-prefix = "DT:"
+format-prefix-foreground = ${colors.orange}
 
 label = %date% %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-label-volume = %percentage%%
+format-volume = VOL: <label-volume>
+format-volume-foreground = ${colors.red}
+
+label-muted = muted
+label-muted-foreground = ${colors.grey}
+
 label-volume-foreground = ${colors.foreground}
-
-label-muted =  muted
-label-muted-foreground = ${colors.pink}
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
@@ -249,68 +218,13 @@ battery = BAT0
 adapter = AC
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging = <label-charging>
+format-charging-prefix = "BAT: "
+format-charging-prefix-foreground = ${colors.green}
 
-format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.blue}
-; format-full-underline = ${self.format-charging-underline}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-menu-0-2 = suspend
-menu-0-2-exec = menu-open-3
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = reboot
-
-menu-2-0 = power off
-menu-2-0-exec = poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-
-menu-3-0 = suspend
-menu-3-0-exec = i3lock && systemctl suspend
-menu-3-1 = cancel
-menu-3-1-exec = menu-open-0
+format-discharging = <label-discharging>
+format-discharging-prefix = "BAT: "
+format-discharging-prefix-foreground = ${colors.red}
 
 [settings]
 screenchange-reload = true

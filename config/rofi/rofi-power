@@ -5,13 +5,13 @@
 
 # 2016 Oliver Kraitschy - http://okraits.de
 
-OPTIONS="1.Lock\n2.Suspend\n3.Reboot"
+OPTIONS="LOCK\nSUSPEND\nREBOOT"
 
 # source configuration or use default values
 if [ -f $HOME/.config/rofi-power/config ]; then
   source $HOME/.config/rofi-power/config
 else
-  LAUNCHER="rofi -location 3 -xoffset -15 -yoffset 30 -width 10 -dmenu -i -p command:"
+  LAUNCHER="rofi -lines 1 -columns 3 -location 3 -xoffset -30 -yoffset 60 -width 15 -dmenu -theme power"
   LOCKER="betterlockscreen --lock blur"
 fi
 
@@ -27,13 +27,13 @@ then
       Exit)
         eval $1
         ;;
-      1.Lock)
+      LOCK)
         $LOCKER
         ;;
-      2.Suspend)
+      SUSPEND)
         betterlockscreen -s blur
         ;;
-      3.Reboot)
+      REBOOT)
         systemctl reboot
         ;;
       *)

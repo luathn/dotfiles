@@ -1,0 +1,24 @@
+[user]
+  name = luathn
+  email = luat.hoangn@gmail.com
+
+[includeIf "gitdir:~/workspace/"]
+  path = .gitconfig-company
+
+[core]
+  editor = vim
+
+[cola]
+  spellcheck = false
+
+[core]
+  pager = delta
+
+[delta]
+  line-numbers = true
+  side-by-side = true
+  plus-color = "#012800"
+  minus-color = "#340001"
+
+[interactive]
+  diffFilter = delta --color-only

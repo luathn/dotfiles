@@ -73,8 +73,9 @@ set so=7                      " Set 7 lines to the cursor
 set laststatus=2
 set ruler
 set wildmenu
-if (has("termguicolors") && has("nvim"))
+if (has("nvim"))
   set termguicolors
+  set inccommand=nosplit
 endif
 
 " Scheme (base16-seti)
@@ -129,8 +130,8 @@ nmap gyn :let @+=expand("%:t")<CR>:echo "File name copied"<CR>
 nmap gysp :let @+=expand("%:")<CR>:echo "File path copied"<CR>
 nmap gylp :let @+=expand("%:p")<CR>:echo "File full path copied"<CR>
 
-nmap ]<space> o<esc>
-nmap [<space> O<esc>
+nmap <S-Enter> O<esc>
+nmap <CR> o<esc>
 
 " Turn off search highlight
 map <silent> <leader>/ :noh<cr>
@@ -181,6 +182,10 @@ nnoremap <silent> <leader>fr :Rg<cr>
 
 " Fugitive
 nnoremap <silent> <leader>gb :Git blame<cr>
+nnoremap <silent> <leader>gs :G<cr>
+nnoremap <silent> <leader>gd :Gdiff<cr>
+nnoremap <silent> <leader>gh :diffget //2<cr>
+nnoremap <silent> <leader>gl :diffget //3<cr>
 
 " YankStack
 let g:yankstack_yank_keys = ['y', 'd']
@@ -255,7 +260,7 @@ function! s:defx_my_settings() abort
   \ defx#do_action('execute_command')
   nnoremap <silent><buffer><expr> X
   \ defx#do_action('execute_system')
-  nnoremap <silent><buffer><expr> y
+  nnoremap <nowait><silent><buffer><expr> y
   \ defx#do_action('yank_path')
   nnoremap <silent><buffer><expr> .
   \ defx#do_action('toggle_ignored_files')
@@ -303,6 +308,10 @@ vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlsf_backend = 'rg'
+let g:ctrlsf_extra_backend_args = {
+    \ 'rg': '--vimgrep --type-not sql --smart-case'
+    \ }
 let g:ctrlsf_default_view_mode = 'compact'
 let g:ctrlsf_auto_focus = {
   \ "at": "start"
@@ -394,19 +403,17 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview(), <bang>0)
 
 " Ale plugin
+let g:ale_ruby_rubocop_executable = 'bundle'
+
 let b:ale_linters = {
-  \ 'python': ['flake8', 'pylint'],
+  \ 'python': ['pylint'],
   \ 'ruby': ['rubocop'],
   \}
 
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'python': ['black', 'flake8'],
+  \ 'python': ['black'],
   \ 'ruby': ['rubocop'],
-  \ 'javascript': ['eslint'],
-  \ 'css': ['prettier'],
-  \ 'json': ['prettier'],
-  \ 'yaml': ['prettier'],
   \}
 
 " Indentline

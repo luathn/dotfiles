@@ -4,22 +4,86 @@
 # environment variables. Some entries may override variables
 # set by alacritty itself.
 env:
-  # TERM variable
-  #
-  # This value is used to set the `$TERM` environment variable for
-  # each instance of Alacritty. If it is not present, alacritty will
-  # check the local terminfo database and use `alacritty` if it is
-  # available, otherwise `xterm-256color` is used.
-  TERM: st-256color
+  TERM: xterm-256color
 
 window:
-  # Window dimensions (changes require restart)
-  #
-  # Specified in number of columns/lines, not pixels.
-  # If both are `0`, this setting is ignored.
-  #dimensions:
-  #  columns: 0
-  #  lines: 0
+  dimensions:
+    columns: 90
+    lines: 25
+
+  padding:
+    x: 0
+    y: 0
+
+  dynamic_padding: true
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 10000
+
+key_bindings:
+  - { key: Return,   mods: Shift,   chars: "\x1b[13;2u" }
+
+font:
+  normal:
+    family: SauceCodePro Nerd Font Mono
+    style: Regular
+
+  bold:
+    family: SauceCodePro Nerd Font Mono
+    style: Bold
+
+  italic:
+    family: SauceCodePro Nerd Font Mono
+    style: Italic
+
+  bold_italic:
+    family: SauceCodePro Nerd Font Mono
+    style: Bold Italic
+
+  size: 11.0
+
+colors:
+  # Default colors
+  primary:
+    background: '0x181818'
+    foreground: '0xd8d8d8'
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x181818'
+    cursor: '0xd8d8d8'
+
+  # Normal colors
+  normal:
+    black:   '0x181818'
+    red:     '0xab4642'
+    green:   '0xa1b56c'
+    yellow:  '0xf7ca88'
+    blue:    '0x7cafc2'
+    magenta: '0xba8baf'
+    cyan:    '0x86c1b9'
+    white:   '0xd8d8d8'
+
+  # Bright colors
+  bright:
+    black:   '0x585858'
+    red:     '0xab4642'
+    green:   '0xa1b56c'
+    yellow:  '0xf7ca88'
+    blue:    '0x7cafc2'
+    magenta: '0xba8baf'
+    cyan:    '0x86c1b9'
+    white:   '0xf8f8f8'
+
+  indexed_colors:
+    - { index: 16, color: '0xdc9656' }
+    - { index: 17, color: '0xa16946' }
+    - { index: 18, color: '0x282828' }
+    - { index: 19, color: '0x383838' }
+    - { index: 20, color: '0xb8b8b8' }
+    - { index: 21, color: '0xe8e8e8' }
 
   # Window position (changes require restart)
   #
@@ -29,16 +93,6 @@ window:
   #  x: 0
   #  y: 0
 
-  # Window padding (changes require restart)
-  #
-  # Blank space added around the window in pixels. This padding is scaled
-  # by DPI and the specified value is always added at both opposing sides.
-  padding:
-   x: 9
-   y: 7
-
-  # Spread additional padding evenly around the terminal content.
-  #dynamic_padding: false
 
   # Window decorations
   #
@@ -78,10 +132,10 @@ window:
   # Set this to `None` to use the default theme variant.
   #gtk_theme_variant: None
 
-scrolling:
+# scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
-  history: 10000
+  # history: 10000
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
@@ -100,56 +154,24 @@ scrolling:
 #tabspaces: 8
 
 # Font configuration
-font:
-  # Normal (roman) font face
-  normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
-    family: SauceCodePro Nerd Font Mono
+# font:
+#   normal:
+#     family: SauceCodePro Nerd Font Mono
+#     style: Regular
 
-    # The `style` can be specified to pick a specific face.
-    style: Regular
+#   bold:
+#     family: SauceCodePro Nerd Font Mono
+#     style: Bold
 
-  # Bold font face
-  bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
-    family: SauceCodePro Nerd Font Mono
+#   italic:
+#     family: SauceCodePro Nerd Font Mono
+#     style: Italic
 
-    # The `style` can be specified to pick a specific face.
-    style: Bold
+#   bold_italic:
+#     family: SauceCodePro Nerd Font Mono
+#     style: Bold Italic
 
-  # Italic font face
-  italic:
-    # Font family
-    #
-    # If the italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    family: SauceCodePro Nerd Font Mono
-
-    # The `style` can be specified to pick a specific face.
-    style: Italic
-
-  # Bold italic font face
-  bold_italic:
-    # Font family
-    #
-    # If the bold italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-    family: SauceCodePro Nerd Font Mono
-
-    # The `style` can be specified to pick a specific face.
-    style: Bold Italic
-
-  # Point size
-  size: 11.0
+#   size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -263,46 +285,46 @@ font:
 
 # Base16 Default Dark 256 - alacritty color config
 # Chris Kempson (http://chriskempson.com)
-colors:
-  # Default colors
-  primary:
-    background: '0x181818'
-    foreground: '0xd8d8d8'
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x181818'
+#     foreground: '0xd8d8d8'
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x181818'
-    cursor: '0xd8d8d8'
+#   # Colors the cursor will use if `custom_cursor_colors` is true
+#   cursor:
+#     text: '0x181818'
+#     cursor: '0xd8d8d8'
 
-  # Normal colors
-  normal:
-    black:   '0x181818'
-    red:     '0xab4642'
-    green:   '0xa1b56c'
-    yellow:  '0xf7ca88'
-    blue:    '0x7cafc2'
-    magenta: '0xba8baf'
-    cyan:    '0x86c1b9'
-    white:   '0xd8d8d8'
+#   # Normal colors
+#   normal:
+#     black:   '0x181818'
+#     red:     '0xab4642'
+#     green:   '0xa1b56c'
+#     yellow:  '0xf7ca88'
+#     blue:    '0x7cafc2'
+#     magenta: '0xba8baf'
+#     cyan:    '0x86c1b9'
+#     white:   '0xd8d8d8'
 
-  # Bright colors
-  bright:
-    black:   '0x585858'
-    red:     '0xab4642'
-    green:   '0xa1b56c'
-    yellow:  '0xf7ca88'
-    blue:    '0x7cafc2'
-    magenta: '0xba8baf'
-    cyan:    '0x86c1b9'
-    white:   '0xf8f8f8'
+#   # Bright colors
+#   bright:
+#     black:   '0x585858'
+#     red:     '0xab4642'
+#     green:   '0xa1b56c'
+#     yellow:  '0xf7ca88'
+#     blue:    '0x7cafc2'
+#     magenta: '0xba8baf'
+#     cyan:    '0x86c1b9'
+#     white:   '0xf8f8f8'
 
-  indexed_colors:
-    - { index: 16, color: '0xdc9656' }
-    - { index: 17, color: '0xa16946' }
-    - { index: 18, color: '0x282828' }
-    - { index: 19, color: '0x383838' }
-    - { index: 20, color: '0xb8b8b8' }
-    - { index: 21, color: '0xe8e8e8' }
+#   indexed_colors:
+#     - { index: 16, color: '0xdc9656' }
+#     - { index: 17, color: '0xa16946' }
+#     - { index: 18, color: '0x282828' }
+#     - { index: 19, color: '0x383838' }
+#     - { index: 20, color: '0xb8b8b8' }
+#     - { index: 21, color: '0xe8e8e8' }
 
 # Visual Bell
 #
@@ -577,7 +599,7 @@ colors:
 # binding with the same triggers is defined. To unset a default binding, it can
 # be mapped to the `ReceiveChar` action. Alternatively, you can use `None` for
 # a no-op if you do not wish to receive input characters for that binding.
-#key_bindings:
+# key_bindings:
   # (Windows, Linux, and BSD only)
   #- { key: V,        mods: Control|Shift, action: Paste            }
   #- { key: C,        mods: Control|Shift, action: Copy             }
