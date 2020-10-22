@@ -77,6 +77,7 @@ if (has("nvim"))
   set termguicolors
   set inccommand=nosplit
 endif
+set fillchars=eob:\           " Hide eob char ~
 
 " Scheme (base16-seti)
 colorscheme base16-default-dark
