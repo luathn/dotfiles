@@ -114,6 +114,17 @@ install_node() {
   fi
 }
 
+install_nvim() {
+  sudo apt update
+  sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+  mkdir ~/buildapp
+  cd ~/buildapp
+  git clone https://github.com/neovim/neovim.git
+  cd neovim
+  make
+  sudo make install
+}
+
 # Install general ##############################################
 sudo apt-get install build-essential zsh vim tmux curl scrot mpd ncmpcpp -y
 

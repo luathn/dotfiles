@@ -93,7 +93,7 @@ bindkey "jk" vi-cmd-mode
 
 export EDITOR="vim"
 
-export FZF_DEFAULT_COMMAND="fd --type file --follow --hidden --exclude .git"
+export FZF_DEFAULT_COMMAND="fd --type file --follow --no-ignore --hidden --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS="--inline-info"
 
@@ -117,9 +117,9 @@ fi
 # Yarn
 export PATH="$PATH:`yarn global bin`"
 
-# App alias
-alias yt="mpsyt"
-alias ms="ncmpcpp"
-alias gg="googler -n 7"
+# Cargo
+export PATH="$PATH:$HOME/.cargo/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source ~/.zsh_local

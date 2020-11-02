@@ -3,6 +3,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
 " Main plugin
+Plug 'lambdalisue/suda.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
@@ -40,6 +41,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General configs                                                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:python3_host_prog = '/home/hoang.nguyen.luat/.pyenv/versions/neovim3/bin/python'
 set encoding=UTF-8
 set history=500
 set mouse=a
@@ -106,7 +108,7 @@ command! Source :source ~/.config/nvim/init.vim
 autocmd FileType qf nnoremap <buffer> q :cclose<CR>
 
 " Useful saving mapping
-noremap <leader>w :w!<cr>
+noremap <leader>fs :update<CR>
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <Esc>:update<CR>
@@ -138,12 +140,12 @@ nmap <CR> o<esc>
 map <silent> <leader>/ :noh<cr>
 
 " Split windows
-map <leader>sv <C-W>v
-map <leader>ss <C-W>s
+map <leader>wv <C-W>v
+map <leader>ws <C-W>s
 
 " Buffer
-map <leader>xx :Bclose<cr>
-map <leader>xa :call CloseAllBuffersButCurrent()<cr>
+map <leader>bk :Bclose<cr>
+map <leader>bK :call CloseAllBuffersButCurrent()<cr>
 map <silent> <leader>l :bnext<cr>
 map <silent> <leader>h :bprevious<cr>
 
@@ -178,7 +180,8 @@ vnoremap <leader>a :call VisualSelection('gv', '')<CR>
 
 " Fzf
 nnoremap <silent> <c-p> :Files<cr>
-nnoremap <silent> <leader>b :Buffers<cr>
+nnoremap <silent> <leader><leader> :Files<cr>
+nnoremap <silent> <leader>bb :Buffers<cr>
 nnoremap <silent> <leader>fr :Rg<cr>
 
 " Fugitive
@@ -201,8 +204,8 @@ nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
 
 " Defx
-nnoremap <C-n> :Defx<CR>
-nnoremap <silent> <leader>ff :Defx -toggle=0 -search=`expand('%:p')`<CR>
+nnoremap <C-n> :Defx -winwidth=30<CR>
+nnoremap <silent> <leader>ff :Defx -winwidth=30 -toggle=0 -search=`expand('%:p')`<CR>
 
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
@@ -252,7 +255,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> P
   \ defx#do_action('preview')
   nnoremap <silent><buffer><expr> C
-  \ defx#do_action('toggle_columns', 'indent:icon:filename:type:size:time')
+  \ defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')
   nnoremap <silent><buffer><expr> S
   \ defx#do_action('toggle_sort', 'time')
   nnoremap <silent><buffer><expr> s
@@ -428,7 +431,6 @@ let g:test#preserve_screen = 1
 
 " Defx
 call defx#custom#option('_', {
-  \ 'winwidth': 30,
   \ 'split': 'vertical',
   \ 'direction': 'topleft',
   \ 'show_ignored_files': 0,
