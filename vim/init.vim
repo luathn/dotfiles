@@ -24,6 +24,7 @@ Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'ludovicchabant/vim-gutentags'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -41,7 +42,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General configs                                                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python3_host_prog = '/home/hoang.nguyen.luat/.pyenv/versions/neovim3/bin/python'
+let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
 set encoding=UTF-8
 set history=500
 set mouse=a
@@ -133,9 +134,6 @@ nmap gyn :let @+=expand("%:t")<CR>:echo "File name copied"<CR>
 nmap gysp :let @+=expand("%:")<CR>:echo "File path copied"<CR>
 nmap gylp :let @+=expand("%:p")<CR>:echo "File full path copied"<CR>
 
-nmap <S-Enter> O<esc>
-nmap <CR> o<esc>
-
 " Turn off search highlight
 map <silent> <leader>/ :noh<cr>
 
@@ -163,7 +161,8 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 map <leader>cd :cd %:p:h<cr>:pwd<cr>"
 
 " Coc.nvim
-nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gd :call <SID>GoToDefinition()<CR>
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -181,7 +180,9 @@ vnoremap <leader>a :call VisualSelection('gv', '')<CR>
 " Fzf
 nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <leader><leader> :Files<cr>
+nnoremap <silent> <leader>, :Buffers<cr>
 nnoremap <silent> <leader>bb :Buffers<cr>
+nnoremap <silent> <leader>. :BTags<cr>
 nnoremap <silent> <leader>fr :Rg<cr>
 
 " Fugitive
@@ -528,4 +529,15 @@ function! VisualSelection(direction, extra_filter) range
 
   let @/ = l:pattern
   let @" = l:saved_reg
+endfunction
+
+function! s:GoToDefinition()
+  if CocAction('jumpDefinition')
+    return v:true
+  endif
+
+  let ret = execute("silent! normal \<C-]>")
+  if ret !~ "not found"
+    execute("normal 0")
+  endif
 endfunction
