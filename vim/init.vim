@@ -536,8 +536,8 @@ function! s:GoToDefinition()
     return v:true
   endif
 
-  let ret = execute("silent! normal \<C-]>")
-  if ret !~ "not found"
+  let ret = execute('silent! normal \<C-]>')
+  if ret !~ 'not found'
     execute("normal 0")
   endif
 endfunction

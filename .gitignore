@@ -1,6 +1,7 @@
 vim/plugged
 vim/.netrwhist
 .directory
+tags
 
 config/mpd/*
 !config/mpd/mpd.conf
