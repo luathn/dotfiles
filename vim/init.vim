@@ -25,6 +25,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'ctrlpvim/ctrlp.vim'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -313,6 +314,10 @@ vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_cmd = 'CtrlPMixed'
+
 let g:ctrlsf_backend = 'rg'
 let g:ctrlsf_extra_backend_args = {
     \ 'rg': '--vimgrep --type-not sql --smart-case'
