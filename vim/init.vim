@@ -222,11 +222,9 @@ function! s:defx_my_settings() abort
   \ defx#do_action('paste')
   nnoremap <silent><buffer><expr> r
   \ defx#do_action('rename')
-  nnoremap <silent><buffer><expr> K
-  \ defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> m
   \ defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> M
+  nnoremap <silent><buffer><expr> gm
   \ defx#do_action('new_multiple_files')
   nnoremap <silent><buffer><expr> <CR>
   \ defx#is_directory() ?
@@ -256,8 +254,11 @@ function! s:defx_my_settings() abort
   \ defx#do_action('open', 'vsplit')
   nnoremap <silent><buffer><expr> P
   \ defx#do_action('preview')
-  nnoremap <silent><buffer><expr> C
-  \ defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')
+  nnoremap <silent><buffer><expr> M
+  \ defx#do_action('multi', [
+  \ ['resize', ToggleDefxWidth(defx#get_context().winwidth)],
+  \ ['toggle_columns', 'mark:indent:icon:filename:type:size:time']
+  \ ])
   nnoremap <silent><buffer><expr> S
   \ defx#do_action('toggle_sort', 'time')
   nnoremap <silent><buffer><expr> s
@@ -268,7 +269,7 @@ function! s:defx_my_settings() abort
   \ defx#do_action('execute_system')
   nnoremap <nowait><silent><buffer><expr> y
   \ defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> .
+  nnoremap <silent><buffer><expr> H
   \ defx#do_action('toggle_ignored_files')
   nnoremap <silent><buffer><expr> ;
   \ defx#do_action('repeat')
@@ -545,4 +546,11 @@ function! s:GoToDefinition()
   if ret !~ 'not found'
     execute("normal 0")
   endif
+endfunction
+
+function! ToggleDefxWidth(winwidth)
+  if a:winwidth == '30'
+    return 80
+  endif
+  return 30
 endfunction
