@@ -25,7 +25,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'ctrlpvim/ctrlp.vim'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -542,7 +541,7 @@ function! s:GoToDefinition()
     return v:true
   endif
 
-  let ret = execute('silent! normal \<C-]>')
+  let ret = execute("silent! normal \<C-]>")
   if ret !~ 'not found'
     execute("normal 0")
   endif
