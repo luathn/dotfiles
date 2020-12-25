@@ -1,0 +1,6 @@
+-R
+--regex-ruby="/^[ \t]*scope[ \t]*:([a-zA-Z0-9_]+)/\1/"
+--languages=ruby
+--exclude=.git
+--exclude=log=
+--exclude=tmp . $(bundle list --paths)
