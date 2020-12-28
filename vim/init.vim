@@ -6,6 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'lambdalisue/suda.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'zackhsi/fzf-tags'
 Plug 'mileszs/ack.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
@@ -185,6 +186,9 @@ nnoremap <silent> <leader>bb :Buffers<cr>
 nnoremap <silent> <leader>. :BTags<cr>
 nnoremap <silent> <leader>fr :Rg<cr>
 
+" Fzf tags
+nmap g] <Plug>(fzf_tags)
+
 " Fugitive
 nnoremap <silent> <leader>gb :Git blame<cr>
 nnoremap <silent> <leader>gs :G<cr>
@@ -314,10 +318,6 @@ vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_cmd = 'CtrlPMixed'
-
 let g:ctrlsf_backend = 'rg'
 let g:ctrlsf_extra_backend_args = {
     \ 'rg': '--vimgrep --type-not sql --smart-case'
@@ -411,6 +411,9 @@ command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
+
+" Fzf tags
+let g:fzf_tags_prompt = "Gd "
 
 " Ale plugin
 let g:ale_ruby_rubocop_executable = 'bundle'
@@ -553,3 +556,10 @@ function! ToggleDefxWidth(winwidth)
   endif
   return 30
 endfunction
+
+" <cword> expansion relies on `iskeyword`. This fixes tag jumping.
+augroup RubySpecialKeywordCharacters
+  autocmd!
+  autocmd Filetype ruby setlocal iskeyword+=!
+  autocmd Filetype ruby setlocal iskeyword+=?
+augroup END
