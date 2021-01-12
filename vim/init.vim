@@ -6,10 +6,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'lambdalisue/suda.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'zackhsi/fzf-tags'
 Plug 'mileszs/ack.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
@@ -29,15 +26,21 @@ Plug 'ludovicchabant/vim-gutentags'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'tpope/vim-endwise'
-" For Python
-Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 " Frontend
 Plug 'pangloss/vim-javascript'
 " UI
 Plug 'vim-airline/vim-airline'
+
+"Test
+Plug 'neovim/nvim-lspconfig'
+if has('python3')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'steelsojka/completion-buffers'
+endif
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -96,7 +99,6 @@ au FocusGained,BufEnter * :checktime
 if has('nvim')
   autocmd TermOpen * setlocal nonumber norelativenumber
 end
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings                                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -163,15 +165,15 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>"
 
 " Coc.nvim
 " nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gd :call <SID>GoToDefinition()<CR>
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nmap <silent> gd :call <SID>GoToDefinition()<CR>
+" nmap <silent> gr <Plug>(coc-references)
+" nmap <leader>rn <Plug>(coc-rename)
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " ALE
-map <leader>= :ALEFix<cr>
-nmap <silent> [e <Plug>(ale_previous_wrap)
-nmap <silent> ]e <Plug>(ale_next_wrap)
+" map <leader>= :ALEFix<cr>
+" nmap <silent> [e <Plug>(ale_previous_wrap)
+" nmap <silent> ]e <Plug>(ale_next_wrap)
 
 " Ack
 nnoremap <leader>a :Ack!<Space>
@@ -318,6 +320,33 @@ vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin config                                                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('python3')
+  " deoplete
+  let g:deoplete#enable_at_startup = 1
+  inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ deoplete#manual_complete()
+  inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+else
+  " completion-nvim
+  let g:completion_matching_smart_case = 1
+  autocmd BufEnter * lua require'completion'.on_attach()
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <c-j>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  set completeopt=menuone,noinsert,noselect
+  set shortmess+=c
+  let g:completion_chain_complete_list = [
+      \{'complete_items': ['buffers', 'lsp']},
+      \{'mode': '<c-p>'},
+      \{'mode': '<c-n>'}
+  \]
+endif
+
+" ctrlsf
 let g:ctrlsf_backend = 'rg'
 let g:ctrlsf_extra_backend_args = {
     \ 'rg': '--vimgrep --type-not sql --smart-case'
@@ -358,26 +387,9 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
-" Coc.nvim setting
-inoremap <silent><expr> <Tab>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<Tab>" :
-  \ coc#refresh()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
 endfunction
 
 " Fzf
@@ -414,20 +426,6 @@ command! -bang -nargs=* Rg
 
 " Fzf tags
 let g:fzf_tags_prompt = "Gd "
-
-" Ale plugin
-let g:ale_ruby_rubocop_executable = 'bundle'
-
-let b:ale_linters = {
-  \ 'python': ['pylint'],
-  \ 'ruby': ['rubocop'],
-  \}
-
-let g:ale_fixers = {
-  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'python': ['black'],
-  \ 'ruby': ['rubocop'],
-  \}
 
 " Indentline
 let g:indentLine_char = '│'
@@ -539,16 +537,16 @@ function! VisualSelection(direction, extra_filter) range
   let @" = l:saved_reg
 endfunction
 
-function! s:GoToDefinition()
-  if CocAction('jumpDefinition')
-    return v:true
-  endif
+" function! s:GoToDefinition()
+"   if CocAction('jumpDefinition')
+"     return v:true
+"   endif
 
-  let ret = execute("silent! normal \<C-]>")
-  if ret !~ 'not found'
-    execute("normal 0")
-  endif
-endfunction
+"   let ret = execute("FZFTags")
+"   if ret !~ 'not found'
+"     execute("normal 0")
+"   endif
+" endfunction
 
 function! ToggleDefxWidth(winwidth)
   if a:winwidth == '30'
@@ -563,3 +561,5 @@ augroup RubySpecialKeywordCharacters
   autocmd Filetype ruby setlocal iskeyword+=!
   autocmd Filetype ruby setlocal iskeyword+=?
 augroup END
+
+lua require("lsp_config")
