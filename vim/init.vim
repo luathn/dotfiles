@@ -6,9 +6,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'lambdalisue/suda.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'zackhsi/fzf-tags'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
 Plug 'lambdalisue/fern.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
@@ -27,19 +24,30 @@ Plug 'ludovicchabant/vim-gutentags'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'tpope/vim-endwise'
-" For Python
-Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 " Frontend
 Plug 'pangloss/vim-javascript'
 " UI
 Plug 'vim-airline/vim-airline'
 
+"Test
+Plug 'neovim/nvim-lspconfig'
+if has('python3')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'steelsojka/completion-buffers'
+endif
+
 " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'mileszs/ack.vim'
 " Plug 'Yggdroot/indentLine'
+" Plug 'zackhsi/fzf-tags'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'dense-analysis/ale'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -105,7 +113,6 @@ augroup RubySpecialKeywordCharacters
   autocmd Filetype ruby setlocal iskeyword+=!
   autocmd Filetype ruby setlocal iskeyword+=?
 augroup END
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings                                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -177,20 +184,28 @@ autocmd Filetype python map <leader>rr :!python3 %<cr>
 vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua require("lsp_config")
+
 source ~/dotfiles/vim/config/ctrlsf.vim
-source ~/dotfiles/vim/config/coc-nvim.vim
 source ~/dotfiles/vim/config/fzf.vim
 source ~/dotfiles/vim/config/gitfugitive.vim
 source ~/dotfiles/vim/config/sneak.vim
 source ~/dotfiles/vim/config/vim-airline.vim
 source ~/dotfiles/vim/config/asyncrun.vim
-source ~/dotfiles/vim/config/fzf-tags.vim
-source ~/dotfiles/vim/config/ale.vim
 source ~/dotfiles/vim/config/vim-test.vim
 source ~/dotfiles/vim/config/yank-stack.vim
 source ~/dotfiles/vim/config/fern.vim
+if has('python3')
+  source ~/dotfiles/vim/config/deoplete.vim
+else
+  source ~/dotfiles/vim/config/completion-nvim.vim
+endif
+
 source ~/dotfiles/vim/config/function.vim
 
 " source ~/dotfiles/vim/config/defx.vim
 " source ~/dotfiles/vim/config/ack.vim
 " source ~/dotfiles/vim/config/indentline.vim
+" source ~/dotfiles/vim/config/coc-nvim.vim
+" source ~/dotfiles/vim/config/fzf-tags.vim
+" source ~/dotfiles/vim/config/ale.vim
