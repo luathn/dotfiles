@@ -9,7 +9,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'zackhsi/fzf-tags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'lambdalisue/fern.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-commentary'
@@ -37,6 +37,7 @@ Plug 'pangloss/vim-javascript'
 " UI
 Plug 'vim-airline/vim-airline'
 
+" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'mileszs/ack.vim'
 " Plug 'Yggdroot/indentLine'
 call plug#end()
@@ -187,8 +188,9 @@ source ~/dotfiles/vim/config/fzf-tags.vim
 source ~/dotfiles/vim/config/ale.vim
 source ~/dotfiles/vim/config/vim-test.vim
 source ~/dotfiles/vim/config/yank-stack.vim
-source ~/dotfiles/vim/config/defx.vim
+source ~/dotfiles/vim/config/fern.vim
 source ~/dotfiles/vim/config/function.vim
 
+" source ~/dotfiles/vim/config/defx.vim
 " source ~/dotfiles/vim/config/ack.vim
 " source ~/dotfiles/vim/config/indentline.vim
