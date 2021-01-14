@@ -7,7 +7,6 @@ Plug 'lambdalisue/suda.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'zackhsi/fzf-tags'
-Plug 'mileszs/ack.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -19,7 +18,6 @@ Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'Yggdroot/indentLine'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
@@ -38,6 +36,9 @@ Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 Plug 'pangloss/vim-javascript'
 " UI
 Plug 'vim-airline/vim-airline'
+
+" Plug 'mileszs/ack.vim'
+" Plug 'Yggdroot/indentLine'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -96,6 +97,13 @@ au FocusGained,BufEnter * :checktime
 if has('nvim')
   autocmd TermOpen * setlocal nonumber norelativenumber
 end
+
+" <cword> expansion relies on `iskeyword`. This fixes tag jumping.
+augroup RubySpecialKeywordCharacters
+  autocmd!
+  autocmd Filetype ruby setlocal iskeyword+=!
+  autocmd Filetype ruby setlocal iskeyword+=?
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings                                                                    "
@@ -161,405 +169,26 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>"
 
-" Coc.nvim
-" nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gd :call <SID>GoToDefinition()<CR>
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" ALE
-map <leader>= :ALEFix<cr>
-nmap <silent> [e <Plug>(ale_previous_wrap)
-nmap <silent> ]e <Plug>(ale_next_wrap)
-
-" Ack
-nnoremap <leader>a :Ack!<Space>
-" When you press gv you Ack after the selected text
-vnoremap <leader>a :call VisualSelection('gv', '')<CR>
-
-" Fzf
-nnoremap <silent> <c-p> :Files<cr>
-nnoremap <silent> <leader><leader> :Files<cr>
-nnoremap <silent> <leader>, :Buffers<cr>
-nnoremap <silent> <leader>bb :Buffers<cr>
-nnoremap <silent> <leader>. :BTags<cr>
-nnoremap <silent> <leader>fr :Rg<cr>
-
-" Fzf tags
-nmap g] <Plug>(fzf_tags)
-
-" Fugitive
-nnoremap <silent> <leader>gb :Git blame<cr>
-nnoremap <silent> <leader>gs :G<cr>
-nnoremap <silent> <leader>gd :Gdiff<cr>
-nnoremap <silent> <leader>gh :diffget //2<cr>
-nnoremap <silent> <leader>gl :diffget //3<cr>
-
-" YankStack
-let g:yankstack_yank_keys = ['y', 'd']
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
-
-" Vim Test
-nmap <silent> <leader>tn :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ts :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tv :TestVisit<CR>
-
-" Defx
-nnoremap <C-n> :Defx -winwidth=30<CR>
-nnoremap <silent> <leader>ff :Defx -winwidth=30 -toggle=0 -search=`expand('%:p')`<CR>
-
-autocmd FileType defx call s:defx_my_settings()
-function! s:defx_my_settings() abort
-  " Define mappings
-  nnoremap <nowait><silent><buffer><expr> c
-  \ defx#do_action('copy')
-  nnoremap <silent><buffer><expr> x
-  \ defx#do_action('move')
-  nnoremap <nowait><silent><buffer><expr> d
-  \ defx#do_action('remove')
-  nnoremap <silent><buffer><expr> p
-  \ defx#do_action('paste')
-  nnoremap <silent><buffer><expr> r
-  \ defx#do_action('rename')
-  nnoremap <silent><buffer><expr> m
-  \ defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> gm
-  \ defx#do_action('new_multiple_files')
-  nnoremap <silent><buffer><expr> <CR>
-  \ defx#is_directory() ?
-  \ defx#do_action('open_or_close_tree') :
-  \ defx#do_action('drop')
-  nnoremap <silent><buffer><expr> o
-  \ defx#is_directory() ?
-  \ defx#do_action('open_or_close_tree') :
-  \ defx#do_action('drop')
-  nnoremap <silent><buffer><expr> <2-LeftMouse>
-  \ defx#is_directory() ?
-  \ defx#do_action('open_or_close_tree') :
-  \ defx#do_action('drop')
-  nnoremap <silent><buffer><expr> i
-  \ defx#do_action('close_tree')
-  nnoremap <silent><buffer><expr> l
-  \ defx#do_action('open_directory')
-  nnoremap <silent><buffer><expr> h
-  \ defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer><expr> v
-  \ defx#do_action('toggle_select')
-  nnoremap <silent><buffer><expr> V
-  \ defx#do_action('clear_select_all')
-  nnoremap <silent><buffer><expr> *
-  \ defx#do_action('toggle_select_all')
-  nnoremap <silent><buffer><expr> E
-  \ defx#do_action('open', 'vsplit')
-  nnoremap <silent><buffer><expr> P
-  \ defx#do_action('preview')
-  nnoremap <silent><buffer><expr> M
-  \ defx#do_action('multi', [
-  \ ['resize', ToggleDefxWidth(defx#get_context().winwidth)],
-  \ ['toggle_columns', 'mark:indent:icon:filename:type:size:time']
-  \ ])
-  nnoremap <silent><buffer><expr> S
-  \ defx#do_action('toggle_sort', 'time')
-  nnoremap <silent><buffer><expr> s
-  \ defx#do_action('search')
-  nnoremap <silent><buffer><expr> !
-  \ defx#do_action('execute_command')
-  nnoremap <silent><buffer><expr> X
-  \ defx#do_action('execute_system')
-  nnoremap <nowait><silent><buffer><expr> y
-  \ defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> H
-  \ defx#do_action('toggle_ignored_files')
-  nnoremap <silent><buffer><expr> ;
-  \ defx#do_action('repeat')
-  nnoremap <silent><buffer><expr> ~
-  \ defx#do_action('cd')
-  nnoremap <silent><buffer><expr> q
-  \ defx#do_action('quit')
-  nnoremap <silent><buffer><expr> j
-  \ line('.') == line('$') ? 'gg' : 'j'
-  nnoremap <silent><buffer><expr> k
-  \ line('.') == 1 ? 'G' : 'k'
-  nnoremap <silent><buffer><expr> <C-r>
-  \ defx#do_action('redraw')
-  nnoremap <silent><buffer><expr> <C-g>
-  \ defx#do_action('print')
-  nnoremap <silent><buffer><expr> cd
-  \ defx#do_action('change_vim_cwd')
-endfunction
-
-" CtrlSF
-let g:ctrlsf_mapping = {
-  \ "openb": { "key": "O", "suffix": "<C-w>p" },
-  \ "next": "n",
-  \ "prev": "N",
-  \ "vsplit": "v",
-  \ }
-nmap     <C-F>f <Plug>CtrlSFPrompt
-vmap     <C-F>f <Plug>CtrlSFVwordPath
-vmap     <C-F>F <Plug>CtrlSFVwordExec
-nmap     <C-F>n <Plug>CtrlSFCwordPath
-nmap     <C-F>p <Plug>CtrlSFPwordPath
-nnoremap <C-F>o :CtrlSFOpen<CR>
-nnoremap <C-F>t :CtrlSFToggle<CR>
-inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
-
 " others
 map <silent> <leader><cr> :call OpenFloatTerm()<cr>
-
 autocmd Filetype ruby map <leader>rr :!ruby %<cr>
 autocmd Filetype python map <leader>rr :!python3 %<cr>
 vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin config                                                                "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlsf_backend = 'rg'
-let g:ctrlsf_extra_backend_args = {
-    \ 'rg': '--vimgrep --type-not sql --smart-case'
-    \ }
-let g:ctrlsf_default_view_mode = 'compact'
-let g:ctrlsf_auto_focus = {
-  \ "at": "start"
-  \ }
+source ~/dotfiles/vim/config/ctrlsf.vim
+source ~/dotfiles/vim/config/coc-nvim.vim
+source ~/dotfiles/vim/config/fzf.vim
+source ~/dotfiles/vim/config/gitfugitive.vim
+source ~/dotfiles/vim/config/sneak.vim
+source ~/dotfiles/vim/config/vim-airline.vim
+source ~/dotfiles/vim/config/asyncrun.vim
+source ~/dotfiles/vim/config/fzf-tags.vim
+source ~/dotfiles/vim/config/ale.vim
+source ~/dotfiles/vim/config/vim-test.vim
+source ~/dotfiles/vim/config/yank-stack.vim
+source ~/dotfiles/vim/config/defx.vim
+source ~/dotfiles/vim/config/function.vim
 
-" Sneak
-let g:sneak#label = 1
-let g:sneak#use_ic_scs = 1
-
-" Ack
-let g:ackprg = "rg --vimgrep --type-not sql --smart-case"
-let g:ack_mappings = {
-  \ 'h': '<C-W>k<C-W>l<C-W>l<C-W>s<C-W>j<CR>',
-  \ 'v': '<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p',
-  \ 'gv': '<C-W><CR><C-W>L<C-W>p<C-W>J',
-  \ 'q': '<C-W>p' }
-
-" Airline config
-let g:airline_theme='base16_default'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_tabs = 0
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#ale#enabled = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-
-" Coc.nvim setting
-inoremap <silent><expr> <Tab>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<Tab>" :
-  \ coc#refresh()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Fzf
-let g:fzf_layout = { 'down': '~30%' }
-
-autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
-" Fzf tags
-let g:fzf_tags_prompt = "Gd "
-
-" Ale plugin
-let g:ale_ruby_rubocop_executable = 'bundle'
-
-let b:ale_linters = {
-  \ 'python': ['pylint'],
-  \ 'ruby': ['rubocop'],
-  \}
-
-let g:ale_fixers = {
-  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'python': ['black'],
-  \ 'ruby': ['rubocop'],
-  \}
-
-" Indentline
-let g:indentLine_char = '│'
-let g:indentLine_fileTypeExclude = ['defx']
-
-" Vim test
-let test#strategy = "asyncrun"
-let g:asyncrun_open = 10
-let g:test#preserve_screen = 1
-
-" Defx
-call defx#custom#option('_', {
-  \ 'split': 'vertical',
-  \ 'direction': 'topleft',
-  \ 'show_ignored_files': 0,
-  \ 'resume': 1,
-  \ 'toggle': 1,
-  \ 'columns': 'mark:indent:icon:filename',
-  \ })
-
-call defx#custom#column('icon', {
-  \ 'directory_icon': '',
-  \ 'opened_icon': 'ﱮ',
-  \ })
-
-call defx#custom#column('mark', {
-  \ 'readonly_icon': '',
-  \ 'selected_icon': '',
-  \ })
-
-" Function
-" Don't close window when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-  let l:currentBufNum = bufnr("%")
-  let l:alternateBufNum = bufnr("#")
-
-  if buflisted(l:alternateBufNum)
-    buffer #
-  else
-    bnext
-  endif
-
-  if bufnr("%") == l:currentBufNum
-    new
-  endif
-
-  if buflisted(l:currentBufNum)
-    execute("bdelete! ".l:currentBufNum)
-  endif
-endfunction
-
-function! CloseAllBuffersButCurrent()
-  let curr = bufnr("%")
-  let last = bufnr("$")
-  if curr > 1 | silent! execute "1,".(curr-1)."bd" | endif
-  if curr < last | silent! execute (curr+1).",".last."bd" | endif
-endfunction
-
-function! OpenFloatTerm()
-  let height = float2nr((&lines - 2) / 1.7)
-  let row = float2nr((&lines - height) / 2)
-  let width = float2nr(&columns / 1.7)
-  let col = float2nr((&columns - width) / 2)
-  " Border Window
-  let border_opts = {
-    \ 'relative': 'editor',
-    \ 'row': row - 1,
-    \ 'col': col - 2,
-    \ 'width': width + 4,
-    \ 'height': height + 2,
-    \ 'style': 'minimal'
-    \ }
-  let border_buf = nvim_create_buf(v:false, v:true)
-  let s:border_win = nvim_open_win(border_buf, v:true, border_opts)
-  " Main Window
-  let opts = {
-    \ 'relative': 'editor',
-    \ 'row': row,
-    \ 'col': col,
-    \ 'width': width,
-    \ 'height': height,
-    \ 'style': 'minimal'
-    \ }
-  let buf = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(buf, v:true, opts)
-  terminal
-  startinsert
-  " Hook up TermClose event to close both terminal and border windows
-  autocmd TermClose * ++once :bd! | call nvim_win_close(s:border_win, v:true)
-endfunction
-
-function! CmdLine(str)
-  call feedkeys(":" . a:str)
-endfunction
-
-function! VisualSelection(direction, extra_filter) range
-  let l:saved_reg = @"
-  execute "normal! vgvy"
-
-  let l:pattern = escape(@", "\\/.*'$^~[]")
-  let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-  if a:direction == 'gv'
-    call CmdLine("Ack '" . l:pattern . "' " )
-  endif
-
-  let @/ = l:pattern
-  let @" = l:saved_reg
-endfunction
-
-function! s:GoToDefinition()
-  if CocAction('jumpDefinition')
-    return v:true
-  endif
-
-  let ret = execute("silent! normal \<C-]>")
-  if ret !~ 'not found'
-    execute("normal 0")
-  endif
-endfunction
-
-function! ToggleDefxWidth(winwidth)
-  if a:winwidth == '30'
-    return 80
-  endif
-  return 30
-endfunction
-
-" <cword> expansion relies on `iskeyword`. This fixes tag jumping.
-augroup RubySpecialKeywordCharacters
-  autocmd!
-  autocmd Filetype ruby setlocal iskeyword+=!
-  autocmd Filetype ruby setlocal iskeyword+=?
-augroup END
+" source ~/dotfiles/vim/config/ack.vim
+" source ~/dotfiles/vim/config/indentline.vim
