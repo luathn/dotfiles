@@ -120,6 +120,9 @@ export PATH="$PATH:`yarn global bin`"
 # Cargo
 export PATH="$PATH:$HOME/.cargo/bin"
 
+# Go
+export PATH=$PATH:/usr/local/go/bin
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source ~/.zsh_local
