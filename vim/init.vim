@@ -29,7 +29,8 @@ Plug 'tpope/vim-endwise'
 " Frontend
 Plug 'pangloss/vim-javascript'
 " UI
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 
 "Test
 Plug 'neovim/nvim-lspconfig'
@@ -41,6 +42,7 @@ else
   Plug 'steelsojka/completion-buffers'
 endif
 
+" Plug 'vim-airline/vim-airline'
 " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'mileszs/ack.vim'
 " Plug 'Yggdroot/indentLine'
@@ -191,11 +193,11 @@ source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
 source ~/dotfiles/vim/config/gitfugitive.vim
 source ~/dotfiles/vim/config/sneak.vim
-source ~/dotfiles/vim/config/vim-airline.vim
 source ~/dotfiles/vim/config/asyncrun.vim
 source ~/dotfiles/vim/config/vim-test.vim
 source ~/dotfiles/vim/config/yank-stack.vim
 source ~/dotfiles/vim/config/fern.vim
+source ~/dotfiles/vim/config/lightline.vim
 if has('python3')
   source ~/dotfiles/vim/config/deoplete.vim
 else
@@ -204,6 +206,7 @@ endif
 
 source ~/dotfiles/vim/config/function.vim
 
+" source ~/dotfiles/vim/config/vim-airline.vim
 " source ~/dotfiles/vim/config/defx.vim
 " source ~/dotfiles/vim/config/ack.vim
 " source ~/dotfiles/vim/config/indentline.vim
