@@ -35,6 +35,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'neovim/nvim-lspconfig'
 if has('python3')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'deoplete-plugins/deoplete-lsp'
 else
   Plug 'nvim-lua/completion-nvim'
   Plug 'steelsojka/completion-buffers'
