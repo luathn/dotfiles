@@ -25,7 +25,6 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'tpope/vim-endwise'
 " Frontend
 Plug 'pangloss/vim-javascript'
 " UI
@@ -34,14 +33,16 @@ Plug 'mengelbrecht/lightline-bufferline'
 
 "Test
 Plug 'neovim/nvim-lspconfig'
-if has('python3')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'deoplete-plugins/deoplete-lsp'
-else
-  Plug 'nvim-lua/completion-nvim'
-  Plug 'steelsojka/completion-buffers'
-endif
+Plug 'hrsh7th/nvim-compe'
 
+" if has('python3')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"   Plug 'deoplete-plugins/deoplete-lsp'
+" else
+"   Plug 'nvim-lua/completion-nvim'
+"   Plug 'steelsojka/completion-buffers'
+" endif
+" Plug 'tpope/vim-endwise'
 " Plug 'vim-airline/vim-airline'
 " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'mileszs/ack.vim'
@@ -198,14 +199,15 @@ source ~/dotfiles/vim/config/vim-test.vim
 source ~/dotfiles/vim/config/yank-stack.vim
 source ~/dotfiles/vim/config/fern.vim
 source ~/dotfiles/vim/config/lightline.vim
-if has('python3')
-  source ~/dotfiles/vim/config/deoplete.vim
-else
-  source ~/dotfiles/vim/config/completion-nvim.vim
-endif
+source ~/dotfiles/vim/config/nvim-compe.vim
 
 source ~/dotfiles/vim/config/function.vim
 
+" if has('python3')
+"   source ~/dotfiles/vim/config/deoplete.vim
+" else
+"   source ~/dotfiles/vim/config/completion-nvim.vim
+" endif
 " source ~/dotfiles/vim/config/vim-airline.vim
 " source ~/dotfiles/vim/config/defx.vim
 " source ~/dotfiles/vim/config/ack.vim
