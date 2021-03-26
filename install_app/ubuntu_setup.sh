@@ -26,8 +26,6 @@ install_git() {
     sudo add-apt-repository ppa:git-core/ppa
     sudo apt update -y
     sudo apt install git -y
-    git config --global user.name "luathn"
-    git config --global user.email "luat.hoangn@gmail.com"
     success "Installed Git"
   fi
 }

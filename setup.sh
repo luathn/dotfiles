@@ -2,6 +2,7 @@ ln -s -f ~/dotfiles/config/* ~/.config
 ln -s -f ~/dotfiles/zshrc ~/.zshrc
 ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -s -f ~/dotfiles/ctags ~/.ctags
+ln -s -f ~/dotfiles/gitconfig ~/.gitconfig
 
 rm -r -f ~/.config/nvim
 ln -s -f ~/dotfiles/vim ~/.config/nvim

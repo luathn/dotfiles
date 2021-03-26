@@ -1,8 +1,11 @@
 [user]
   name = luathn
-  email = luat.hoangn@gmail.com
+  email = luat1203@gmail.com
 
 [includeIf "gitdir:~/workspace/"]
+  path = .gitconfig-company
+
+[includeIf "gitdir:~/work/"]
   path = .gitconfig-company
 
 [core]
