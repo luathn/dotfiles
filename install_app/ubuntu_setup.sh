@@ -125,6 +125,16 @@ install_nvim() {
   sudo make install
 }
 
+install_command_line_tools() {
+  sudo apt install bat -y
+  mkdir ~/buildapp
+  cd ~/buildapp
+  curl -LO https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep_12.1.1_amd64.deb
+  sudo dpkg -i ripgrep_12.1.1_amd64.deb
+  curl -LO https://github.com/sharkdp/fd/releases/download/v8.2.1/fd_8.2.1_amd64.deb
+  sudo dpkg -i fd_8.2.1_amd64.deb
+}
+
 # Install general ##############################################
 sudo apt-get install build-essential zsh vim tmux curl scrot mpd ncmpcpp -y
 
@@ -135,3 +145,4 @@ install_zsh
 install_ruby
 install_docker
 install_node
+install_command_line_tools

@@ -27,22 +27,23 @@ key_bindings:
 
 font:
   normal:
-    family: SauceCodePro Nerd Font Mono
+    family: Ubuntu Mono
     style: Regular
 
   bold:
-    family: SauceCodePro Nerd Font Mono
+    family: Ubuntu Mono
     style: Bold
 
   italic:
-    family: SauceCodePro Nerd Font Mono
+    family: Ubuntu Mono
     style: Italic
 
   bold_italic:
-    family: SauceCodePro Nerd Font Mono
+    family: Ubuntu Mono
     style: Bold Italic
+    # family: SauceCodePro Nerd Font Mono
 
-  size: 11.0
+  size: 13.0
 
 colors:
   # Default colors
