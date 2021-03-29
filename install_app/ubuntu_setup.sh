@@ -114,7 +114,8 @@ install_node() {
 
 install_nvim() {
   sudo apt update
-  sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+  sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip -y
+  sudo apt install xclip -y
   mkdir ~/buildapp
   cd ~/buildapp
   git clone https://github.com/neovim/neovim.git
