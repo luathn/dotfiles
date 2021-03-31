@@ -5,6 +5,7 @@ nnoremap <silent> <Leader>ff :Fern . -drawer -reveal=%<CR>
 function! s:init_fern() abort
   nmap <nowait><buffer> d <Plug>(fern-action-remove)
   nmap <nowait><buffer> c <Plug>(fern-action-clipboard-copy)
+  nmap <nowait><buffer> y <Plug>(fern-action-clipboard-copy)
   nmap <buffer> x <Plug>(fern-action-clipboard-move)
   nmap <buffer> p <Plug>(fern-action-clipboard-paste)
   nmap <buffer> o <Plug>(fern-action-open-or-expand)
@@ -29,9 +30,9 @@ let g:fern#disable_default_mappings = 1
 let g:fern#disable_viewer_spinner = 1
 let g:fern#renderer#default#root_symbol = '[root] '
 let g:fern#renderer#default#leading = '  '
-let g:fern#renderer#default#leaf_symbol = '  '
-let g:fern#renderer#default#collapsed_symbol = ' '
-let g:fern#renderer#default#expanded_symbol = 'ﱮ '
+" let g:fern#renderer#default#leaf_symbol = '  '
+" let g:fern#renderer#default#collapsed_symbol = ' '
+" let g:fern#renderer#default#expanded_symbol = 'ﱮ '
 
 function! s:on_highlight() abort
   highlight link FernRootSymbol Comment
