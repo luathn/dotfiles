@@ -10,6 +10,7 @@
 
 [core]
   editor = vim
+  excludesfile = /home/luat/.gitignore_global
 
 [cola]
   spellcheck = false
