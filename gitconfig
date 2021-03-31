@@ -14,14 +14,14 @@
 [cola]
   spellcheck = false
 
-[core]
-  pager = delta
+; [core]
+  ; pager = delta
 
-[delta]
-  line-numbers = true
-  side-by-side = true
-  plus-color = "#012800"
-  minus-color = "#340001"
+; [delta]
+;   line-numbers = true
+;   side-by-side = true
+;   plus-color = "#012800"
+;   minus-color = "#340001"
 
-[interactive]
-  diffFilter = delta --color-only
+; [interactive]
+;   diffFilter = delta --color-only

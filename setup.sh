@@ -7,7 +7,7 @@ ln -s -f ~/dotfiles/gitconfig ~/.gitconfig
 rm -r -f ~/.config/nvim
 ln -s -f ~/dotfiles/vim ~/.config/nvim
 
-ln -s -f ~/dotfiles/Xresources ~/.Xresources
+# ln -s -f ~/dotfiles/Xresources ~/.Xresources
 
 rm -r -f ~/.fonts
 ln -s -f ~/dotfiles/fonts ~/.fonts
