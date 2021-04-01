@@ -194,10 +194,10 @@ lua require("lsp_config")
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
 source ~/dotfiles/vim/config/gitfugitive.vim
+source ~/dotfiles/vim/config/yankstack.vim
 source ~/dotfiles/vim/config/sneak.vim
 source ~/dotfiles/vim/config/asyncrun.vim
 source ~/dotfiles/vim/config/vim-test.vim
-source ~/dotfiles/vim/config/yank-stack.vim
 source ~/dotfiles/vim/config/fern.vim
 source ~/dotfiles/vim/config/lightline.vim
 source ~/dotfiles/vim/config/nvim-compe.vim
