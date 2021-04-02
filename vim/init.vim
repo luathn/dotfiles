@@ -35,6 +35,8 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'metakirby5/codi.vim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -202,6 +204,7 @@ source ~/dotfiles/vim/config/fern.vim
 source ~/dotfiles/vim/config/lightline.vim
 source ~/dotfiles/vim/config/nvim-compe.vim
 source ~/dotfiles/vim/config/codi.vim
+source ~/dotfiles/vim/config/nvim-tree-lua.vim
 
 source ~/dotfiles/vim/config/function.vim
 
