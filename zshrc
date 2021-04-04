@@ -119,7 +119,7 @@ fi
 
 # Yarn
 if command -v yarn 1>/dev/null 2>&1; then
-  export PATH="$PATH:`yarn global bin`"
+  export PATH="$PATH:$HOME/.yarn/bin"
 fi
 
 # Cargo
