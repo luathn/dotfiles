@@ -1,11 +1,48 @@
+" Mappings
+nnoremap <C-m> :NvimTreeToggle<CR>
+nnoremap <leader>mr :NvimTreeRefresh<CR>
+nnoremap <leader>mf :NvimTreeFindFile<CR>
+
+:lua <<EOF
+    local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+    vim.g.nvim_tree_bindings = {
+      ["i"]              = tree_cb("cd"),
+      ["l"]              = tree_cb("edit"),
+      ["<2-LeftMouse>"]  = tree_cb("edit"),
+      ["o"]              = tree_cb("cd"),
+      ["<C-v>"]          = tree_cb("vsplit"),
+      ["<C-x>"]          = tree_cb("split"),
+      ["<C-t>"]          = tree_cb("tabnew"),
+      ["<"]              = tree_cb("prev_sibling"),
+      [">"]              = tree_cb("next_sibling"),
+      ["h"]              = tree_cb("close_node"),
+      ["<Tab>"]          = tree_cb("preview"),
+      ["I"]              = tree_cb("toggle_ignored"),
+      ["H"]              = tree_cb("toggle_dotfiles"),
+      ["R"]              = tree_cb("refresh"),
+      ["m"]              = tree_cb("create"),
+      ["d"]              = tree_cb("remove"),
+      ["r"]              = tree_cb("rename"),
+      ["<C-r>"]          = tree_cb("full_rename"),
+      ["x"]              = tree_cb("cut"),
+      ["c"]              = tree_cb("copy"),
+      ["p"]              = tree_cb("paste"),
+      ["[c"]             = tree_cb("prev_git_item"),
+      ["]c"]             = tree_cb("next_git_item"),
+      ["-"]              = tree_cb("dir_up"),
+      ["q"]              = tree_cb("close"),
+    }
+EOF
+
+" Configs
 let g:nvim_tree_side = 'left' "left by default
 let g:nvim_tree_width = 35 "30 by default
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
 let g:nvim_tree_gitignore = 2 "0 by default
 let g:nvim_tree_auto_open = 0 "0 by default, opens the tree when typing `vim $DIR` or `vim`
-let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+let g:nvim_tree_auto_close = 0 "0 by default, closes the tree when it's the last window
 let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ] "empty by default, don't auto open tree on specific filetypes.
-let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
+let g:nvim_tree_quit_on_open = 0 "0 by default, closes the tree when you open a file
 let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
 let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_hide_dotfiles = 1 "0 by default, this option hides files and folders starting with a dot `.`
@@ -47,10 +84,3 @@ let g:nvim_tree_icons = {
     \   'symlink_open': "",
     \   }
     \ }
-
-nnoremap <C-m> :NvimTreeToggle<CR>
-nnoremap <leader>mr :NvimTreeRefresh<CR>
-nnoremap <leader>mf :NvimTreeFindFile<CR>
-" NvimTreeOpen and NvimTreeClose are also available if you need them
-
-set termguicolors " this variable must be enabled for colors to be applied properly
