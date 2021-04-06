@@ -1,3 +1,5 @@
+source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
@@ -5,19 +7,42 @@ export PATH=$HOME/.local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="amuse"
 ZSH_THEME="robbyrussell"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME="random"
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "bira" )
+plugins=(vi-mode rails docker docker-compose git ruby tmux)
+
+source $ZSH/oh-my-zsh.sh
+
+# Key binding #################################################################
+stty -ixon
+
+# vi mode
+bindkey -v
+bindkey "^a" beginning-of-line
+bindkey "^e" end-of-line
+bindkey "^b" backward-char
+bindkey "^f" forward-char
+bindkey "^u" kill-whole-line
+bindkey "^w" backward-kill-word
+bindkey "^s" history-incremental-search-backward
+bindkey "^n" history-search-forward
+bindkey "^p" history-search-backward
+bindkey "^ " autosuggest-accept
+bindkey "jk" vi-cmd-mode
+
+export EDITOR="vim"
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Zsh Defer
+
+zsh-defer source ~/.zsh/zsh-fzf.zsh
+zsh-defer source ~/.zsh/zsh-export-path.zsh
+zsh-defer source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+zsh-defer source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+zsh-defer source ~/.zsh_local
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -62,72 +87,3 @@ DISABLE_AUTO_TITLE="true"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode rails docker docker-compose git ruby tmux zsh-autosuggestions zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
-
-# Key binding #################################################################
-stty -ixon
-
-# vi mode
-bindkey -v
-bindkey "^a" beginning-of-line
-bindkey "^e" end-of-line
-bindkey "^b" backward-char
-bindkey "^f" forward-char
-bindkey "^u" kill-whole-line
-bindkey "^w" backward-kill-word
-bindkey "^s" history-incremental-search-backward
-bindkey "^n" history-search-forward
-bindkey "^p" history-search-backward
-bindkey "^ " autosuggest-accept
-bindkey "jk" vi-cmd-mode
-
-export EDITOR="vim"
-
-export FZF_DEFAULT_COMMAND="fd --type file --follow --no-ignore --hidden --exclude .git --exclude node_modules"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS="--inline-info"
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-
-# Add rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-if command -v rbenv 1>/dev/null 2>&1; then
-  eval "$(rbenv init -)"
-fi
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-
-# Add pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-# Yarn
-if command -v yarn 1>/dev/null 2>&1; then
-  export PATH="$PATH:$HOME/.yarn/bin"
-fi
-
-# Cargo
-export PATH="$PATH:$HOME/.cargo/bin"
-
-# Go
-export PATH=$PATH:/usr/local/go/bin
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-source ~/.zsh_local
