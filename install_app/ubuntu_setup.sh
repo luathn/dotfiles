@@ -85,6 +85,15 @@ install_docker() {
   fi
 }
 
+install_docker_compose() {
+  read -r -p "Do you want to install Ruby? [y|N] " response
+  if [[ $response =~ (y|yes|Y) ]];then
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    success "Docker Compose Installed"
+  fi
+}
+
 install_ruby() {
   read -r -p "Do you want to install Ruby? [y|N] " response
   if [[ $response =~ (y|yes|Y) ]];then
@@ -143,5 +152,6 @@ install_interface_app
 install_zsh
 install_ruby
 install_docker
+install_docker_compose
 install_node
 install_command_line_tools
