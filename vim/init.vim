@@ -31,12 +31,14 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 " Frontend
 Plug 'pangloss/vim-javascript'
 " UI
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
+" Plug 'itchyny/lightline.vim'
+" Plug 'mengelbrecht/lightline-bufferline'
 
 "Test
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'glepnir/galaxyline.nvim'
+Plug 'akinsho/nvim-bufferline.lua'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -191,6 +193,8 @@ autocmd Filetype python map <leader>rr :!python3 %<cr>
 vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua require("galaxy-line")
+lua require("buffer-line")
 lua require("lsp_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
