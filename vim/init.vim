@@ -21,6 +21,9 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
+Plug 'metakirby5/codi.vim'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -32,9 +35,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 
 "Test
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
-Plug 'metakirby5/codi.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 
