@@ -44,7 +44,15 @@ gls.left[4] ={
 
 gls.left[5] = {
   FileName = {
-    provider = 'FileName',
+    provider = function()
+      local squeeze_width  = vim.fn.winwidth(0) / 2
+      if squeeze_width > 50 then
+        return vim.fn.expand('%')
+      end
+      return vim.fn.pathshorten(vim.fn.expand('%'))
+    end,
+    separator = ' ',
+    separator_highlight = {'NONE',colors.bg},
     condition = condition.buffer_not_empty,
     highlight = {colors.fg,colors.bg,'bold'}
   }
