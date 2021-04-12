@@ -1,5 +1,5 @@
 " Fern Mappings
-nnoremap <C-n> :Fern . -drawer -toggle<CR>
+nnoremap <silent><C-n> :Fern . -drawer -toggle -width=35<CR>
 nnoremap <silent> <Leader>ff :Fern . -drawer -reveal=%<CR>
 
 function! s:init_fern() abort
