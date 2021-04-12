@@ -2,6 +2,8 @@
 let g:ctrlsf_mapping = {
   \ "openb": { "key": "O", "suffix": "<C-w>p" },
   \ "vsplit": "v",
+  \ "next": "]c",
+  \ "prev": "[c",
   \ }
 nmap     <C-F>f <Plug>CtrlSFPrompt
 vmap     <C-F>f <Plug>CtrlSFVwordPath
