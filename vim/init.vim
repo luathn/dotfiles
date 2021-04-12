@@ -39,6 +39,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
+Plug 'Yggdroot/indentLine'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -51,7 +52,6 @@ Plug 'akinsho/nvim-bufferline.lua'
 " Plug 'vim-airline/vim-airline'
 " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'mileszs/ack.vim'
-" Plug 'Yggdroot/indentLine'
 " Plug 'zackhsi/fzf-tags'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
@@ -220,7 +220,7 @@ source ~/dotfiles/vim/config/function.vim
 " source ~/dotfiles/vim/config/vim-airline.vim
 " source ~/dotfiles/vim/config/defx.vim
 " source ~/dotfiles/vim/config/ack.vim
-" source ~/dotfiles/vim/config/indentline.vim
+source ~/dotfiles/vim/config/indentline.vim
 " source ~/dotfiles/vim/config/coc-nvim.vim
 " source ~/dotfiles/vim/config/fzf-tags.vim
 " source ~/dotfiles/vim/config/ale.vim
