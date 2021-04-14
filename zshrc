@@ -7,7 +7,7 @@ export PATH=$HOME/.local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="amuse"
 
 plugins=(vi-mode rails docker docker-compose git ruby tmux)
 
