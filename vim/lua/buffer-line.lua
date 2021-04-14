@@ -49,6 +49,9 @@ require'bufferline'.setup {
     sort_by = 'extension'
   },
   highlights = {
+    fill = {
+      guibg = "#282c34"
+    },
     separator = {
       guifg = "#585858"
     },

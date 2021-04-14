@@ -40,6 +40,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'Yggdroot/indentLine'
+Plug 'joshdick/onedark.vim'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -103,7 +104,8 @@ endif
 set fillchars=eob:\           " Hide eob char ~
 
 " Scheme (base16-seti)
-colorscheme base16-default-dark
+" colorscheme base16-default-dark
+colorscheme onedark
 let g:gruvbox_contrast_dark='hard'
 set background=dark
 
