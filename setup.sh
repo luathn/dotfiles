@@ -10,6 +10,8 @@ ln -s -f ~/dotfiles/ctags ~/.ctags
 ln -s -f ~/dotfiles/gitconfig ~/.gitconfig
 ln -s -f ~/dotfiles/gitignore_global ~/.gitignore_global
 
+ln -s -f ~/dotfiles/ssh/config ~/.ssh/config
+
 rm -r -f ~/.config/nvim
 ln -s -f ~/dotfiles/vim ~/.config/nvim
 
