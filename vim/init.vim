@@ -122,6 +122,8 @@ augroup RubySpecialKeywordCharacters
   autocmd Filetype ruby setlocal iskeyword+=!
   autocmd Filetype ruby setlocal iskeyword+=?
 augroup END
+
+autocmd FileType typescript setlocal tabstop=4 softtabstop=4 shiftwidth=4
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings                                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
