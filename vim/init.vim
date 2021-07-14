@@ -15,7 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'maxbrunsfeld/vim-yankstack'
+" Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
@@ -200,7 +200,7 @@ lua require("lsp_config")
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
 source ~/dotfiles/vim/config/gitfugitive.vim
-source ~/dotfiles/vim/config/yankstack.vim
+" source ~/dotfiles/vim/config/yankstack.vim
 source ~/dotfiles/vim/config/sneak.vim
 source ~/dotfiles/vim/config/asyncrun.vim
 source ~/dotfiles/vim/config/vim-test.vim
@@ -209,6 +209,7 @@ source ~/dotfiles/vim/config/lightline.vim
 source ~/dotfiles/vim/config/nvim-compe.vim
 source ~/dotfiles/vim/config/codi.vim
 source ~/dotfiles/vim/config/nvim-tree-lua.vim
+source ~/dotfiles/vim/config/indentline.vim
 
 source ~/dotfiles/vim/config/function.vim
 
@@ -220,7 +221,6 @@ source ~/dotfiles/vim/config/function.vim
 " source ~/dotfiles/vim/config/vim-airline.vim
 " source ~/dotfiles/vim/config/defx.vim
 " source ~/dotfiles/vim/config/ack.vim
-source ~/dotfiles/vim/config/indentline.vim
 " source ~/dotfiles/vim/config/coc-nvim.vim
 " source ~/dotfiles/vim/config/fzf-tags.vim
 " source ~/dotfiles/vim/config/ale.vim
