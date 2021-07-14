@@ -41,6 +41,9 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'Yggdroot/indentLine'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -199,6 +202,7 @@ lua require("galaxy-line")
 lua require("buffer-line")
 lua require("lsp_config")
 lua require("treesitter_config")
+lua require("telescope_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
