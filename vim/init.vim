@@ -28,6 +28,7 @@ Plug 'metakirby5/codi.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Frontend
 Plug 'pangloss/vim-javascript'
 " UI
@@ -104,7 +105,6 @@ set fillchars=eob:\           " Hide eob char ~
 
 " Scheme (base16-seti)
 colorscheme base16-default-dark
-let g:gruvbox_contrast_dark='hard'
 set background=dark
 
 " Enable matchit for ruby textobject
@@ -198,6 +198,7 @@ vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 lua require("galaxy-line")
 lua require("buffer-line")
 lua require("lsp_config")
+lua require("treesitter_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
