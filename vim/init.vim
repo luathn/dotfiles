@@ -20,7 +20,7 @@ Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'metakirby5/codi.vim'
@@ -47,6 +47,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'Pocco81/DAPInstall.nvim'
 Plug 'rcarriga/nvim-dap-ui'
+Plug 'TimUntersberger/neogit'
+Plug 'sindrets/diffview.nvim'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -207,6 +209,8 @@ lua require("lsp_config")
 lua require("treesitter_config")
 lua require("telescope_config")
 lua require("dap_debug_config")
+lua require("neo_git_config")
+lua require("diff_view_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
