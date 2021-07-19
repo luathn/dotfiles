@@ -87,7 +87,7 @@ install_docker() {
 }
 
 install_docker_compose() {
-  read -r -p "Do you want to install Ruby? [y|N] " response
+  read -r -p "Do you want to install Docker Compose? [y|N] " response
   if [[ $response =~ (y|yes|Y) ]];then
     sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
@@ -97,6 +97,7 @@ install_docker_compose() {
 
 install_ruby() {
   read -r -p "Do you want to install Ruby? [y|N] " response
+  sudo apt-get install -y libssl-dev zlib1g-dev
   if [[ $response =~ (y|yes|Y) ]];then
     info "Installing Ruby"
     cd
@@ -156,3 +157,4 @@ install_docker
 install_docker_compose
 install_node
 install_command_line_tools
+install_nvim
