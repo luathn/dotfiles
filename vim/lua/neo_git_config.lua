@@ -9,10 +9,10 @@ neogit.setup {
   disable_commit_confirmation = false,
   -- customize displayed signs
   signs = {
-    -- { CLOSED, OPENED }
-    section = { ">", "v" },
-    item = { ">", "v" },
-    hunk = { "", "" },
+    -- { CLOSED, OPENED }並ﴴ 
+    section = { "", "" },
+    item = { "", "" },
+    hunk = { "+", "-" },
   },
   integrations = {
     diffview = true
@@ -22,8 +22,9 @@ neogit.setup {
     -- modify status buffer mappings
     status = {
       -- Adds a mapping with "B" as key that does the "BranchPopup" command
-      ["B"] = "BranchPopup",
-      ["R"] = "RefreshBuffer",
+      ["l"] = "LogPopup",
+      ["x"] = "",
+      ["X"] = "Discard",
     }
   }
 }
