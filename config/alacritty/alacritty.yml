@@ -27,19 +27,19 @@ key_bindings:
 
 font:
   normal:
-    family: Hack
+    family: JetBrainsMono
     style: Regular
 
   bold:
-    family: Hack
+    family: JetBrainsMono
     style: Bold
 
   italic:
-    family: Hack
+    family: JetBrainsMono
     style: Italic
 
   bold_italic:
-    family: Hack
+    family: JetBrainsMono
     style: Bold Italic
     # family: SauceCodePro Nerd Font Mono
 
