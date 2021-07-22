@@ -22,3 +22,6 @@ export PATH="$PATH:$HOME/.cargo/bin"
 
 # Go
 export PATH=$PATH:/usr/local/go/bin
+
+# asdf
+. $HOME/.asdf/asdf.sh
