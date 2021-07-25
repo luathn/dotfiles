@@ -95,7 +95,7 @@ install_docker_compose() {
   fi
 }
 
-install_ruby() {
+install_rbenv() {
   read -r -p "Do you want to install Ruby? [y|N] " response
   sudo apt-get install -y libssl-dev zlib1g-dev
   if [[ $response =~ (y|yes|Y) ]];then
@@ -145,16 +145,23 @@ install_command_line_tools() {
   sudo dpkg -i fd_8.2.1_amd64.deb
 }
 
+install_asdf() {
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+  git -C ~/.asdf checkout "$(git -C ~/.asdf describe --abbrev=0 --tags)"
+}
+
 # Install general ##############################################
 sudo apt-get install build-essential zsh vim tmux curl scrot mpd ncmpcpp -y
+
+# install_rbenv
 
 install_chrome
 install_git
 install_interface_app
 install_zsh
-install_ruby
 install_docker
 install_docker_compose
 install_node
 install_command_line_tools
 install_nvim
+install_asdf
