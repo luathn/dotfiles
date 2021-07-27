@@ -40,7 +40,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -67,6 +67,7 @@ Plug 'projekt0n/github-nvim-theme'
 " Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'dense-analysis/ale'
+" Plug 'Yggdroot/indentLine'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -226,7 +227,7 @@ source ~/dotfiles/vim/config/lightline.vim
 source ~/dotfiles/vim/config/nvim-compe.vim
 source ~/dotfiles/vim/config/codi.vim
 source ~/dotfiles/vim/config/nvim-tree-lua.vim
-source ~/dotfiles/vim/config/indentline.vim
+source ~/dotfiles/vim/config/indent-blankline.vim
 
 source ~/dotfiles/vim/config/function.vim
 
@@ -241,6 +242,7 @@ source ~/dotfiles/vim/config/function.vim
 " source ~/dotfiles/vim/config/coc-nvim.vim
 " source ~/dotfiles/vim/config/fzf-tags.vim
 " source ~/dotfiles/vim/config/ale.vim
+" source ~/dotfiles/vim/config/indentline.vim
 
 nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
 nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
