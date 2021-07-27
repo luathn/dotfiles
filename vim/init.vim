@@ -50,6 +50,7 @@ Plug 'rcarriga/nvim-dap-ui'
 Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim'
 Plug 'projekt0n/github-nvim-theme'
+Plug 'vhyrro/neorg'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -214,6 +215,7 @@ lua require("dap_debug_config")
 lua require("neo_git_config")
 lua require("diff_view_config")
 lua require("github_nvim_config")
+lua require("neorg_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim

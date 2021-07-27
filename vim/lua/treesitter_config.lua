@@ -1,5 +1,15 @@
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+
+parser_configs.norg = {
+    install_info = {
+        url = "https://github.com/vhyrro/tree-sitter-norg",
+        files = { "src/parser.c" },
+        branch = "main"
+    },
+}
+
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "typescript", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = { "typescript", "norg" },
   -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
