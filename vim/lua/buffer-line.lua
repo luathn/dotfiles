@@ -16,7 +16,7 @@ require'bufferline'.setup {
     close_icon = '',
     left_trunc_marker = '',
     right_trunc_marker = '',
-    max_name_length = 15,
+    max_name_length = 30,
     max_prefix_length = 10, -- prefix used when a buffer is deduplicated
     tab_size = 18,
     diagnostics = false,
