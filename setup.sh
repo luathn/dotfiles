@@ -20,4 +20,4 @@ ln -s -f ~/dotfiles/vim ~/.config/nvim
 rm -r -f ~/.fonts
 ln -s -f ~/dotfiles/fonts ~/.fonts
 
-vim +PlugInstall +qall
+nvim +PlugInstall +qall
