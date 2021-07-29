@@ -40,5 +40,7 @@ saga.init_lsp_saga {
 -- vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua require('lspsaga.codeaction').code_action()', {silent=true, noremap=true})
 vim.api.nvim_set_keymap('n', '<leader>ca', ':Lspsaga code_action<CR>', {silent=true, noremap=true})
 vim.api.nvim_set_keymap('v', '<leader>ca', ':<C-U>Lspsaga range_code_action<CR>', {silent=true, noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>cr', ':Lspsaga rename<CR>', {silent=true, noremap=true})
+vim.api.nvim_set_keymap('n', 'gD', ':Lspsaga preview_definition<CR>', {silent=true, noremap=true})
 -- nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 -- vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>

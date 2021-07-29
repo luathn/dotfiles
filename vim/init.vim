@@ -147,7 +147,7 @@ nnoremap Y y$
 command! Source :source ~/.config/nvim/init.vim
 
 " Close quickfix
-autocmd FileType qf nnoremap <buffer> q :cclose<CR>
+autocmd FileType qf nnoremap <buffer> q :cclose<cr>:lclose<cr>
 
 " Useful saving mapping
 noremap <leader>fs :update<CR>
