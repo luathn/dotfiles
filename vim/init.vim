@@ -51,7 +51,6 @@ Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim'
 Plug 'projekt0n/github-nvim-theme'
 Plug 'vhyrro/neorg'
-Plug 'glepnir/lspsaga.nvim'
 Plug 'windwp/nvim-autopairs'
 
 " if has('python3')
@@ -71,6 +70,7 @@ Plug 'windwp/nvim-autopairs'
 " Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'dense-analysis/ale'
 " Plug 'Yggdroot/indentLine'
+" Plug 'glepnir/lspsaga.nvim'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -218,9 +218,10 @@ lua require("neo_git_config")
 lua require("diff_view_config")
 lua require("github_nvim_config")
 lua require("neorg_config")
-lua require("lsp_saga_config")
 lua require("nvim_autopairs_config")
 lua require("nvim_compe_config")
+
+" lua require("lspsaga_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim

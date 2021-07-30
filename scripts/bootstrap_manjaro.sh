@@ -6,6 +6,20 @@ install_yay() {
   makepkg -si
 }
 
+mkdir ~/buildapp
+
+install_yay
+
+# Install dev tools
+yay -S neovim alacritty tmux xsel fd ripgrep bat --noconfirm
+
+# Install app
+yay -S fcitx5-unikey fcitx5-configtool fcitx5-gtk --noconfirm
+
+# Install app via AUR
+yay -S asdf-vm --noconfirm
+
+# Setup config
 setup_zsh() {
   sudo chsh -s $(which zsh)
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -14,14 +28,12 @@ setup_zsh() {
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
 }
 
-mkdir ~/buildapp
-
-install_yay
-
-# Install app
-yay -S neovim xsel fd ripgrep bat --noconfirm
-
-# Install app via AUR
-yay -S asdf-vm --noconfirm
+setup_unikey() {
+  sudo -i
+  echo "GTK_IM_MODULE=fcitx" >> /etc/environment
+  echo "QT_IM_MODULE=fcitx" >> /etc/environment
+  echo "XMODIFIERS=@im=fcitx" >> /etc/environment
+}
 
 setup_zsh
+setup_unikey
