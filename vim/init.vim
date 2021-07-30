@@ -220,6 +220,7 @@ lua require("github_nvim_config")
 lua require("neorg_config")
 lua require("lsp_saga_config")
 lua require("nvim_autopairs_config")
+lua require("nvim_compe_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
@@ -230,7 +231,6 @@ source ~/dotfiles/vim/config/asyncrun.vim
 source ~/dotfiles/vim/config/vim-test.vim
 source ~/dotfiles/vim/config/fern.vim
 source ~/dotfiles/vim/config/lightline.vim
-source ~/dotfiles/vim/config/nvim-compe.vim
 source ~/dotfiles/vim/config/codi.vim
 source ~/dotfiles/vim/config/nvim-tree-lua.vim
 source ~/dotfiles/vim/config/indent-blankline.vim
