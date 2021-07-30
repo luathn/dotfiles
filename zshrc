@@ -1,3 +1,5 @@
+setopt correct
+
 source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
 
 # If you come from bash you might have to change your $PATH.
