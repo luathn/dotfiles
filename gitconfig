@@ -9,7 +9,7 @@
   path = .gitconfig-company
 
 [core]
-  editor = vim
+  editor = nvim
   excludesfile = /home/luat/.gitignore_global
 
 [cola]
