@@ -184,8 +184,8 @@ map <leader>ws <C-W>s
 " Buffer
 map <leader>bk :Bclose<cr>
 map <leader>bK :call CloseAllBuffersButCurrent()<cr>
-map <silent> <leader>l :bnext<cr>
-map <silent> <leader>h :bprevious<cr>
+" map <silent> <leader>l :bnext<cr>
+" map <silent> <leader>h :bprevious<cr>
 
 " Mappings for managing tabs
 map <leader>tc :tabnew<cr>
