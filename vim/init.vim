@@ -45,7 +45,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'mfussenegger/nvim-dap'
-Plug 'Pocco81/DAPInstall.nvim'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim'
@@ -266,11 +265,3 @@ nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
 nnoremap <leader>dk :lua require("dapui").eval(<c-r>=expand("<cword>")<cr>)<CR>
 vnoremap <leader>dk :lua require("dapui").eval()<CR>
 
-:lua << EOF
-local dap_install = require("dap-install")
-
-dap_install.setup({
-  installation_path = ".dapinstall",
-  verbosely_call_debuggers = true,
-})
-EOF
