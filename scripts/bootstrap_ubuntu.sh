@@ -146,7 +146,7 @@ install_command_line_tools() {
 }
 
 install_asdf() {
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+  sudo git clone https://github.com/asdf-vm/asdf.git /opt/asdf-vm
   git -C ~/.asdf checkout "$(git -C ~/.asdf describe --abbrev=0 --tags)"
 }
 
