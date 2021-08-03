@@ -20,10 +20,10 @@ Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'ludovicchabant/vim-gutentags'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'metakirby5/codi.vim'
+Plug 'windwp/nvim-autopairs'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -32,14 +32,12 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Frontend
 Plug 'pangloss/vim-javascript'
 " UI
-" Plug 'itchyny/lightline.vim'
-" Plug 'mengelbrecht/lightline-bufferline'
+Plug 'glepnir/galaxyline.nvim'
+Plug 'akinsho/nvim-bufferline.lua'
 
 "Test
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'glepnir/galaxyline.nvim'
-Plug 'akinsho/nvim-bufferline.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -50,7 +48,6 @@ Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim'
 Plug 'projekt0n/github-nvim-theme'
 Plug 'vhyrro/neorg'
-Plug 'windwp/nvim-autopairs'
 Plug 'folke/trouble.nvim'
 
 " if has('python3')
@@ -71,6 +68,9 @@ Plug 'folke/trouble.nvim'
 " Plug 'dense-analysis/ale'
 " Plug 'Yggdroot/indentLine'
 " Plug 'glepnir/lspsaga.nvim'
+" Plug 'ludovicchabant/vim-gutentags'
+" Plug 'itchyny/lightline.vim'
+" Plug 'mengelbrecht/lightline-bufferline'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
