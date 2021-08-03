@@ -51,6 +51,7 @@ Plug 'sindrets/diffview.nvim'
 Plug 'projekt0n/github-nvim-theme'
 Plug 'vhyrro/neorg'
 Plug 'windwp/nvim-autopairs'
+Plug 'folke/trouble.nvim'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -219,6 +220,7 @@ lua require("github_nvim_config")
 lua require("neorg_config")
 lua require("nvim_autopairs_config")
 lua require("nvim_compe_config")
+lua require("trouble_config")
 
 " lua require("lspsaga_config")
 
