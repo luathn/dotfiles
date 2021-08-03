@@ -15,7 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
@@ -227,7 +227,7 @@ lua require("trouble_config")
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
 source ~/dotfiles/vim/config/gitfugitive.vim
-" source ~/dotfiles/vim/config/yankstack.vim
+source ~/dotfiles/vim/config/yankstack.vim
 source ~/dotfiles/vim/config/sneak.vim
 source ~/dotfiles/vim/config/asyncrun.vim
 source ~/dotfiles/vim/config/vim-test.vim
