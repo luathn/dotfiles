@@ -1,6 +1,6 @@
 " Fern Mappings
 nnoremap <silent><C-n> :Fern . -drawer -toggle -width=35<CR>
-nnoremap <silent> <Leader>ff :Fern . -drawer -reveal=%<CR>
+nnoremap <silent> <Leader>nf :Fern . -drawer -reveal=%<CR>
 
 function! s:init_fern() abort
   nmap <nowait><buffer> d <Plug>(fern-action-remove)
