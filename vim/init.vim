@@ -15,7 +15,6 @@ Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-sneak'
 Plug 'kana/vim-textobj-user'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'vim-test/vim-test'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
@@ -71,6 +70,7 @@ Plug 'folke/trouble.nvim'
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'itchyny/lightline.vim'
 " Plug 'mengelbrecht/lightline-bufferline'
+" Plug 'maxbrunsfeld/vim-yankstack'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -227,7 +227,6 @@ lua require("trouble_config")
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
 source ~/dotfiles/vim/config/gitfugitive.vim
-source ~/dotfiles/vim/config/yankstack.vim
 source ~/dotfiles/vim/config/sneak.vim
 source ~/dotfiles/vim/config/asyncrun.vim
 source ~/dotfiles/vim/config/vim-test.vim
@@ -251,3 +250,4 @@ source ~/dotfiles/vim/config/function.vim
 " source ~/dotfiles/vim/config/fzf-tags.vim
 " source ~/dotfiles/vim/config/ale.vim
 " source ~/dotfiles/vim/config/indentline.vim
+" source ~/dotfiles/vim/config/yankstack.vim
