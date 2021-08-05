@@ -48,6 +48,7 @@ Plug 'sindrets/diffview.nvim'
 Plug 'projekt0n/github-nvim-theme'
 Plug 'vhyrro/neorg'
 Plug 'folke/trouble.nvim'
+Plug 'simrat39/symbols-outline.nvim'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -221,6 +222,7 @@ lua require("neorg_config")
 lua require("nvim_autopairs_config")
 lua require("nvim_compe_config")
 lua require("trouble_config")
+lua require("symbols-outline_config")
 
 " lua require("lspsaga_config")
 
