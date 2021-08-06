@@ -45,10 +45,13 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'TimUntersberger/neogit'
 Plug 'sindrets/diffview.nvim'
-Plug 'projekt0n/github-nvim-theme'
 Plug 'vhyrro/neorg'
 Plug 'folke/trouble.nvim'
 Plug 'simrat39/symbols-outline.nvim'
+
+" Scheme
+Plug 'folke/tokyonight.nvim'
+" Plug 'projekt0n/github-nvim-theme'
 
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -117,9 +120,6 @@ if (has("nvim"))
 endif
 set fillchars=eob:\           " Hide eob char ~
 
-" Scheme (base16-seti)
-" colorscheme base16-default-dark
-" set background=dark
 
 " Enable matchit for ruby textobject
 runtime macros/matchit.vim
@@ -217,12 +217,13 @@ lua require("telescope_config")
 lua require("dap_debug_config")
 lua require("neo_git_config")
 lua require("diff_view_config")
-lua require("github_nvim_config")
 lua require("neorg_config")
 lua require("nvim_autopairs_config")
 lua require("nvim_compe_config")
 lua require("trouble_config")
 lua require("symbols-outline_config")
+lua require("tokyonight_config")
+" lua require("github_nvim_config")
 
 " lua require("lspsaga_config")
 

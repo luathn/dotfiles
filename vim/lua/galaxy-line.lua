@@ -14,6 +14,12 @@ local colors = require('galaxyline.theme').default
 --   blue = '#51afef';
 --   red = '#ec5f67';
 -- }
+
+-- Tokyonight
+local colors = require("tokyonight.colors").setup()
+colors.fg = "#a9b1d6"
+colors.bg = "#0e0e14"
+
 local condition = require('galaxyline.condition')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer','fern'}
