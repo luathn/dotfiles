@@ -37,7 +37,6 @@ Plug 'akinsho/nvim-bufferline.lua'
 "Test
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -48,11 +47,13 @@ Plug 'sindrets/diffview.nvim'
 Plug 'vhyrro/neorg'
 Plug 'folke/trouble.nvim'
 Plug 'simrat39/symbols-outline.nvim'
+Plug 'Yggdroot/indentLine'
 
 " Scheme
 Plug 'folke/tokyonight.nvim'
 " Plug 'projekt0n/github-nvim-theme'
 
+" Plug 'lukas-reineke/indent-blankline.nvim'
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "   Plug 'deoplete-plugins/deoplete-lsp'
@@ -69,7 +70,6 @@ Plug 'folke/tokyonight.nvim'
 " Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'dense-analysis/ale'
-" Plug 'Yggdroot/indentLine'
 " Plug 'glepnir/lspsaga.nvim'
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'itchyny/lightline.vim'
@@ -237,10 +237,11 @@ source ~/dotfiles/vim/config/fern.vim
 source ~/dotfiles/vim/config/lightline.vim
 source ~/dotfiles/vim/config/codi.vim
 source ~/dotfiles/vim/config/nvim-tree-lua.vim
-source ~/dotfiles/vim/config/indent-blankline.vim
+source ~/dotfiles/vim/config/indentline.vim
 
 source ~/dotfiles/vim/config/function.vim
 
+" source ~/dotfiles/vim/config/indent-blankline.vim
 " if has('python3')
 "   source ~/dotfiles/vim/config/deoplete.vim
 " else
@@ -252,5 +253,4 @@ source ~/dotfiles/vim/config/function.vim
 " source ~/dotfiles/vim/config/coc-nvim.vim
 " source ~/dotfiles/vim/config/fzf-tags.vim
 " source ~/dotfiles/vim/config/ale.vim
-" source ~/dotfiles/vim/config/indentline.vim
 " source ~/dotfiles/vim/config/yankstack.vim
