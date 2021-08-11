@@ -24,13 +24,13 @@ local condition = require('galaxyline.condition')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer','fern'}
 
-gls.left[1] = {
+gls.left[0] = {
   RainbowRed = {
     provider = function() return '▊ ' end,
     highlight = {colors.blue,colors.bg}
   },
 }
-gls.left[2] = {
+gls.left[1] = {
   ViMode = {
     provider = function()
       -- auto change color according the vim mode
@@ -47,6 +47,27 @@ gls.left[2] = {
     end,
   },
 }
+
+gls.left[2] = {
+  GitIcon = {
+    provider = function() return '' end,
+    condition = condition.check_git_workspace,
+    separator = ' ',
+    separator_highlight = {'NONE',colors.bg},
+    highlight = {colors.magenta,colors.bg,'bold'},
+  }
+}
+
+gls.left[3] = {
+  GitBranch = {
+    provider = 'GitBranch',
+    separator = '  ',
+    separator_highlight = {'NONE',colors.bg},
+    condition = condition.check_git_workspace,
+    highlight = {colors.magenta,colors.bg,'bold'},
+  }
+}
+
 -- gls.left[3] = {
 --   FileSize = {
 --     provider = 'FileSize',
@@ -162,24 +183,6 @@ gls.right[2] = {
   }
 }
 
-gls.right[3] = {
-  GitIcon = {
-    provider = function() return '  ' end,
-    condition = condition.check_git_workspace,
-    separator = ' ',
-    separator_highlight = {'NONE',colors.bg},
-    highlight = {colors.violet,colors.bg,'bold'},
-  }
-}
-
-gls.right[4] = {
-  GitBranch = {
-    provider = 'GitBranch',
-    condition = condition.check_git_workspace,
-    highlight = {colors.violet,colors.bg,'bold'},
-  }
-}
-
 gls.right[5] = {
   DiffAdd = {
     provider = 'DiffAdd',
@@ -207,7 +210,7 @@ gls.right[7] = {
 
 gls.right[8] = {
   RainbowBlue = {
-    provider = function() return ' ▊' end,
+    provider = function() return '  ▊' end,
     highlight = {colors.blue,colors.bg}
   },
 }
