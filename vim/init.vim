@@ -47,13 +47,13 @@ Plug 'sindrets/diffview.nvim'
 Plug 'vhyrro/neorg'
 Plug 'folke/trouble.nvim'
 Plug 'simrat39/symbols-outline.nvim'
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Scheme
 Plug 'folke/tokyonight.nvim'
 " Plug 'projekt0n/github-nvim-theme'
 
-" Plug 'lukas-reineke/indent-blankline.nvim'
+" Plug 'Yggdroot/indentLine'
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "   Plug 'deoplete-plugins/deoplete-lsp'
@@ -237,11 +237,11 @@ source ~/dotfiles/vim/config/fern.vim
 source ~/dotfiles/vim/config/lightline.vim
 source ~/dotfiles/vim/config/codi.vim
 source ~/dotfiles/vim/config/nvim-tree-lua.vim
-source ~/dotfiles/vim/config/indentline.vim
+source ~/dotfiles/vim/config/indent-blankline.vim
 
 source ~/dotfiles/vim/config/function.vim
 
-" source ~/dotfiles/vim/config/indent-blankline.vim
+" source ~/dotfiles/vim/config/indentline.vim
 " if has('python3')
 "   source ~/dotfiles/vim/config/deoplete.vim
 " else
