@@ -1,7 +1,7 @@
 " Mappings
-nnoremap <leader>oe :NvimTreeToggle<CR>
-nnoremap <leader>mr :NvimTreeRefresh<CR>
-nnoremap <leader>mf :NvimTreeFindFile<CR>
+nnoremap <silent> <leader>oe :NvimTreeToggle<CR>
+nnoremap <silent> <leader>mr :NvimTreeRefresh<CR>
+nnoremap <silent> <leader>mf :NvimTreeFindFile<CR>
 
 :lua <<EOF
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback

@@ -1,7 +1,7 @@
 local cb = require'diffview.config'.diffview_callback
 
 vim.api.nvim_set_keymap('n', '<leader>gd', ':DiffviewOpen ', {noremap=true})
-vim.api.nvim_set_keymap('n', '<leader>gq', ':DiffviewClose<CR>', {noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>gq', ':DiffviewClose<CR>', {noremap=true, silent=true})
 
 require'diffview'.setup {
   diff_binaries = false,    -- Show diffs for binaries

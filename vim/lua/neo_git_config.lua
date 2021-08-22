@@ -22,8 +22,9 @@ neogit.setup {
     -- modify status buffer mappings
     status = {
       -- Adds a mapping with "B" as key that does the "BranchPopup" command
-      ["l"] = "LogPopup",
       ["x"] = "",
+      ["p"] = "",
+      ["F"] = "PullPopup",
       ["X"] = "Discard",
     }
   }
