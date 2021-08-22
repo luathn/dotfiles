@@ -24,8 +24,10 @@ neogit.setup {
       -- Adds a mapping with "B" as key that does the "BranchPopup" command
       ["x"] = "",
       ["p"] = "",
+      ["<c-s>"] = "",
       ["F"] = "PullPopup",
       ["X"] = "Discard",
+      ["gS"] = "StageAll"
     }
   }
 }
