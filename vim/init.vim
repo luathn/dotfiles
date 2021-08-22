@@ -210,7 +210,7 @@ vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua require("galaxyline_config")
-lua require("buffer-line")
+lua require("nvim-bufferline_config")
 lua require("lsp_config")
 lua require("treesitter_config")
 lua require("telescope_config")
