@@ -209,7 +209,7 @@ autocmd Filetype python map <leader>rr :!python3 %<cr>
 vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-lua require("galaxy-line")
+lua require("galaxyline_config")
 lua require("buffer-line")
 lua require("lsp_config")
 lua require("treesitter_config")
