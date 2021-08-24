@@ -53,7 +53,7 @@ table.insert(gls.left, {
 table.insert(gls.left, {
   GitIcon = {
     provider = function() return '' end,
-    condition = condition.check_git_workspace and condition.hide_in_width,
+    condition = condition.check_git_workspace or condition.hide_in_width,
     highlight = {colors.magenta, colors.bg, 'bold'},
     separator = ' ',
     separator_highlight = {colors.fg_transparent, colors.bg},
@@ -63,7 +63,7 @@ table.insert(gls.left, {
 table.insert(gls.left, {
   GitBranch = {
     provider = 'GitBranch',
-    condition = condition.check_git_workspace and condition.hide_in_width,
+    condition = condition.check_git_workspace or condition.hide_in_width,
     highlight = {colors.magenta, colors.bg, 'bold'},
     separator = ' ',
     separator_highlight = {colors.fg_transparent, colors.bg},
@@ -185,8 +185,9 @@ table.insert(gls.short_line_left, {
   BufferType = {
     provider = 'FileTypeName',
     highlight = {colors.blue, colors.bg_transparent, 'bold'},
-    separator = ' ',
-    separator_highlight = {colors.fg_transparent, colors.bg_transparent},
+    condition = condition.buffer_not_empty,
+    separator = ' ',
+    separator_highlight = {colors.bg, colors.bg_transparent},
   }
 })
 
@@ -194,14 +195,14 @@ table.insert(gls.short_line_left, {
   SFileName = {
     provider = 'SFileName',
     condition = condition.buffer_not_empty,
-    highlight = {colors.fg, colors.bg_transparent, 'bold'},
+    highlight = {colors.fg, colors.bg, 'bold'},
   }
 })
 
 table.insert(gls.short_line_right, {
   BufferIcon = {
     provider = 'BufferIcon',
-    highlight = {colors.fg, colors.bg_transparent},
+    highlight = {colors.fg, colors.bg},
   }
 })
 
