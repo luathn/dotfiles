@@ -50,7 +50,7 @@ require'bufferline'.setup {
   },
   highlights = {
     fill = {
-      guibg = 'NONE',
+      guibg = '#24283b',
     },
     tab_close = {
       guibg = 'NONE'

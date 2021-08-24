@@ -9,7 +9,7 @@ parser_configs.norg = {
 }
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "typescript", "norg" },
+  ensure_installed = { "ruby", "typescript", "norg" },
   -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
