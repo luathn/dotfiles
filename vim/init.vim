@@ -210,23 +210,23 @@ autocmd Filetype python map <leader>rr :!python3 %<cr>
 vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-lua require("galaxyline_config")
-lua require("nvim-bufferline_config")
-lua require("lsp_config")
-lua require("treesitter_config")
-lua require("telescope_config")
-lua require("dap_debug_config")
-lua require("neogit_config")
-lua require("diff_view_config")
-lua require("neorg_config")
-lua require("nvim_autopairs_config")
-lua require("nvim_compe_config")
-lua require("trouble_config")
-lua require("symbols-outline_config")
-lua require("tokyonight_config")
-" lua require("github_nvim_config")
+lua require("plugins/tokyonight_config")
+lua require("plugins/galaxyline_config")
+lua require("plugins/nvim-bufferline_config")
+lua require("plugins/lsp_config")
+lua require("plugins/treesitter_config")
+lua require("plugins/telescope_config")
+lua require("plugins/dap_debug_config")
+lua require("plugins/neogit_config")
+lua require("plugins/diff_view_config")
+lua require("plugins/neorg_config")
+lua require("plugins/nvim_autopairs_config")
+lua require("plugins/nvim_compe_config")
+lua require("plugins/trouble_config")
+lua require("plugins/symbols-outline_config")
+" lua require("plugins/github_nvim_config")
 
-" lua require("lspsaga_config")
+" lua require("plugins/lspsaga_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim

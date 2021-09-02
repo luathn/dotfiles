@@ -1,3 +1,5 @@
+local colors = require("colors").get()
+
 -- Mappings
 vim.api.nvim_set_keymap('n', '<leader>l', ':BufferLineCycleNext<CR>', {silent=true, noremap=true})
 vim.api.nvim_set_keymap('n', '<leader>h', ':BufferLineCyclePrev<CR>', {silent=true, noremap=true})
@@ -39,6 +41,11 @@ require'bufferline'.setup {
         return true
       end
     end,
+    offsets = {
+      {
+        filetype = "NvimTree",
+      }
+    },
     show_buffer_close_icons = true,
     show_close_icon = true,
     show_tab_indicators = true,
@@ -50,7 +57,18 @@ require'bufferline'.setup {
   },
   highlights = {
     fill = {
-      guibg = '#24283b',
+      guibg = colors.bg,
+    },
+    background = {
+      guibg = colors.bg,
+      guifg = colors.fg_dark
+    },
+    close_button = {
+      guibg = colors.bg
+    },
+    separator = {
+      guifg = colors.bg,
+      guibg = colors.bg
     },
     tab_close = {
       guibg = 'NONE'

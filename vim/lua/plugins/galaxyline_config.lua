@@ -1,34 +1,14 @@
 local gl = require('galaxyline')
-local colors = require('galaxyline.theme').default
--- Light color
--- local colors = {
---   bg = '#ebebeb',
---   fg = '#666666',
---   yellow = '#ECBE7B',
---   cyan = '#008080',
---   darkblue = '#081633',
---   green = '#98be65',
---   orange = '#FF8800',
---   violet = '#a9a1e1',
---   magenta = '#c678dd',
---   blue = '#51afef';
---   red = '#ec5f67';
--- }
-
--- Tokyonight
-local colors = require("tokyonight.colors").setup()
-colors.fg = colors.fg_dark
-colors.fg_transparent = "NONE"
-colors.bg_transparent = "NONE"
-
 local condition = require('galaxyline.condition')
 local gls = gl.section
+local colors = require("colors").get()
+
 gl.short_line_list = {'NvimTree', 'vista', 'dbui', 'packer', 'fern'}
 
 table.insert(gls.left, {
   RainbowRed = {
     provider = function() return '▊ ' end,
-    highlight = {colors.blue, colors.bg}
+    highlight = {colors.blue, colors.bg_highlight}
   },
 })
 
@@ -44,7 +24,7 @@ table.insert(gls.left, {
                           cv = colors.red, ce=colors.red, r = colors.cyan,
                           rm = colors.cyan, ['r?'] = colors.cyan,
                           ['!']  = colors.red, t = colors.red}
-      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()] ..' guibg='..colors.bg)
+      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()] ..' guibg='..colors.bg_highlight)
       return '  '
     end,
   },
@@ -54,9 +34,9 @@ table.insert(gls.left, {
   GitIcon = {
     provider = function() return '' end,
     condition = condition.check_git_workspace or condition.hide_in_width,
-    highlight = {colors.magenta, colors.bg, 'bold'},
+    highlight = {colors.purple, colors.bg_highlight, 'bold'},
     separator = ' ',
-    separator_highlight = {colors.fg_transparent, colors.bg},
+    separator_highlight = {colors.fg_transparent, colors.bg_highlight},
   }
 })
 
@@ -64,16 +44,16 @@ table.insert(gls.left, {
   GitBranch = {
     provider = 'GitBranch',
     condition = condition.check_git_workspace or condition.hide_in_width,
-    highlight = {colors.magenta, colors.bg, 'bold'},
+    highlight = {colors.purple, colors.bg_highlight, 'bold'},
     separator = ' ',
-    separator_highlight = {colors.fg_transparent, colors.bg},
+    separator_highlight = {colors.fg_transparent, colors.bg_highlight},
   }
 })
 
 table.insert(gls.left, {
   RightRounded = {
     provider = function () return ' ' end,
-    highlight = {colors.bg, colors.bg_transparent}
+    highlight = {colors.bg_highlight, colors.bg}
   }
 })
 
@@ -81,7 +61,7 @@ table.insert(gls.left,{
   FileIcon = {
     provider = 'FileIcon',
     condition = condition.buffer_not_empty,
-    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg_transparent},
+    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg},
   },
 })
 
@@ -95,9 +75,9 @@ table.insert(gls.left, {
       return vim.fn.pathshorten(vim.fn.expand('%'))
     end,
     condition = condition.buffer_not_empty,
-    highlight = {colors.fg, colors.bg_transparent, 'bold'},
+    highlight = {colors.fg_dark, colors.bg, 'bold'},
     separator = ' ',
-    separator_highlight = {colors.fg_transparent, colors.bg_transparent},
+    separator_highlight = {colors.fg_transparent, colors.bg},
   }
 })
 
@@ -105,7 +85,7 @@ table.insert(gls.left, {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
-    highlight = {colors.red, colors.bg_transparent}
+    highlight = {colors.red, colors.bg}
   }
 })
 
@@ -113,7 +93,7 @@ table.insert(gls.left, {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
-    highlight = {colors.yellow, colors.bg_transparent},
+    highlight = {colors.yellow, colors.bg},
   }
 })
 
@@ -121,7 +101,7 @@ table.insert(gls.left, {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = '  ',
-    highlight = {colors.cyan, colors.bg_transparent},
+    highlight = {colors.cyan, colors.bg},
   }
 })
 
@@ -129,7 +109,7 @@ table.insert(gls.left, {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
     icon = '  ',
-    highlight = {colors.blue, colors.bg_transparent},
+    highlight = {colors.blue, colors.bg},
   }
 })
 
@@ -137,9 +117,9 @@ table.insert(gls.right, {
   FileEncode = {
     provider = 'FileEncode',
     condition = condition.hide_in_width,
-    highlight = {colors.fg, colors.bg_transparent},
+    highlight = {colors.fg_dark, colors.bg},
     separator = ' ',
-    separator_highlight = {colors.fg_transparent, colors.bg_transparent},
+    separator_highlight = {colors.fg_transparent, colors.bg},
   }
 })
 
@@ -147,36 +127,36 @@ table.insert(gls.right, {
   FileFormat = {
     provider = 'FileFormat',
     condition = condition.hide_in_width,
-    highlight = {colors.fg, colors.bg_transparent},
+    highlight = {colors.fg_dark, colors.bg},
     separator = '  ',
-    separator_highlight = {colors.fg_transparent, colors.bg_transparent},
+    separator_highlight = {colors.fg_transparent, colors.bg},
   }
 })
 
 table.insert(gls.right, {
   LeftRounded = {
     provider = function () return '' end,
-    highlight = {colors.bg, colors.bg_transparent},
+    highlight = {colors.bg_highlight, colors.bg},
     separator = '  ',
-    separator_highlight = {colors.fg_transparent, colors.bg_transparent},
+    separator_highlight = {colors.fg_transparent, colors.bg},
   }
 })
 
 table.insert(gls.right, {
   LineInfo = {
     provider = 'LineColumn',
-    highlight = {colors.fg, colors.bg},
+    highlight = {colors.fg_dark, colors.bg_highlight},
     separator = ' ',
-    separator_highlight = {colors.fg_transparent, colors.bg},
+    separator_highlight = {colors.fg_transparent, colors.bg_highlight},
   },
 })
 
 table.insert(gls.right, {
   PerCent = {
     provider = 'LinePercent',
-    highlight = {colors.fg, colors.bg, 'bold'},
+    highlight = {colors.fg_dark, colors.bg_highlight, 'bold'},
     separator = ' ',
-    separator_highlight = {colors.fg_transparent, colors.bg},
+    separator_highlight = {colors.fg_transparent, colors.bg_highlight},
   }
 })
 
@@ -184,10 +164,10 @@ table.insert(gls.right, {
 table.insert(gls.short_line_left, {
   BufferType = {
     provider = 'FileTypeName',
-    highlight = {colors.blue, colors.bg_transparent, 'bold'},
+    highlight = {colors.blue, colors.bg, 'bold'},
     condition = condition.buffer_not_empty,
     separator = ' ',
-    separator_highlight = {colors.bg, colors.bg_transparent},
+    separator_highlight = {colors.bg, colors.bg},
   }
 })
 
@@ -195,14 +175,14 @@ table.insert(gls.short_line_left, {
   SFileName = {
     provider = 'SFileName',
     condition = condition.buffer_not_empty,
-    highlight = {colors.fg, colors.bg, 'bold'},
+    highlight = {colors.fg_dark, colors.bg, 'bold'},
   }
 })
 
 table.insert(gls.short_line_right, {
   BufferIcon = {
     provider = 'BufferIcon',
-    highlight = {colors.fg, colors.bg},
+    highlight = {colors.fg_dark, colors.bg},
   }
 })
 
@@ -242,7 +222,7 @@ table.insert(gls.short_line_right, {
 --       end
 --       return '  '..alias_mode
 --     end,
---     highlight = { colors.bg_transparent, colors.section_bg },
+--     highlight = { colors.bg, colors.section_bg },
 --   },
 -- })
 
@@ -266,7 +246,7 @@ table.insert(gls.short_line_right, {
 --       return true
 --     end,
 --     icon = ' LSP:',
---     highlight = {colors.fg, colors.bg_transparent, 'bold'}
+--     highlight = {colors.fg, colors.bg, 'bold'}
 --   }
 -- })
 
@@ -275,7 +255,7 @@ table.insert(gls.short_line_right, {
 --     provider = 'DiffAdd',
 --     condition = condition.hide_in_width,
 --     icon = '  ',
---     highlight = {colors.green, colors.bg_transparent},
+--     highlight = {colors.green, colors.bg},
 --   }
 -- })
 
@@ -284,7 +264,7 @@ table.insert(gls.short_line_right, {
 --     provider = 'DiffModified',
 --     condition = condition.hide_in_width,
 --     icon = ' 柳',
---     highlight = {colors.orange, colors.bg_transparent},
+--     highlight = {colors.orange, colors.bg},
 --   }
 -- })
 
@@ -293,6 +273,6 @@ table.insert(gls.short_line_right, {
 --     provider = 'DiffRemove',
 --     condition = condition.hide_in_width,
 --     icon = '  ',
---     highlight = {colors.red, colors.bg_transparent},
+--     highlight = {colors.red, colors.bg},
 --   })
 -- }
