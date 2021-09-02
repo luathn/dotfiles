@@ -1,13 +1,14 @@
 " Mappings
 nnoremap <silent> <c-p> :Files<cr>
-nnoremap <silent> <leader><leader> :Files<cr>
-nnoremap <silent> <leader>, :Buffers<cr>
+" nnoremap <silent> <leader><leader> :Files<cr>
+" nnoremap <silent> <leader>, :Buffers<cr>
 nnoremap <silent> <leader>bb :Buffers<cr>
 nnoremap <silent> <leader>. :BTags<cr>
 nnoremap <silent> <leader>fr :Rg<cr>
 
 " Configs
-let g:fzf_layout = { 'down': '~30%' }
+" let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7, 'yoffset': 0.5, 'border': 'rounded' } }
 
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 autocmd  FileType fzf set laststatus=0 noshowmode noruler

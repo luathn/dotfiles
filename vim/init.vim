@@ -6,7 +6,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'lambdalisue/suda.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'lambdalisue/fern.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-commentary'
@@ -23,6 +22,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'metakirby5/codi.vim'
 Plug 'windwp/nvim-autopairs'
+Plug 'kyazdani42/nvim-tree.lua'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -36,7 +36,6 @@ Plug 'akinsho/nvim-bufferline.lua'
 
 "Test
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -54,6 +53,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'folke/tokyonight.nvim'
 " Plug 'projekt0n/github-nvim-theme'
 
+" Plug 'lambdalisue/fern.vim'
 " Plug 'Yggdroot/indentLine'
 " if has('python3')
 "   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -180,9 +180,14 @@ nmap gylp :let @+=expand("%:p")<CR>:echo "File full path copied"<CR>
 " Turn off search highlight
 map <silent> <leader>/ :noh<cr>
 
-" Split windows
+" Manage Windows
 map <leader>wv <C-W>v
 map <leader>ws <C-W>s
+map <leader>wq <C-W>q
+map <leader>wh <C-W>h
+map <leader>wj <C-W>j
+map <leader>wk <C-W>k
+map <leader>wl <C-W>l
 
 " Buffer
 map <leader>bk :Bclose<cr>
@@ -234,7 +239,6 @@ source ~/dotfiles/vim/config/gitfugitive.vim
 source ~/dotfiles/vim/config/sneak.vim
 source ~/dotfiles/vim/config/asyncrun.vim
 source ~/dotfiles/vim/config/vim-test.vim
-source ~/dotfiles/vim/config/fern.vim
 source ~/dotfiles/vim/config/lightline.vim
 source ~/dotfiles/vim/config/codi.vim
 source ~/dotfiles/vim/config/nvim-tree-lua.vim
@@ -242,6 +246,7 @@ source ~/dotfiles/vim/config/indent-blankline.vim
 
 source ~/dotfiles/vim/config/function.vim
 
+" source ~/dotfiles/vim/config/fern.vim
 " source ~/dotfiles/vim/config/indentline.vim
 " if has('python3')
 "   source ~/dotfiles/vim/config/deoplete.vim
