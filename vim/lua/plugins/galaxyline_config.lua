@@ -33,7 +33,7 @@ table.insert(gls.left, {
 table.insert(gls.left, {
   GitIcon = {
     provider = function() return '' end,
-    condition = condition.check_git_workspace or condition.hide_in_width,
+    condition = condition.check_git_workspace and condition.hide_in_width,
     highlight = {colors.purple, colors.bg_highlight, 'bold'},
     separator = ' ',
     separator_highlight = {colors.fg_transparent, colors.bg_highlight},
@@ -43,7 +43,7 @@ table.insert(gls.left, {
 table.insert(gls.left, {
   GitBranch = {
     provider = 'GitBranch',
-    condition = condition.check_git_workspace or condition.hide_in_width,
+    condition = condition.check_git_workspace and condition.hide_in_width,
     highlight = {colors.purple, colors.bg_highlight, 'bold'},
     separator = ' ',
     separator_highlight = {colors.fg_transparent, colors.bg_highlight},
