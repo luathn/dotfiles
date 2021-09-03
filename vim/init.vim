@@ -19,10 +19,11 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
 Plug 'metakirby5/codi.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
 " For Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -53,6 +54,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'folke/tokyonight.nvim'
 " Plug 'projekt0n/github-nvim-theme'
 
+" Plug 'hrsh7th/nvim-compe'
 " Plug 'lambdalisue/fern.vim'
 " Plug 'Yggdroot/indentLine'
 " if has('python3')
@@ -226,12 +228,13 @@ lua require("plugins/neogit_config")
 lua require("plugins/diff_view_config")
 lua require("plugins/neorg_config")
 lua require("plugins/nvim_autopairs_config")
-lua require("plugins/nvim_compe_config")
 lua require("plugins/trouble_config")
 lua require("plugins/symbols-outline_config")
-" lua require("plugins/github_nvim_config")
+lua require("plugins/nvim-cmp_config")
 
 " lua require("plugins/lspsaga_config")
+" lua require("plugins/nvim_compe_config")
+" lua require("plugins/github_nvim_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
 source ~/dotfiles/vim/config/fzf.vim
