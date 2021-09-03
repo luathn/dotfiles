@@ -11,8 +11,6 @@ require'bufferline'.setup {
   options = {
     view = "multiwindow",
     numbers = "none",
-    number_style = "none",
-    mappings = false,
     buffer_close_icon= '',
     modified_icon = '●',
     close_icon = '',
