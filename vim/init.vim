@@ -3,6 +3,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
 " Main plugin
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'lambdalisue/suda.vim'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'junegunn/fzf.vim'
@@ -24,13 +26,6 @@ Plug 'windwp/nvim-autopairs'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
-" For Rails
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Frontend
-Plug 'pangloss/vim-javascript'
 " UI
 Plug 'glepnir/galaxyline.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
@@ -54,6 +49,13 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'folke/tokyonight.nvim'
 " Plug 'projekt0n/github-nvim-theme'
 
+" Plug 'nvim-treesitter/playground'
+" " For Rails
+" Plug 'vim-ruby/vim-ruby'
+" Plug 'tpope/vim-rails'
+" Plug 'nelstrom/vim-textobj-rubyblock'
+" " Frontend
+" Plug 'pangloss/vim-javascript'
 " Plug 'hrsh7th/nvim-compe'
 " Plug 'lambdalisue/fern.vim'
 " Plug 'Yggdroot/indentLine'
