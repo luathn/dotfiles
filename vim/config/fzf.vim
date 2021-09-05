@@ -1,7 +1,7 @@
 " Mappings
 nnoremap <silent> <c-p> :Files<cr>
-" nnoremap <silent> <leader><leader> :Files<cr>
-" nnoremap <silent> <leader>, :Buffers<cr>
+nnoremap <silent> <leader><leader> :Files<cr>
+nnoremap <silent> <leader>, :Buffers<cr>
 nnoremap <silent> <leader>bb :Buffers<cr>
 nnoremap <silent> <leader>. :BTags<cr>
 nnoremap <silent> <leader>fr :Rg<cr>

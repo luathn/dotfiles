@@ -4,8 +4,8 @@
 call plug#begin('~/.config/nvim/plugged')
 " Main plugin
 Plug 'lambdalisue/suda.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-commentary'
@@ -237,7 +237,7 @@ lua require("plugins/nvim-cmp_config")
 " lua require("plugins/github_nvim_config")
 
 source ~/dotfiles/vim/config/ctrlsf.vim
-source ~/dotfiles/vim/config/fzf.vim
+" source ~/dotfiles/vim/config/fzf.vim
 source ~/dotfiles/vim/config/gitfugitive.vim
 source ~/dotfiles/vim/config/sneak.vim
 source ~/dotfiles/vim/config/asyncrun.vim

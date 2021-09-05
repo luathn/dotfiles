@@ -5,6 +5,8 @@ require('telescope').setup{
       i = {
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
+        ["<C-l>"] = actions.cycle_history_next,
+        ["<C-h>"] = actions.cycle_history_prev,
       },
       n = {
         ["<C-C>"] = actions.close
@@ -14,6 +16,9 @@ require('telescope').setup{
       width = 0.7,
       height = 0.7,
     },
+    history = {
+      limit = 5
+    }
   },
   extensions = {
     fzf = {
@@ -55,6 +60,7 @@ vim.api.nvim_set_keymap('n', '<leader><leader>', "<cmd>lua require('telescope.bu
 vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep(with_preview)<cr>", {silent=true, noremap=true})
 vim.api.nvim_set_keymap('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers(no_preview())<cr>", {silent=true, noremap=true})
 vim.api.nvim_set_keymap('n', '<leader>,', "<cmd>lua require('telescope.builtin').buffers(no_preview())<cr>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>", {silent=true, noremap=true})
 
 -- vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>lua require(\'telescope.builtin\').find_files(no_preview())<cr>', {silent=true, noremap=true})
 -- nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags(no_preview())<cr>
