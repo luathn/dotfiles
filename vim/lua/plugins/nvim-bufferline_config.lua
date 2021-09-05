@@ -61,6 +61,12 @@ require'bufferline'.setup {
       guibg = colors.bg,
       guifg = colors.fg_dark
     },
+    duplicate_selected = {
+      guibg = 'NONE',
+    },
+    duplicate = {
+      guibg = colors.bg
+    },
     close_button = {
       guibg = colors.bg
     },

@@ -6,6 +6,7 @@ local check_back_space = function()
 end
 
 cmp.setup({
+  preselect = cmp.PreselectMode.None,
   formatting = {
     format = function(entry, vim_item)
       vim_item.menu = ({
@@ -26,7 +27,7 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = false,
     }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if vim.fn.pumvisible() == 1 then

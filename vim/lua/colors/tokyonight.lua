@@ -5,6 +5,8 @@ if vim.o.background == "light" then
   colors.bg = "#ced2de"
   colors.bg_highlight = "#c4c8da"
   colors.fg_dark = colors.dark5
+else
+  colors.true_bg = "#1a1b26"
 end
 
 return colors
