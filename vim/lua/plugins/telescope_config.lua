@@ -12,13 +12,30 @@ require('telescope').setup{
         ["<C-C>"] = actions.close
       },
     },
+    history = {
+      limit = 5
+    },
     layout_config = {
       width = 0.7,
       height = 0.7,
     },
-    history = {
-      limit = 5
-    }
+  },
+  pickers = {
+    git_branches = {
+      theme = "dropdown",
+      previewer = false,
+      layout_config = {
+        width = 0.5,
+      },
+    },
+    buffers = {
+      sort_mru = true,
+      theme = "dropdown",
+      previewer = false,
+      layout_config = {
+        width = 0.5,
+      },
+    },
   },
   extensions = {
     fzf = {
@@ -58,9 +75,10 @@ end
 vim.api.nvim_set_keymap('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files(no_preview())<cr>", {silent=true, noremap=true})
 vim.api.nvim_set_keymap('n', '<leader><leader>', "<cmd>lua require('telescope.builtin').find_files(no_preview())<cr>", {silent=true, noremap=true})
 vim.api.nvim_set_keymap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep(with_preview)<cr>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers(no_preview())<cr>", {silent=true, noremap=true})
-vim.api.nvim_set_keymap('n', '<leader>,', "<cmd>lua require('telescope.builtin').buffers(no_preview())<cr>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>,', "<cmd>lua require('telescope.builtin').buffers()<cr>", {silent=true, noremap=true})
 vim.api.nvim_set_keymap('n', '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>", {silent=true, noremap=true})
+vim.api.nvim_set_keymap('n', '<leader>gc', "<cmd>lua require('telescope.builtin').git_branches()<cr>", {silent=true, noremap=true})
 
 -- vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>lua require(\'telescope.builtin\').find_files(no_preview())<cr>', {silent=true, noremap=true})
 -- nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags(no_preview())<cr>
