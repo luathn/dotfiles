@@ -26,6 +26,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
 " UI
 Plug 'glepnir/galaxyline.nvim'
 Plug 'akinsho/nvim-bufferline.lua'

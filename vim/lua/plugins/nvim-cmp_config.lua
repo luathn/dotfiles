@@ -11,7 +11,7 @@ cmp.setup({
     format = function(entry, vim_item)
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
-        -- buffer = "[Buffer]",
+        buffer = "[Buffer]",
         -- luasnip = "[LuaSnip]",
       })[entry.source.name]
       return vim_item
@@ -19,6 +19,7 @@ cmp.setup({
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'buffer' },
   },
   mapping = {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
