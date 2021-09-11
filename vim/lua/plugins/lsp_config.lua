@@ -40,7 +40,7 @@ _G.Rename = {
 vim.api.nvim_set_keymap('n', '<leader>gr', '<cmd>lua Rename.rename()<CR>', {silent = true})
 
 
-local function preview_location_callback(_, _, result)
+local function preview_location_callback(_, result)
   if result == nil or vim.tbl_isempty(result) then
     return nil
   end
