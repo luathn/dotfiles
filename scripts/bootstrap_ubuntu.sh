@@ -59,6 +59,7 @@ install_zsh() {
     git clone https://github.com/romkatv/zsh-defer.git ~/.zsh/zsh-defer
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+    git clone https://github.com/rupa/z.git ~/.zsh/z
     success "Installed Zsh"
   fi
 }

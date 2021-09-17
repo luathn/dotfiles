@@ -25,3 +25,5 @@ export PATH=$PATH:/usr/local/go/bin
 
 # asdf
 . /opt/asdf-vm/asdf.sh
+
+. ~/.zsh/z/z.sh
