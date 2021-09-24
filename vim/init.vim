@@ -26,6 +26,9 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
 " UI
 Plug 'glepnir/galaxyline.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
@@ -124,6 +127,8 @@ if (has("nvim"))
   set inccommand=nosplit
 endif
 set fillchars=eob:\           " Hide eob char ~
+set completeopt=menuone,noselect "Set completeopt to have a better completion experience
+set shortmess+=c
 
 
 " Enable matchit for ruby textobject
