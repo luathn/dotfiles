@@ -1,4 +1,5 @@
 local dap = require('dap')
+local dapui = require('dapui')
 
 vim.api.nvim_set_keymap('n', '<leader>dd', "<cmd>lua require('dap').continue()<CR>", {silent=true, noremap=true})
 vim.api.nvim_set_keymap('n', '<leader>dq', "<cmd>lua require('dap').disconnect()<CR>", {silent=true, noremap=true})
@@ -18,7 +19,11 @@ vim.api.nvim_set_keymap('v', '<leader>de', "<cmd>lua require('dapui').eval()<CR>
 vim.api.nvim_set_keymap('n', '<leader>df', "<cmd>lua require('dapui').float_element(scopes)<CR>", {silent=true, noremap=true})
 
 -- Dap UI
-require('dapui').setup({
+dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open() end
+dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close() end
+dap.listeners.before.event_exited['dapui_config'] = function() dapui.close() end
+
+dapui.setup({
   icons = {
     expanded = "",
     collapsed = ""
@@ -33,7 +38,6 @@ require('dapui').setup({
     close_floating = {"<Esc>", "q"},
   },
   sidebar = {
-    open_on_start = true,
     elements = {
       -- You can change the order of elements in the sidebar
       "breakpoints",
@@ -45,7 +49,6 @@ require('dapui').setup({
     position = "left"
   },
   tray = {
-    open_on_start = true,
     elements = { "repl" },
     size = 9,
     position = "bottom" -- Can be "bottom" or "top"
