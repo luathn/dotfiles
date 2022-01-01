@@ -127,7 +127,7 @@ if (has("nvim"))
   set inccommand=nosplit
 endif
 set fillchars=eob:\           " Hide eob char ~
-set completeopt=menuone,noselect "Set completeopt to have a better completion experience
+set completeopt=menu,menuone,noselect "Set completeopt to have a better completion experience
 set shortmess+=c
 
 

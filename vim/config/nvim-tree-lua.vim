@@ -4,11 +4,8 @@ nnoremap <silent> <leader>mr :NvimTreeRefresh<CR>
 nnoremap <silent> <leader>mf :NvimTreeFindFile<CR>
 
 " Configs
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
-let g:nvim_tree_gitignore = 1 "0 by default
 let g:nvim_tree_quit_on_open = 0 "0 by default, closes the tree when you open a file
 let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
-let g:nvim_tree_hide_dotfiles = 0 "0 by default, this option hides files and folders starting with a dot `.`
 let g:nvim_tree_git_hl = 0 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 let g:nvim_tree_highlight_opened_files = 0 "0 by default, will enable folder and file icon highlight for opened files/directories.
 let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
@@ -78,9 +75,21 @@ let g:nvim_tree_icons = {
     ignore_ft_on_setup  = {},
     auto_close          = false,
     open_on_tab         = false,
+    update_to_buf_dir   = {
+      enable = true,
+      auto_open = true,
+    },
     hijack_cursor       = false,
     update_cwd          = false,
-    lsp_diagnostics     = false,
+    diagnostics = {
+      enable = false,
+      icons = {
+        hint = "",
+        info = "",
+        warning = "",
+        error = "",
+      }
+    },
     update_focused_file = {
       enable      = false,
       update_cwd  = false,
@@ -89,6 +98,15 @@ let g:nvim_tree_icons = {
     system_open = {
       cmd  = nil,
       args = {}
+    },
+    filters = {
+      dotfiles = false,
+      custom = { '.git', 'node_modules', '.cache' }
+    },
+    git = {
+      enable = true,
+      ignore = true,
+      timeout = 500,
     },
     view = {
       width = 35,

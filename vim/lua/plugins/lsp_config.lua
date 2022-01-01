@@ -37,7 +37,7 @@ _G.Rename = {
    dorename = dorename
 }
 
-vim.api.nvim_set_keymap('n', '<leader>gr', '<cmd>lua Rename.rename()<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>ar', '<cmd>lua Rename.rename()<CR>', {silent = true})
 
 
 local function preview_location_callback(_, result)
@@ -108,7 +108,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
-local servers = { "solargraph", "pylsp", "jedi_language_server", "tsserver" }
+local servers = { "solargraph", "pylsp", "jedi_language_server", "tsserver", "eslint" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -126,29 +126,86 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Eslint
-local util = require "lspconfig".util
+-- local util = require "lspconfig".util
 
-local eslint = {
-  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-  lintStdin = true,
-  lintFormats = {"%f:%l:%c: %m"},
-  lintIgnoreExitCode = true,
-  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-  formatStdin = true
-}
+-- local eslint = {
+--   lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+--   lintStdin = true,
+--   lintFormats = {"%f:%l:%c: %m"},
+--   lintIgnoreExitCode = true,
+--   formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+--   formatStdin = true
+-- }
 
-require "lspconfig".efm.setup {
-  init_options = {documentFormatting = true},
-  filetypes = {"javascript", "typescript"},
-  root_dir = function(fname)
-    return util.root_pattern("tsconfig.json")(fname) or
-    util.root_pattern(".eslintrc.js", ".git")(fname);
-  end,
-  settings = {
-    rootMarkers = {".eslintrc.js", ".git/"},
-    languages = {
-      javascript = {eslint},
-      typescript = {eslint}
-    }
-  }
-}
+-- require "lspconfig".efm.setup {
+--   init_options = {documentFormatting = true},
+--   filetypes = {"javascript", "typescript"},
+--   root_dir = function(fname)
+--     return util.root_pattern("tsconfig.json")(fname) or
+--     util.root_pattern(".eslintrc.js", ".git")(fname);
+--   end,
+--   settings = {
+--     rootMarkers = {".eslintrc.js", ".git/"},
+--     languages = {
+--       javascript = {eslint},
+--       typescript = {eslint}
+--     }
+--   }
+-- }
+
+
+vim.lsp.handlers["textDocument/rename"] = function(err, result)
+  if err then vim.notify(("Error running lsp query 'rename': "..err), vim.log.levels.ERROR) end
+  if result and result.changes then
+    local msg = ""
+    for f, c in pairs(result.changes) do
+      local new = c[1].newText
+      msg = msg..("%d changes -> %s"):format(#c, f:gsub("file://",""):gsub(vim.fn.getcwd(),".")).."\n"
+      msg = msg:sub(1, #msg - 1)
+      vim.notify(msg, vim.log.levels.INFO, { title = ("Rename: %s -> %s"):format(vim.fn.expand("<cword>"), new) })
+    end
+  end
+  vim.lsp.util.apply_workspace_edit(result)
+end
+
+function _G.rename()
+  local currName = vim.fn.expand("<cword>")
+  -- local tshl = require("nvim-treesitter-playground.hl-info").get_treesitter_hl()
+  -- if tshl and #tshl > 0 then
+  --   local ind = tshl[#tshl]:match("^.*()%*%*.*%*%*")
+  --   tshl = tshl[#tshl]:sub(ind + 2, -3)
+  -- end
+
+  local win = require('plenary.popup').create(currName, {
+    title = "New Name",
+    style = "minimal",
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    relative = "cursor",
+    borderhighlight = "FloatBorder",
+    titlehighlight = "Title",
+    -- highlight = tshl,
+    focusable = true,
+    width = 25,
+    height = 1,
+    line = "cursor+2",
+    col = "cursor-1"
+  })
+
+  local map_opts = { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(0, "i", "<Esc>", "<cmd>stopinsert<CR>", map_opts)
+  vim.api.nvim_buf_set_keymap(0, "n", "<Esc>", "<cmd>stopinsert | q!<CR>", map_opts)
+  vim.api.nvim_buf_set_keymap(0, "i", "<CR>", "<cmd>stopinsert | lua _rename('"..currName..","..win.."')<CR>", map_opts)
+  vim.api.nvim_buf_set_keymap(0, "n", "<CR>", "<cmd>stopinsert | lua _rename('"..currName..","..win.."')<CR>", map_opts)
+end
+
+function _G._rename(curr, win)
+  local newName = vim.trim(vim.fn.getline('.'))
+  vim.api.nvim_win_close(win, true)
+  if #newName > 0 and newName ~= curr then
+    local params = vim.lsp.util.make_position_params()
+    params.newName = newName
+    vim.lsp.buf_request(0, "textDocument/rename", params)
+  end
+end
+
+vim.api.nvim_set_keymap('n', '<leader>gr', '<cmd>lua rename()<CR>', {silent = true})

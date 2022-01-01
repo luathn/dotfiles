@@ -19,6 +19,9 @@ require('telescope').setup{
       width = 0.7,
       height = 0.7,
     },
+    file_ignore_patterns = {
+      'node_modules'
+    }
   },
   pickers = {
     git_branches = {
