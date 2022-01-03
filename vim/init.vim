@@ -30,7 +30,7 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
 " UI
-Plug 'glepnir/galaxyline.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
 
 "Test
@@ -52,6 +52,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'folke/tokyonight.nvim'
 " Plug 'projekt0n/github-nvim-theme'
 
+" Plug 'glepnir/galaxyline.nvim'
 " Plug 'nvim-treesitter/playground'
 " " For Rails
 " Plug 'vim-ruby/vim-ruby'
@@ -226,7 +227,7 @@ vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua require("plugins/tokyonight_config")
-lua require("plugins/galaxyline_config")
+lua require("plugins/lualine_config")
 lua require("plugins/nvim-bufferline_config")
 lua require("plugins/lsp_config")
 lua require("plugins/treesitter_config")
@@ -240,6 +241,7 @@ lua require("plugins/trouble_config")
 lua require("plugins/symbols-outline_config")
 lua require("plugins/nvim-cmp_config")
 
+" lua require("plugins/galaxyline_config")
 " lua require("plugins/lspsaga_config")
 " lua require("plugins/nvim_compe_config")
 " lua require("plugins/github_nvim_config")
