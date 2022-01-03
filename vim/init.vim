@@ -221,6 +221,7 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>"
 map <silent> <leader><cr> :call OpenFloatTerm()<cr>
 autocmd Filetype ruby map <leader>rr :!ruby %<cr>
 autocmd Filetype python map <leader>rr :!python3 %<cr>
+autocmd Filetype go map <leader>rr :!go run %<cr>
 vnoremap <leader>rw "hy:%s/<C-r>h//g<left><left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
