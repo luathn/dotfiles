@@ -17,7 +17,7 @@ ln -s -f ~/dotfiles/vim ~/.config/nvim
 
 # ln -s -f ~/dotfiles/Xresources ~/.Xresources
 
-rm -r -f ~/.fonts
-ln -s -f ~/dotfiles/fonts ~/.fonts
+# rm -r -f ~/.fonts
+# ln -s -f ~/dotfiles/fonts ~/.fonts
 
 nvim +PlugInstall +qall
