@@ -1,7 +1,7 @@
-local home_dir = os.getenv("HOME")
-local node_bin = "/.asdf/installs/nodejs/18.15.0/bin"
+-- local home_dir = os.getenv("HOME")
+-- local node_bin = "/.asdf/installs/nodejs/18.15.0/bin"
 -- vim.g.node_host_prog = home_dir .. node_bin .. "/node"
-vim.cmd("let $PATH = '" .. home_dir .. node_bin .. ":' . $PATH")
+-- vim.cmd("let $PATH = '" .. home_dir .. node_bin .. ":' . $PATH")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

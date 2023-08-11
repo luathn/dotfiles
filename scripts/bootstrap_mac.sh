@@ -21,6 +21,7 @@ brew install cmake
 brew install libtool
 brew install ripgrep
 brew install translate-shell
+brew install bat
 
 # Cask
 brew install --cask slack

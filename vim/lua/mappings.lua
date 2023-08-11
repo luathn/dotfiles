@@ -82,123 +82,101 @@ M.lsp = {
 }
 
 M.ctrlsf = {
-  n = {
-    ["<C-F>f"]     = { "<Plug>CtrlSFPrompt" },
-    ["<C-F>n"]     = { "<Plug>CtrlSFCwordPath" },
-    ["<C-F>p"]     = { "<Plug>CtrlSFPwordPath" },
-    ["<C-F>o"]     = { ":CtrlSFOpen<cr>" },
-    ["<C-F>t"]     = { ":CtrlSFToggle<cr>" },
-  },
-  v = {
-    ["<C-F>f"]     = { "<Plug>CtrlSFVwordPath" },
-    ["<C-F>F"]     = { "<Plug>CtrlSFVwordExec" },
-  },
-  i = {
-    ["<C-F>t"]     = { "<Esc>:CtrlSFToggle<cr>" },
-  },
+  { "<C-F>f", "<Plug>CtrlSFPrompt" },
+  { "<C-F>n", "<Plug>CtrlSFCwordPath" },
+  { "<C-F>p", "<Plug>CtrlSFPwordPath" },
+  { "<C-F>o", ":CtrlSFOpen<cr>" },
+  { "<C-F>t", ":CtrlSFToggle<cr>" },
+  { "<C-F>f", "<Plug>CtrlSFVwordPath", mode = "v" },
+  { "<C-F>F", "<Plug>CtrlSFVwordExec", mode = "v" },
+  { "<C-F>t", "<Esc>:CtrlSFToggle<cr>", mode = "i" },
 }
 
 M.diffview = {
-  n = {
-    ["<leader>gd"] = { ":DiffviewOpen ", "[G]it [d]iff" },
-    ["<leader>gq"] = { ":DiffviewClose<cr>", "[G]it diff [q]uit" },
-  },
+  { "<leader>gd", ":DiffviewOpen ", desc = "[G]it [d]iff" },
+  { "<leader>gq", ":DiffviewClose<cr>", desc = "[G]it diff [q]uit" },
 }
 
 M.neogit = {
-  n = {
-    ["<leader>gg"] = { ":Neogit<cr>", "[G]it status", opts = silent_noremap },
-    ["<leader>gl"] = { ":Neogit log<cr>", "[G]it [l]og", opts = silent_noremap }
-  },
+  { "<leader>gg", ":Neogit<cr>", desc = "[G]it status" },
+  { "<leader>gl", ":Neogit log<cr>", desc = "[G]it [l]og" }
 }
 
 M.nvim_bufferline = {
-  n = {
-    ["<leader>l"]  =  { ":BufferLineCycleNext<cr>", "[l] Next buffer" },
-    ["<leader>h"]  =  { ":BufferLineCyclePrev<cr>", "[h] Previous buffer" },
-    ["<leader>bl"] = { ":BufferLineMoveNext<cr>", "Move [b]uffer [l]eft" },
-    ["<leader>bh"] = { ":BufferLineMovePrev<cr>", "Move [b]uffer rig[h]t" },
-    ["<leader>bp"] = { ":BufferLineTogglePin<cr>", "Toggle [b]uffer [p]in" },
-    ["<leader>bX"] = { ":BufferLineGroupClose ungrouped<cr>",  "Non-pinned [bX]uffer delete"  },
-  },
+  { "<leader>l", ":BufferLineCycleNext<cr>", desc = "[l] Next buffer" },
+  { "<leader>h", ":BufferLineCyclePrev<cr>", desc = "[h] Previous buffer" },
+  { "<leader>bl", ":BufferLineMoveNext<cr>", desc = "Move [b]uffer [l]eft" },
+  { "<leader>bh", ":BufferLineMovePrev<cr>", desc = "Move [b]uffer rig[h]t" },
+  { "<leader>bp", ":BufferLineTogglePin<cr>", desc = "Toggle [b]uffer [p]in" },
+  { "<leader>bX", ":BufferLineGroupClose ungrouped<cr>", desc =  "Non-pinned [bX]uffer delete"  },
 }
 
 M.nvim_spectre = {
-  n = {
-    ["<leader>ss"] = { "<cmd>lua require('spectre').open()<cr>", "[S]pectre [s]earch open" },
-    ["<leader>sw"] = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "[S]earch current [w]ord" },
-    ["<leader>sb"] = { "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", "[S]earch on current [b]uffer"},
-  },
-  v = {
-    ["<leader>sw"] = { "<esc><cmd>lua require('spectre').open_visual()<cr>", "[S]earch current [w]ord" },
-  },
+  { "<leader>ss", "<cmd>lua require('spectre').open()<cr>", desc = "[S]pectre [s]earch open" },
+  { "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", desc = "[S]earch current [w]ord" },
+  { "<leader>sb", "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", desc = "[S]earch on current [b]uffer"},
+  { "<leader>sw", "<esc><cmd>lua require('spectre').open_visual()<cr>", mode = "v", desc = "[S]earch current [w]ord" },
 }
 
 M.nvim_telescope = {
-  n = {
-    ["<leader><leader>"] = { "<cmd>lua require('telescope.builtin').find_files(no_preview)<cr>", "Find files", opts = silent_noremap },
-    ["<leader>ff"] = { "<cmd>lua require('telescope.builtin').find_files(no_preview)<cr>", "[F]ind [f]ile", opts = silent_noremap },
-    ["<leader>,"]  = { "<cmd>lua require('telescope.builtin').buffers(no_preview)<cr>", "Find buffers", opts = silent_noremap },
-    ["<leader>bb"] = { "<cmd>lua require('telescope.builtin').buffers(no_preview)<cr>", "Find [b]uffers", opts = silent_noremap },
-    ["<leader>fg"] = { "<cmd>lua require('telescope.builtin').live_grep(with_preview)<cr>", "[F]ind by live[g]rep", opts = silent_noremap },
-    ["<leader>fw"] = { "<cmd>lua require('telescope.builtin').grep_string(with_preview)<cr>", "[F]ind current [w]ord", opts = silent_noremap },
-    ["<leader>fr"] = { "<cmd>lua require('telescope.builtin').resume()<cr>", "[F]ind [r]esume", opts = silent_noremap },
-    ["<leader>gc"] = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "[G]it [c]heckout branch", opts = silent_noremap },
-    ["<leader>fp"] = { "<cmd>lua require('telescope.builtin').find_files(opts = {search_dirs = { vim.fn.expand('%p:h') }})<cr>", "[F]ind current [p]ath", opts = silent_noremap },
-  }
+  -- { "<leader><leader>", "<cmd>lua require('telescope.builtin').find_files(no_preview)<cr>", desc = "Find files" },
+  -- { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(no_preview)<cr>", desc = "[F]ind [f]ile" },
+  -- { "<leader>,",{ "<cmd>lua require('telescope.builtin').buffers(no_preview)<cr>", desc = "Find buffers" },
+  -- { "<leader>bb", "<cmd>lua require('telescope.builtin').buffers(no_preview)<cr>", desc = "Find [b]uffers" },
+  { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep(with_preview)<cr>", desc = "[F]ind by live[g]rep" },
+  { "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string(with_preview)<cr>", desc = "[F]ind current [w]ord" },
+  { "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<cr>", desc = "[F]ind [r]esume" },
+  { "<leader>gc", "<cmd>lua require('telescope.builtin').git_branches()<cr>", desc = "[G]it [c]heckout branch" },
+  { "<leader>fp", "<cmd>lua require('telescope.builtin').find_files(opts = {search_dirs = { vim.fn.expand('%p:h') }})<cr>", desc = "[F]ind current [p]ath" },
 }
 
 M.nvim_tree = {
-  n = {
-    ["<leader>oe"] = { ":NvimTreeToggle<cr>" },
-    ["<leader>mr"] = { ":NvimTreeRefresh<cr>" },
-    ["<leader>mf"] = { "<cmd>lua require('nvim-tree.api').tree.find_file({ open = true, focus = true })<cr>" },
-  }
+  { "<leader>oe", ":NvimTreeToggle<cr>" },
+  { "<leader>mr", ":NvimTreeRefresh<cr>" },
+  { "<leader>mf", "<cmd>lua require('nvim-tree.api').tree.find_file({ open = true, focus = true })<cr>" },
 }
 
 M.oil = {
-  n = {
-    ["-"]          = { "<cmd>lua require('oil').open()<cr>", "Open parent directory" },
-  },
+  { "-", "<cmd>lua require('oil').open()<cr>", desc = "Open parent directory" },
 }
 
 M.vim_fugitive = {
-  n = {
-    ["<leader>gb"] = { ":Git blame<cr>", "[G]it [b]lame" }
-  }
+  { "<leader>gb", ":Git blame<cr>", desc = "[G]it [b]lame" }
 }
 
 M.vim_test = {
-  n = {
-    ["<leader>tn"] = { ":TestNearest<CR>", "[T]est [n]earest" },
-    ["<leader>tf"] = { ":TestFile<CR>", "[T]est [f]ile" },
-    ["<leader>ts"] = { ":TestSuite<CR>", "[T]est [s]uite" },
-    ["<leader>tl"] = { ":TestLast<CR>", "[T]est [l]ast" },
-    ["<leader>tv"] = { ":TestVisit<CR>", "[T]est [v]isit" },
-  }
+  { "<leader>tn", ":TestNearest<CR>", desc = "[T]est [n]earest" },
+  { "<leader>tf", ":TestFile<CR>", desc = "[T]est [f]ile" },
+  { "<leader>ts", ":TestSuite<CR>", desc = "[T]est [s]uite" },
+  { "<leader>tl", ":TestLast<CR>", desc = "[T]est [l]ast" },
+  { "<leader>tv", ":TestVisit<CR>", desc = "[T]est [v]isit" },
 }
 
 M.nvim_bufdel = {
-  n = {
-    ["<leader>bd"] = { ":BufDel<CR>", "[B]uffer [d]elete" },
-    ["<leader>bD"] = { ":BufDelAll<CR>", "[B]uffer [D]elete all" },
-    -- ["<leader>x"]  = { ":BufDel<CR>", "[B]uffer [d]elete" },
-    ["<leader>bo"] = { ":BufDelOther<CR>", "[B]uffer delete [o]ther" },
-  }
+  { "<leader>bd", ":BufDel<CR>", desc = "[B]uffer [d]elete" },
+  { "<leader>bD", ":BufDelAll<CR>", desc = "[B]uffer [D]elete all" },
+  -- { "<leader>x",{ ":BufDel<CR>", desc = "[B]uffer [d]elete" },
+  { "<leader>bo", ":BufDelOther<CR>", desc = "[B]uffer delete [o]ther" },
 }
 
 M.treesj = {
-  n = {
-    ["gS"]         = { "<cmd>lua require('treesj').toggle()<cr>", "Toggle [S]plit/Join" },
-  }
+  { "gS", "<cmd>lua require('treesj').toggle()<cr>", desc = "Toggle [S]plit/Join" },
+}
+
+M.harpoon = {
+  { "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "[H]arpoon add file" },
+  { "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[H]arpoon toggle" },
+  { "<leader>,", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[H]arpoon toggle" },
+}
+
+M.fzf = {
+  { "<leader><space>", ":Files<CR>", desc = "fzf files" },
+  { "<leader>ff", ":Files<CR>", desc = "[f]zf [f]iles" },
+  { "<leader>fb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
+  { "<leader>bb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
 }
 
 return M
-
--- Close quickfix
--- autocmd FileType qf nnoremap <buffer> q :cclose<cr>:lclose<cr>
-
--- command! Source :source ~/.config/nvim/init.vim
 
 -- others
 -- map <silent> <leader><cr> :call OpenFloatTerm()<cr>

@@ -12,10 +12,8 @@ return {
   },
   {
     "tpope/vim-fugitive",
+    keys = require("mappings").vim_fugitive,
     event = "VeryLazy",
-    config = function()
-      require("core.utils").load_mappings("vim_fugitive")
-    end,
   },
   {
     "numToStr/Comment.nvim",
@@ -34,9 +32,9 @@ return {
   },
   {
     "dyng/ctrlsf.vim",
+    keys = require("mappings").ctrlsf,
     event = "VeryLazy",
     config = function()
-      require("core.utils").load_mappings("ctrlsf")
       require("plugins.ctrlsf")
     end,
   },
@@ -46,7 +44,7 @@ return {
       { "williamboman/mason.nvim", opts = {} },
       { "williamboman/mason-lspconfig.nvim", opts = {} },
       -- Useful status updates for LSP
-      { "j-hui/fidget.nvim", opts = {} },
+      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
     },
     config = function()
       require("plugins.nvim-lspconfig")
@@ -74,11 +72,14 @@ return {
     },
   },
   {
+    "nvim-lua/plenary.nvim",
+  },
+  {
     "nvim-telescope/telescope.nvim",
+    keys = require("mappings").nvim_telescope,
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("core.utils").load_mappings("nvim_telescope")
       require("plugins.nvim-telescope")
     end,
   },
@@ -93,32 +94,35 @@ return {
   {
     "TimUntersberger/neogit",
     dependencies = {
-      "sindrets/diffview.nvim",
-      event = "VeryLazy",
-      config = function()
-        require("core.utils").load_mappings("diffview")
-        require("plugins.diffview")
-      end,
+      {
+        "sindrets/diffview.nvim",
+        keys = require("mappings").diffview,
+        event = "VeryLazy",
+        config = function()
+          require("plugins.diffview")
+        end,
+      },
+      { "nvim-lua/plenary.nvim" }
     },
+    keys = require("mappings").neogit,
     event = "VeryLazy",
     config = function()
-      require("core.utils").load_mappings("neogit")
       require("plugins.neogit")
     end,
   },
   {
     "ojroques/nvim-bufdel",
+    keys = require("mappings").nvim_bufdel,
     event = "VeryLazy",
     commit = "9f1ed6e",
     config = function()
-      require("core.utils").load_mappings("nvim_bufdel")
       require("plugins.nvim_bufdel")
     end,
   },
   {
     "vim-test/vim-test",
+    keys = require("mappings").vim_test,
     config = function()
-      require("core.utils").load_mappings("vim_test")
       require("plugins.vim_test")
     end,
     event = "VeryLazy",
@@ -154,21 +158,21 @@ return {
   },
   {
     "nvim-pack/nvim-spectre",
+    keys = require("mappings").nvim_spectre,
     event = "VeryLazy",
     config = function()
-      require("core.utils").load_mappings("nvim_spectre")
       require("plugins.nvim-spectre")
     end,
   },
-  -- Test
   {
     'Wansmer/treesj',
+    keys = require("mappings").treesj,
     requires = { 'nvim-treesitter' },
     config = function()
-      require("core.utils").load_mappings("treesj")
       require("plugins.treesj")
     end,
   },
+  -- Test
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -185,6 +189,13 @@ return {
     }
   },
   {
+    "junegunn/fzf.vim",
+    keys = require("mappings").fzf,
+    config = function()
+      require("plugins.fzf")
+    end,
+  },
+  {
     "utilyre/barbecue.nvim",
     name = "barbecue",
     version = "*",
@@ -194,28 +205,40 @@ return {
     },
     opts = {},
   },
-  -- {
-  --   "stevearc/oil.nvim",
-  --   config = function()
-  --     require("core.utils").load_mappings("oil")
-  --     require("plugins.oil")
-  --   end,
-  -- },
+  {
+    "stevearc/oil.nvim",
+    keys = require("mappings").oil,
+    config = function()
+      require("plugins.oil")
+    end,
+  },
+  { "jlanzarotta/bufexplorer" },
+  {
+    "ThePrimeagen/harpoon",
+    keys = require("mappings").harpoon,
+    config = function()
+      require("harpoon").setup({
+        menu = {
+          width = 120,
+        }
+      })
+    end,
+  },
   -- {
   --   "akinsho/nvim-bufferline.lua",
   --   config = function()
-  --     require("core.utils").load_mappings("nvim_bufferline")
   --     require("plugins.nvim-bufferline")
   --   end,
+  --   keys = require("mappings").nvim_bufferline,
   -- },
   -- {
   --   "kyazdani42/nvim-tree.lua",
   --   dependencies = { "nvim-tree/nvim-web-devicons" },
   --   event = "VeryLazy",
   --   config = function()
-  --     require("core.utils").load_mappings("nvim_tree")
   --     require("plugins.nvim-tree")
   --   end,
+  --   keys = require("mappings").nvim_tree,
   -- },
   -- {
   --   "folke/tokyonight.nvim",

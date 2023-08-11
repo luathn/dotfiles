@@ -78,7 +78,7 @@ local config = {
       {
         "filename",
         path = 1,
-        shorting_target = 90,
+        shorting_target = 60,
         cond = conditions.buffer_not_empty,
       },
       -- Git diff
@@ -161,7 +161,7 @@ local config = {
     lualine_y = {},
     lualine_z = {},
   },
-  extensions = { tree_buffer },
+  extensions = { 'fzf' },
 }
 
 lualine.setup(config)

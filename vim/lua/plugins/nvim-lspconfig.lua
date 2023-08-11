@@ -4,9 +4,8 @@ end
 
 local servers = {
   solargraph = {},
-  tsserver = {},
+  vtsls = {},
   lua_ls = {},
-  eslint = {},
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -22,7 +21,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Mason lspconfig
-
+-- ensure_installed_eg =  { 'eslint_d' }
 local mason_lspconfig = require "mason-lspconfig"
 
 mason_lspconfig.setup {

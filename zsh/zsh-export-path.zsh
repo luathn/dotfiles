@@ -37,4 +37,4 @@ esac
 . ~/.zsh/z/z.sh
 
 # Openjdk
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+# export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
