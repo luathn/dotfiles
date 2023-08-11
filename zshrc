@@ -6,6 +6,9 @@ source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
+# Add homebrew
+export PATH=/opt/homebrew/bin:$PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 

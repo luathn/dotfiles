@@ -10,21 +10,27 @@
 
 [core]
   editor = nvim
-  excludesfile = /home/luat/.gitignore_global
+  pager = delta
+  excludesfile = ~/.gitignore_global
 
 [cola]
   spellcheck = false
 
-; [core]
-  ; pager = delta
+[delta]
+  line-numbers = true
+  side-by-side = false
+  syntax-theme = base16-256
+  plus-style = 'white "#455052"'
+  minus-style = 'white "#514251"'
 
-; [delta]
-;   line-numbers = true
-;   side-by-side = true
-;   plus-color = "#012800"
-;   minus-color = "#340001"
+[merge]
+  conflictstyle = diff3
 
 ; [interactive]
 ;   diffFilter = delta --color-only
 [push]
 	default = current
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = true
