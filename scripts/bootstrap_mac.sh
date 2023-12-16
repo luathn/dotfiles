@@ -29,7 +29,6 @@ brew install git-delta
 brew install --cask slack
 brew install --cask zoom
 brew install --cask tableplus
-brew install --cask send-to-kindle
 brew install --cask cloudflare-warp
 brew install --cask webtorrent
 brew install --cask iina
@@ -40,8 +39,11 @@ brew install --cask visual-studio-code
 brew install --cask anki
 brew install --cask wezterm
 brew install --cask obsidian
+brew install --cask telegram
 
 # brew install --cask iterm2
 # brew install --cask notion
 # brew install --cask background-music
 # brew install --cask teamviewer
+
+# 1password
