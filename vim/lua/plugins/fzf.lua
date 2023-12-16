@@ -1,11 +1,18 @@
 vim.cmd([[
-  let g:fzf_layout = { 'down': '~30%' }
-  let g:fzf_preview_window = ['right,30%', 'ctrl-/']
+  let g:fzf_layout = { 'down': '~40%' }
+  let g:fzf_preview_window = ['up,40%', 'ctrl-/']
+
+  function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
+  endfunction
 
   let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
-    \ 'ctrl-x': 'split',
-    \ 'ctrl-v': 'vsplit' }
+    \ 'ctrl-s': 'split',
+    \ 'ctrl-v': 'vsplit',
+    \ 'ctrl-q': function('s:build_quickfix_list') }
 
   function! s:expect_keys(keys_list)
       let key_results = keys(get(g:, 'fzf_action'))

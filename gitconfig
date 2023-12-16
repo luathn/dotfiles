@@ -19,9 +19,10 @@
 [delta]
   line-numbers = true
   side-by-side = false
-  syntax-theme = base16-256
-  plus-style = 'white "#455052"'
-  minus-style = 'white "#514251"'
+  light = true
+  ;syntax-theme = discord
+  ;plus-style = 'white "#455052"'
+  ;minus-style = 'white "#514251"'
 
 [merge]
   conflictstyle = diff3
@@ -29,8 +30,8 @@
 ; [interactive]
 ;   diffFilter = delta --color-only
 [push]
-	default = current
+  default = current
 [gpg]
-	program = gpg
+  program = gpg
 [commit]
-	gpgsign = true
+  gpgsign = true

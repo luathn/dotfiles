@@ -5,6 +5,7 @@ require"nvim-treesitter.configs".setup {
     "javascript",
     "markdown",
     "markdown_inline",
+    "html",
   },
   -- ignore_install = { "javascript" },
   indent = {
@@ -18,9 +19,9 @@ require"nvim-treesitter.configs".setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "gnn", -- set to `false` to disable one of the mappings
-      node_incremental = "grn",
-      node_decremental = "grm",
+      init_selection = false, -- set to `false` to disable one of the mappings
+      node_incremental = "<CR>",
+      node_decremental = "<BS>",
       scope_incremental = false,
     },
   },
@@ -59,14 +60,14 @@ require"nvim-treesitter.configs".setup {
         ["[]"] = "@class.outer",
       },
     },
-    lsp_interop = {
-      enable = true,
-      border = "none",
-      peek_definition_code = {
-        ["<leader>df"] = "@function.outer",
-        ["<leader>dF"] = "@class.outer",
-      },
-    },
+    -- lsp_interop = {
+    --   enable = true,
+    --   border = "none",
+    --   peek_definition_code = {
+    --     ["<leader>df"] = "@function.outer",
+    --     ["<leader>dF"] = "@class.outer",
+    --   },
+    -- },
     swap = {
       enable = true,
       swap_next = {
@@ -77,4 +78,8 @@ require"nvim-treesitter.configs".setup {
       },
     },
   },
+}
+
+require('ts_context_commentstring').setup {
+  enable_autocmd = false,
 }

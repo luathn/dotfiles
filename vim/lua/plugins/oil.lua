@@ -1,17 +1,15 @@
 require("oil").setup({
-  -- Id is automatically added at the beginning, and name at the end
-  -- See :help oil-columns
+  default_file_explorer = true,
   columns = {
     "icon",
     -- "size",
     -- "permissions",
     -- "mtime",
   },
-  -- Buffer-local options to use for oil buffers
   buf_options = {
     buflisted = false,
+    bufhidden = "hide",
   },
-  -- Window-local options to use for oil buffers
   win_options = {
     wrap = false,
     signcolumn = "no",
@@ -20,20 +18,11 @@ require("oil").setup({
     spell = false,
     list = false,
     conceallevel = 3,
-    concealcursor = "n",
+    concealcursor = "nvic",
   },
-  -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
-  default_file_explorer = true,
-  -- Restore window options to previous values when leaving an oil buffer
-  restore_win_options = true,
-  -- Skip the confirmation popup for simple operations
+  delete_to_trash = false,
   skip_confirm_for_simple_edits = false,
-  -- Keymaps in oil buffer. Can be any value that `vim.keymap.set` accepts OR a table of keymap
-  -- options with a `callback` (e.g. { callback = function() ... end, desc = "", nowait = true })
-  -- Additionally, if it is a string that matches "actions.<name>",
-  -- it will use the mapping at require("oil.actions").<name>
-  -- Set to `false` to remove a keymap
-  -- See :help oil-actions for a list of all available actions
+  prompt_save_on_select_new_entry = true,
   keymaps = {
     ["g?"] = "actions.show_help",
     ["<CR>"] = "actions.select",
@@ -48,15 +37,14 @@ require("oil").setup({
     ["_"] = "actions.open_cwd",
     ["cd"] = "actions.cd",
     ["~"] = "actions.tcd",
+    ["gs"] = "actions.change_sort",
     ["H"] = "actions.toggle_hidden",
     ["gy"] = "actions.copy_entry_path",
   },
   -- Set to false to disable all of the above keymaps
   use_default_keymaps = false,
   view_options = {
-    -- Show files and directories that start with "."
-    show_hidden = false,
-    -- This function defines what is considered a "hidden" file
+    show_hidden = true,
     is_hidden_file = function(name, bufnr)
       return vim.startswith(name, ".")
     end,
@@ -64,6 +52,12 @@ require("oil").setup({
     is_always_hidden = function(name, bufnr)
       return false
     end,
+    sort = {
+      -- sort order can be "asc" or "desc"
+      -- see :help oil-columns to see which columns are sortable
+      { "type", "asc" },
+      { "name", "asc" },
+    },
   },
   -- Configuration for the floating window in oil.open_float
   float = {

@@ -18,7 +18,28 @@ neogit.setup {
   remember_settings = true,
   use_per_project_settings = true,
   ignored_settings = {},
-  commit_popup = {
+  status = {
+    recent_commit_count = 15,
+  },
+  commit_editor = {
+    kind = "split",
+  },
+  commit_select_view = {
+    kind = "tab",
+  },
+  commit_view = {
+    kind = "vsplit",
+  },
+  log_view = {
+    kind = "tab",
+  },
+  rebase_editor = {
+    kind = "split",
+  },
+  reflog_view = {
+    kind = "tab",
+  },
+  merge_editor = {
     kind = "split",
   },
   preview_buffer = {
@@ -34,30 +55,54 @@ neogit.setup {
     hunk = { "+", "-" },
   },
   integrations = {
-    telescope = nil,
+    telescope = true,
     diffview = true
   },
   sections = {
+    -- Reverting/Cherry Picking
+    sequencer = {
+      folded = false,
+      hidden = false,
+    },
     untracked = {
-      folded = false
+      folded = false,
+      hidden = false,
     },
     unstaged = {
-      folded = false
+      folded = false,
+      hidden = false,
     },
     staged = {
-      folded = false
+      folded = false,
+      hidden = false,
     },
     stashes = {
-      folded = true
+      folded = true,
+      hidden = false,
     },
-    unpulled = {
-      folded = true
+    unpulled_upstream = {
+      folded = true,
+      hidden = false,
     },
-    unmerged = {
-      folded = true
+    unmerged_upstream = {
+      folded = false,
+      hidden = false,
+    },
+    unpulled_pushRemote = {
+      folded = true,
+      hidden = false,
+    },
+    unmerged_pushRemote = {
+      folded = false,
+      hidden = false,
     },
     recent = {
-      folded = true
+      folded = true,
+      hidden = true,
+    },
+    rebase = {
+      folded = true,
+      hidden = true,
     },
   },
   -- override/add mappings

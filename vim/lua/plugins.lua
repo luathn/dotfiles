@@ -1,10 +1,22 @@
 return {
+  {
+    "nvim-tree/nvim-web-devicons",
+  },
+  {
+    "nvim-lua/plenary.nvim",
+  },
   -- Main plugins
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      event = "VeryLazy",
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        event = "VeryLazy",
+      },
+      {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        event = "VeryLazy",
+      }
     },
     config = function()
       require("plugins.treesitter")
@@ -18,7 +30,11 @@ return {
   {
     "numToStr/Comment.nvim",
     event = "VeryLazy",
-    opts = {},
+    config = function()
+      require('Comment').setup {
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+      }
+    end,
   },
   {
     "kylechui/nvim-surround",
@@ -27,30 +43,23 @@ return {
     opts = {}
   },
   {
-    "christoomey/vim-tmux-navigator",
-    event = "VeryLazy",
-  },
-  {
-    "dyng/ctrlsf.vim",
-    keys = require("mappings").ctrlsf,
-    event = "VeryLazy",
+    "numToStr/Navigator.nvim",
+    keys = require("mappings").navigator,
     config = function()
-      require("plugins.ctrlsf")
-    end,
+      require('Navigator').setup()
+    end
   },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "williamboman/mason.nvim", opts = {} },
       { "williamboman/mason-lspconfig.nvim", opts = {} },
-      -- Useful status updates for LSP
       { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
     },
     config = function()
       require("plugins.nvim-lspconfig")
     end,
   },
-  -- { "metakirby5/codi.vim", lazy = true },
   {
     "windwp/nvim-autopairs",
     event = "VeryLazy",
@@ -72,23 +81,21 @@ return {
     },
   },
   {
-    "nvim-lua/plenary.nvim",
-  },
-  {
     "nvim-telescope/telescope.nvim",
     keys = require("mappings").nvim_telescope,
     event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        event = "VeryLazy",
+        build = "make",
+        cond = function()
+          return vim.fn.executable "make" == 1
+        end,
+      },
+    },
     config = function()
       require("plugins.nvim-telescope")
-    end,
-  },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    event = "VeryLazy",
-    build = "make",
-    cond = function()
-      return vim.fn.executable "make" == 1
     end,
   },
   {
@@ -102,7 +109,6 @@ return {
           require("plugins.diffview")
         end,
       },
-      { "nvim-lua/plenary.nvim" }
     },
     keys = require("mappings").neogit,
     event = "VeryLazy",
@@ -134,21 +140,17 @@ return {
       require("leap").add_default_mappings()
     end,
   },
-  -- UI
   {
     "catppuccin/nvim",
     priority = 1000,
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({
-        flavour = "latte", -- latte, frappe, macchiato, mocha
-        no_bold = true, -- Force no bold
+        flavour = "latte",
+        no_bold = true,
       })
       vim.cmd.colorscheme "catppuccin"
     end,
-  },
-  {
-    "nvim-tree/nvim-web-devicons",
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -172,7 +174,6 @@ return {
       require("plugins.treesj")
     end,
   },
-  -- Test
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -187,23 +188,6 @@ return {
     dependencies = {
       'junegunn/fzf',
     }
-  },
-  {
-    "junegunn/fzf.vim",
-    keys = require("mappings").fzf,
-    config = function()
-      require("plugins.fzf")
-    end,
-  },
-  {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {},
   },
   {
     "stevearc/oil.nvim",
@@ -224,27 +208,90 @@ return {
       })
     end,
   },
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("plugins.nvim-ts-autotag")
+    end
+  },
+  {
+    "mfussenegger/nvim-dap",
+    -- dependencies = "rcarriga/nvim-dap-ui",
+    keys = require("mappings").nvim_dap,
+    config = function()
+      require("plugins.nvim-dap")
+    end,
+  },
+  {
+    "luckasRanarison/nvim-devdocs",
+    keys = require("mappings").devdocs,
+    event = "VeryLazy",
+    config = function()
+      require("plugins.nvim-devdocs")
+
+      vim.keymap.set("n", "<leader>dd", "<cmd>lua require('plugins.fzf-lua-devdocs').open_picker()<CR>")
+    end,
+  },
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = require("mappings").fzf_lua,
+    config = function()
+      require("plugins.fzf-lua")
+    end
+  },
+  -- Test
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    config = function()
+      require("toggleterm").setup({
+        -- size can be a number or function which is passed the current terminal
+        size = 20,
+        open_mapping = [[<c-/>]],
+        shade_filetypes = {},
+        autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
+        -- shading_factor = '<number>', -- the percentage by which to lighten terminal background, default: -30 (gets multiplied by -3 if background is light)
+        start_in_insert = false,
+        insert_mappings = true, -- whether or not the open mapping applies in insert mode
+        terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
+        persist_size = true,
+        persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
+        direction = 'tab',
+        close_on_exit = true, -- close the terminal window when the process exits
+        -- Change the default shell. Can be a string or a function returning a string
+        shell = vim.o.shell,
+        auto_scroll = true, -- automatically scroll to the bottom on terminal output
+        -- This field is only relevant if direction is set to 'float'
+        float_opts = {
+          -- The border key is *almost* the same as 'nvim_open_win'
+          -- see :h nvim_open_win for details on borders however
+          -- the 'curved' border is a custom border type
+          -- not natively supported but implemented in this plugin.
+          border = "single",
+          -- like `size`, width and height can be a number or function which is passed the current terminal
+          winblend = 3,
+          -- zindex = <value>,
+        },
+        winbar = {
+          enabled = false,
+          name_formatter = function(term) --  term: Terminal
+            return term.name
+          end
+        },
+      })
+    end
+  },
   -- {
-  --   "akinsho/nvim-bufferline.lua",
-  --   config = function()
-  --     require("plugins.nvim-bufferline")
-  --   end,
-  --   keys = require("mappings").nvim_bufferline,
-  -- },
-  -- {
-  --   "kyazdani42/nvim-tree.lua",
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   "christoomey/vim-tmux-navigator",
   --   event = "VeryLazy",
-  --   config = function()
-  --     require("plugins.nvim-tree")
-  --   end,
-  --   keys = require("mappings").nvim_tree,
   -- },
   -- {
-  --   "folke/tokyonight.nvim",
-  --   priority = 1000,
+  --   "junegunn/fzf.vim",
+  --   keys = require("mappings").fzf,
   --   config = function()
-  --     vim.cmd.colorscheme "tokyonight-day"
+  --     require("plugins.fzf")
   --   end,
   -- },
 }

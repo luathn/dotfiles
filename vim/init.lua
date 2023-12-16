@@ -29,8 +29,3 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "qf" },
   command = [[nnoremap <buffer> q :cclose<CR>:lclose<CR>]]
 })
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "spectre_panel" },
-  command = [[nnoremap <buffer> q :q<CR>]]
-})

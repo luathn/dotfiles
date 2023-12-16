@@ -1,4 +1,5 @@
 local actions = require("telescope.actions")
+
 require("telescope").setup{
   defaults = {
     mappings = {
@@ -9,6 +10,7 @@ require("telescope").setup{
         ["<C-h>"] = actions.cycle_history_prev,
         ["<C-d>"] = actions.delete_buffer,
         ["<C-s>"] = actions.select_horizontal,
+        -- ["<C-w>"] = actions.send_selected_to_qflist + actions.open_qflist,
       },
       n = {
         ["<C-c>"] = actions.close,
@@ -20,21 +22,26 @@ require("telescope").setup{
       limit = 10
     },
     border = true,
-    layout_strategy = "horizontal",
+    layout_strategy = "vertical",
     layout_config = {
-      height = 0.5,
-      width = 0.8,
+      anchor = "S",
+      height = 0.6,
+      width = vim.o.columns,
       prompt_position = "top",
+      preview_height = 0.4, -- 60% of available lines
     },
     sorting_strategy = "ascending",
     prompt_title = false,
-    previewer = false,
+    prompt_prefix = "  ",
+    selection_caret = " ",
+    -- multi_icon = "󰄭",
+    entry_prefix = "  ",
+    previewer = true,
     file_ignore_patterns = {
       "node_modules"
     },
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     color_devicons = true,
-    use_less = true
   },
   pickers = {
     find_files = {
@@ -50,27 +57,15 @@ require("telescope").setup{
   extensions = {
     fzf = {
       fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = false, -- override the generic sorter
+      override_generic_sorter = true, -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
-    }
+    },
   }
 }
 
 require("telescope").load_extension("fzf")
-
-_G.with_preview = {
-  border = true,
-  layout_strategy = "horizontal",
-  layout_config = {
-    height = 0.7,
-    width = 0.9,
-    prompt_position = "top",
-  },
-  sorting_strategy = "ascending",
-  prompt_title = false,
-}
 
 _G.no_preview = {
   border = true,
@@ -83,6 +78,35 @@ _G.no_preview = {
   sorting_strategy = "ascending",
   prompt_title = false,
   previewer = false,
+}
+
+_G.half_screen = {
+  border = true,
+  layout_strategy = "vertical",
+  layout_config = {
+    anchor = "S",
+    height = 0.6, -- maximally available lines
+    width = vim.o.columns, -- maximally available columns
+    prompt_position = "top",
+    preview_height = 0.5, -- 60% of available lines
+  },
+  sorting_strategy = "ascending",
+  prompt_title = "abc",
+  previewer = true,
+}
+
+_G.my_theme = {
+  border = true,
+  layout_strategy = "vertical",
+  layout_config = {
+    height = vim.o.lines, -- maximally available lines
+    width = vim.o.columns, -- maximally available columns
+    prompt_position = "top",
+    preview_height = 0.6, -- 60% of available lines
+  },
+  sorting_strategy = "ascending",
+  prompt_title = false,
+  previewer = true,
 }
 
 _G.current_buffer = {

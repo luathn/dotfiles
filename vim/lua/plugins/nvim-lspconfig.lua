@@ -4,6 +4,7 @@ end
 
 local servers = {
   solargraph = {},
+  -- tsserver = {},
   vtsls = {},
   lua_ls = {},
 }

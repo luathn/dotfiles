@@ -63,3 +63,4 @@ vim.o.fillchars = "eob: "
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menu,menuone,noselect"
 vim.api.nvim_command("set shortmess+=c")
+vim.o.showmode = false

@@ -17,28 +17,52 @@ local tree_buffer = {
     lualine_a = {
       {
         function()
-          return "NVIMTREE"
+          return "OIL"
         end,
-        color = { fg = colors.blue, bg = colors.bg_dark, gui = "bold" }
+        color = { gui = "bold" }
+      }
+    },
+    lualine_b = {
+      {
+        function()
+          return require("oil").get_current_dir()
+        end,
       }
     }
+  },
+  filetypes = { "oil" }
+}
+
+-- Specific buffer
+local telescope_buffer = {
+  sections = {
+    lualine_a = {
+      {
+        function()
+          return "Telescope"
+        end,
+        color = { gui = "bold" }
+      }
+    },
   },
   inactive_sections = {
     lualine_a = {
       {
         function()
-          return "NVIMTREE"
+          return "Telescope"
         end,
-        color = { fg = colors.fg_darker, gui = "bold" }
+        color = { gui = "bold" }
       }
-    }
+    },
   },
-  filetypes = { "NvimTree" }
+  filetypes = { 'TelescopePrompt' },
 }
 
 -- Config
 local config = {
   options = {
+    disabled_filetypes = {},
+    globalstatus = false,
     component_separators = "",
     section_separators = "",
     theme = {
@@ -67,19 +91,19 @@ local config = {
       },
     },
     lualine_b = {
-      -- Git branch
-      {
-        "branch",
-        icon = " ",
-        cond = conditions.hide_in_width,
-        color = { fg = colors.magenta, bg = colors.bg_light },
-      },
       -- File name
       {
         "filename",
         path = 1,
         shorting_target = 60,
         cond = conditions.buffer_not_empty,
+      },
+      -- Git branch
+      {
+        "branch",
+        icon = " ",
+        cond = conditions.hide_in_width,
+        -- color = { fg = colors.magenta, bg = colors.bg_light },
       },
       -- Git diff
       {
@@ -148,8 +172,7 @@ local config = {
       {
         "filename",
         path = 1,
-        shorting_target = 120,
-        cond = conditions.buffer_not_empty,
+        shorting_target = 60,
       },
     },
     lualine_x = {
@@ -161,7 +184,7 @@ local config = {
     lualine_y = {},
     lualine_z = {},
   },
-  extensions = { 'fzf' },
+  extensions = { 'fzf', 'quickfix', tree_buffer, telescope_buffer },
 }
 
 lualine.setup(config)

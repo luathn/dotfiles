@@ -1,6 +1,7 @@
 local colors = require("catppuccin.palettes").get_palette "latte"
 
 colors.fg_transparent = "NONE"
+colors.fg_light = "#bbc0cd"
 colors.fg = colors.text
 colors.fg_dark = "#414459"
 colors.fg_darker = "#353747"

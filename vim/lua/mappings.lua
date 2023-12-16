@@ -31,7 +31,7 @@ M.general = {
     ["<leader>tc"] = { ":tabnew<cr>", "[T]ab [c]reate" },
     ["<leader>tx"] = { ":tabclose<cr>", "[T]ab close [x]" },
     -- Turn off search highlight
-    ["<leader>/"]  = { ":noh<cr>", "[/] No highlight" },
+    ["<esc>"]  = { ":noh<cr><esc>", "[/] No highlight" },
     -- Open
     ["<leader>oq"]  = { ":copen<CR>", "[O]pen [q]uickfix" },
     ["<leader>ol"]  = { ":lopen<CR>", "[O]pen [l]ocation list" },
@@ -94,17 +94,18 @@ M.ctrlsf = {
 
 M.diffview = {
   { "<leader>gd", ":DiffviewOpen ", desc = "[G]it [d]iff" },
-  { "<leader>gq", ":DiffviewClose<cr>", desc = "[G]it diff [q]uit" },
+  { "<leader>cc", "<cmd>lua require('diffview.config').actions.conflict_choose('all')<cr>", desc = "[C]onflict [C]hoose" },
 }
 
 M.neogit = {
   { "<leader>gg", ":Neogit<cr>", desc = "[G]it status" },
-  { "<leader>gl", ":Neogit log<cr>", desc = "[G]it [l]og" }
+  { "<leader>gl", ":Neogit log<cr>", desc = "[G]it [l]og" },
+  { "<leader>gb", ":Neogit branch<cr>", desc = "[G]it [b]ranch" },
 }
 
-M.nvim_bufferline = {
-  { "<leader>l", ":BufferLineCycleNext<cr>", desc = "[l] Next buffer" },
-  { "<leader>h", ":BufferLineCyclePrev<cr>", desc = "[h] Previous buffer" },
+M.bufferline = {
+  { "]b", ":BufferLineCycleNext<cr>", desc = "[l] Next buffer" },
+  { "[b", ":BufferLineCyclePrev<cr>", desc = "[h] Previous buffer" },
   { "<leader>bl", ":BufferLineMoveNext<cr>", desc = "Move [b]uffer [l]eft" },
   { "<leader>bh", ":BufferLineMovePrev<cr>", desc = "Move [b]uffer rig[h]t" },
   { "<leader>bp", ":BufferLineTogglePin<cr>", desc = "Toggle [b]uffer [p]in" },
@@ -112,7 +113,7 @@ M.nvim_bufferline = {
 }
 
 M.nvim_spectre = {
-  { "<leader>ss", "<cmd>lua require('spectre').open()<cr>", desc = "[S]pectre [s]earch open" },
+  { "<leader>ss", "<cmd>lua require('spectre').toggle({is_close = false})<cr>", desc = "[S]pectre [s]earch open" },
   { "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", desc = "[S]earch current [w]ord" },
   { "<leader>sb", "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", desc = "[S]earch on current [b]uffer"},
   { "<leader>sw", "<esc><cmd>lua require('spectre').open_visual()<cr>", mode = "v", desc = "[S]earch current [w]ord" },
@@ -120,12 +121,12 @@ M.nvim_spectre = {
 
 M.nvim_telescope = {
   -- { "<leader><leader>", "<cmd>lua require('telescope.builtin').find_files(no_preview)<cr>", desc = "Find files" },
-  -- { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(no_preview)<cr>", desc = "[F]ind [f]ile" },
-  -- { "<leader>,",{ "<cmd>lua require('telescope.builtin').buffers(no_preview)<cr>", desc = "Find buffers" },
-  -- { "<leader>bb", "<cmd>lua require('telescope.builtin').buffers(no_preview)<cr>", desc = "Find [b]uffers" },
-  { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep(with_preview)<cr>", desc = "[F]ind by live[g]rep" },
-  { "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string(with_preview)<cr>", desc = "[F]ind current [w]ord" },
-  { "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<cr>", desc = "[F]ind [r]esume" },
+  -- { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(require'telescope.themes'.get_ivy())<cr>", desc = "[F]ind [f]ile" },
+  { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(my_theme)<cr>", desc = "[F]ind [f]ile" },
+  { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers(half_screen)<cr>", desc = "Find [b]uffers" },
+  -- { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep(my_theme)<cr>", desc = "[F]ind by live[g]rep" },
+  -- { "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string(my_theme)<cr>", desc = "[F]ind current [w]ord" },
+  -- { "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<cr>", desc = "[F]ind [r]esume" },
   { "<leader>gc", "<cmd>lua require('telescope.builtin').git_branches()<cr>", desc = "[G]it [c]heckout branch" },
   { "<leader>fp", "<cmd>lua require('telescope.builtin').find_files(opts = {search_dirs = { vim.fn.expand('%p:h') }})<cr>", desc = "[F]ind current [p]ath" },
 }
@@ -141,7 +142,8 @@ M.oil = {
 }
 
 M.vim_fugitive = {
-  { "<leader>gb", ":Git blame<cr>", desc = "[G]it [b]lame" }
+  { "<leader>gB", ":Git blame<cr>", desc = "[G]it [b]lame" },
+  { "<leader>ge", ":Gedit<cr>", desc = "[G]it [b]lame" },
 }
 
 M.vim_test = {
@@ -166,14 +168,41 @@ M.treesj = {
 M.harpoon = {
   { "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "[H]arpoon add file" },
   { "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[H]arpoon toggle" },
-  { "<leader>,", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[H]arpoon toggle" },
 }
 
 M.fzf = {
-  { "<leader><space>", ":Files<CR>", desc = "fzf files" },
-  { "<leader>ff", ":Files<CR>", desc = "[f]zf [f]iles" },
-  { "<leader>fb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
-  { "<leader>bb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
+  -- { "<leader><space>", ":Files<CR>", desc = "fzf files" },
+  -- { "<leader>ff", ":Files<CR>", desc = "[f]zf [f]iles" },
+  -- { "<leader>,", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
+  -- { "<leader>fb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
+  -- { "<leader>bb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
+  -- { "<leader>fg", ":Rg <C-R><C-W><CR>", desc = "[f]zf [g]rep" },
+}
+
+M.navigator = {
+  { "<C-h>", "<cmd>NavigatorLeft<CR>", mode = { "n", "t" } },
+  { "<C-l>", "<cmd>NavigatorRight<CR>", mode = { "n", "t" } },
+  { "<C-k>", "<cmd>NavigatorUp<CR>", mode = { "n", "t" } },
+  { "<C-j>", "<cmd>NavigatorDown<CR>", mode = { "n", "t" } },
+}
+
+M.fzf_lua = {
+  { "<Char-0xAB>", "<cmd>FzfLua commands<CR>", desc = "[f]zf commands" },
+  { "<leader><space>", "<cmd>FzfLua files<CR>", desc = "[f]zf [f]iles" },
+  { "<leader>,", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
+  { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({ continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
+  { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", mode = "n", desc = "[f]zf grep [w]ord" },
+  { "<leader>fw", "<cmd>FzfLua grep_visual<CR>", mode = "v", desc = "[f]zf grep [w]ord" },
+}
+
+M.nvim_dap = {
+  { "<leader>dt", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", desc = "" },
+  { "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", desc = "" },
+}
+
+M.devdocs = {
+  { "<leader>dd", "<cmd>DevdocsOpen<cr>", desc = "[d]ev [d]ocs open" },
+  { "<leader>df", "<cmd>DevdocsOpenFloat<cr>", desc = "[d]evdocs open [f]loat" },
 }
 
 return M
