@@ -5,6 +5,7 @@ require"nvim-treesitter.configs".setup {
     "javascript",
     "markdown",
     "markdown_inline",
+    "lua",
     "html",
   },
   -- ignore_install = { "javascript" },

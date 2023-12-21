@@ -127,7 +127,7 @@ M.nvim_telescope = {
   -- { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep(my_theme)<cr>", desc = "[F]ind by live[g]rep" },
   -- { "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string(my_theme)<cr>", desc = "[F]ind current [w]ord" },
   -- { "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<cr>", desc = "[F]ind [r]esume" },
-  { "<leader>gc", "<cmd>lua require('telescope.builtin').git_branches()<cr>", desc = "[G]it [c]heckout branch" },
+  -- { "<leader>gc", "<cmd>lua require('telescope.builtin').git_branches()<cr>", desc = "[G]it [c]heckout branch" },
   { "<leader>fp", "<cmd>lua require('telescope.builtin').find_files(opts = {search_dirs = { vim.fn.expand('%p:h') }})<cr>", desc = "[F]ind current [p]ath" },
 }
 
@@ -143,7 +143,7 @@ M.oil = {
 
 M.vim_fugitive = {
   { "<leader>gB", ":Git blame<cr>", desc = "[G]it [b]lame" },
-  { "<leader>ge", ":Gedit<cr>", desc = "[G]it [b]lame" },
+  { "<leader>ge", ":Gedit", desc = "[G]it [e]dit" },
 }
 
 M.vim_test = {
@@ -193,6 +193,7 @@ M.fzf_lua = {
   { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({ continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
   { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", mode = "n", desc = "[f]zf grep [w]ord" },
   { "<leader>fw", "<cmd>FzfLua grep_visual<CR>", mode = "v", desc = "[f]zf grep [w]ord" },
+  { "<leader>gc", "<cmd>FzfLua git_branches<CR>", desc = "[G]it [c]heckout branch" },
 }
 
 M.nvim_dap = {

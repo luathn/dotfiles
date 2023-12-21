@@ -1,6 +1,7 @@
 brew install neovim
 brew install fzf
 brew install fd
+brew tap homebrew/cask-fonts
 brew install font-jetbrains-mono-nerd-font
 brew install tmux
 brew install asdf
@@ -22,6 +23,7 @@ brew install ripgrep
 brew install translate-shell
 brew install bat
 brew install git-delta
+brew install gnu-sed
 
 # brew install lazygit
 

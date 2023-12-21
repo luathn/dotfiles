@@ -14,7 +14,8 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="amuse"
 
-plugins=(vi-mode rails docker docker-compose git ruby tmux)
+# docker docker-compose ruby tmux rails
+plugins=(vi-mode git)
 
 source $ZSH/oh-my-zsh.sh
 

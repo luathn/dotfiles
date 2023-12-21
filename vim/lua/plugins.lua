@@ -101,6 +101,7 @@ return {
   {
     "TimUntersberger/neogit",
     dependencies = {
+      "nvim-lua/plenary.nvim",
       {
         "sindrets/diffview.nvim",
         keys = require("mappings").diffview,
