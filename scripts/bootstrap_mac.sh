@@ -12,7 +12,10 @@ brew install gnupg
 brew install libjpg libpng libtiff webp
 brew install mysql
 brew install jq
+
+brew tap wix/brew
 brew install applesimutils
+
 brew install postgresql
 brew install blueutil
 brew install terminal-notifier

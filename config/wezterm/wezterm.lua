@@ -21,30 +21,14 @@ config.color_scheme = 'Catppuccin Latte'
 -- config.enable_csi_u_key_encoding = false
 
 config.inactive_pane_hsb = {
-  saturation = 0.8,
-  brightness = 0.9,
+  saturation = 0.85,
+  brightness = 0.95,
 }
 
 config.font = wezterm.font('JetBrains Mono', { weight = 'Medium', italic = false })
 
-local function isViProcess(pane)
-  -- get_foreground_process_name On Linux, macOS and Windows, 
-  -- the process can be queried to determine this path. Other operating systems 
-  -- (notably, FreeBSD and other unix systems) are not currently supported
+local function is_vi_process(pane)
   return pane:get_foreground_process_name():find('n?vim') ~= nil
-  -- return pane:get_title():find("n?vim") ~= nil
-end
-
-local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
-  if isViProcess(pane) then
-    window:perform_action(
-      -- This should match the keybinds you set in Neovim.
-      act.SendKey({ key = vim_direction, mods = 'CTRL' }),
-      pane
-    )
-  else
-    window:perform_action(act.ActivatePaneDirection(pane_direction), pane)
-  end
 end
 
 local super_vim_keys_map = {
@@ -61,7 +45,7 @@ local function bind_super_key_to_vim(key)
     mods = 'CMD',
     action = wezterm.action_callback(function(win, pane)
       local char = super_vim_keys_map[key]
-      if char and isViProcess(pane) then
+      if char and is_vi_process(pane) then
         -- pass the keys through to vim/nvim
         win:perform_action({
         SendKey = { key = char, mods = nil },
@@ -78,29 +62,11 @@ local function bind_super_key_to_vim(key)
   }
 end
 
-
-wezterm.on('ActivatePaneDirection-right', function(window, pane)
-  conditionalActivatePane(window, pane, 'Right', 'l')
-end)
-wezterm.on('ActivatePaneDirection-left', function(window, pane)
-  conditionalActivatePane(window, pane, 'Left', 'h')
-end)
-wezterm.on('ActivatePaneDirection-up', function(window, pane)
-  conditionalActivatePane(window, pane, 'Up', 'k')
-end)
-wezterm.on('ActivatePaneDirection-down', function(window, pane)
-  conditionalActivatePane(window, pane, 'Down', 'j')
-end)
-
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 config.keys = {
   { key = 'v', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = 's', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-  { key = 'h', mods = "LEADER", action = act.ActivatePaneDirection 'Left' },
-  { key = 'j', mods = "LEADER", action = act.ActivatePaneDirection 'Down' },
-  { key = 'k', mods = "LEADER", action = act.ActivatePaneDirection 'Up' },
-  { key = 'l', mods = "LEADER", action = act.ActivatePaneDirection 'Right' },
   { key = 'h', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-left') },
   { key = 'j', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-down') },
   { key = 'k', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-up') },
@@ -128,10 +94,6 @@ config.keys = {
     action = act.PromptInputLine {
       description = 'Enter new name for tab',
       action = wezterm.action_callback(function(window, _, line)
-        -- _ is pane
-        -- line will be `nil` if they hit escape without entering anything
-        -- An empty string if they just hit enter
-        -- Or the actual line of text they wrote
         if line then
           window:active_tab():set_title(line)
         end
@@ -150,6 +112,30 @@ config.key_tables = {
     { key = 'Escape', action = 'PopKeyTable' },
   },
 }
+
+local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
+  if is_vi_process(pane) then
+    window:perform_action(
+      act.SendKey({ key = vim_direction, mods = 'CTRL' }),
+      pane
+    )
+  else
+    window:perform_action(act.ActivatePaneDirection(pane_direction), pane)
+  end
+end
+
+wezterm.on('ActivatePaneDirection-right', function(window, pane)
+  conditionalActivatePane(window, pane, 'Right', 'l')
+end)
+wezterm.on('ActivatePaneDirection-left', function(window, pane)
+  conditionalActivatePane(window, pane, 'Left', 'h')
+end)
+wezterm.on('ActivatePaneDirection-up', function(window, pane)
+  conditionalActivatePane(window, pane, 'Up', 'k')
+end)
+wezterm.on('ActivatePaneDirection-down', function(window, pane)
+  conditionalActivatePane(window, pane, 'Down', 'j')
+end)
 
 -- and finally, return the configuration to wezterm
 return config

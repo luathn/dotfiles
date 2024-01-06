@@ -150,7 +150,7 @@ return {
         flavour = "latte",
         no_bold = true,
       })
-      vim.cmd.colorscheme "catppuccin"
+      vim.cmd.colorscheme "catppuccin-frappe"
     end,
   },
   {

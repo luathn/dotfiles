@@ -1,5 +1,6 @@
 local colors = require("catppuccin.palettes").get_palette "frappe"
 
+colors.fg_light = colors.text
 colors.fg_transparent = "NONE"
 colors.fg = colors.text
 colors.fg_dark = colors.subtext0

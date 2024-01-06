@@ -47,7 +47,7 @@ M.general = {
 
 M.lsp = {
   n = {
-    ["<leader>rn"] = { vim.lsp.buf.rename, "[R]e[n]ame" },
+    ["<leader>cr"] = { vim.lsp.buf.rename, "[C]ode [R]ename" },
     ["<leader>ca"] = { vim.lsp.buf.code_action, "[C]ode [a]ction" },
 
     ["gd"]         = { vim.lsp.buf.definition, "Go to [d]efinition" },
@@ -81,17 +81,6 @@ M.lsp = {
   }
 }
 
-M.ctrlsf = {
-  { "<C-F>f", "<Plug>CtrlSFPrompt" },
-  { "<C-F>n", "<Plug>CtrlSFCwordPath" },
-  { "<C-F>p", "<Plug>CtrlSFPwordPath" },
-  { "<C-F>o", ":CtrlSFOpen<cr>" },
-  { "<C-F>t", ":CtrlSFToggle<cr>" },
-  { "<C-F>f", "<Plug>CtrlSFVwordPath", mode = "v" },
-  { "<C-F>F", "<Plug>CtrlSFVwordExec", mode = "v" },
-  { "<C-F>t", "<Esc>:CtrlSFToggle<cr>", mode = "i" },
-}
-
 M.diffview = {
   { "<leader>gd", ":DiffviewOpen ", desc = "[G]it [d]iff" },
   { "<leader>cc", "<cmd>lua require('diffview.config').actions.conflict_choose('all')<cr>", desc = "[C]onflict [C]hoose" },
@@ -101,15 +90,6 @@ M.neogit = {
   { "<leader>gg", ":Neogit<cr>", desc = "[G]it status" },
   { "<leader>gl", ":Neogit log<cr>", desc = "[G]it [l]og" },
   { "<leader>gb", ":Neogit branch<cr>", desc = "[G]it [b]ranch" },
-}
-
-M.bufferline = {
-  { "]b", ":BufferLineCycleNext<cr>", desc = "[l] Next buffer" },
-  { "[b", ":BufferLineCyclePrev<cr>", desc = "[h] Previous buffer" },
-  { "<leader>bl", ":BufferLineMoveNext<cr>", desc = "Move [b]uffer [l]eft" },
-  { "<leader>bh", ":BufferLineMovePrev<cr>", desc = "Move [b]uffer rig[h]t" },
-  { "<leader>bp", ":BufferLineTogglePin<cr>", desc = "Toggle [b]uffer [p]in" },
-  { "<leader>bX", ":BufferLineGroupClose ungrouped<cr>", desc =  "Non-pinned [bX]uffer delete"  },
 }
 
 M.nvim_spectre = {
@@ -129,12 +109,6 @@ M.nvim_telescope = {
   -- { "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<cr>", desc = "[F]ind [r]esume" },
   -- { "<leader>gc", "<cmd>lua require('telescope.builtin').git_branches()<cr>", desc = "[G]it [c]heckout branch" },
   { "<leader>fp", "<cmd>lua require('telescope.builtin').find_files(opts = {search_dirs = { vim.fn.expand('%p:h') }})<cr>", desc = "[F]ind current [p]ath" },
-}
-
-M.nvim_tree = {
-  { "<leader>oe", ":NvimTreeToggle<cr>" },
-  { "<leader>mr", ":NvimTreeRefresh<cr>" },
-  { "<leader>mf", "<cmd>lua require('nvim-tree.api').tree.find_file({ open = true, focus = true })<cr>" },
 }
 
 M.oil = {
@@ -170,15 +144,6 @@ M.harpoon = {
   { "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[H]arpoon toggle" },
 }
 
-M.fzf = {
-  -- { "<leader><space>", ":Files<CR>", desc = "fzf files" },
-  -- { "<leader>ff", ":Files<CR>", desc = "[f]zf [f]iles" },
-  -- { "<leader>,", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
-  -- { "<leader>fb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
-  -- { "<leader>bb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
-  -- { "<leader>fg", ":Rg <C-R><C-W><CR>", desc = "[f]zf [g]rep" },
-}
-
 M.navigator = {
   { "<C-h>", "<cmd>NavigatorLeft<CR>", mode = { "n", "t" } },
   { "<C-l>", "<cmd>NavigatorRight<CR>", mode = { "n", "t" } },
@@ -205,6 +170,41 @@ M.devdocs = {
   { "<leader>dd", "<cmd>DevdocsOpen<cr>", desc = "[d]ev [d]ocs open" },
   { "<leader>df", "<cmd>DevdocsOpenFloat<cr>", desc = "[d]evdocs open [f]loat" },
 }
+
+-- M.fzf = {
+--   { "<leader><space>", ":Files<CR>", desc = "fzf files" },
+--   { "<leader>ff", ":Files<CR>", desc = "[f]zf [f]iles" },
+--   { "<leader>,", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
+--   { "<leader>fb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
+--   { "<leader>bb", ":FzfBuffers<CR>", desc = "[f]zf [b]uffers" },
+--   { "<leader>fg", ":Rg <C-R><C-W><CR>", desc = "[f]zf [g]rep" },
+-- }
+
+-- M.nvim_tree = {
+--   { "<leader>oe", ":NvimTreeToggle<cr>" },
+--   { "<leader>mr", ":NvimTreeRefresh<cr>" },
+--   { "<leader>mf", "<cmd>lua require('nvim-tree.api').tree.find_file({ open = true, focus = true })<cr>" },
+-- }
+
+-- M.ctrlsf = {
+--   { "<C-F>f", "<Plug>CtrlSFPrompt" },
+--   { "<C-F>n", "<Plug>CtrlSFCwordPath" },
+--   { "<C-F>p", "<Plug>CtrlSFPwordPath" },
+--   { "<C-F>o", ":CtrlSFOpen<cr>" },
+--   { "<C-F>t", ":CtrlSFToggle<cr>" },
+--   { "<C-F>f", "<Plug>CtrlSFVwordPath", mode = "v" },
+--   { "<C-F>F", "<Plug>CtrlSFVwordExec", mode = "v" },
+--   { "<C-F>t", "<Esc>:CtrlSFToggle<cr>", mode = "i" },
+-- }
+
+-- M.bufferline = {
+--   { "]b", ":BufferLineCycleNext<cr>", desc = "[l] Next buffer" },
+--   { "[b", ":BufferLineCyclePrev<cr>", desc = "[h] Previous buffer" },
+--   { "<leader>bl", ":BufferLineMoveNext<cr>", desc = "Move [b]uffer [l]eft" },
+--   { "<leader>bh", ":BufferLineMovePrev<cr>", desc = "Move [b]uffer rig[h]t" },
+--   { "<leader>bp", ":BufferLineTogglePin<cr>", desc = "Toggle [b]uffer [p]in" },
+--   { "<leader>bX", ":BufferLineGroupClose ungrouped<cr>", desc =  "Non-pinned [bX]uffer delete"  },
+-- }
 
 return M
 
