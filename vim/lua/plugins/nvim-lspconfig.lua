@@ -7,6 +7,7 @@ local servers = {
   tsserver = {},
   -- vtsls = {},
   lua_ls = {},
+  eslint = {},
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -15,9 +15,9 @@ neogit.setup {
     ["bitbucket.org"] = "https://bitbucket.org/${owner}/${repository}/pull-requests/new?source=${branch_name}&t=1",
     ["gitlab.com"] = "https://gitlab.com/${owner}/${repository}/merge_requests/new?merge_request[source_branch]=${branch_name}",
   },
-  telescope_sorter = function()
-    return require("telescope").extensions.fzf.native_fzf_sorter()
-  end,
+  -- telescope_sorter = function()
+  --   return require("telescope").extensions.fzf.native_fzf_sorter()
+  -- end,
   remember_settings = true,
   use_per_project_settings = true,
   auto_refresh = true,
@@ -64,8 +64,8 @@ neogit.setup {
     hunk = { "+", "-" },
   },
   integrations = {
-    telescope = true,
-    diffview = true
+    diffview = true,
+    fzf_lua = true,
   },
   sections = {
     -- Reverting/Cherry Picking

@@ -7,7 +7,7 @@ require("oil").setup({
     -- "mtime",
   },
   buf_options = {
-    buflisted = false,
+    buflisted = true,
     bufhidden = "hide",
   },
   win_options = {
@@ -23,6 +23,19 @@ require("oil").setup({
   delete_to_trash = false,
   skip_confirm_for_simple_edits = false,
   prompt_save_on_select_new_entry = true,
+  cleanup_delay_ms = false,
+  lsp_file_methods = {
+    -- Time to wait for LSP file operations to complete before skipping
+    timeout_ms = 1000,
+    -- Set to true to autosave buffers that are updated with LSP willRenameFiles
+    -- Set to "unmodified" to only save unmodified buffers
+    autosave_changes = false,
+  },
+  -- Constrain the cursor to the editable parts of the oil buffer
+  -- Set to `false` to disable, or "name" to keep it on the file names
+  constrain_cursor = "editable",
+  -- Set to true to watch the filesystem for changes and reload oil
+  experimental_watch_for_changes = false,
   keymaps = {
     ["g?"] = "actions.show_help",
     ["<CR>"] = "actions.select",
@@ -38,8 +51,9 @@ require("oil").setup({
     ["cd"] = "actions.cd",
     ["~"] = "actions.tcd",
     ["gs"] = "actions.change_sort",
-    ["H"] = "actions.toggle_hidden",
-    ["gy"] = "actions.copy_entry_path",
+    ["gx"] = "actions.open_external",
+    ["g."] = "actions.toggle_hidden",
+    ["g\\"] = "actions.toggle_trash",
   },
   -- Set to false to disable all of the above keymaps
   use_default_keymaps = false,

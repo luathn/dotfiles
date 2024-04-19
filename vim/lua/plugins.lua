@@ -1,22 +1,12 @@
 return {
-  {
-    "nvim-tree/nvim-web-devicons",
-  },
-  {
-    "nvim-lua/plenary.nvim",
-  },
+  { "nvim-tree/nvim-web-devicons" },
+  { "nvim-lua/plenary.nvim" },
   -- Main plugins
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        event = "VeryLazy",
-      },
-      {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        event = "VeryLazy",
-      }
+      { "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
+      { 'JoosepAlviste/nvim-ts-context-commentstring', event = "VeryLazy" }
     },
     config = function()
       require("plugins.treesitter")
@@ -28,11 +18,15 @@ return {
     event = "VeryLazy",
   },
   {
-    "numToStr/Comment.nvim",
-    event = "VeryLazy",
+    'echasnovski/mini.comment',
+    version = false,
     config = function()
-      require('Comment').setup {
-        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+      require('mini.comment').setup {
+        options = {
+          custom_commentstring = function()
+            return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+          end,
+        },
       }
     end,
   },
@@ -54,17 +48,13 @@ return {
     dependencies = {
       { "williamboman/mason.nvim", opts = {} },
       { "williamboman/mason-lspconfig.nvim", opts = {} },
-      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      -- { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
     },
     config = function()
       require("plugins.nvim-lspconfig")
     end,
   },
-  {
-    "windwp/nvim-autopairs",
-    event = "VeryLazy",
-    opts = {}
-  },
+  { "windwp/nvim-autopairs", event = "VeryLazy", opts = {} },
   {
     "hrsh7th/nvim-cmp",
     config = function()
@@ -78,25 +68,8 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
+      -- "hrsh7th/cmp-nvim-lsp-signature-help",
     },
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    keys = require("mappings").nvim_telescope,
-    event = "VeryLazy",
-    dependencies = {
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        event = "VeryLazy",
-        build = "make",
-        cond = function()
-          return vim.fn.executable "make" == 1
-        end,
-      },
-    },
-    config = function()
-      require("plugins.nvim-telescope")
-    end,
   },
   {
     "TimUntersberger/neogit",
@@ -135,13 +108,6 @@ return {
     event = "VeryLazy",
   },
   {
-    "ggandor/leap.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("leap").add_default_mappings()
-    end,
-  },
-  {
     "catppuccin/nvim",
     priority = 1000,
     name = "catppuccin",
@@ -150,7 +116,7 @@ return {
         flavour = "latte",
         no_bold = true,
       })
-      vim.cmd.colorscheme "catppuccin-frappe"
+      vim.cmd.colorscheme "catppuccin-latte"
     end,
   },
   {
@@ -176,19 +142,8 @@ return {
     end,
   },
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 500
-    end,
-    opts = {},
-  },
-  {
     'kevinhwang91/nvim-bqf',
-    dependencies = {
-      'junegunn/fzf',
-    }
+    dependencies = {'junegunn/fzf'},
   },
   {
     "stevearc/oil.nvim",
@@ -197,7 +152,6 @@ return {
       require("plugins.oil")
     end,
   },
-  { "jlanzarotta/bufexplorer" },
   {
     "ThePrimeagen/harpoon",
     keys = require("mappings").harpoon,
@@ -224,18 +178,7 @@ return {
     end,
   },
   {
-    "luckasRanarison/nvim-devdocs",
-    keys = require("mappings").devdocs,
-    event = "VeryLazy",
-    config = function()
-      require("plugins.nvim-devdocs")
-
-      vim.keymap.set("n", "<leader>dd", "<cmd>lua require('plugins.fzf-lua-devdocs').open_picker()<CR>")
-    end,
-  },
-  {
     "ibhagwan/fzf-lua",
-    -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = require("mappings").fzf_lua,
     config = function()
@@ -249,7 +192,9 @@ return {
     config = function()
       require("toggleterm").setup({
         -- size can be a number or function which is passed the current terminal
-        size = 20,
+        size = function()
+          return vim.o.columns * 0.4
+        end,
         open_mapping = [[<c-/>]],
         shade_filetypes = {},
         autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
@@ -259,7 +204,7 @@ return {
         terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
         persist_size = true,
         persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
-        direction = 'tab',
+        direction = 'vertical', -- 'tab'
         close_on_exit = true, -- close the terminal window when the process exits
         -- Change the default shell. Can be a string or a function returning a string
         shell = vim.o.shell,
@@ -284,15 +229,71 @@ return {
       })
     end
   },
+  {
+    "nvimtools/none-ls.nvim",
+    config = function()
+      local null_ls = require("null-ls")
+
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.prettier,
+        },
+      })
+    end,
+  },
+  {
+    "robitx/gp.nvim",
+    config = function()
+      require("gp").setup({
+        hooks = {
+          -- example of adding command which writes unit tests for the selected code
+          UnitTests = function(gp, params)
+            local template = "I have the following code:\n\n"
+            .. "```{{selection}}\n```\n\n"
+            .. "Please respond by writing unit tests for the code above using Rspec."
+            local agent = gp.get_command_agent()
+            gp.Prompt(params, gp.Target.enew, nil, agent.model, template, agent.system_prompt)
+          end,
+        },
+      })
+    end
+  },
   -- {
-  --   "christoomey/vim-tmux-navigator",
+  --   "luckasRanarison/nvim-devdocs",
+  --   keys = require("mappings").devdocs,
   --   event = "VeryLazy",
+  --   config = function()
+  --     require("plugins.nvim-devdocs")
+  --
+  --     vim.keymap.set("n", "<leader>dd", "<cmd>lua require('plugins.fzf-lua-devdocs').open_picker()<CR>")
+  --   end,
   -- },
   -- {
-  --   "junegunn/fzf.vim",
-  --   keys = require("mappings").fzf,
+  --   "nvim-telescope/telescope.nvim",
+  --   keys = require("mappings").nvim_telescope,
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     {
+  --       "nvim-telescope/telescope-fzf-native.nvim",
+  --       event = "VeryLazy",
+  --       build = "make",
+  --       cond = function()
+  --         return vim.fn.executable "make" == 1
+  --       end,
+  --     },
+  --   },
   --   config = function()
-  --     require("plugins.fzf")
+  --     require("plugins.nvim-telescope")
+  --   end,
+  -- },
+  -- { "jlanzarotta/bufexplorer" },
+  -- {
+  --   "numToStr/Comment.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require('Comment').setup {
+  --       pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+  --     }
   --   end,
   -- },
 }

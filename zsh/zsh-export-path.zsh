@@ -24,16 +24,6 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # Go
 export PATH=$PATH:/usr/local/go/bin
 
-# asdf
-case `uname` in
-  Darwin)
-    . /opt/homebrew/opt/asdf/libexec/asdf.sh
-  ;;
-  Linux)
-    . /opt/asdf-vm/asdf.sh
-  ;;
-esac
-
 . ~/.zsh/z/z.sh
 
 # Openjdk

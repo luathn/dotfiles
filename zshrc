@@ -41,6 +41,21 @@ export EDITOR="vim"
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+# asdf
+case `uname` in
+  Darwin)
+    . /opt/homebrew/opt/asdf/libexec/asdf.sh
+  ;;
+  Linux)
+    . /opt/asdf-vm/asdf.sh
+  ;;
+esac
+
+export GOPATH="$(go env GOPATH)"
+export PATH=${GOPATH}/bin:$PATH
+
+# export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk
+
 # Zsh Defer
 
 zsh-defer source ~/.zsh/zsh-fzf.zsh

@@ -13,7 +13,7 @@ end
 
 require('fzf-lua').setup({
   winopts             = {
-    split             = "botright 30new",  -- open in a full-width split on the bottom
+    -- split             = "botright 30new",  -- open in a full-width split on the bottom
     -- border         = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
     border            = { '', '', '', '', '─', '─', '─', '' },
     height            = 0.4,            -- window height
@@ -36,7 +36,7 @@ require('fzf-lua').setup({
   keymap              = {
     fzf               = {
       ["ctrl-q"]      = "select-all+accept",
-    }
+    },
   },
   files = {
     prompt = 'Files❯ ',
@@ -48,6 +48,7 @@ require('fzf-lua').setup({
       ["ctrl-y"]      = function(selected)
         vim.fn.setreg('*', selected[1])
       end,
+      ["ctrl-g"]      = "",
     },
     winopts           = {
       split           = "botright 15new",  -- open in a full-width split on the bottom
@@ -67,18 +68,33 @@ require('fzf-lua').setup({
       end,
     },
     winopts           = {
-      split           = "bot 30new",  -- open in a full-width split on the bottom
+      split           = "bot 30new",
+    },
+  },
+  git = {
+    branches = {
+      cmd             = "git branch -l --sort=-committerdate --color",
+      winopts           = {
+        split           = "botright 15new",
+        preview         = {
+          hidden        = "hidden"
+        }
+      }
     },
   },
   grep = {
     prompt            = 'Grep❯ ',
     actions           = {
       -- ["ctrl-q"]      = actions.buf_sel_to_qf
-    }
+    },
+    winopts           = {
+      split           = "bot 40new",
+    },
   },
   commands = {
     prompt            = 'Commands❯ ',
     winopts           = {
+      split           = "bot 15new",
       preview         = {
         hidden        = "hidden"
       }

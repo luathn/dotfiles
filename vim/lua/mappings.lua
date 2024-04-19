@@ -4,29 +4,29 @@ local silent_noremap = { silent = true, noremap = true }
 
 M.general = {
   n = {
-    ["<leader>fs"] = { ":update<cr>", "[F]ile [s]ave" },
     ["<C-S>"]      = { ":update<cr>" },
     -- Copy file path
     ["gyn"]        = { ":let @+=expand('%:t')<cr>", "[Y]ank [n]ame" },
-    ["gysp"]       = { ":let @+=expand('%')<cr>", "[Y]ank [s]hort [p]ath" },
-    ["gyfp"]       = { ":let @+=expand('%:p')<cr>", "[Y]ank [f]ull [p]ath" },
+    ["gys"]       = { ":let @+=expand('%')<cr>", "[Y]ank [s]hort [p]ath" },
+    ["gyp"]       = { ":let @+=expand('%:h')<cr>", "[Y]ank [s]hort [p]ath" },
+    ["gyf"]       = { ":let @+=expand('%:p')<cr>", "[Y]ank [f]ull [p]ath" },
     -- Manage windows
-    ["<leader>wv"] = { "<C-W>v", "Split [w]indow [v]ertical" },
-    ["<leader>ws"] = { "<C-W>s", "Split [w]indow [s]plit horizontal" },
-    ["<leader>wq"] = { "<C-W>q", "[W]indow [q]uit" },
-    ["<leader>wh"] = { "<C-W>h", "[W]indow left [h]" },
-    ["<leader>wj"] = { "<C-W>j", "[W]indow down [j]" },
-    ["<leader>wk"] = { "<C-W>k", "[W]indow up [k]" },
-    ["<leader>wl"] = { "<C-W>l", "[W]indow right [l]" },
-    ["<leader>wH"] = { "<C-W>H", "Move [w]indow left [H]" },
-    ["<leader>wJ"] = { "<C-W>J", "Move [w]indow down [J]" },
-    ["<leader>wK"] = { "<C-W>K", "Move [w]indow up [K]" },
-    ["<leader>wL"] = { "<C-W>L", "Move [w]indow right [L]" },
-    ["<leader>w>"] = { "<C-W>>", "Increase [w]indow width [>]" },
-    ["<leader>w<"] = { "<C-W><", "Iecrease [w]indow width [<]" },
-    ["<leader>w+"] = { "<C-W>+", "Increase [w]indow height [+]" },
-    ["<leader>w-"] = { "<C-W>-", "Decrease [w]indow height [-]" },
-    ["<leader>w="] = { "<C-W>=", "Make [w]indow [=]" },
+    -- ["<leader>wv"] = { "<C-W>v", "Split [w]indow [v]ertical" },
+    -- ["<leader>ws"] = { "<C-W>s", "Split [w]indow [s]plit horizontal" },
+    -- ["<leader>wq"] = { "<C-W>q", "[W]indow [q]uit" },
+    -- ["<leader>wh"] = { "<C-W>h", "[W]indow left [h]" },
+    -- ["<leader>wj"] = { "<C-W>j", "[W]indow down [j]" },
+    -- ["<leader>wk"] = { "<C-W>k", "[W]indow up [k]" },
+    -- ["<leader>wl"] = { "<C-W>l", "[W]indow right [l]" },
+    -- ["<leader>wH"] = { "<C-W>H", "Move [w]indow left [H]" },
+    -- ["<leader>wJ"] = { "<C-W>J", "Move [w]indow down [J]" },
+    -- ["<leader>wK"] = { "<C-W>K", "Move [w]indow up [K]" },
+    -- ["<leader>wL"] = { "<C-W>L", "Move [w]indow right [L]" },
+    -- ["<leader>w>"] = { "<C-W>>", "Increase [w]indow width [>]" },
+    -- ["<leader>w<"] = { "<C-W><", "Iecrease [w]indow width [<]" },
+    -- ["<leader>w+"] = { "<C-W>+", "Increase [w]indow height [+]" },
+    -- ["<leader>w-"] = { "<C-W>-", "Decrease [w]indow height [-]" },
+    -- ["<leader>w="] = { "<C-W>=", "Make [w]indow [=]" },
     -- Manage tabs
     ["<leader>tc"] = { ":tabnew<cr>", "[T]ab [c]reate" },
     ["<leader>tx"] = { ":tabclose<cr>", "[T]ab close [x]" },
@@ -93,7 +93,7 @@ M.neogit = {
 }
 
 M.nvim_spectre = {
-  { "<leader>ss", "<cmd>lua require('spectre').toggle({is_close = false})<cr>", desc = "[S]pectre [s]earch open" },
+  { "<leader>ss", "<cmd>lua require('spectre').toggle({is_close = true})<cr>", desc = "[S]pectre [s]earch open" },
   { "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", desc = "[S]earch current [w]ord" },
   { "<leader>sb", "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", desc = "[S]earch on current [b]uffer"},
   { "<leader>sw", "<esc><cmd>lua require('spectre').open_visual()<cr>", mode = "v", desc = "[S]earch current [w]ord" },
@@ -152,7 +152,6 @@ M.navigator = {
 }
 
 M.fzf_lua = {
-  { "<Char-0xAB>", "<cmd>FzfLua commands<CR>", desc = "[f]zf commands" },
   { "<leader><space>", "<cmd>FzfLua files<CR>", desc = "[f]zf [f]iles" },
   { "<leader>,", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
   { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({ continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },

@@ -28,7 +28,7 @@ require("telescope").setup{
       height = 0.6,
       width = vim.o.columns,
       prompt_position = "top",
-      preview_height = 0.4, -- 60% of available lines
+      -- preview_height = 0.4, -- 60% of available lines
     },
     sorting_strategy = "ascending",
     prompt_title = false,
@@ -47,8 +47,7 @@ require("telescope").setup{
     find_files = {
       previewer = false,
     },
-    git_branches = {
-    },
+    git_branches = {},
     buffers = {
       sort_mru = true,
       previewer = false,
