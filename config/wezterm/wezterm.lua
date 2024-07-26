@@ -21,8 +21,8 @@ config.color_scheme = 'Catppuccin Latte'
 -- config.enable_csi_u_key_encoding = false
 
 config.inactive_pane_hsb = {
-  saturation = 0.85,
-  brightness = 0.95,
+  saturation = 0.80,
+  brightness = 0.90,
 }
 
 config.font = wezterm.font('JetBrains Mono', { weight = 'Medium', italic = false })

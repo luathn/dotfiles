@@ -1,7 +1,8 @@
 vim.o.encoding = "UTF-8"
-vim.o.history = "500"
+vim.opt.updatetime = 100
+-- vim.o.history = "500"
 vim.o.mouse = "a"
-vim.o.noswapfile = true
+-- vim.o.noswapfile = true
 vim.o.backspace = "indent,eol,start"
 vim.api.nvim_command("set whichwrap+=<,>,h,l")
 -- Set to auto read when a file is changed

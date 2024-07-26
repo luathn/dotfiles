@@ -20,6 +20,7 @@ require('fzf-lua').setup({
     width             = 1,            -- window width
     row               = 1,            -- window row position (0=top, 1=bottom)
     col               = 0,            -- window col position (0=left, 1=right)
+    backdrop          = 100,
     preview           = {
       layout          = 'vertical',          -- horizontal|vertical|flex
       vertical        = 'up:50%',
@@ -125,8 +126,9 @@ require('fzf-lua').setup({
 
     scrollborder_f    = "TelescopeSelectionCaret",
     scrollborder_e    = "TelescopeNormal",
+    -- backdrop          = "TelescopePreviewLine",
   },
-
+  -- fzf_colors = true,
   fzf_colors = {
     ["fg"]            = { "fg", "TelescopeNormal" },
     ["bg"]            = { "bg", "TelescopeNormal" },
@@ -142,5 +144,5 @@ require('fzf-lua').setup({
     ["marker"]        = { "fg", "TelescopeSelectionCaret" },
     ["header"]        = { "fg", "TelescopeSelection" },
   },
-  -- defaults         = { git_icons = false, file_icons = false },
+  defaults            = { git_icons = false, file_icons = false },
 })

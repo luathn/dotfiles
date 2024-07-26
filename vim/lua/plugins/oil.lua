@@ -23,7 +23,7 @@ require("oil").setup({
   delete_to_trash = false,
   skip_confirm_for_simple_edits = false,
   prompt_save_on_select_new_entry = true,
-  cleanup_delay_ms = false,
+  cleanup_delay_ms = 10000,
   lsp_file_methods = {
     -- Time to wait for LSP file operations to complete before skipping
     timeout_ms = 1000,

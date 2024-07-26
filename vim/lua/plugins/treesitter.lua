@@ -21,7 +21,7 @@ require"nvim-treesitter.configs".setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = false, -- set to `false` to disable one of the mappings
+      init_selection = "gnn", -- set to `false` to disable one of the mappings
       node_incremental = "<CR>",
       node_decremental = "<BS>",
       scope_incremental = false,
@@ -30,7 +30,6 @@ require"nvim-treesitter.configs".setup {
   textobjects = {
     select = {
       enable = true,
-      -- Automatically jump forward to textobj, similar to targets.vim 
       lookahead = true,
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
@@ -80,8 +79,4 @@ require"nvim-treesitter.configs".setup {
       },
     },
   },
-}
-
-require('ts_context_commentstring').setup {
-  enable_autocmd = false,
 }

@@ -5,8 +5,30 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      { "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
-      { 'JoosepAlviste/nvim-ts-context-commentstring', event = "VeryLazy" }
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        event = "VeryLazy",
+      },
+      {
+        "folke/ts-comments.nvim",
+        opts = {},
+        event = "VeryLazy",
+        enabled = vim.fn.has("nvim-0.10.0") == 1,
+      },
+      {
+        'Wansmer/treesj',
+        keys = require("mappings").treesj,
+        requires = { 'nvim-treesitter' },
+        config = function()
+          require("plugins.treesj")
+        end,
+      },
+      {
+        "windwp/nvim-ts-autotag",
+        config = function()
+          require("plugins.nvim-ts-autotag")
+        end
+      },
     },
     config = function()
       require("plugins.treesitter")
@@ -16,19 +38,6 @@ return {
     "tpope/vim-fugitive",
     keys = require("mappings").vim_fugitive,
     event = "VeryLazy",
-  },
-  {
-    'echasnovski/mini.comment',
-    version = false,
-    config = function()
-      require('mini.comment').setup {
-        options = {
-          custom_commentstring = function()
-            return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
-          end,
-        },
-      }
-    end,
   },
   {
     "kylechui/nvim-surround",
@@ -134,14 +143,6 @@ return {
     end,
   },
   {
-    'Wansmer/treesj',
-    keys = require("mappings").treesj,
-    requires = { 'nvim-treesitter' },
-    config = function()
-      require("plugins.treesj")
-    end,
-  },
-  {
     'kevinhwang91/nvim-bqf',
     dependencies = {'junegunn/fzf'},
   },
@@ -162,12 +163,6 @@ return {
         }
       })
     end,
-  },
-  {
-    "windwp/nvim-ts-autotag",
-    config = function()
-      require("plugins.nvim-ts-autotag")
-    end
   },
   {
     "mfussenegger/nvim-dap",
@@ -258,6 +253,35 @@ return {
       })
     end
   },
+  {
+    'MagicDuck/grug-far.nvim',
+    keys = require("mappings").grug_far,
+    config = function()
+      require('grug-far').setup({
+        prefills = {
+          flags = '-i',
+        },
+        keymaps = {
+          replace = { n = '<localleader>r' },
+          qflist = { n = '<localleader>q' },
+          syncLocations = { n = '<localleader>y' },
+          syncLine = { n = '<localleader>l' },
+          close = { n = 'q' },
+          historyOpen = { n = '<localleader>h' },
+          historyAdd = { n = '<localleader>a' },
+          refresh = { n = '<localleader>f' },
+          gotoLocation = { n = '<enter>' },
+          pickHistoryEntry = { n = '<enter>' },
+          abort = { n = '<c-g>' },
+        },
+      });
+    end
+  },
+  {
+    "tpope/vim-rails",
+    config = function()
+    end
+  }
   -- {
   --   "luckasRanarison/nvim-devdocs",
   --   keys = require("mappings").devdocs,

@@ -29,3 +29,8 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "qf" },
   command = [[nnoremap <buffer> q :cclose<CR>:lclose<CR>]]
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "ruby" },
+  command = [[nnoremap <buffer> <leader>rr :TermExec cmd="ruby %"<CR>]]
+})

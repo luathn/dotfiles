@@ -35,6 +35,11 @@ M.general = {
     -- Open
     ["<leader>oq"]  = { ":copen<CR>", "[O]pen [q]uickfix" },
     ["<leader>ol"]  = { ":lopen<CR>", "[O]pen [l]ocation list" },
+    -- resize
+    ["<C-w>."] = { "<C-w>5>"},
+    ["<C-w><C-.>"] = { "<C-w>5>"},
+    ["<C-w>,"] = { "<C-w>5<"},
+    ["<C-w><C-,>"] = { "<C-w>5<"},
   },
   v = {
     ["<C-S>"]      = { "<C-C>:update<cr>" },
@@ -56,13 +61,13 @@ M.lsp = {
     ["<leader>D"]  = { vim.lsp.buf.type_definition, "Type [D]efinition" },
 
     -- See `:help K` for why this keymap
-    ["K"]          = { vim.lsp.buf.hover, "Hover documentation" },
+    -- ["K"]          = { vim.lsp.buf.hover, "Hover documentation" },
     -- ["<C-k>"]      = { vim.lsp.buf.signature_help, "signature documentation" },
 
     ["<leader>ce"] = { vim.diagnostic.open_float, "Show line diagnostic" },
     ["<leader>cl"] = { vim.diagnostic.setloclist, "Show diagnostic in loc[l]ist" },
-    ["[d"]         = { vim.diagnostic.goto_prev, "Prev [d]iagnostic" },
-    ["]d"]         = { vim.diagnostic.goto_next, "Next [d]iagnostic", },
+    -- ["[d"]         = { vim.diagnostic.goto_prev, "Prev [d]iagnostic" },
+    -- ["]d"]         = { vim.diagnostic.goto_next, "Next [d]iagnostic", },
 
     -- Lesser used LSP functionality
     ["gD"]         = { vim.lsp.buf.declaration, "Go to [D]eclaration" },
@@ -93,10 +98,16 @@ M.neogit = {
 }
 
 M.nvim_spectre = {
-  { "<leader>ss", "<cmd>lua require('spectre').toggle({is_close = true})<cr>", desc = "[S]pectre [s]earch open" },
-  { "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", desc = "[S]earch current [w]ord" },
-  { "<leader>sb", "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", desc = "[S]earch on current [b]uffer"},
-  { "<leader>sw", "<esc><cmd>lua require('spectre').open_visual()<cr>", mode = "v", desc = "[S]earch current [w]ord" },
+  -- { "<leader>ss", "<cmd>lua require('spectre').toggle({is_close = true})<cr>", desc = "[S]pectre [s]earch open" },
+  -- { "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", desc = "[S]earch current [w]ord" },
+  -- { "<leader>sb", "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", desc = "[S]earch on current [b]uffer"},
+  -- { "<leader>sw", "<esc><cmd>lua require('spectre').open_visual()<cr>", mode = "v", desc = "[S]earch current [w]ord" },
+}
+
+M.grug_far = {
+  { "<leader>ss", "<cmd>lua require('grug-far').grug_far()<cr>", desc = "[S]each open" },
+  { "<leader>sw", "<cmd>lua require('grug-far').grug_far({ startInInsertMode = false, prefills = { search = vim.fn.expand('<cword>') } })<cr>", desc = "[S]each [w]ord" },
+  { "<leader>sw", ":<C-u> lua require('grug-far').with_visual_selection({ startInInsertMode = false })<cr>" , mode = "v", desc = "[S]each [w]ord" },
 }
 
 M.nvim_telescope = {
@@ -154,10 +165,11 @@ M.navigator = {
 M.fzf_lua = {
   { "<leader><space>", "<cmd>FzfLua files<CR>", desc = "[f]zf [f]iles" },
   { "<leader>,", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
-  { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({ continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
+  { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({  multiline = 2, continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
   { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", mode = "n", desc = "[f]zf grep [w]ord" },
   { "<leader>fw", "<cmd>FzfLua grep_visual<CR>", mode = "v", desc = "[f]zf grep [w]ord" },
   { "<leader>gc", "<cmd>FzfLua git_branches<CR>", desc = "[G]it [c]heckout branch" },
+  { "<leader>fr", "<cmd>FzfLua resume<CR>", mode = "n", desc = "[f]zf [r]esum" },
 }
 
 M.nvim_dap = {
