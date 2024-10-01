@@ -22,7 +22,7 @@ config.color_scheme = 'Catppuccin Latte'
 
 config.inactive_pane_hsb = {
   saturation = 0.80,
-  brightness = 0.90,
+  brightness = 0.85,
 }
 
 config.font = wezterm.font('JetBrains Mono', { weight = 'Medium', italic = false })
@@ -31,40 +31,10 @@ local function is_vi_process(pane)
   return pane:get_foreground_process_name():find('n?vim') ~= nil
 end
 
--- local super_vim_keys_map = {
---   s = utf8.char(0xAA),
---   x = utf8.char(0xAB),
---   b = utf8.char(0xAC),
---   ['.'] = utf8.char(0xAD),
---   o = utf8.char(0xAF),
--- }
-
--- local function bind_super_key_to_vim(key)
---   return {
---     key = key,
---     mods = 'CMD',
---     action = wezterm.action_callback(function(win, pane)
---       local char = super_vim_keys_map[key]
---       if char and is_vi_process(pane) then
---         -- pass the keys through to vim/nvim
---         win:perform_action({
---         SendKey = { key = char, mods = nil },
---         }, pane)
---       else
---         win:perform_action({
---           SendKey = {
---             key = key,
---             mods = 'CMD'
---           }
---         }, pane)
---       end
---     end)
---   }
--- end
-
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 config.keys = {
+  { key = 'x', mods = 'LEADER', action = act.ActivateCopyMode },
   { key = 'v', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = 's', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
   { key = 'h', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-left') },
@@ -81,7 +51,7 @@ config.keys = {
   { key = 'w', mods = 'LEADER', action = act.PaneSelect { mode = 'SwapWithActive' } },
   { key = '[', mods = 'LEADER', action = act.MoveTabRelative(-1) },
   { key = ']', mods = 'LEADER', action = act.MoveTabRelative(1) },
-  { key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentPane { confirm = true } },
+  { key = 'w', mods = 'CMD', action = act.CloseCurrentPane { confirm = true } },
   {
     key = 'r',
     mods = 'LEADER',
@@ -100,11 +70,10 @@ config.keys = {
       end),
     },
   },
-  -- bind_super_key_to_vim("x"),
 }
 
 for i = 1, 8 do
-  -- CTRL+ALT + number to move to that position
+  -- CTRL+CMD + number to move to that position
   table.insert(config.keys, {
     key = tostring(i),
     mods = 'CTRL|CMD',

@@ -24,7 +24,7 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # Go
 export PATH=$PATH:/usr/local/go/bin
 
-. ~/.zsh/z/z.sh
+eval "$(zoxide init zsh)"
 
 # Openjdk
 # export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

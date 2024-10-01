@@ -36,7 +36,7 @@ bindkey "^p" history-search-backward
 bindkey "^ " autosuggest-accept
 bindkey "jk" vi-cmd-mode
 
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8

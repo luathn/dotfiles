@@ -50,6 +50,10 @@ require('fzf-lua').setup({
         vim.fn.setreg('*', selected[1])
       end,
       ["ctrl-g"]      = "",
+      ["ctrl-f"]      = function(selected)
+        local dir_path = vim.fn.fnamemodify(selected[1], ":h")
+        vim.cmd("Oil " .. dir_path)
+      end,
     },
     winopts           = {
       split           = "botright 15new",  -- open in a full-width split on the bottom

@@ -27,6 +27,7 @@ brew install translate-shell
 brew install bat
 brew install git-delta
 brew install gnu-sed
+brew install p7zip
 
 # brew install lazygit
 
