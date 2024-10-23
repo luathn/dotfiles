@@ -30,7 +30,7 @@ bindkey "^b" backward-char
 bindkey "^f" forward-char
 bindkey "^u" kill-whole-line
 bindkey "^w" backward-kill-word
-bindkey "^s" history-incremental-search-backward
+# bindkey "^s" history-incremental-search-backward
 bindkey "^n" history-search-forward
 bindkey "^p" history-search-backward
 bindkey "^ " autosuggest-accept

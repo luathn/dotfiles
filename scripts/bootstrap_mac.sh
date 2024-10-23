@@ -36,20 +36,21 @@ brew install --cask slack
 brew install --cask zoom
 brew install --cask tableplus
 brew install --cask cloudflare-warp
-brew install --cask webtorrent
 brew install --cask iina
 brew install --cask alfred
 brew install --cask transmission
-brew install --cask rectangle
-brew install --cask visual-studio-code
 brew install --cask anki
 brew install --cask wezterm
-brew install --cask obsidian
 brew install --cask telegram
 
+# brew install --cask obsidian
+# brew install --cask visual-studio-code
 # brew install --cask iterm2
+# brew install --cask rectangle
+# brew install --cask webtorrent
 # brew install --cask notion
 # brew install --cask background-music
 # brew install --cask teamviewer
+# brew install bluesnooze # turn off bluetooth when sleep
 
 # 1password

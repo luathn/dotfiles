@@ -110,18 +110,6 @@ M.grug_far = {
   { "<leader>sw", ":<C-u> lua require('grug-far').with_visual_selection({ startInInsertMode = false })<cr>" , mode = "v", desc = "[S]each [w]ord" },
 }
 
-M.nvim_telescope = {
-  -- { "<leader><leader>", "<cmd>lua require('telescope.builtin').find_files(no_preview)<cr>", desc = "Find files" },
-  -- { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(require'telescope.themes'.get_ivy())<cr>", desc = "[F]ind [f]ile" },
-  { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(my_theme)<cr>", desc = "[F]ind [f]ile" },
-  { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers(half_screen)<cr>", desc = "Find [b]uffers" },
-  -- { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep(my_theme)<cr>", desc = "[F]ind by live[g]rep" },
-  -- { "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string(my_theme)<cr>", desc = "[F]ind current [w]ord" },
-  -- { "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<cr>", desc = "[F]ind [r]esume" },
-  -- { "<leader>gc", "<cmd>lua require('telescope.builtin').git_branches()<cr>", desc = "[G]it [c]heckout branch" },
-  { "<leader>fp", "<cmd>lua require('telescope.builtin').find_files(opts = {search_dirs = { vim.fn.expand('%p:h') }})<cr>", desc = "[F]ind current [p]ath" },
-}
-
 M.oil = {
   { "-", "<cmd>lua require('oil').open()<cr>", desc = "Open parent directory" },
 }
@@ -165,6 +153,7 @@ M.navigator = {
 M.fzf_lua = {
   { "<leader><space>", "<cmd>FzfLua files<CR>", desc = "[f]zf [f]iles" },
   { "<leader>,", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
+  { "<leader>/", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
   { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({  multiline = 2, continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
   { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", mode = "n", desc = "[f]zf grep [w]ord" },
   { "<leader>fw", "<cmd>FzfLua grep_visual<CR>", mode = "v", desc = "[f]zf grep [w]ord" },
@@ -181,6 +170,40 @@ M.devdocs = {
   { "<leader>dd", "<cmd>DevdocsOpen<cr>", desc = "[d]ev [d]ocs open" },
   { "<leader>df", "<cmd>DevdocsOpenFloat<cr>", desc = "[d]evdocs open [f]loat" },
 }
+
+M.copilot_chat = {
+  {
+    "<leader>ch",
+    function()
+      local actions = require("CopilotChat.actions")
+      require("CopilotChat.integrations.fzflua").pick(actions.help_actions())
+    end,
+    mode = { "n", "v" },
+    desc = "CopilotChat - Help actions",
+  },
+  -- Show prompts actions with fzf-lua
+  {
+    "<leader>cp",
+    function()
+      local actions = require("CopilotChat.actions")
+      require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions())
+    end,
+    mode = { "n", "v" },
+    desc = "CopilotChat - Prompt actions",
+  }
+}
+
+-- M.nvim_telescope = {
+--   { "<leader><leader>", "<cmd>lua require('telescope.builtin').find_files(no_preview)<cr>", desc = "Find files" },
+--   { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(require'telescope.themes'.get_ivy())<cr>", desc = "[F]ind [f]ile" },
+--   { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(my_theme)<cr>", desc = "[F]ind [f]ile" },
+--   { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers(half_screen)<cr>", desc = "Find [b]uffers" },
+--   { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep(my_theme)<cr>", desc = "[F]ind by live[g]rep" },
+--   { "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string(my_theme)<cr>", desc = "[F]ind current [w]ord" },
+--   { "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<cr>", desc = "[F]ind [r]esume" },
+--   { "<leader>gc", "<cmd>lua require('telescope.builtin').git_branches()<cr>", desc = "[G]it [c]heckout branch" },
+--   { "<leader>fp", "<cmd>lua require('telescope.builtin').find_files(opts = {search_dirs = { vim.fn.expand('%p:h') }})<cr>", desc = "[F]ind current [p]ath" },
+-- }
 
 -- M.fzf = {
 --   { "<leader><space>", ":Files<CR>", desc = "fzf files" },

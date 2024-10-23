@@ -1,11 +1,6 @@
 -- calling `setup` is optional for customization
 local actions = require "fzf-lua.actions"
 
-local fg_bg = require("core.utils").fg_bg
-local colors = require("colors").get()
-
-fg_bg("FzfLuaPreviewBorder", colors.fg_light, colors.bg_dark)
-
 local get_buffer_name = function (selected)
   local bufnr = tonumber(string.match(selected[1], "%[(%d+)"))
   return vim.fn.bufname(bufnr)

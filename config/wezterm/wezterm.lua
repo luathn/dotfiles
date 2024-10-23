@@ -7,6 +7,8 @@ if wezterm.config_builder then
 end
 
 config.use_fancy_tab_bar = false
+-- config.hide_tab_bar_if_only_one_tab = true
+
 config.window_padding = {
   left = 0,
   right = 0,
@@ -26,6 +28,7 @@ config.inactive_pane_hsb = {
 }
 
 config.font = wezterm.font('JetBrains Mono', { weight = 'Medium', italic = false })
+config.font_size = 13
 
 local function is_vi_process(pane)
   return pane:get_foreground_process_name():find('n?vim') ~= nil
@@ -34,7 +37,7 @@ end
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 config.keys = {
-  { key = 'x', mods = 'LEADER', action = act.ActivateCopyMode },
+  { key = 'Enter', mods = 'LEADER', action = act.ActivateCopyMode },
   { key = 'v', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = 's', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
   { key = 'h', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-left') },
@@ -52,12 +55,11 @@ config.keys = {
   { key = '[', mods = 'LEADER', action = act.MoveTabRelative(-1) },
   { key = ']', mods = 'LEADER', action = act.MoveTabRelative(1) },
   { key = 'w', mods = 'CMD', action = act.CloseCurrentPane { confirm = true } },
-  {
-    key = 'r',
-    mods = 'LEADER',
-    action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, timeout_milliseconds = 500 },
-  },
+  { key = 'x', mods = 'LEADER', action = act.CloseCurrentPane { confirm = true } },
+  { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, timeout_milliseconds = 500 } },
   { key = '!', mods = 'LEADER', action = act.PaneSelect { mode = 'MoveToNewTab' } },
+  { key = 'n', mods = 'LEADER', action = act.ActivateTabRelative(1) },
+  { key = 'p', mods = 'LEADER', action = act.ActivateTabRelative(-1) },
   {
     key = ',',
     mods = 'LEADER',

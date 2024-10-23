@@ -10,13 +10,11 @@ require"nvim-treesitter.configs".setup {
     "go",
   },
   -- ignore_install = { "javascript" },
-  indent = {
-    enable = true,
-  },
+  indent = { enable = true, disable = { 'ruby' } },
   highlight = {
     enable = true,
     -- disable = { "c", "rust" },
-    additional_vim_regex_highlighting = false,
+    additional_vim_regex_highlighting = { 'ruby' },
   },
   incremental_selection = {
     enable = true,
@@ -59,23 +57,6 @@ require"nvim-treesitter.configs".setup {
       goto_previous_end = {
         ["[M"] = "@function.outer",
         ["[]"] = "@class.outer",
-      },
-    },
-    -- lsp_interop = {
-    --   enable = true,
-    --   border = "none",
-    --   peek_definition_code = {
-    --     ["<leader>df"] = "@function.outer",
-    --     ["<leader>dF"] = "@class.outer",
-    --   },
-    -- },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<leader>a"] = "@parameter.inner",
-      },
-      swap_previous = {
-        ["<leader>A"] = "@parameter.inner",
       },
     },
   },

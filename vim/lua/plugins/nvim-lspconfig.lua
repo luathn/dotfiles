@@ -4,6 +4,7 @@ end
 
 local servers = {
   solargraph = {},
+  -- ruby_lsp = {},
   ts_ls = {},
   -- vtsls = {},
   lua_ls = {},
@@ -21,6 +22,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = false,
   }
 )
+
+vim.diagnostic.config({
+  virtual_text = false,
+})
 
 -- Mason lspconfig
 -- ensure_installed_eg =  { 'eslint_d' }
