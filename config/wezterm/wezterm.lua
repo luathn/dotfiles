@@ -1,38 +1,23 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
+local utils = require 'utils'
 local config = {}
 
 if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-config.use_fancy_tab_bar = false
--- config.hide_tab_bar_if_only_one_tab = true
-
-config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 0,
-  bottom = 0,
+config = {
+  -- UI
+  use_fancy_tab_bar = false,
+  window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
+  window_decorations = "RESIZE",
+  -- hide_tab_bar_if_only_one_tab = true,
+  color_scheme = 'Catppuccin Latte',
+  inactive_pane_hsb = { saturation = 0.80, brightness = 0.85 },
+  font = wezterm.font('JetBrains Mono', { weight = 'Medium', italic = false }),
+  font_size = 13,
 }
-config.window_decorations = "RESIZE"
-
-config.color_scheme = 'Catppuccin Latte'
-
--- config.enable_kitty_keyboard = true
--- config.enable_csi_u_key_encoding = false
-
-config.inactive_pane_hsb = {
-  saturation = 0.80,
-  brightness = 0.85,
-}
-
-config.font = wezterm.font('JetBrains Mono', { weight = 'Medium', italic = false })
-config.font_size = 13
-
-local function is_vi_process(pane)
-  return pane:get_foreground_process_name():find('n?vim') ~= nil
-end
 
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
@@ -44,14 +29,10 @@ config.keys = {
   { key = 'j', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-down') },
   { key = 'k', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-up') },
   { key = 'l', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-right') },
-  { key = 'H', mods = 'LEADER', action = act.AdjustPaneSize { 'Left', 2 }, },
-  { key = 'J', mods = 'LEADER', action = act.AdjustPaneSize { 'Down', 2 } },
-  { key = 'K', mods = 'LEADER', action = act.AdjustPaneSize { 'Up', 2 } },
-  { key = 'L', mods = 'LEADER', action = act.AdjustPaneSize { 'Right', 2 } },
   { key = 'f', mods = 'LEADER', action = act.TogglePaneZoomState },
   { key = 'z', mods = 'LEADER', action = act.ToggleFullScreen },
   { key = '/', mods = 'LEADER', action = act.Search { CaseInSensitiveString = '' } },
-  { key = 'w', mods = 'LEADER', action = act.PaneSelect { mode = 'SwapWithActive' } },
+  { key = 'm', mods = 'LEADER', action = act.PaneSelect { mode = 'SwapWithActiveKeepFocus' } },
   { key = '[', mods = 'LEADER', action = act.MoveTabRelative(-1) },
   { key = ']', mods = 'LEADER', action = act.MoveTabRelative(1) },
   { key = 'w', mods = 'CMD', action = act.CloseCurrentPane { confirm = true } },
@@ -61,7 +42,7 @@ config.keys = {
   { key = 'n', mods = 'LEADER', action = act.ActivateTabRelative(1) },
   { key = 'p', mods = 'LEADER', action = act.ActivateTabRelative(-1) },
   {
-    key = ',',
+    key = '.',
     mods = 'LEADER',
     action = act.PromptInputLine {
       description = 'Enter new name for tab',
@@ -72,10 +53,87 @@ config.keys = {
       end),
     },
   },
+  -- { key = 'l', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
+  {
+    key = "l",
+    mods = "LEADER",
+    action = wezterm.action_callback(function(window, pane)
+      local choices = {}
+      local workspace_names = wezterm.mux.get_workspace_names()
+      for _, name in ipairs(workspace_names) do
+        table.insert(choices, { label = name })
+      end
+
+      window:perform_action(
+        act.InputSelector {
+          action = wezterm.action_callback(
+            function(_, _, _, label)
+              wezterm.mux.set_active_workspace(label)
+            end
+          ),
+          title = 'Choose Workspace',
+          choices = choices,
+          fuzzy = true,
+          fuzzy_description = 'Switch to workspace: ',
+        },
+        pane
+      )
+    end),
+  },
+  {
+    key = ',',
+    mods = 'LEADER',
+    action = act.PromptInputLine {
+      description = 'Rename workspace',
+      action = wezterm.action_callback(function(_, _, line)
+        if line then
+          wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+        end
+      end),
+    },
+  },
+  {
+    key = 'w',
+    mods = 'LEADER',
+    action = act.PromptInputLine {
+      description = 'Enter name for new workspace',
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
+        end
+      end),
+    },
+  },
+  {
+    key = "k",
+    mods = "LEADER",
+    action = wezterm.action_callback(function(window, pane)
+      local choices = {}
+      local workspace_names = wezterm.mux.get_workspace_names()
+      for _, name in ipairs(workspace_names) do
+        table.insert(choices, { label = name })
+      end
+
+      window:perform_action(
+        act.InputSelector {
+          action = wezterm.action_callback(
+            function(_, _, _, label)
+              utils.kill_workspace(label)
+            end
+          ),
+          title = 'Choose Workspace',
+          choices = choices,
+          fuzzy = true,
+          fuzzy_description = 'Kill workspace: ',
+        },
+        pane
+      )
+    end),
+  },
 }
 
+-- CTRL+CMD + number to move to that position
 for i = 1, 8 do
-  -- CTRL+CMD + number to move to that position
   table.insert(config.keys, {
     key = tostring(i),
     mods = 'CTRL|CMD',
@@ -92,6 +150,10 @@ config.key_tables = {
     { key = 'Escape', action = 'PopKeyTable' },
   },
 }
+
+local function is_vi_process(pane)
+  return pane:get_foreground_process_name():find('n?vim') ~= nil
+end
 
 local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
   if is_vi_process(pane) then
@@ -117,5 +179,8 @@ wezterm.on('ActivatePaneDirection-down', function(window, pane)
   conditionalActivatePane(window, pane, 'Down', 'j')
 end)
 
--- and finally, return the configuration to wezterm
+wezterm.on('update-right-status', function(window, pane)
+  window:set_right_status(window:active_workspace())
+end)
+
 return config

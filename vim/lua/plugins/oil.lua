@@ -56,11 +56,10 @@ require("oil").setup({
     ["g\\"] = "actions.toggle_trash",
     ["<leader>ss"] = {
       callback = function()
-        -- get the current directory
-        local prefills = { paths = require("oil").get_current_dir() }
+        local dir = require("oil").get_current_dir()
+        local prefills = { paths = vim.fn.fnamemodify(dir, ":~:.") }
 
         local grug_far = require "grug-far"
-        -- instance check
         if not grug_far.has_instance "explorer" then
           grug_far.open {
             instanceName = "explorer",
@@ -69,7 +68,6 @@ require("oil").setup({
           }
         else
           grug_far.open_instance "explorer"
-          -- updating the prefills without clearing the search and other fields
           grug_far.update_instance_prefills("explorer", prefills, false)
         end
       end,

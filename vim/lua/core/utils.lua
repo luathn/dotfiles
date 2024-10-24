@@ -29,9 +29,9 @@ end
 
 -- Load mappings - inspired by NVchad
 
-M.load_mappings = function(section, mapping_opts)
+M.load_mappings = function(section, mapping_opts, source_mappings)
   vim.schedule(function()
-    local mappings = require("mappings")[section]
+    local mappings = source_mappings or require("mappings")[section]
     local default_opts = vim.tbl_deep_extend("force", {}, mapping_opts or {})
 
     for mode, mode_mappings in pairs(mappings) do

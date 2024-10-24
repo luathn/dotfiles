@@ -1,3 +1,5 @@
+local mappings = require("mappings")
+
 return {
   { "nvim-tree/nvim-web-devicons" },
   { "nvim-lua/plenary.nvim" },
@@ -11,7 +13,7 @@ return {
   },
   {
     'Wansmer/treesj',
-    keys = require("mappings").treesj,
+    keys = mappings.treesj,
     event = "VeryLazy",
     config = function() require("plugins.treesj") end,
   },
@@ -47,7 +49,7 @@ return {
   -- Main plugins
   {
     "tpope/vim-fugitive",
-    keys = require("mappings").vim_fugitive,
+    keys = mappings.vim_fugitive,
     event = "VeryLazy",
   },
   {
@@ -58,7 +60,7 @@ return {
   },
   {
     "numToStr/Navigator.nvim",
-    keys = require("mappings").navigator,
+    keys = mappings.navigator,
     config = function() require('Navigator').setup() end,
   },
   {
@@ -84,7 +86,7 @@ return {
   },
   {
     "TimUntersberger/neogit",
-    keys = require("mappings").neogit,
+    keys = mappings.neogit,
     event = "VeryLazy",
     config = function()
       require("plugins.neogit")
@@ -92,7 +94,7 @@ return {
   },
   {
     "sindrets/diffview.nvim",
-    keys = require("mappings").diffview,
+    keys = mappings.diffview,
     event = "VeryLazy",
     config = function()
       require("plugins.diffview")
@@ -100,7 +102,7 @@ return {
   },
   {
     "ojroques/nvim-bufdel",
-    keys = require("mappings").nvim_bufdel,
+    keys = mappings.nvim_bufdel,
     event = "VeryLazy",
     commit = "9f1ed6e",
     config = function()
@@ -109,7 +111,7 @@ return {
   },
   {
     "vim-test/vim-test",
-    keys = require("mappings").vim_test,
+    keys = mappings.vim_test,
     config = function()
       require("plugins.vim_test")
     end,
@@ -127,13 +129,6 @@ return {
       vim.cmd.colorscheme "catppuccin-latte"
     end,
   },
-  -- {
-  --   'echasnovski/mini.statusline',
-  --   version = false,
-  --   init = function()
-  --     require('mini.statusline').setup()
-  --   end,
-  -- },
   {
     "nvim-lualine/lualine.nvim",
     config = function()
@@ -142,7 +137,7 @@ return {
   },
   {
     "stevearc/oil.nvim",
-    keys = require("mappings").oil,
+    keys = mappings.oil,
     event = "VeryLazy",
     config = function()
       require("plugins.oil")
@@ -151,7 +146,7 @@ return {
   {
     "ibhagwan/fzf-lua",
     event = "VeryLazy",
-    keys = require("mappings").fzf_lua,
+    keys = mappings.fzf_lua,
     config = function()
       require("plugins.fzf-lua")
     end
@@ -159,7 +154,7 @@ return {
   {
     'MagicDuck/grug-far.nvim',
     event = "VeryLazy",
-    keys = require("mappings").grug_far,
+    keys = mappings.grug_far,
     config = function()
       require("plugins.grug_far")
     end
@@ -234,7 +229,7 @@ return {
       debug = true, -- Enable debugging
       -- See Configuration section for rest
     },
-    keys = require("mappings").copilot_chat,
+    keys = mappings.copilot_chat,
   },
   {
     'echasnovski/mini.ai',

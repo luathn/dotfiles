@@ -4,86 +4,25 @@ local silent_noremap = { silent = true, noremap = true }
 
 M.general = {
   n = {
-    ["<C-S>"]      = { ":update<cr>" },
-    -- Copy file path
+    ["gp"]         = { "`[v`]" },
     ["gyn"]        = { ":let @+=expand('%:t')<cr>", "[Y]ank [n]ame" },
-    ["gys"]       = { ":let @+=expand('%')<cr>", "[Y]ank [s]hort [p]ath" },
-    ["gyp"]       = { ":let @+=expand('%:h')<cr>", "[Y]ank [s]hort [p]ath" },
-    ["gyf"]       = { ":let @+=expand('%:p')<cr>", "[Y]ank [f]ull [p]ath" },
-    -- Manage windows
-    -- ["<leader>wv"] = { "<C-W>v", "Split [w]indow [v]ertical" },
-    -- ["<leader>ws"] = { "<C-W>s", "Split [w]indow [s]plit horizontal" },
-    -- ["<leader>wq"] = { "<C-W>q", "[W]indow [q]uit" },
-    -- ["<leader>wh"] = { "<C-W>h", "[W]indow left [h]" },
-    -- ["<leader>wj"] = { "<C-W>j", "[W]indow down [j]" },
-    -- ["<leader>wk"] = { "<C-W>k", "[W]indow up [k]" },
-    -- ["<leader>wl"] = { "<C-W>l", "[W]indow right [l]" },
-    -- ["<leader>wH"] = { "<C-W>H", "Move [w]indow left [H]" },
-    -- ["<leader>wJ"] = { "<C-W>J", "Move [w]indow down [J]" },
-    -- ["<leader>wK"] = { "<C-W>K", "Move [w]indow up [K]" },
-    -- ["<leader>wL"] = { "<C-W>L", "Move [w]indow right [L]" },
-    -- ["<leader>w>"] = { "<C-W>>", "Increase [w]indow width [>]" },
-    -- ["<leader>w<"] = { "<C-W><", "Iecrease [w]indow width [<]" },
-    -- ["<leader>w+"] = { "<C-W>+", "Increase [w]indow height [+]" },
-    -- ["<leader>w-"] = { "<C-W>-", "Decrease [w]indow height [-]" },
-    -- ["<leader>w="] = { "<C-W>=", "Make [w]indow [=]" },
-    -- Manage tabs
+    ["gys"]        = { ":let @+=expand('%')<cr>", "[Y]ank [s]hort [p]ath" },
+    ["gyp"]        = { ":let @+=expand('%:h')<cr>", "[Y]ank [s]hort [p]ath" },
+    ["gyf"]        = { ":let @+=expand('%:p')<cr>", "[Y]ank [f]ull [p]ath" },
     ["<leader>tc"] = { ":tabnew<cr>", "[T]ab [c]reate" },
     ["<leader>tx"] = { ":tabclose<cr>", "[T]ab close [x]" },
-    -- Turn off search highlight
-    ["<esc>"]  = { ":noh<cr><esc>", "[/] No highlight" },
-    -- Open
-    ["<leader>oq"]  = { ":copen<CR>", "[O]pen [q]uickfix" },
-    ["<leader>ol"]  = { ":lopen<CR>", "[O]pen [l]ocation list" },
-    -- resize
-    ["<C-w>."] = { "<C-w>5>"},
-    ["<C-w><C-.>"] = { "<C-w>5>"},
-    ["<C-w>,"] = { "<C-w>5<"},
-    ["<C-w><C-,>"] = { "<C-w>5<"},
-  },
-  v = {
-    ["<C-S>"]      = { "<C-C>:update<cr>" },
+    ["<esc>"]      = { ":noh<cr><esc>", "[/] No highlight" },
+    ["<leader>oq"] = { ":copen<CR>", "[O]pen [q]uickfix" },
+    ["<leader>ol"] = { ":lopen<CR>", "[O]pen [l]ocation list" },
+    ["<C-.>"]      = { "" },
+    ["<C-w>."]     = { "<C-w>5>" },
+    ["<C-w><C-.>"] = { "<C-w>5>" },
+    ["<C-w>,"]     = { "<C-w>5<" },
+    ["<C-w><C-,>"] = { "<C-w>5<" },
   },
   i = {
     ["jk"]         = { "<Esc>" },
-    ["<C-S>"]      = { "<Esc>:update<cr>" },
   },
-}
-
-M.lsp = {
-  n = {
-    ["<leader>cr"] = { vim.lsp.buf.rename, "[C]ode [R]ename" },
-    ["<leader>ca"] = { vim.lsp.buf.code_action, "[C]ode [a]ction" },
-
-    ["gd"]         = { vim.lsp.buf.definition, "Go to [d]efinition" },
-    ["gr"]         = { vim.lsp.buf.references, "Go to [r]eference" },
-    ["gI"]         = { vim.lsp.buf.implementation, "Go to [I]mplementation" },
-    ["<leader>D"]  = { vim.lsp.buf.type_definition, "Type [D]efinition" },
-
-    -- See `:help K` for why this keymap
-    -- ["K"]          = { vim.lsp.buf.hover, "Hover documentation" },
-    -- ["<C-k>"]      = { vim.lsp.buf.signature_help, "signature documentation" },
-
-    ["<leader>ce"] = { vim.diagnostic.open_float, "Show line diagnostic" },
-    ["<leader>cl"] = { vim.diagnostic.setloclist, "Show diagnostic in loc[l]ist" },
-    -- ["[d"]         = { vim.diagnostic.goto_prev, "Prev [d]iagnostic" },
-    -- ["]d"]         = { vim.diagnostic.goto_next, "Next [d]iagnostic", },
-
-    -- Lesser used LSP functionality
-    ["gD"]         = { vim.lsp.buf.declaration, "Go to [D]eclaration" },
-    ["<leader>wa"] = { vim.lsp.buf.add_workspace_folder, "[W]orkspace [a]dd Folder" },
-    ["<leader>wr"] = { vim.lsp.buf.remove_workspace_folder, "[W]orkspace [r]emove folder" },
-    ["<leader>wf"] = {
-      function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end,
-      "[W]orkspace list [f]olders"
-    },
-    ["<leader>cf"] = { vim.lsp.buf.format, "[C]ode format" },
-  },
-  v = {
-    ["<leader>cf"] = { vim.lsp.buf.format, "[C]ode format" },
-  }
 }
 
 M.diffview = {
@@ -95,13 +34,6 @@ M.neogit = {
   { "<leader>gg", ":Neogit<cr>", desc = "[G]it status" },
   { "<leader>gl", ":Neogit log<cr>", desc = "[G]it [l]og" },
   { "<leader>gb", ":Neogit branch<cr>", desc = "[G]it [b]ranch" },
-}
-
-M.nvim_spectre = {
-  -- { "<leader>ss", "<cmd>lua require('spectre').toggle({is_close = true})<cr>", desc = "[S]pectre [s]earch open" },
-  -- { "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", desc = "[S]earch current [w]ord" },
-  -- { "<leader>sb", "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", desc = "[S]earch on current [b]uffer"},
-  -- { "<leader>sw", "<esc><cmd>lua require('spectre').open_visual()<cr>", mode = "v", desc = "[S]earch current [w]ord" },
 }
 
 M.grug_far = {
@@ -214,30 +146,11 @@ M.copilot_chat = {
 --   { "<leader>fg", ":Rg <C-R><C-W><CR>", desc = "[f]zf [g]rep" },
 -- }
 
--- M.nvim_tree = {
---   { "<leader>oe", ":NvimTreeToggle<cr>" },
---   { "<leader>mr", ":NvimTreeRefresh<cr>" },
---   { "<leader>mf", "<cmd>lua require('nvim-tree.api').tree.find_file({ open = true, focus = true })<cr>" },
--- }
-
--- M.ctrlsf = {
---   { "<C-F>f", "<Plug>CtrlSFPrompt" },
---   { "<C-F>n", "<Plug>CtrlSFCwordPath" },
---   { "<C-F>p", "<Plug>CtrlSFPwordPath" },
---   { "<C-F>o", ":CtrlSFOpen<cr>" },
---   { "<C-F>t", ":CtrlSFToggle<cr>" },
---   { "<C-F>f", "<Plug>CtrlSFVwordPath", mode = "v" },
---   { "<C-F>F", "<Plug>CtrlSFVwordExec", mode = "v" },
---   { "<C-F>t", "<Esc>:CtrlSFToggle<cr>", mode = "i" },
--- }
-
--- M.bufferline = {
---   { "]b", ":BufferLineCycleNext<cr>", desc = "[l] Next buffer" },
---   { "[b", ":BufferLineCyclePrev<cr>", desc = "[h] Previous buffer" },
---   { "<leader>bl", ":BufferLineMoveNext<cr>", desc = "Move [b]uffer [l]eft" },
---   { "<leader>bh", ":BufferLineMovePrev<cr>", desc = "Move [b]uffer rig[h]t" },
---   { "<leader>bp", ":BufferLineTogglePin<cr>", desc = "Toggle [b]uffer [p]in" },
---   { "<leader>bX", ":BufferLineGroupClose ungrouped<cr>", desc =  "Non-pinned [bX]uffer delete"  },
+-- M.nvim_spectre = {
+  -- { "<leader>ss", "<cmd>lua require('spectre').toggle({is_close = true})<cr>", desc = "[S]pectre [s]earch open" },
+  -- { "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", desc = "[S]earch current [w]ord" },
+  -- { "<leader>sb", "<cmd>lua require('spectre').open_file_search({select_word=true})<cr>", desc = "[S]earch on current [b]uffer"},
+  -- { "<leader>sw", "<esc><cmd>lua require('spectre').open_visual()<cr>", mode = "v", desc = "[S]earch current [w]ord" },
 -- }
 
 return M
