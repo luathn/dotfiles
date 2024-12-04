@@ -9,15 +9,13 @@ export PATH=$HOME/.local/bin:$PATH
 # Add homebrew
 export PATH=/opt/homebrew/bin:$PATH
 
+# oh-my-zsh config
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="amuse"
-
+# export ZSH="$HOME/.oh-my-zsh"
+# ZSH_THEME="amuse"
 # docker docker-compose ruby tmux rails
-plugins=(vi-mode git)
-
-source $ZSH/oh-my-zsh.sh
+# plugins=(vi-mode git)
+# source $ZSH/oh-my-zsh.sh
 
 # Key binding #################################################################
 stty -ixon
@@ -54,16 +52,21 @@ esac
 export GOPATH="$(go env GOPATH)"
 export PATH=${GOPATH}/bin:$PATH
 
-# export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk
+alias ls="ls --color=auto"
+alias gst="git status"
 
 # Zsh Defer
-
 zsh-defer source ~/.zsh/zsh-fzf.zsh
 zsh-defer source ~/.zsh/zsh-export-path.zsh
 zsh-defer source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 zsh-defer source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 zsh-defer source ~/.zsh_local
+
+# Powerlevel10k
+source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

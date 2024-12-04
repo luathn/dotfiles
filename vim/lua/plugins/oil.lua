@@ -2,12 +2,9 @@ require("oil").setup({
   default_file_explorer = true,
   columns = {
     "icon",
-    -- "size",
-    -- "permissions",
-    -- "mtime",
   },
   buf_options = {
-    buflisted = true,
+    buflisted = false,
     bufhidden = "hide",
   },
   win_options = {
@@ -26,7 +23,7 @@ require("oil").setup({
   cleanup_delay_ms = 10000,
   lsp_file_methods = {
     -- Time to wait for LSP file operations to complete before skipping
-    timeout_ms = 1000,
+    timeout_ms = 2000,
     -- Set to true to autosave buffers that are updated with LSP willRenameFiles
     -- Set to "unmodified" to only save unmodified buffers
     autosave_changes = false,
@@ -39,12 +36,12 @@ require("oil").setup({
   keymaps = {
     ["g?"] = "actions.show_help",
     ["<CR>"] = "actions.select",
-    ["<C-v>"] = "actions.select_vsplit",
-    ["<C-s>"] = "actions.select_split",
-    ["<C-t>"] = "actions.select_tab",
+    ["<C-v>"] = { "actions.select", opts = { vertical = true } },
+    ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
+    ["<C-t>"] = { "actions.select", opts = { tab = true } },
     ["<C-p>"] = "actions.preview",
-    ["<C-c>"] = "actions.close",
-    ["q"] = "actions.close",
+    ["<C-c>"] = { "actions.close", mode = "n" },
+    ["gq"] = "actions.close",
     ["<C-r>"] = "actions.refresh",
     ["-"] = "actions.parent",
     ["_"] = "actions.open_cwd",

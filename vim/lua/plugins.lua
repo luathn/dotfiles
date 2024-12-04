@@ -1,6 +1,7 @@
 local mappings = require("mappings")
 
 return {
+  { "dstein64/vim-startuptime" },
   { "nvim-tree/nvim-web-devicons" },
   { "nvim-lua/plenary.nvim" },
   -- Treesitter
@@ -10,6 +11,10 @@ return {
     config = function()
       require("plugins.treesitter")
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = "VeryLazy",
   },
   {
     'Wansmer/treesj',
@@ -30,10 +35,6 @@ return {
       require("plugins.nvim-ts-autotag")
     end,
   },
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "VeryLazy",
-  },
   -- LSP
   {
     "neovim/nvim-lspconfig",
@@ -46,11 +47,37 @@ return {
       require("plugins.nvim-lspconfig")
     end,
   },
-  -- Main plugins
+  -- Base plugins
   {
-    "tpope/vim-fugitive",
-    keys = mappings.vim_fugitive,
+    "numToStr/Navigator.nvim",
+    keys = mappings.navigator,
+    config = function() require('Navigator').setup() end,
+  },
+  -- Mini
+  {
+    'echasnovski/mini.pick',
+    version = false,
     event = "VeryLazy",
+    config = function()
+      require("plugins.mini_pick")
+    end,
+    keys = mappings.mini_pick,
+  },
+  {
+    'echasnovski/mini.extra',
+    event = "VeryLazy",
+    version = false,
+    config = function()
+      require('mini.extra').setup()
+    end
+  },
+  {
+    "echasnovski/mini.surround",
+    event = "VeryLazy",
+    version = false,
+    config = function()
+      require('plugins.mini_surround')
+    end,
   },
   {
     "kylechui/nvim-surround",
@@ -59,15 +86,54 @@ return {
     opts = {},
   },
   {
-    "numToStr/Navigator.nvim",
-    keys = mappings.navigator,
-    config = function() require('Navigator').setup() end,
+    'echasnovski/mini.pairs',
+    event = "VeryLazy",
+    version = false,
+    config = function()
+      require('mini.pairs').setup()
+    end
   },
   {
-    "windwp/nvim-autopairs",
-    event = "VeryLazy",
-    opts = {},
+    'echasnovski/mini.statusline',
+    version = false,
+    config = function()
+      require('plugins.mini_statusline')
+    end
   },
+  {
+    'echasnovski/mini-git',
+    event = "VeryLazy",
+    version = false,
+    main = 'mini.git',
+    config = function()
+      require('plugins.mini_git')
+    end,
+    keys = mappings.mini_git,
+  },
+  {
+    'echasnovski/mini.bufremove',
+    event = "VeryLazy",
+    version = false,
+    keys = mappings.mini_bufremove,
+    config = function()
+      require('plugins.mini_bufremove')
+    end,
+  },
+  -- {
+  --   'echasnovski/mini.files',
+  --   version = false,
+  --   config = function()
+  --     require('mini.files').setup()
+  --   end
+  -- },
+  -- {
+  --   'echasnovski/mini.completion',
+  --   event = "VeryLazy",
+  --   version = false,
+  --   config = function()
+  --     require('mini.completion').setup()
+  --   end,
+  -- },
   {
     "hrsh7th/nvim-cmp",
     event = "VeryLazy",
@@ -79,9 +145,9 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-      "rafamadriz/friendly-snippets",
+      -- "L3MON4D3/LuaSnip",
+      -- "saadparwaiz1/cmp_luasnip",
+      -- "rafamadriz/friendly-snippets",
     },
   },
   {
@@ -101,15 +167,6 @@ return {
     end,
   },
   {
-    "ojroques/nvim-bufdel",
-    keys = mappings.nvim_bufdel,
-    event = "VeryLazy",
-    commit = "9f1ed6e",
-    config = function()
-      require("plugins.nvim_bufdel")
-    end,
-  },
-  {
     "vim-test/vim-test",
     keys = mappings.vim_test,
     config = function()
@@ -123,33 +180,19 @@ return {
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({
-        flavour = "latte",
+        flavour = "frappe",
         no_bold = true,
       })
-      vim.cmd.colorscheme "catppuccin-latte"
-    end,
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("plugins.lualine")
+      vim.cmd.colorscheme "catppuccin-frappe"
     end,
   },
   {
     "stevearc/oil.nvim",
-    keys = mappings.oil,
     event = "VeryLazy",
+    keys = mappings.oil,
     config = function()
       require("plugins.oil")
     end,
-  },
-  {
-    "ibhagwan/fzf-lua",
-    event = "VeryLazy",
-    keys = mappings.fzf_lua,
-    config = function()
-      require("plugins.fzf-lua")
-    end
   },
   {
     'MagicDuck/grug-far.nvim',
@@ -159,16 +202,20 @@ return {
       require("plugins.grug_far")
     end
   },
-  { "tpope/vim-rails", config = function() end },
-  -- Test
   {
-    'akinsho/toggleterm.nvim',
+    "tpope/vim-rails",
     event = "VeryLazy",
-    version = "*",
-    config = function()
-      require("plugins.toggleterm")
-    end
+    config = function() end,
   },
+  -- Test
+  -- {
+  --   'akinsho/toggleterm.nvim',
+  --   event = "VeryLazy",
+  --   version = "*",
+  --   config = function()
+  --     require("plugins.toggleterm")
+  --   end
+  -- },
   {
     "nvimtools/none-ls.nvim",
     event = "VeryLazy",
@@ -189,37 +236,9 @@ return {
     end
   },
   {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    version = false,
-    opts = require("plugins.avante"),
-    build = "make",
-    dependencies = {
-      "stevearc/dressing.nvim",
-      "MunifTanjim/nui.nvim",
-      { "zbirenbaum/copilot.lua", opts = {} },
-      {
-        'MeanderingProgrammer/render-markdown.nvim',
-        event = "VeryLazy",
-        opts = { file_types = { "Avante" } },
-        ft = { "Avante" },
-      },
-    },
-    -- init = function()
-    --   vim.api.nvim_create_autocmd("VimEnter", {
-    --     callback = function()
-    --       -- Ensure Avante.nvim has been loaded before switching providers
-    --       if vim.fn.exists(":AvanteSwitchProvider") == 2 then
-    --         vim.cmd("AvanteSwitchProvider copilot")
-    --       end
-    --     end,
-    --   })
-    -- end,
-  },
-  {
     "CopilotC-Nvim/CopilotChat.nvim",
     event = "VeryLazy",
-    branch = "canary",
+    branch = "main",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
@@ -232,11 +251,84 @@ return {
     keys = mappings.copilot_chat,
   },
   {
-    'echasnovski/mini.ai',
+    "olimorris/codecompanion.nvim",
     event = "VeryLazy",
-    version = false,
-    opts = {},
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      -- The following are optional:
+      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
+    },
+    config = true,
+    opts = require('plugins.codecompanion')
   },
+  {
+    'akinsho/git-conflict.nvim',
+    version = "*",
+    event = "VeryLazy",
+    config = true,
+  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   opts = require("plugins.copilot_config")
+  -- },
+  -- {
+  --   "yetone/avante.nvim",
+  --   event = "VeryLazy",
+  --   version = false,
+  --   build = "make",
+  --   dependencies = {
+  --     { "stevearc/dressing.nvim" },
+  --     { "MunifTanjim/nui.nvim" },
+  --     { "zbirenbaum/copilot.lua", opts = {} },
+  --     { 'MeanderingProgrammer/render-markdown.nvim', opts = { file_types = { "Avante" } }, ft = { "Avante" } },
+  --   },
+  -- },
+
+  -- Replaced by mini
+
+  {
+    "ibhagwan/fzf-lua",
+    event = "VeryLazy",
+    keys = mappings.fzf_lua,
+    config = function()
+      require("plugins.fzf-lua")
+    end
+  },
+  -- {
+  --   "kylechui/nvim-surround",
+  --   version = "*",
+  --   -- event = "VeryLazy",
+  --   opts = {},
+  -- },
+  -- {
+  --   "windwp/nvim-autopairs",
+  --   event = "VeryLazy",
+  --   opts = {},
+  -- },
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   config = function()
+  --     require("plugins.lualine")
+  --   end,
+  -- },
+  -- {
+  --   "ojroques/nvim-bufdel",
+  --   keys = mappings.nvim_bufdel,
+  --   event = "VeryLazy",
+  --   commit = "9f1ed6e",
+  --   config = function()
+  --     require("plugins.nvim_bufdel")
+  --   end,
+  -- },
+  -- {
+  --   "tpope/vim-fugitive",
+  --   keys = mappings.vim_fugitive,
+  --   event = "VeryLazy",
+  -- },
+
   -- {
   --   "mfussenegger/nvim-dap",
   --   -- dependencies = "rcarriga/nvim-dap-ui",

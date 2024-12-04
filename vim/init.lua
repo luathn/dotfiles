@@ -23,7 +23,7 @@ require("settings")
 require("core.utils").load_mappings("general")
 
 local plugins = require("plugins")
-require("lazy").setup(plugins, opts)
+require("lazy").setup(plugins, {})
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "qf" },

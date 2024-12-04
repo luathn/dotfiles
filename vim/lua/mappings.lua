@@ -68,6 +68,7 @@ M.nvim_bufdel = {
 
 M.treesj = {
   { "gS", "<cmd>lua require('treesj').toggle()<cr>", desc = "Toggle [S]plit/Join" },
+  { "gs", "<cmd>lua require('treesj').toggle()<cr>", desc = "Toggle [s]plit/join" },
 }
 
 M.harpoon = {
@@ -83,14 +84,34 @@ M.navigator = {
 }
 
 M.fzf_lua = {
-  { "<leader><space>", "<cmd>FzfLua files<CR>", desc = "[f]zf [f]iles" },
-  { "<leader>,", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
-  { "<leader>/", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
-  { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({  multiline = 2, continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
-  { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", mode = "n", desc = "[f]zf grep [w]ord" },
-  { "<leader>fw", "<cmd>FzfLua grep_visual<CR>", mode = "v", desc = "[f]zf grep [w]ord" },
+  { "<leader>ff", "<cmd>FzfLua files<CR>", desc = "[f]zf [f]iles" },
+  { "<leader>bb", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
+  -- { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({  multiline = 2, continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
+  -- { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", mode = "n", desc = "[f]zf grep [w]ord" },
+  -- { "<leader>fw", "<cmd>FzfLua grep_visual<CR>", mode = "v", desc = "[f]zf grep [w]ord" },
   { "<leader>gc", "<cmd>FzfLua git_branches<CR>", desc = "[G]it [c]heckout branch" },
-  { "<leader>fr", "<cmd>FzfLua resume<CR>", mode = "n", desc = "[f]zf [r]esum" },
+  -- { "<leader>fr", "<cmd>FzfLua resume<CR>", mode = "n", desc = "[f]zf [r]esum" },
+}
+
+M.mini_pick = {
+  { "<leader><space>", "<cmd>Pick files<cr>", desc = "" },
+  -- { "<c-p>", "<cmd>Pick files<cr>", desc = "" },
+  { "<leader>,", "<cmd>lua MiniPick.registry.sorted_buffers()<cr>", desc = "" },
+  { "<c-,>", "<cmd>lua MiniPick.registry.sorted_buffers()<cr>", desc = "" },
+  { "<leader>fr", "<cmd>Pick resume<CR>", mode = "n", desc = "[r]esum" },
+  { "<leader>fg", "<cmd>Pick grep<cr>", desc = "" },
+  { "<leader>fl", "<cmd>Pick grep_live<cr>", desc = "" },
+}
+
+M.mini_bufremove = {
+  { "<leader>bd", "<cmd>lua MiniBufremove.delete()<CR>", desc = "[B]uffer [d]elete" },
+  -- { "<leader>bD", ":BufDelAll<CR>", desc = "[B]uffer [D]elete all" },
+  -- { "<leader>x",{ ":BufDel<CR>", desc = "[B]uffer [d]elete" },
+  -- { "<leader>bo", ":BufDelOther<CR>", desc = "[B]uffer delete [o]ther" },
+}
+
+M.mini_git = {
+  { "<leader>gB", ":vertical Git blame - %<cr>", desc = "[G]it [b]lame" },
 }
 
 M.nvim_dap = {

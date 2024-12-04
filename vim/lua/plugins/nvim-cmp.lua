@@ -1,15 +1,15 @@
 local cmp = require "cmp"
-local luasnip = require "luasnip"
+-- local luasnip = require "luasnip"
 
 cmp.setup({
   completion = {
     keyword_length = 2,
   },
-  snippet = {
-    expand = function(args)
-      require("luasnip").lsp_expand(args.body)
-    end,
-  },
+  -- snippet = {
+  --   expand = function(args)
+  --     luasnip.lsp_expand(args.body)
+  --   end,
+  -- },
   preselect = cmp.PreselectMode.None,
   formatting = {
     format = function(entry, vim_item)
@@ -46,8 +46,8 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
+      -- elseif luasnip.expand_or_locally_jumpable() then
+      --   luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -55,8 +55,8 @@ cmp.setup({
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
+      -- elseif luasnip.locally_jumpable(-1) then
+      --   luasnip.jump(-1)
       else
         fallback()
       end
@@ -74,4 +74,4 @@ cmp.setup.cmdline(':', {
   })
 })
 
-require("luasnip.loaders.from_vscode").lazy_load({})
+-- require("luasnip.loaders.from_vscode").lazy_load({})

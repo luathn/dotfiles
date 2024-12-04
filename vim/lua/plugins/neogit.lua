@@ -28,7 +28,7 @@ neogit.setup {
   status = {
     recent_commit_count = 15,
   },
-  kind = "tab",
+  kind = "auto",
   ignored_settings = {},
   commit_editor = {
     kind = "split",
@@ -176,7 +176,7 @@ neogit.setup {
       ["r"] = "RebasePopup",
       ["t"] = "TagPopup",
       ["v"] = false,
-      ["V"] = "RevertPopup",
+      ["T"] = "RevertPopup",
       ["w"] = false,
       ["W"] = "WorktreePopup",
       ["X"] = "ResetPopup",

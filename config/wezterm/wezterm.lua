@@ -13,7 +13,7 @@ config = {
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   window_decorations = "RESIZE",
   -- hide_tab_bar_if_only_one_tab = true,
-  color_scheme = 'Catppuccin Latte',
+  color_scheme = 'Catppuccin Frappe',
   inactive_pane_hsb = { saturation = 0.80, brightness = 0.85 },
   font = wezterm.font('JetBrains Mono', { weight = 'Medium', italic = false }),
   font_size = 13,
@@ -22,6 +22,7 @@ config = {
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 config.keys = {
+  { key = 'a', mods = 'LEADER|CTRL', action = act.SendKey({ key = 'a', mods = 'CTRL' }) },
   { key = 'Enter', mods = 'LEADER', action = act.ActivateCopyMode },
   { key = 'v', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = 's', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
