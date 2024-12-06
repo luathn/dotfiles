@@ -119,21 +119,6 @@ return {
       require('plugins.mini_bufremove')
     end,
   },
-  -- {
-  --   'echasnovski/mini.files',
-  --   version = false,
-  --   config = function()
-  --     require('mini.files').setup()
-  --   end
-  -- },
-  -- {
-  --   'echasnovski/mini.completion',
-  --   event = "VeryLazy",
-  --   version = false,
-  --   config = function()
-  --     require('mini.completion').setup()
-  --   end,
-  -- },
   {
     "hrsh7th/nvim-cmp",
     event = "VeryLazy",
@@ -208,14 +193,6 @@ return {
     config = function() end,
   },
   -- Test
-  -- {
-  --   'akinsho/toggleterm.nvim',
-  --   event = "VeryLazy",
-  --   version = "*",
-  --   config = function()
-  --     require("plugins.toggleterm")
-  --   end
-  -- },
   {
     "nvimtools/none-ls.nvim",
     event = "VeryLazy",
@@ -378,4 +355,12 @@ return {
   --   end,
   -- },
   -- { "jlanzarotta/bufexplorer" },
+  -- {
+  --   'akinsho/toggleterm.nvim',
+  --   event = "VeryLazy",
+  --   version = "*",
+  --   config = function()
+  --     require("plugins.toggleterm")
+  --   end
+  -- },
 }

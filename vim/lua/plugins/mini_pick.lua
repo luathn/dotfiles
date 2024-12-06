@@ -1,5 +1,3 @@
-local MiniPick = require('mini.pick')
-
 local win_config = function()
   height = 18
   width = vim.o.columns
@@ -13,8 +11,11 @@ local win_config = function()
   }
 end
 
+-- Custom functions
 local wipeout_cur = function()
-  vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
+  local bufnr = MiniPick.get_picker_matches().current.bufnr
+  print(bufnr)
+  vim.api.nvim_buf_delete(bufnr, {})
 end
 
 local switch_picker = function()
@@ -33,6 +34,16 @@ local switch_picker = function()
   )
 end
 
+local toggle_switch_picker = function()
+  local query = MiniPick.get_picker_query() or {}
+  local current_picker = MiniPick.get_picker_opts().source.name
+  local next_picker = string.lower(current_picker) == 'buffers' and { 'builtin', 'files' } or { 'registry', 'buffers' }
+  MiniPick.stop()
+  MiniPick[next_picker[1]][next_picker[2]]()
+  local transfer_query = function() MiniPick.set_picker_query(query) end
+  vim.api.nvim_create_autocmd('User', { pattern = 'MiniPickStart', once = true, callback = transfer_query })
+end
+
 local grep_files = function()
   local items = MiniPick.get_picker_matches().all or {}
   MiniPick.stop()
@@ -40,20 +51,21 @@ local grep_files = function()
 end
 
 local open_explorer = function()
-  local current = (MiniPick.get_picker_matches() or {}).current
-  -- if current == nil then return end
-  local dir_path = vim.fn.fnamemodify(current, ":h")
-  -- vim.cmd(vim.fn.input('Execute: '))
-  -- vim.cmd(vim.fn.input('Oil ' .. dir_path))
-  MiniPick.stop()
-  vim.cmd("Oil app")
+ local current = (MiniPick.get_picker_matches() or {}).current
+ if current == nil then return end
+ local dir_path = vim.fn.fnamemodify(current, ":h")
+ MiniPick.stop()
+
+ vim.schedule(function()
+   require('oil').open(dir_path)
+ end)
 end
 
 require('mini.pick').setup({
   window = {
     config = win_config,
     prompt_cursor = '▏',
-    prompt_prefix = 'Search ',
+    prompt_prefix = ' ',
   },
   mappings = {
     caret_left    = '<C-b>',
@@ -65,100 +77,74 @@ require('mini.pick').setup({
     scroll_down   = '<C-j>',
     scroll_up     = '<C-k>',
     scroll_right  = '<C-l>',
-    -- oil           = { char = '<C-e>', func = open_explorer },
-    switch        = { char = '<C-z>', func = switch_picker },
+    explorer      = { char = '<C-e>', func = open_explorer },
+    switch        = { char = "<C-'>", func = switch_picker },
+    toggle_switch = { char = "<C-;>", func = toggle_switch_picker },
     grep_files    = { char = '<C-o>', func = grep_files },
   },
-  buffers = {
-    mappings = {
-      wipeout = { char = '<C-d>', func = wipeout_cur }
-    }
-  }
 })
 
+-- Sorted buffers
 local get_unixtime = function(buf)
   return buf.lastused
 end
 
-local get_bufs = function()
+MiniPick.registry.sorted_buffers = function()
   local bufs = vim.tbl_filter(function(buf)
-    return vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_get_option(buf, 'buflisted')
-  end, vim.api.nvim_list_bufs())
+    return vim.api.nvim_buf_is_valid(buf)
+       and vim.api.nvim_buf_get_option(buf, 'buflisted')
+       and vim.api.nvim_buf_get_name(buf) ~= ''
+  end, vim.api.nvim_list_bufs()) or vim.api.nvim_list_bufs()
+
+  -- Add lastused and modified to buffers
   local buffers = {}
   for _, bufnr in ipairs(bufs) do
     table.insert(buffers, {
       bufnr = bufnr,
       lastused = vim.fn.getbufinfo(bufnr)[1].lastused,
-      is_modified = vim.api.nvim_buf_get_option(bufnr, 'modified')
+      modified = vim.api.nvim_buf_get_option(bufnr, 'modified')
     })
   end
 
   table.sort(buffers, function(a, b)
     return get_unixtime(a) > get_unixtime(b)
   end)
+
+  local current_bufnr = table.remove(buffers, 1)
+  table.insert(buffers, current_bufnr)
+
+  -- Transform to mini pick format
   local items = {}
   for _, buf in ipairs(buffers) do
     local bufnr = buf.bufnr
-    local is_modified = buf.is_modified
-
-    local full_path = vim.api.nvim_buf_get_name(bufnr)
-    local relative_path = vim.fn.fnamemodify(full_path, ':~:.')
-    local flag = (is_modified == true and "+") or " "
+    local buf_name = vim.fn.fnamemodify(vim.fs.normalize(vim.api.nvim_buf_get_name(bufnr)), ':.')
+    local flag = (buf.modified == true and "+") or " "
 
     table.insert(items, {
       bufnr = bufnr,
-      text = string.format('[%s] %s %s', bufnr, flag, relative_path),
+      text = string.format('%s %s', flag, buf_name),
     })
   end
-  return items
+
+  MiniPick.start({
+    source = {
+      items = items,
+      name = 'Buffers',
+    },
+    mappings = { wipeout = { char = '<C-d>', func = wipeout_cur } },
+  })
 end
 
--- -- Configure and start mini.pick
--- MiniPick.start({
---   source = {
---     items = items,
---     name = 'Buffers',
---     show = function(buf)
---       local width = vim.api.nvim_win_get_width(0)
---       local filename_width = math.floor(width * 0.4)
---       return string.format('%-' .. filename_width .. 's %s', buf.filename, buf.directory)
---     end,
---   },
---   mappings = {
---     choose = '<CR>',
---     choose_in_split = '<C-s>',
---     choose_in_tabpage = '<C-t>',
---   },
---   -- Callback function when an item is selected
---   action = function(buf)
---     vim.api.nvim_set_current_buf(buf.bufnr)
---   end,
--- })
-
-vim.keymap.set(
-  'n',
-  '<C-,>',
-  function()
-    MiniPick.start({
-      source = {
-        items = get_bufs(),
-        name = 'Buffers',
-        mappings = { wipeout = { char = '<C-d>', func = wipeout_cur } },
-      },
-    })
-  end
-)
-
 -- UI
-local fg_bg = require("core.utils").fg_bg
-local bg = require("core.utils").bg
-local fg = require("core.utils").fg
-local colors = require("colors").get()
-
-bg("MiniPickNormal", colors.bg)
-bg("MiniPickMatchCurrent", colors.bg_dark)
-
-fg_bg("MiniPickBorder", colors.purple, colors.bg)
--- bg("MiniPickBorderText", colors.bg_dark)
-
-fg_bg("MiniPickPrompt", colors.purple, colors.bg)
+-- local fg_bg = require("core.utils").fg_bg
+-- local bg = require("core.utils").bg
+-- local fg = require("core.utils").fg
+-- local colors = require("colors").get()
+--
+-- bg("MiniPickNormal", colors.bg)
+-- bg("MiniPickMatchCurrent", colors.bg_dark)
+--
+-- fg_bg("MiniPickBorder", colors.purple, colors.bg)
+-- -- bg("MiniPickBorderText", colors.bg_dark)
+--
+-- fg_bg("MiniPickPrompt", colors.purple, colors.bg)

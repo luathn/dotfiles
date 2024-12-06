@@ -32,12 +32,11 @@ config.keys = {
   { key = 'l', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-right') },
   { key = 'f', mods = 'LEADER', action = act.TogglePaneZoomState },
   { key = 'z', mods = 'LEADER', action = act.ToggleFullScreen },
-  { key = '/', mods = 'LEADER', action = act.Search { CaseInSensitiveString = '' } },
+  { key = '/', mods = 'LEADER', action = act.Search { CaseInSensitiveString = 'hash' } },
   { key = 'm', mods = 'LEADER', action = act.PaneSelect { mode = 'SwapWithActiveKeepFocus' } },
   { key = '[', mods = 'LEADER', action = act.MoveTabRelative(-1) },
   { key = ']', mods = 'LEADER', action = act.MoveTabRelative(1) },
   { key = 'w', mods = 'CMD', action = act.CloseCurrentPane { confirm = true } },
-  { key = 'x', mods = 'LEADER', action = act.CloseCurrentPane { confirm = true } },
   { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, timeout_milliseconds = 500 } },
   { key = '!', mods = 'LEADER', action = act.PaneSelect { mode = 'MoveToNewTab' } },
   { key = 'n', mods = 'LEADER', action = act.ActivateTabRelative(1) },
@@ -150,6 +149,14 @@ config.key_tables = {
     { key = 'j', action = act.AdjustPaneSize { 'Down', 2 } },
     { key = 'Escape', action = 'PopKeyTable' },
   },
+  search_mode = {
+    { key = 'Escape', mods = 'NONE', action = act.CopyMode 'Close' },
+    { key = 'n', mods = 'CTRL', action = act.CopyMode 'NextMatch' },
+    { key = 'p', mods = 'CTRL', action = act.CopyMode 'PriorMatch' },
+    { key = 'r', mods = 'CTRL', action = act.CopyMode 'CycleMatchType' },
+    { key = 'u', mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
+    { key = 'w', mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
+  }
 }
 
 local function is_vi_process(pane)

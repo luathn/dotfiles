@@ -45,7 +45,7 @@ require('fzf-lua').setup({
         vim.fn.setreg('*', selected[1])
       end,
       ["ctrl-g"]      = "",
-      ["ctrl-f"]      = function(selected)
+      ["ctrl-e"]      = function(selected)
         local dir_path = vim.fn.fnamemodify(selected[1], ":h")
         vim.cmd("Oil " .. dir_path)
       end,
@@ -101,7 +101,7 @@ require('fzf-lua').setup({
     }
   },
   lsp = {
-   code_actions = {
+    code_actions = {
       previewer = "codeaction_native",
       preview_pager = "delta --side-by-side --width=$FZF_PREVIEW_COLUMNS --hunk-header-style='omit' --file-style='omit'",
     },
