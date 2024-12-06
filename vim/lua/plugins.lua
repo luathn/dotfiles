@@ -42,6 +42,7 @@ return {
     dependencies = {
       { "williamboman/mason.nvim", opts = {} },
       { "williamboman/mason-lspconfig.nvim", opts = {} },
+      { 'saghen/blink.cmp' },
     },
     config = function()
       require("plugins.nvim-lspconfig")
@@ -120,21 +121,29 @@ return {
     end,
   },
   {
-    "hrsh7th/nvim-cmp",
-    event = "VeryLazy",
-    config = function()
-      require("plugins.nvim-cmp")
-    end,
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      -- "L3MON4D3/LuaSnip",
-      -- "saadparwaiz1/cmp_luasnip",
-      -- "rafamadriz/friendly-snippets",
-    },
+    'saghen/blink.cmp',
+    event = 'VeryLazy',
+    dependencies = 'rafamadriz/friendly-snippets',
+    version = 'v0.*',
+    opts = require('plugins.blink_cmp'),
+    opts_extend = { "sources.completion.enabled_providers" }
   },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("plugins.nvim-cmp")
+  --   end,
+  --   dependencies = {
+  --     "hrsh7th/cmp-nvim-lsp",
+  --     "hrsh7th/cmp-buffer",
+  --     "hrsh7th/cmp-path",
+  --     "hrsh7th/cmp-cmdline",
+  --     -- "L3MON4D3/LuaSnip",
+  --     -- "saadparwaiz1/cmp_luasnip",
+  --     -- "rafamadriz/friendly-snippets",
+  --   },
+  -- },
   {
     "TimUntersberger/neogit",
     keys = mappings.neogit,
@@ -206,6 +215,12 @@ return {
     end,
   },
   {
+    'akinsho/git-conflict.nvim',
+    version = "*",
+    event = "VeryLazy",
+    config = true,
+  },
+  {
     "robitx/gp.nvim",
     event = "VeryLazy",
     config = function()
@@ -239,12 +254,6 @@ return {
     config = true,
     opts = require('plugins.codecompanion')
   },
-  {
-    'akinsho/git-conflict.nvim',
-    version = "*",
-    event = "VeryLazy",
-    config = true,
-  },
   -- {
   --   "zbirenbaum/copilot.lua",
   --   cmd = "Copilot",
@@ -265,7 +274,6 @@ return {
   -- },
 
   -- Replaced by mini
-
   {
     "ibhagwan/fzf-lua",
     event = "VeryLazy",
