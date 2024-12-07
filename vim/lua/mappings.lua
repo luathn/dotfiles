@@ -34,6 +34,7 @@ M.neogit = {
   { "<leader>gg", ":Neogit<cr>", desc = "[G]it status" },
   { "<leader>gl", ":Neogit log<cr>", desc = "[G]it [l]og" },
   { "<leader>gb", ":Neogit branch<cr>", desc = "[G]it [b]ranch" },
+  { "<leader>gc", "<cmd>lua require('neogit').action('branch', 'checkout_local_branch')<cr>", desc = "[g]it [c]heckout" },
 }
 
 M.grug_far = {
@@ -86,16 +87,16 @@ M.navigator = {
 M.fzf_lua = {
   { "<leader>ff", "<cmd>FzfLua files<CR>", desc = "[f]zf [f]iles" },
   { "<leader>bb", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
-  -- { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({  multiline = 2, continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
-  -- { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", mode = "n", desc = "[f]zf grep [w]ord" },
-  -- { "<leader>fw", "<cmd>FzfLua grep_visual<CR>", mode = "v", desc = "[f]zf grep [w]ord" },
+  { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({  multiline = 2, continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
+  { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", mode = "n", desc = "[f]zf grep [w]ord" },
+  { "<leader>fw", "<cmd>FzfLua grep_visual<CR>", mode = "v", desc = "[f]zf grep [w]ord" },
   { "<leader>gc", "<cmd>FzfLua git_branches<CR>", desc = "[G]it [c]heckout branch" },
-  -- { "<leader>fr", "<cmd>FzfLua resume<CR>", mode = "n", desc = "[f]zf [r]esum" },
+  { "<leader>fr", "<cmd>FzfLua resume<CR>", mode = "n", desc = "[f]zf [r]esum" },
 }
 
 M.mini_pick = {
   { "<leader><space>", "<cmd>Pick files<cr>", desc = "" },
-  -- { "<c-p>", "<cmd>Pick files<cr>", desc = "" },
+  { "<c-p>", "<cmd>Pick files<cr>", desc = "" },
   { "<leader>,", "<cmd>lua MiniPick.registry.sorted_buffers()<cr>", desc = "" },
   { "<c-,>", "<cmd>lua MiniPick.registry.sorted_buffers()<cr>", desc = "" },
   { "<leader>fr", "<cmd>Pick resume<CR>", mode = "n", desc = "[r]esum" },

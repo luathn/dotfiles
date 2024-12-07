@@ -65,7 +65,7 @@ neogit.setup {
   },
   integrations = {
     diffview = true,
-    fzf_lua = true,
+    mini_pick = true,
   },
   sections = {
     -- Reverting/Cherry Picking
@@ -211,3 +211,9 @@ neogit.setup {
     },
   }
 }
+
+vim.keymap.set(
+  'n',
+  '<leader>gc',
+  neogit.action('branch', 'checkout_local_branch')
+)

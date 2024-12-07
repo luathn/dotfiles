@@ -151,6 +151,11 @@ return {
     config = function()
       require("plugins.neogit")
     end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "echasnovski/mini.pick",
+    },
   },
   {
     "sindrets/diffview.nvim",
@@ -274,14 +279,14 @@ return {
   -- },
 
   -- Replaced by mini
-  {
-    "ibhagwan/fzf-lua",
-    event = "VeryLazy",
-    keys = mappings.fzf_lua,
-    config = function()
-      require("plugins.fzf-lua")
-    end
-  },
+  -- {
+  --   "ibhagwan/fzf-lua",
+  --   event = "VeryLazy",
+  --   keys = mappings.fzf_lua,
+  --   config = function()
+  --     require("plugins.fzf-lua")
+  --   end
+  -- },
   -- {
   --   "kylechui/nvim-surround",
   --   version = "*",
