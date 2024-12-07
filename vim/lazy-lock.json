@@ -21,7 +21,6 @@
   "mini.statusline": { "branch": "main", "commit": "813854243156472c9d0bc9c64ea0af159b9b37ca" },
   "mini.surround": { "branch": "main", "commit": "48a9795c9d352c771e1ab5dedab6063c0a2df037" },
   "neogit": { "branch": "master", "commit": "a38945a585794c716b2ff9b25668bb5c089e8cd7" },
-  "none-ls.nvim": { "branch": "main", "commit": "58866c670d68ef80397c317a3a1ee5f53ca646fd" },
   "nvim-lspconfig": { "branch": "master", "commit": "64073cbed0ce23e988160bfd1a148a75b6af94cc" },
   "nvim-surround": { "branch": "main", "commit": "9f0cb495f25bff32c936062d85046fbda0c43517" },
   "nvim-treesitter": { "branch": "master", "commit": "894cb3cebbad0535fb4e319ada5d875dbc48d8b9" },
