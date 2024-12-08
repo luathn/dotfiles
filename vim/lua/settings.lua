@@ -55,10 +55,7 @@ vim.o.so = 7
 vim.o.laststatus = 2
 vim.o.ruler = true
 vim.o.wildmenu = true
--- if (has("nvim"))
---   set termguicolors
---   set inccommand=nosplit
--- endif
+vim.o.wildmode = 'full'
 -- Hide eob char ~
 vim.o.fillchars = "eob: "
 -- Set completeopt to have a better completion experience
