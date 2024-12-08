@@ -1,3 +1,38 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+--------- Kickstart
+-- Enable break indent
+vim.opt.breakindent = true
+
+-- Save undo history
+vim.opt.undofile = true
+
+-- Keep signcolumn on by default
+vim.opt.signcolumn = 'yes'
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
+
+-- Use the OS clipboard by default
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end)
+
+--------- Old
+
 vim.o.encoding = "UTF-8"
 vim.opt.updatetime = 100
 -- vim.o.history = "500"
@@ -7,8 +42,6 @@ vim.o.backspace = "indent,eol,start"
 vim.api.nvim_command("set whichwrap+=<,>,h,l")
 -- Set to auto read when a file is changed
 vim.o.autoread = true
--- Use the OS clipboard by default
-vim.o.clipboard = "unnamedplus"
 -- A buffer becomes hidden when it is abandoned
 vim.o.hid = true
 -- Enable filetype plugins
@@ -40,8 +73,6 @@ vim.o.splitright = true
 -- turn hybrid line numbers on
 vim.o.number = true
 vim.o.relativenumber = true
--- Highlight cursorline
-vim.o.cursorline = true
 -- Highlight all search results
 vim.o.hlsearch = true
 -- Enable smart-case search
@@ -50,8 +81,6 @@ vim.o.smartcase = true
 vim.o.ignorecase = true
 -- Searches for strings incrementally
 vim.o.incsearch = true
--- Set 7 lines to the cursor
-vim.o.so = 7
 vim.o.laststatus = 2
 vim.o.ruler = true
 vim.o.wildmenu = true

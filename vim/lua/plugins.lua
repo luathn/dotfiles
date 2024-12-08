@@ -54,6 +54,15 @@ return {
     keys = mappings.navigator,
     config = function() require('Navigator').setup() end,
   },
+  {
+    "ojroques/nvim-bufdel",
+    keys = mappings.nvim_bufdel,
+    event = "VeryLazy",
+    commit = "523d58e",
+    config = function()
+      require("plugins.nvim_bufdel")
+    end,
+  },
   -- Mini
   {
     'echasnovski/mini.pick',
@@ -110,15 +119,6 @@ return {
       require('plugins.mini_git')
     end,
     keys = mappings.mini_git,
-  },
-  {
-    'echasnovski/mini.bufremove',
-    event = "VeryLazy",
-    version = false,
-    keys = mappings.mini_bufremove,
-    config = function()
-      require('plugins.mini_bufremove')
-    end,
   },
   {
     'saghen/blink.cmp',
@@ -179,7 +179,6 @@ return {
     name = "catppuccin",
     config = function()
       require("catppuccin").setup({
-        flavour = "frappe",
         no_bold = true,
       })
       vim.cmd.colorscheme "catppuccin-frappe"
@@ -290,15 +289,6 @@ return {
   --   "nvim-lualine/lualine.nvim",
   --   config = function()
   --     require("plugins.lualine")
-  --   end,
-  -- },
-  -- {
-  --   "ojroques/nvim-bufdel",
-  --   keys = mappings.nvim_bufdel,
-  --   event = "VeryLazy",
-  --   commit = "9f1ed6e",
-  --   config = function()
-  --     require("plugins.nvim_bufdel")
   --   end,
   -- },
   -- {
