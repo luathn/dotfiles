@@ -1,5 +1,25 @@
 return {
-  keymap = { preset = 'enter' },
+  keymap = {
+    preset = 'enter',
+    ['<Tab>'] = {
+      function(cmp)
+        if require('blink.cmp.completion.windows.menu').win:is_open() then
+          return cmp.select_next()
+        end
+      end,
+      'snippet_forward',
+      'fallback'
+    },
+    ['<S-Tab>'] = {
+      function(cmp)
+        if require('blink.cmp.completion.windows.menu').win:is_open() then
+          return cmp.select_prev()
+        end
+      end,
+      'snippet_backward',
+      'fallback'
+    },
+  },
   sources = {
     completion = {
       enabled_providers = { 'lsp', 'path', 'snippets', 'buffer' },
@@ -24,6 +44,11 @@ return {
   completion = {
     keyword = {
       range = 'full',
+    },
+    list = {
+      -- Maximum number of items to display
+      max_items = 20,
+      selection = 'auto_insert',
     },
   },
   signature = { enabled = true },
