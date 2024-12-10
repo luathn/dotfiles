@@ -1,13 +1,22 @@
+-- local win_config = function()
+--   height = 18
+--   width = vim.o.columns
+--
+--   return {
+--     anchor = 'NW',
+--     height = height,
+--     width = width,
+--     row = vim.o.lines - height - 4,
+--     col = vim.o.columns - width,
+--   }
+-- end
 local win_config = function()
-  height = 18
-  width = vim.o.columns
-
+  height = math.floor(0.3 * vim.o.lines)
+  width = vim.o.columns > 170 and math.floor(0.618 * vim.o.columns) or vim.o.columns
   return {
-    anchor = 'NW',
-    height = height,
-    width = width,
-    row = vim.o.lines - height - 4,
-    col = vim.o.columns - width,
+    anchor = 'NW', height = height, width = width,
+    row = math.floor(0.5 * (vim.o.lines - height)),
+    col = math.floor(0.5 * (vim.o.columns - width)),
   }
 end
 
@@ -72,7 +81,7 @@ require('mini.pick').setup({
     caret_right   = '<C-f>',
     choose_marked = '<C-CR>',
     paste         = '<C-r>',
-    stop          = '<Esc>',
+    stop          = '<C-g>',
     scroll_left   = '<C-h>',
     scroll_down   = '<C-j>',
     scroll_up     = '<C-k>',
@@ -81,8 +90,11 @@ require('mini.pick').setup({
     switch        = { char = "<C-'>", func = switch_picker },
     toggle_switch = { char = "<C-;>", func = toggle_switch_picker },
     grep_files    = { char = '<C-o>', func = grep_files },
+    pick_stop     = { char = '<Esc>', func = function() MiniPick.stop() end }
   },
 })
+
+vim.ui.select = MiniPick.ui_select
 
 -- Sorted buffers
 local get_unixtime = function(buf)
