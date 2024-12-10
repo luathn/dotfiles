@@ -23,7 +23,6 @@ end
 -- Custom functions
 local wipeout_cur = function()
   local bufnr = MiniPick.get_picker_matches().current.bufnr
-  print(bufnr)
   vim.api.nvim_buf_delete(bufnr, {})
 end
 
@@ -70,6 +69,15 @@ local open_explorer = function()
  end)
 end
 
+local yank_path = function()
+  local current = (MiniPick.get_picker_matches() or {}).current
+  if current == nil then return end
+  local path = current.name or current
+
+  MiniPick.stop()
+  vim.fn.setreg('*', path)
+end
+
 require('mini.pick').setup({
   window = {
     config = win_config,
@@ -90,7 +98,8 @@ require('mini.pick').setup({
     switch        = { char = "<C-'>", func = switch_picker },
     toggle_switch = { char = "<C-;>", func = toggle_switch_picker },
     grep_files    = { char = '<C-o>', func = grep_files },
-    pick_stop     = { char = '<Esc>', func = function() MiniPick.stop() end }
+    pick_stop     = { char = '<Esc>', func = function() MiniPick.stop() end },
+    yank_path     = { char = '<C-y>', func = yank_path }
   },
 })
 
@@ -135,6 +144,7 @@ MiniPick.registry.sorted_buffers = function()
     table.insert(items, {
       bufnr = bufnr,
       text = string.format('%s %s', flag, buf_name),
+      name = buf_name,
     })
   end
 
