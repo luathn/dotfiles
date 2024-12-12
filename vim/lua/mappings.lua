@@ -25,6 +25,12 @@ M.general = {
   },
 }
 
+M.ruby_on_rails = {
+  n = {
+    ['<leader>rm'] = { ':vsplit | term bin/rails db:migrate RAILS_ENV=development<Cr>' }
+  }
+}
+
 M.diffview = {
   { "<leader>gd", ":DiffviewOpen ", desc = "[G]it [d]iff" },
   { "<leader>cc", "<cmd>lua require('diffview.config').actions.conflict_choose('all')<cr>", desc = "[C]onflict [C]hoose" },
