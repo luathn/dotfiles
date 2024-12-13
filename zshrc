@@ -39,6 +39,12 @@ export EDITOR="nvim"
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+# set history size
+export HISTSIZE=10000
+
+# save history after logout
+export SAVEHIST=10000
+
 # asdf
 case `uname` in
   Darwin)
