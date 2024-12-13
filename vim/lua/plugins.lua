@@ -121,6 +121,19 @@ return {
     keys = mappings.mini_git,
   },
   {
+    'echasnovski/mini.indentscope',
+    event = 'VeryLazy',
+    version = false,
+    config = function()
+      require('mini.indentscope').setup({
+        draw = {
+          delay = 0,
+          animation = require('mini.indentscope').gen_animation.none(),
+        },
+      })
+    end
+  },
+  {
     'saghen/blink.cmp',
     event = 'VeryLazy',
     dependencies = 'rafamadriz/friendly-snippets',
