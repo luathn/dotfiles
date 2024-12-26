@@ -22,14 +22,24 @@ config = {
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 config.keys = {
+  { key = '-', mods = 'CTRL', action = act.DisableDefaultAssignment },
+  { key = '=', mods = 'CTRL', action = act.DisableDefaultAssignment },
   { key = 'a', mods = 'LEADER|CTRL', action = act.SendKey({ key = 'a', mods = 'CTRL' }) },
   { key = 'Enter', mods = 'LEADER', action = act.ActivateCopyMode },
   { key = 'v', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = 's', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-  { key = 'h', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-left') },
-  { key = 'j', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-down') },
-  { key = 'k', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-up') },
-  { key = 'l', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-right') },
+  { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection('Left') },
+  { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection('Down') },
+  { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection('Up') },
+  { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection('Right') },
+  { key = 'h', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Left') },
+  { key = 'j', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Down') },
+  { key = 'k', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Up') },
+  { key = 'l', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Right') },
+  -- { key = 'h', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-left') },
+  -- { key = 'j', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-down') },
+  -- { key = 'k', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-up') },
+  -- { key = 'l', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-right') },
   { key = 'f', mods = 'LEADER', action = act.TogglePaneZoomState },
   { key = 'z', mods = 'LEADER', action = act.ToggleFullScreen },
   { key = '/', mods = 'LEADER', action = act.Search { CaseInSensitiveString = 'hash' } },
@@ -53,9 +63,9 @@ config.keys = {
       end),
     },
   },
-  -- { key = 'l', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
+  -- { key = 'w', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
   {
-    key = "l",
+    key = "w",
     mods = "LEADER",
     action = wezterm.action_callback(function(window, pane)
       local choices = {}
@@ -93,7 +103,7 @@ config.keys = {
     },
   },
   {
-    key = 'w',
+    key = 'c',
     mods = 'LEADER',
     action = act.PromptInputLine {
       description = 'Enter name for new workspace',
@@ -105,7 +115,7 @@ config.keys = {
     },
   },
   {
-    key = "k",
+    key = "q",
     mods = "LEADER",
     action = wezterm.action_callback(function(window, pane)
       local choices = {}
