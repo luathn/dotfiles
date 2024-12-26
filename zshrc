@@ -32,18 +32,12 @@ bindkey "^w" backward-kill-word
 bindkey "^n" history-search-forward
 bindkey "^p" history-search-backward
 bindkey "^ " autosuggest-accept
-bindkey "jk" vi-cmd-mode
+# bindkey "jk" vi-cmd-mode
 
 export EDITOR="nvim"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
-
-# set history size
-export HISTSIZE=10000
-
-# save history after logout
-export SAVEHIST=10000
 
 # asdf
 case `uname` in
@@ -73,6 +67,12 @@ zsh-defer source ~/.zsh_local
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# set history size
+export HISTSIZE=10000
+
+# save history after logout
+export SAVEHIST=10000
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
