@@ -1,5 +1,5 @@
 require('grug-far').setup({
-  minSearchChars = 4,
+  minSearchChars = 3,
   prefills = {
     flags = '-i',
   },

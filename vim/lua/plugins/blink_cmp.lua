@@ -21,8 +21,8 @@ return {
     },
   },
   sources = {
-    completion = {
-      enabled_providers = { 'lsp', 'path', 'snippets', 'buffer' },
+    default = {
+      'lsp', 'path', 'snippets', 'buffer', 'codecompanion',
     },
     providers = {
       lsp = {
@@ -33,11 +33,16 @@ return {
       buffer = {
         name = 'Buffer',
         module = 'blink.cmp.sources.buffer',
-        fallback_for = {},
+        fallbacks = {},
       },
       path = {
         name = 'Path',
         module = 'blink.cmp.sources.path',
+      },
+      codecompanion = {
+        name = "CodeCompanion",
+        module = "codecompanion.providers.completion.blink",
+        enabled = true,
       },
     },
   },
@@ -46,7 +51,6 @@ return {
       range = 'full',
     },
     list = {
-      -- Maximum number of items to display
       max_items = 20,
       selection = 'auto_insert',
     },

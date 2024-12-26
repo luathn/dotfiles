@@ -109,6 +109,44 @@ return {
         },
       },
     },
+    ["Generate rspec"] = {
+      strategy = "chat",
+      description = "Generate Rspec for Rails code",
+      opts = {
+        default_prompt = true,
+        -- modes = { "v" },
+        short_name = "translate_translation",
+        auto_submit = true,
+        stop_context_insertion = true,
+      },
+      prompts = {
+        {
+          role = constants.SYSTEM_ROLE,
+          content = function(context)
+            return "Please consider the following when generating the RSpec tests:\n"
+              .. "- Use shoulda-matchers gem to test validations"
+              .. "- Use FactoryBot for creating test data. Just use create(:name)\n"
+              .. "- Don't use let or before hook\n"
+              .. "- Test each scope in each different describe\n"
+          end,
+          opts = {
+            visible = false,
+          },
+        },
+        {
+          role = constants.USER_ROLE,
+          content = function(context)
+            local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+
+            return "I'm working on a Rails application and need help writing RSpec tests.\n"
+              .. "Please generate RSpec code for the following:\n\n```" .. context.filetype .. "\n" .. code .. "\n```\n"
+          end,
+          opts = {
+            contains_code = true,
+          },
+        },
+      },
+    },
   },
   display = {
     diff = {

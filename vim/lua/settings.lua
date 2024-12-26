@@ -83,8 +83,8 @@ vim.o.ignorecase = true
 vim.o.incsearch = true
 vim.o.laststatus = 2
 vim.o.ruler = true
-vim.o.wildmenu = true
-vim.o.wildmode = 'full'
+-- vim.o.wildmenu = true
+-- vim.o.wildmode = 'full'
 -- Hide eob char ~
 vim.o.fillchars = "eob: "
 -- Set completeopt to have a better completion experience

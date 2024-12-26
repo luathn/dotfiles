@@ -15,19 +15,27 @@ M.general = {
     ["<leader>oq"] = { ":copen<CR>", "[O]pen [q]uickfix" },
     ["<leader>ol"] = { ":lopen<CR>", "[O]pen [l]ocation list" },
     ["<C-.>"]      = { "" },
-    ["<C-w>."]     = { "<C-w>5>" },
-    ["<C-w><C-.>"] = { "<C-w>5>" },
-    ["<C-w>,"]     = { "<C-w>5<" },
-    ["<C-w><C-,>"] = { "<C-w>5<" },
+    ["<C-w>."]     = { "<C-w>10>" },
+    ["<C-w><C-.>"] = { "<C-w>10>" },
+    ["<C-w>,"]     = { "<C-w>10<" },
+    ["<C-w><C-,>"] = { "<C-w>10<" },
+    ["<C-w>-"]     = { "<C-w>5-" },
+    ["<C-w>+"]     = { "<C-w>5+" },
+    ["<C-w>m"]     = { "<C-w>5+<C-w>15>" },
   },
   i = {
     ["jk"]         = { "<Esc>" },
   },
+  t = {
+    ["<esc>"]      = { "<c-\\><c-n>"},
+    ["jk"]         = { "<c-\\><c-n>"},
+  }
 }
 
 M.ruby_on_rails = {
   n = {
-    ['<leader>rm'] = { ':vsplit | term bin/rails db:migrate RAILS_ENV=development<Cr>' }
+    ['<leader>rm'] = { ':vsplit | term bin/rails db:migrate RAILS_ENV=development<Cr>' },
+    ['<leader>rc'] = { ':vsplit | term rails console<Cr>' }
   }
 }
 
@@ -102,9 +110,7 @@ M.fzf_lua = {
 
 M.mini_pick = {
   { "<leader><space>", "<cmd>Pick files<cr>", desc = "" },
-  { "<c-p>", "<cmd>Pick files<cr>", desc = "" },
   { "<leader>,", "<cmd>lua MiniPick.registry.sorted_buffers()<cr>", desc = "" },
-  { "<c-,>", "<cmd>lua MiniPick.registry.sorted_buffers()<cr>", desc = "" },
   { "<leader>fr", "<cmd>Pick resume<CR>", mode = "n", desc = "[r]esum" },
   { "<leader>fg", "<cmd>Pick grep<cr>", desc = "" },
   { "<leader>fl", "<cmd>Pick grep_live<cr>", desc = "" },
@@ -136,21 +142,15 @@ M.copilot_chat = {
     "<leader>ch",
     function()
       local actions = require("CopilotChat.actions")
-      require("CopilotChat.integrations.fzflua").pick(actions.help_actions())
-    end,
-    mode = { "n", "v" },
-    desc = "CopilotChat - Help actions",
-  },
-  -- Show prompts actions with fzf-lua
-  {
-    "<leader>cp",
-    function()
-      local actions = require("CopilotChat.actions")
       require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions())
     end,
     mode = { "n", "v" },
     desc = "CopilotChat - Prompt actions",
   }
+}
+
+M.codecompanion = {
+  { '<leader>aa', '<cmd>CodeCompanionAction<Cr>', mode = { 'n', 'v' } },
 }
 
 -- M.nvim_telescope = {
