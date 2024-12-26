@@ -19,6 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 require("settings")
 require("core.utils").load_mappings("general")
 require("core.utils").load_mappings("ruby_on_rails")
+require("core.utils").load_mappings("term")
 
 local plugins = require("plugins")
 require("lazy").setup(plugins, {})

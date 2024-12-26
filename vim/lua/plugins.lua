@@ -1,8 +1,7 @@
 local mappings = require("mappings")
 
 return {
-  { "dstein64/vim-startuptime" },
-  { "nvim-tree/nvim-web-devicons" },
+  -- { "dstein64/vim-startuptime" },
   { "nvim-lua/plenary.nvim" },
   -- Treesitter
   {
@@ -49,11 +48,6 @@ return {
     end,
   },
   -- Base plugins
-  {
-    "numToStr/Navigator.nvim",
-    keys = mappings.navigator,
-    config = function() require('Navigator').setup() end,
-  },
   {
     "ojroques/nvim-bufdel",
     keys = mappings.nvim_bufdel,
@@ -134,12 +128,27 @@ return {
     end
   },
   {
+    'echasnovski/mini.cursorword',
+    version = false,
+    config = function()
+      require('mini.cursorword').setup({
+        delay = 500
+      })
+    end
+  },
+  {
+    'echasnovski/mini.icons',
+    version = false,
+    config = function()
+      require('mini.icons').setup()
+    end
+  },
+  {
     'saghen/blink.cmp',
-    event = 'VeryLazy',
     dependencies = 'rafamadriz/friendly-snippets',
-    version = 'v0.*',
+    version = '*',
     opts = require('plugins.blink_cmp'),
-    opts_extend = { "sources.completion.enabled_providers" }
+    opts_extend = { "sources.default" }
   },
   -- {
   --   "hrsh7th/nvim-cmp",
@@ -219,12 +228,12 @@ return {
     config = function() end,
   },
   -- Test
-  {
-    'akinsho/git-conflict.nvim',
-    version = "*",
-    event = "VeryLazy",
-    config = true,
-  },
+  -- {
+  --   'akinsho/git-conflict.nvim',
+  --   version = "*",
+  --   event = "VeryLazy",
+  --   config = true,
+  -- },
   {
     "robitx/gp.nvim",
     event = "VeryLazy",
@@ -233,32 +242,28 @@ return {
     end
   },
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    event = "VeryLazy",
-    branch = "main",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-    },
-    build = "make tiktoken", -- Only on MacOS or Linux
-    opts = {
-      debug = true, -- Enable debugging
-      -- See Configuration section for rest
-    },
-    keys = mappings.copilot_chat,
-  },
-  {
     "olimorris/codecompanion.nvim",
     event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      -- The following are optional:
-      { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } },
-    },
     config = true,
+    keys = mappings.codecompanion,
     opts = require('plugins.codecompanion')
   },
+  -- {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   event = "VeryLazy",
+  --   branch = "main",
+  --   dependencies = {
+  --     { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+  --     { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+  --     { "ibhagwan/fzf-lua" },
+  --   },
+  --   build = "make tiktoken", -- Only on MacOS or Linux
+  --   opts = {
+  --     debug = true, -- Enable debugging
+  --     -- See Configuration section for rest
+  --   },
+  --   keys = mappings.copilot_chat,
+  -- },
   -- {
   --   "zbirenbaum/copilot.lua",
   --   cmd = "Copilot",
@@ -366,5 +371,10 @@ return {
   --   config = function()
   --     require("plugins.toggleterm")
   --   end
+  -- },
+  -- {
+  --   "numToStr/Navigator.nvim",
+  --   keys = mappings.navigator,
+  --   config = function() require('Navigator').setup() end,
   -- },
 }

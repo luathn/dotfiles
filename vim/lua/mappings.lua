@@ -39,6 +39,12 @@ M.ruby_on_rails = {
   }
 }
 
+M.term = {
+  n = {
+    ['<C-/>'] = { "<cmd>lua require('core.term').toggle()<Cr>" }
+  },
+}
+
 M.diffview = {
   { "<leader>gd", ":DiffviewOpen ", desc = "[G]it [d]iff" },
   { "<leader>cc", "<cmd>lua require('diffview.config').actions.conflict_choose('all')<cr>", desc = "[C]onflict [C]hoose" },
