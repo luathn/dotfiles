@@ -52,7 +52,7 @@ return {
     },
     list = {
       max_items = 20,
-      selection = 'auto_insert',
+      selection = { preselect = false, auto_insert = true },
     },
   },
   signature = { enabled = true },
