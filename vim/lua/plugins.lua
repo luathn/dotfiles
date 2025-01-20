@@ -58,15 +58,15 @@ return {
     end,
   },
   -- Mini
-  {
-    'echasnovski/mini.pick',
-    version = false,
-    event = "VeryLazy",
-    config = function()
-      require("plugins.mini_pick")
-    end,
-    keys = mappings.mini_pick,
-  },
+  -- {
+  --   'echasnovski/mini.pick',
+  --   version = false,
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("plugins.mini_pick")
+  --   end,
+  --   keys = mappings.mini_pick,
+  -- },
   {
     'echasnovski/mini.extra',
     event = "VeryLazy",
@@ -248,6 +248,74 @@ return {
     keys = mappings.codecompanion,
     opts = require('plugins.codecompanion')
   },
+  {
+    "folke/snacks.nvim",
+    lazy = false,
+    opts = {
+      picker = {
+        ui_select = true,
+        layout = {
+          preview = false,
+          layout = {
+            backdrop = false,
+            width = 0.5,
+            min_width = 100,
+            height = 0.35,
+            min_height = 17,
+            box = "vertical",
+            border = "rounded",
+            title = " Select ",
+            title_pos = "center",
+            { win = "input", height = 1, border = "bottom" },
+            { win = "list", border = "none" },
+            { win = "preview", height = 0.4, border = "top" },
+          },
+        },
+        win = {
+          -- input window
+          input = {
+            keys = {
+              ["<Esc>"] = { "close", mode = { "n", "i" } },
+            },
+          }
+        },
+      }
+    },
+    keys = {
+      {
+        "<leader>,",
+        function() Snacks.picker.buffers({
+          finder = "buffers",
+          format = "buffer",
+          layout = {
+            preset = "ivy",
+          },
+          current = false,
+          sort_lastused = true,
+          win = {
+            input = {
+              keys = {
+                ["<c-x>"] = { "bufdelete", mode = { "n", "i" } },
+              },
+            },
+          },
+        }) end,
+        desc = "Buffers",
+      },
+      { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader><space>", function() Snacks.picker.smart() end, desc = "Find Files" },
+    },
+    init = function()
+      local bg = require("core.utils").bg
+      local fg = require("core.utils").fg
+      local colors = require("catppuccin.palettes").get_palette "frappe"
+
+      bg("SnacksPickerInput", colors.base)
+      -- bg("SnacksPickerList", colors.base)
+      fg("SnacksPickerDir", colors.text)
+    end
+  },
   -- {
   --   "CopilotC-Nvim/CopilotChat.nvim",
   --   event = "VeryLazy",
@@ -287,7 +355,7 @@ return {
   -- {
   --   "ibhagwan/fzf-lua",
   --   event = "VeryLazy",
-  --   keys = mappings.fzf_lua,
+  --   -- keys = mappings.fzf_lua,
   --   config = function()
   --     require("plugins.fzf-lua")
   --   end

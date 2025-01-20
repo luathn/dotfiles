@@ -115,8 +115,8 @@ M.fzf_lua = {
 }
 
 M.mini_pick = {
-  { "<leader><space>", "<cmd>Pick files<cr>", desc = "" },
-  { "<leader>,", "<cmd>lua MiniPick.registry.sorted_buffers()<cr>", desc = "" },
+  { "<leader>ff", "<cmd>Pick files<cr>", desc = "" },
+  { "<leader>bb", "<cmd>lua MiniPick.registry.sorted_buffers()<cr>", desc = "" },
   { "<leader>fr", "<cmd>Pick resume<CR>", mode = "n", desc = "[r]esum" },
   { "<leader>fg", "<cmd>Pick grep<cr>", desc = "" },
   { "<leader>fl", "<cmd>Pick grep_live<cr>", desc = "" },
@@ -157,6 +157,11 @@ M.copilot_chat = {
 
 M.codecompanion = {
   { '<leader>aa', '<cmd>CodeCompanionAction<Cr>', mode = { 'n', 'v' } },
+}
+
+M.snacks = {
+  { '<leader><space>', '<cmd>lua Snacks.picker.files()<Cr>' },
+  { '<leader>,', '<cmd>lua Snacks.picker.buffers()<Cr>'},
 }
 
 -- M.nvim_telescope = {

@@ -65,7 +65,8 @@ neogit.setup {
   },
   integrations = {
     diffview = true,
-    mini_pick = true,
+    mini_pick = false,
+    fzf_lua = false,
   },
   sections = {
     -- Reverting/Cherry Picking
