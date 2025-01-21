@@ -47,6 +47,7 @@ M.term = {
 
 M.diffview = {
   { "<leader>gd", ":DiffviewOpen ", desc = "[G]it [d]iff" },
+  { "<leader>gh", "<cmd>DiffviewFileHistory %<Cr>", desc = "[G]it [h]istory" },
   { "<leader>cc", "<cmd>lua require('diffview.config').actions.conflict_choose('all')<cr>", desc = "[C]onflict [C]hoose" },
 }
 

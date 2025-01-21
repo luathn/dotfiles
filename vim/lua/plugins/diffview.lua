@@ -4,7 +4,7 @@ require"diffview".setup {
   diff_binaries = false,
   enhanced_diff_hl = true,
   git_cmd = { "git" },
-  use_icons = true,         -- Requires nvim-web-devicons
+  use_icons = false,         -- Requires nvim-web-devicons
   icons = {                 -- Only applies when use_icons is true.
     folder_closed = "",
     folder_open = "",
@@ -173,14 +173,15 @@ require"diffview".setup {
       { "n", "<leader>b",     actions.toggle_files,                { desc = "Toggle the file panel" } },
       { "n", "g<C-x>",        actions.cycle_layout,                { desc = "Cycle available layouts" } },
       { "n", "g?",            actions.help("file_history_panel"),  { desc = "Open the help panel" } },
+      { "n", "gq",            "<cmd>DiffviewClose<cr>",            { desc = "Close Diffview" } },
     },
     option_panel = {
       { "n", "<tab>", actions.select_entry,          { desc = "Change the current option" } },
-      { "n", "q",     actions.close,                 { desc = "Close the panel" } },
+      { "n", "gq",    actions.close,                 { desc = "Close the panel" } },
       { "n", "g?",    actions.help("option_panel"),  { desc = "Open the help panel" } },
     },
     help_panel = {
-      { "n", "q",     actions.close,  { desc = "Close help menu" } },
+      { "n", "gq",    actions.close,  { desc = "Close help menu" } },
       { "n", "<esc>", actions.close,  { desc = "Close help menu" } },
     },
   },
