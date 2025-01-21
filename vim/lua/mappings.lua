@@ -5,10 +5,10 @@ local silent_noremap = { silent = true, noremap = true }
 M.general = {
   n = {
     ["gp"]         = { "`[v`]" },
-    ["gyn"]        = { ":let @+=expand("%:t")<cr>", "[Y]ank [n]ame" },
-    ["gys"]        = { ":let @+=expand("%")<cr>", "[Y]ank [s]hort [p]ath" },
-    ["gyp"]        = { ":let @+=expand("%:h")<cr>", "[Y]ank [s]hort [p]ath" },
-    ["gyf"]        = { ":let @+=expand("%:p")<cr>", "[Y]ank [f]ull [p]ath" },
+    ["gyn"]        = { ":let @+=expand('%:t')<cr>", "[Y]ank [n]ame" },
+    ["gys"]        = { ":let @+=expand('%')<cr>", "[Y]ank [s]hort [p]ath" },
+    ["gyp"]        = { ":let @+=expand('%:h')<cr>", "[Y]ank [s]hort [p]ath" },
+    ["gyf"]        = { ":let @+=expand('%:p')<cr>", "[Y]ank [f]ull [p]ath" },
     ["<leader>tc"] = { ":tabnew<cr>", "[T]ab [c]reate" },
     ["<leader>tx"] = { ":tabclose<cr>", "[T]ab close [x]" },
     ["<esc>"]      = { ":noh<cr><esc>", "[/] No highlight" },
@@ -41,30 +41,30 @@ M.ruby_on_rails = {
 
 M.term = {
   n = {
-    ["<C-/>"] = { "<cmd>lua require("core.term").toggle()<Cr>" }
+    ["<C-/>"] = { "<cmd>lua require('core.term').toggle()<Cr>" }
   },
 }
 
 M.diffview = {
   { "<leader>gd", ":DiffviewOpen ", desc = "[G]it [d]iff" },
-  { "<leader>cc", "<cmd>lua require("diffview.config").actions.conflict_choose("all")<cr>", desc = "[C]onflict [C]hoose" },
+  { "<leader>cc", "<cmd>lua require('diffview.config').actions.conflict_choose('all')<cr>", desc = "[C]onflict [C]hoose" },
 }
 
 M.neogit = {
   { "<leader>gg", ":Neogit<cr>", desc = "[G]it status" },
   { "<leader>gl", ":Neogit log<cr>", desc = "[G]it [l]og" },
   { "<leader>gb", ":Neogit branch<cr>", desc = "[G]it [b]ranch" },
-  { "<leader>gc", "<cmd>lua require("neogit").action("branch", "checkout_local_branch")<cr>", desc = "[g]it [c]heckout" },
+  { "<leader>gc", "<cmd>lua require('neogit').action('branch', 'checkout_local_branch')<cr>", desc = "[g]it [c]heckout" },
 }
 
 M.grug_far = {
-  { "<leader>ss", "<cmd>lua require("grug-far").grug_far()<cr>", desc = "[S]each open" },
-  { "<leader>sw", "<cmd>lua require("grug-far").grug_far({ startInInsertMode = false, prefills = { search = vim.fn.expand("<cword>") } })<cr>", desc = "[S]each [w]ord" },
-  { "<leader>sw", ":<C-u> lua require("grug-far").with_visual_selection({ startInInsertMode = false })<cr>" , mode = "v", desc = "[S]each [w]ord" },
+  { "<leader>ss", "<cmd>lua require('grug-far').grug_far()<cr>", desc = "[S]each open" },
+  { "<leader>sw", "<cmd>lua require('grug-far').grug_far({ startInInsertMode = false, prefills = { search = vim.fn.expand('<cword>') } })<cr>", desc = "[S]each [w]ord" },
+  { "<leader>sw", ":<C-u> lua require('grug-far').with_visual_selection({ startInInsertMode = false })<cr>" , mode = "v", desc = "[S]each [w]ord" },
 }
 
 M.oil = {
-  { "-", "<cmd>lua require("oil").open()<cr>", desc = "Open parent directory" },
+  { "-", "<cmd>lua require('oil').open()<cr>", desc = "Open parent directory" },
 }
 
 M.vim_fugitive = {
@@ -88,13 +88,13 @@ M.nvim_bufdel = {
 }
 
 M.treesj = {
-  { "gS", "<cmd>lua require("treesj").toggle()<cr>", desc = "Toggle [S]plit/Join" },
-  { "gs", "<cmd>lua require("treesj").toggle()<cr>", desc = "Toggle [s]plit/join" },
+  { "gS", "<cmd>lua require('treesj').toggle()<cr>", desc = "Toggle [S]plit/Join" },
+  { "gs", "<cmd>lua require('treesj').toggle()<cr>", desc = "Toggle [s]plit/join" },
 }
 
 M.harpoon = {
-  { "<leader>ha", "<cmd>lua require("harpoon.mark").add_file()<cr>", desc = "[H]arpoon add file" },
-  { "<leader>hh", "<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>", desc = "[H]arpoon toggle" },
+  { "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "[H]arpoon add file" },
+  { "<leader>hh", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[H]arpoon toggle" },
 }
 
 M.navigator = {
@@ -107,7 +107,7 @@ M.navigator = {
 M.fzf_lua = {
   { "<leader>ff", "<cmd>FzfLua files<CR>", desc = "[f]zf [f]iles" },
   { "<leader>bb", "<cmd>FzfLua buffers<CR>", desc = "[f]zf [b]uffers" },
-  { "<leader>fg", "<cmd>lua require("fzf-lua").live_grep({  multiline = 2, continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
+  { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep({  multiline = 2, continue_last_search = true })<cr>", desc = "[f]zf live_[g]rep" },
   { "<leader>fw", "<cmd>FzfLua grep_cword<CR>", mode = "n", desc = "[f]zf grep [w]ord" },
   { "<leader>fw", "<cmd>FzfLua grep_visual<CR>", mode = "v", desc = "[f]zf grep [w]ord" },
   { "<leader>gc", "<cmd>FzfLua git_branches<CR>", desc = "[G]it [c]heckout branch" },
@@ -134,8 +134,8 @@ M.mini_git = {
 }
 
 M.nvim_dap = {
-  { "<leader>dt", "<cmd>lua require"dap".toggle_breakpoint()<cr>", desc = "" },
-  { "<leader>dc", "<cmd>lua require"dap".continue()<cr>", desc = "" },
+  { "<leader>dt", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", desc = "" },
+  { "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", desc = "" },
 }
 
 M.devdocs = {
