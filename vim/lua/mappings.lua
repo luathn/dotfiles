@@ -160,8 +160,10 @@ M.codecompanion = {
 }
 
 M.snacks = {
-  { '<leader><space>', '<cmd>lua Snacks.picker.files()<Cr>' },
-  { '<leader>,', '<cmd>lua Snacks.picker.buffers()<Cr>'},
+  { '<leader><space>', '<cmd>lua Snacks.picker.smart()<Cr>', desc = 'Find Files' },
+  { '<leader>,', '<cmd>lua Snacks.picker.buffers()<Cr>', desc = 'Buffers' },
+  { '<leader>/', '<cmd>lua Snacks.picker.grep()<Cr>', desc = 'Grep' },
+  { '<leader>:', '<cmd>lua Snacks.picker.command_history()<Cr>', desc = 'Command History' }
 }
 
 -- M.nvim_telescope = {
