@@ -118,7 +118,7 @@ neogit.setup {
   -- override/add mappings
   mappings = {
     commit_editor = {
-      ["q"] = "Close",
+      ["gq"] = "Close",
       ["<c-c><c-c>"] = "Submit",
       ["<c-c><c-k>"] = "Abort",
     },
@@ -135,7 +135,7 @@ neogit.setup {
       ["x"]          = "Execute",
       ["d"]          = "Drop",
       ["b"]          = "Break",
-      ["q"]          = "Close",
+      ["gq"]          = "Close",
       ["<cr>"]       = "OpenCommit",
       ["gk"]         = "MoveUp",
       ["gj"]         = "MoveDown",
@@ -184,7 +184,8 @@ neogit.setup {
       ["Z"] = "StashPopup",
     },
     status = {
-      ["q"]     = "Close",
+      ["q"]     = false,
+      ["gq"]    = "Close",
       ["I"]     = "InitRepo",
       ["1"]     = "Depth1",
       ["2"]     = "Depth2",

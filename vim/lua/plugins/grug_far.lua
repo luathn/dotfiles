@@ -8,7 +8,7 @@ require('grug-far').setup({
     qflist = { n = '<localleader>q' },
     syncLocations = { n = '<localleader>s' },
     syncLine = { n = '<localleader>l' },
-    close = { n = 'q' },
+    close = { n = 'gq' },
     historyOpen = { n = '<localleader>h' },
     historyAdd = { n = '<localleader>a' },
     refresh = { n = '<localleader>f' },
