@@ -17,21 +17,21 @@ return {
         win = {
           input = {
             keys = {
-              ['<c-;>'] = { 'switch_to_buffers', mode = { 'n', 'i' } },
+              ["<c-;>"] = { "switch_to_buffers", mode = { "n", "i" } },
             },
           },
         }
       },
       buffers = {
-        finder = 'buffers',
-        format = 'buffer',
+        finder = "buffers",
+        format = "buffer",
         current = false,
         sort_lastused = true,
         win = {
           input = {
             keys = {
-              ['<c-x>'] = { 'bufdelete', mode = { 'n', 'i' } },
-              ['<c-;>'] = { 'switch_to_smart', mode = { 'n', 'i' } },
+              ["<c-x>"] = { "bufdelete", mode = { "n", "i" } },
+              ["<c-;>"] = { "switch_to_smart", mode = { "n", "i" } },
             },
           },
         },
@@ -40,7 +40,7 @@ return {
     ui_select = true,
     layout = {
       preview = false,
-      preset = 'select',
+      preset = "select",
     },
     layouts = {
       select = {
@@ -51,12 +51,12 @@ return {
           height = 0.35,
           min_height = 17,
           max_height = 17,
-          box = 'vertical',
-          border = 'rounded',
-          title_pos = 'center',
-          { win = 'input', height = 1, border = 'bottom' },
-          { win = 'list', border = 'none' },
-          { win = 'preview', height = 0.4, border = 'top' },
+          box = "vertical",
+          border = "rounded",
+          title_pos = "center",
+          { win = "input", height = 1, border = "bottom" },
+          { win = "list", border = "none" },
+          { win = "preview", height = 0.4, border = "top" },
         }
       },
     },
@@ -64,7 +64,7 @@ return {
       -- input window
       input = {
         keys = {
-          ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
+          ["<Esc>"] = { "close", mode = { "n", "i" } },
         },
       }
     },

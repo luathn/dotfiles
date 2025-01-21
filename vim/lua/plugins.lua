@@ -16,7 +16,7 @@ return {
     event = "VeryLazy",
   },
   {
-    'Wansmer/treesj',
+    "Wansmer/treesj",
     keys = mappings.treesj,
     event = "VeryLazy",
     config = function() require("plugins.treesj") end,
@@ -41,7 +41,7 @@ return {
     dependencies = {
       { "williamboman/mason.nvim", opts = {} },
       { "williamboman/mason-lspconfig.nvim", opts = {} },
-      { 'saghen/blink.cmp' },
+      { "saghen/blink.cmp" },
     },
     config = function()
       require("plugins.nvim-lspconfig")
@@ -59,7 +59,7 @@ return {
   },
   -- Mini
   -- {
-  --   'echasnovski/mini.pick',
+  --   "echasnovski/mini.pick",
   --   version = false,
   --   event = "VeryLazy",
   --   config = function()
@@ -68,11 +68,11 @@ return {
   --   keys = mappings.mini_pick,
   -- },
   {
-    'echasnovski/mini.extra',
+    "echasnovski/mini.extra",
     event = "VeryLazy",
     version = false,
     config = function()
-      require('mini.extra').setup()
+      require("mini.extra").setup()
     end
   },
   {
@@ -80,7 +80,7 @@ return {
     event = "VeryLazy",
     version = false,
     config = function()
-      require('plugins.mini_surround')
+      require("plugins.mini_surround")
     end,
   },
   {
@@ -90,64 +90,64 @@ return {
     opts = {},
   },
   {
-    'echasnovski/mini.pairs',
+    "echasnovski/mini.pairs",
     event = "VeryLazy",
     version = false,
     config = function()
-      require('mini.pairs').setup()
+      require("mini.pairs").setup()
     end
   },
   {
-    'echasnovski/mini.statusline',
+    "echasnovski/mini.statusline",
     version = false,
     config = function()
-      require('plugins.mini_statusline')
+      require("plugins.mini_statusline")
     end
   },
   {
-    'echasnovski/mini-git',
+    "echasnovski/mini-git",
     event = "VeryLazy",
     version = false,
-    main = 'mini.git',
+    main = "mini.git",
     config = function()
-      require('plugins.mini_git')
+      require("plugins.mini_git")
     end,
     keys = mappings.mini_git,
   },
   {
-    'echasnovski/mini.indentscope',
-    event = 'VeryLazy',
+    "echasnovski/mini.indentscope",
+    event = "VeryLazy",
     version = false,
     config = function()
-      require('mini.indentscope').setup({
+      require("mini.indentscope").setup({
         draw = {
           delay = 0,
-          animation = require('mini.indentscope').gen_animation.none(),
+          animation = require("mini.indentscope").gen_animation.none(),
         },
       })
     end
   },
   {
-    'echasnovski/mini.cursorword',
+    "echasnovski/mini.cursorword",
     version = false,
     config = function()
-      require('mini.cursorword').setup({
+      require("mini.cursorword").setup({
         delay = 500
       })
     end
   },
   {
-    'echasnovski/mini.icons',
+    "echasnovski/mini.icons",
     version = false,
     config = function()
-      require('mini.icons').setup()
+      require("mini.icons").setup()
     end
   },
   {
-    'saghen/blink.cmp',
-    dependencies = 'rafamadriz/friendly-snippets',
-    version = '*',
-    opts = require('plugins.blink_cmp'),
+    "saghen/blink.cmp",
+    dependencies = "rafamadriz/friendly-snippets",
+    version = "*",
+    opts = require("plugins.blink_cmp"),
     opts_extend = { "sources.default" }
   },
   -- {
@@ -215,7 +215,7 @@ return {
     end,
   },
   {
-    'MagicDuck/grug-far.nvim',
+    "MagicDuck/grug-far.nvim",
     event = "VeryLazy",
     keys = mappings.grug_far,
     config = function()
@@ -229,7 +229,7 @@ return {
   },
   -- Test
   -- {
-  --   'akinsho/git-conflict.nvim',
+  --   "akinsho/git-conflict.nvim",
   --   version = "*",
   --   event = "VeryLazy",
   --   config = true,
@@ -246,13 +246,13 @@ return {
     event = "VeryLazy",
     config = true,
     keys = mappings.codecompanion,
-    opts = require('plugins.codecompanion')
+    opts = require("plugins.codecompanion")
   },
   {
     "folke/snacks.nvim",
     lazy = false,
     keys = mappings.snacks,
-    opts = require('plugins.snacks'),
+    opts = require("plugins.snacks"),
     init = function()
       local bg = require("core.utils").bg
       local fg = require("core.utils").fg
@@ -294,7 +294,7 @@ return {
   --     { "stevearc/dressing.nvim" },
   --     { "MunifTanjim/nui.nvim" },
   --     { "zbirenbaum/copilot.lua", opts = {} },
-  --     { 'MeanderingProgrammer/render-markdown.nvim', opts = { file_types = { "Avante" } }, ft = { "Avante" } },
+  --     { "MeanderingProgrammer/render-markdown.nvim", opts = { file_types = { "Avante" } }, ft = { "Avante" } },
   --   },
   -- },
 
@@ -339,8 +339,8 @@ return {
   --   end,
   -- },
   -- {
-  --   'kevinhwang91/nvim-bqf',
-  --   dependencies = { 'junegunn/fzf' },
+  --   "kevinhwang91/nvim-bqf",
+  --   dependencies = { "junegunn/fzf" },
   -- },
   -- {
   --   "nvim-pack/nvim-spectre",
@@ -357,7 +357,7 @@ return {
   --   config = function()
   --     require("plugins.nvim-devdocs")
   --
-  --     vim.keymap.set("n", "<leader>dd", "<cmd>lua require('plugins.fzf-lua-devdocs').open_picker()<CR>")
+  --     vim.keymap.set("n", "<leader>dd", "<cmd>lua require("plugins.fzf-lua-devdocs").open_picker()<CR>")
   --   end,
   -- },
   -- {
@@ -380,7 +380,7 @@ return {
   -- },
   -- { "jlanzarotta/bufexplorer" },
   -- {
-  --   'akinsho/toggleterm.nvim',
+  --   "akinsho/toggleterm.nvim",
   --   event = "VeryLazy",
   --   version = "*",
   --   config = function()
@@ -390,6 +390,6 @@ return {
   -- {
   --   "numToStr/Navigator.nvim",
   --   keys = mappings.navigator,
-  --   config = function() require('Navigator').setup() end,
+  --   config = function() require("Navigator").setup() end,
   -- },
 }
