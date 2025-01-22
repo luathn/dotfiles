@@ -72,16 +72,6 @@ return {
     end
   },
   {
-    "echasnovski/mini-git",
-    event = "VeryLazy",
-    version = false,
-    main = "mini.git",
-    config = function()
-      require("plugins.mini_git")
-    end,
-    keys = mappings.mini_git,
-  },
-  {
     "echasnovski/mini.indentscope",
     event = "VeryLazy",
     version = false,
@@ -111,6 +101,12 @@ return {
     end
   },
   -- Base plugins
+  {
+    "tpope/vim-fugitive",
+    keys = mappings.vim_fugitive,
+    event = "VeryLazy",
+  },
+
   {
     "kylechui/nvim-surround",
     version = "*",
@@ -236,7 +232,16 @@ return {
   --   event = "InsertEnter",
   --   opts = require("plugins.copilot_config")
   -- },
-
+  -- {
+  --   "echasnovski/mini-git",
+  --   event = "VeryLazy",
+  --   version = false,
+  --   main = "mini.git",
+  --   config = function()
+  --     require("plugins.mini_git")
+  --   end,
+  --   keys = mappings.mini_git,
+  -- },
   -- Replaced by mini
   -- {
   --   "ibhagwan/fzf-lua",
@@ -252,12 +257,6 @@ return {
   --     require("plugins.lualine")
   --   end,
   -- },
-  -- {
-  --   "tpope/vim-fugitive",
-  --   keys = mappings.vim_fugitive,
-  --   event = "VeryLazy",
-  -- },
-
   -- {
   --   "mfussenegger/nvim-dap",
   --   -- dependencies = "rcarriga/nvim-dap-ui",
