@@ -47,34 +47,7 @@ return {
       require("plugins.nvim-lspconfig")
     end,
   },
-  -- Base plugins
-  {
-    "ojroques/nvim-bufdel",
-    keys = mappings.nvim_bufdel,
-    event = "VeryLazy",
-    commit = "523d58e",
-    config = function()
-      require("plugins.nvim_bufdel")
-    end,
-  },
   -- Mini
-  -- {
-  --   "echasnovski/mini.pick",
-  --   version = false,
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("plugins.mini_pick")
-  --   end,
-  --   keys = mappings.mini_pick,
-  -- },
-  {
-    "echasnovski/mini.extra",
-    event = "VeryLazy",
-    version = false,
-    config = function()
-      require("mini.extra").setup()
-    end
-  },
   {
     "echasnovski/mini.surround",
     event = "VeryLazy",
@@ -82,12 +55,6 @@ return {
     config = function()
       require("plugins.mini_surround")
     end,
-  },
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    opts = {},
   },
   {
     "echasnovski/mini.pairs",
@@ -143,6 +110,13 @@ return {
       require("mini.icons").setup()
     end
   },
+  -- Base plugins
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    opts = {},
+  },
   {
     "saghen/blink.cmp",
     dependencies = "rafamadriz/friendly-snippets",
@@ -150,22 +124,6 @@ return {
     opts = require("plugins.blink_cmp"),
     opts_extend = { "sources.default" }
   },
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("plugins.nvim-cmp")
-  --   end,
-  --   dependencies = {
-  --     "hrsh7th/cmp-nvim-lsp",
-  --     "hrsh7th/cmp-buffer",
-  --     "hrsh7th/cmp-path",
-  --     "hrsh7th/cmp-cmdline",
-  --     -- "L3MON4D3/LuaSnip",
-  --     -- "saadparwaiz1/cmp_luasnip",
-  --     -- "rafamadriz/friendly-snippets",
-  --   },
-  -- },
   {
     "TimUntersberger/neogit",
     keys = mappings.neogit,
@@ -227,13 +185,6 @@ return {
     event = "VeryLazy",
     config = function() end,
   },
-  -- Test
-  -- {
-  --   "akinsho/git-conflict.nvim",
-  --   version = "*",
-  --   event = "VeryLazy",
-  --   config = true,
-  -- },
   {
     "robitx/gp.nvim",
     event = "VeryLazy",
@@ -248,6 +199,7 @@ return {
     keys = mappings.codecompanion,
     opts = require("plugins.codecompanion")
   },
+  -- Test
   {
     "folke/snacks.nvim",
     lazy = false,
@@ -259,43 +211,30 @@ return {
       local colors = require("catppuccin.palettes").get_palette "frappe"
 
       bg("SnacksPickerInput", colors.base)
-      -- bg("SnacksPickerList", colors.base)
       fg("SnacksPickerDir", colors.text)
     end
   },
   -- {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   "hrsh7th/nvim-cmp",
   --   event = "VeryLazy",
-  --   branch = "main",
+  --   config = function()
+  --     require("plugins.nvim-cmp")
+  --   end,
   --   dependencies = {
-  --     { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-  --     { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-  --     { "ibhagwan/fzf-lua" },
+  --     "hrsh7th/cmp-nvim-lsp",
+  --     "hrsh7th/cmp-buffer",
+  --     "hrsh7th/cmp-path",
+  --     "hrsh7th/cmp-cmdline",
+  --     -- "L3MON4D3/LuaSnip",
+  --     -- "saadparwaiz1/cmp_luasnip",
+  --     -- "rafamadriz/friendly-snippets",
   --   },
-  --   build = "make tiktoken", -- Only on MacOS or Linux
-  --   opts = {
-  --     debug = true, -- Enable debugging
-  --     -- See Configuration section for rest
-  --   },
-  --   keys = mappings.copilot_chat,
   -- },
   -- {
   --   "zbirenbaum/copilot.lua",
   --   cmd = "Copilot",
   --   event = "InsertEnter",
   --   opts = require("plugins.copilot_config")
-  -- },
-  -- {
-  --   "yetone/avante.nvim",
-  --   event = "VeryLazy",
-  --   version = false,
-  --   build = "make",
-  --   dependencies = {
-  --     { "stevearc/dressing.nvim" },
-  --     { "MunifTanjim/nui.nvim" },
-  --     { "zbirenbaum/copilot.lua", opts = {} },
-  --     { "MeanderingProgrammer/render-markdown.nvim", opts = { file_types = { "Avante" } }, ft = { "Avante" } },
-  --   },
   -- },
 
   -- Replaced by mini
@@ -306,17 +245,6 @@ return {
   --   config = function()
   --     require("plugins.fzf-lua")
   --   end
-  -- },
-  -- {
-  --   "kylechui/nvim-surround",
-  --   version = "*",
-  --   -- event = "VeryLazy",
-  --   opts = {},
-  -- },
-  -- {
-  --   "windwp/nvim-autopairs",
-  --   event = "VeryLazy",
-  --   opts = {},
   -- },
   -- {
   --   "nvim-lualine/lualine.nvim",
@@ -343,14 +271,6 @@ return {
   --   dependencies = { "junegunn/fzf" },
   -- },
   -- {
-  --   "nvim-pack/nvim-spectre",
-  --   keys = require("mappings").nvim_spectre,
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("plugins.nvim-spectre")
-  --   end,
-  -- },
-  -- {
   --   "luckasRanarison/nvim-devdocs",
   --   keys = require("mappings").devdocs,
   --   event = "VeryLazy",
@@ -359,33 +279,6 @@ return {
   --
   --     vim.keymap.set("n", "<leader>dd", "<cmd>lua require("plugins.fzf-lua-devdocs").open_picker()<CR>")
   --   end,
-  -- },
-  -- {
-  --   "nvim-telescope/telescope.nvim",
-  --   keys = require("mappings").nvim_telescope,
-  --   event = "VeryLazy",
-  --   dependencies = {
-  --     {
-  --       "nvim-telescope/telescope-fzf-native.nvim",
-  --       event = "VeryLazy",
-  --       build = "make",
-  --       cond = function()
-  --         return vim.fn.executable "make" == 1
-  --       end,
-  --     },
-  --   },
-  --   config = function()
-  --     require("plugins.nvim-telescope")
-  --   end,
-  -- },
-  -- { "jlanzarotta/bufexplorer" },
-  -- {
-  --   "akinsho/toggleterm.nvim",
-  --   event = "VeryLazy",
-  --   version = "*",
-  --   config = function()
-  --     require("plugins.toggleterm")
-  --   end
   -- },
   -- {
   --   "numToStr/Navigator.nvim",

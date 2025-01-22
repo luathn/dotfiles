@@ -164,7 +164,11 @@ M.snacks = {
   { "<leader><space>", "<cmd>lua Snacks.picker.smart()<Cr>", desc = "Find Files" },
   { "<leader>,", "<cmd>lua Snacks.picker.buffers()<Cr>", desc = "Buffers" },
   { "<leader>/", "<cmd>lua Snacks.picker.grep()<Cr>", desc = "Grep" },
-  { "<leader>:", "<cmd>lua Snacks.picker.command_history()<Cr>", desc = "Command History" }
+  { "<leader>:", "<cmd>lua Snacks.picker.command_history()<Cr>", desc = "Command History" },
+  -- Buffer
+  { "<leader>bd", "<cmd>lua Snacks.bufdelete()<Cr>", desc = "[B]uffer [d]elete" },
+  { "<leader>bD", "<cmd>lua Snacks.bufdelete.all()<Cr>", desc = "[B]uffer [D]elete all" },
+  { "<leader>bo", "<cmd>lua Snacks.bufdelete.other()<Cr>", desc = "[B]uffer delete [o]ther" },
 }
 
 return M
