@@ -36,6 +36,17 @@ return {
           },
         },
       },
+      grep_buffers = {
+        layout = {
+          preview = "main",
+          preset = "ivy",
+        }
+      },
+      command_history = {
+        layout = {
+          preset = "select",
+        }
+      }
     },
     ui_select = true,
     layout = {

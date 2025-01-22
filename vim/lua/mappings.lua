@@ -27,7 +27,7 @@ M.general = {
     ["jk"]         = { "<Esc>" },
   },
   t = {
-    ["<esc>"]      = { "<c-\\><c-n>"},
+    ["<esc><esc>"]      = { "<c-\\><c-n>"},
     ["jk"]         = { "<c-\\><c-n>"},
   }
 }
@@ -163,7 +163,7 @@ M.codecompanion = {
 M.snacks = {
   { "<leader><space>", "<cmd>lua Snacks.picker.smart()<Cr>", desc = "Find Files" },
   { "<leader>,", "<cmd>lua Snacks.picker.buffers()<Cr>", desc = "Buffers" },
-  { "<leader>/", "<cmd>lua Snacks.picker.grep()<Cr>", desc = "Grep" },
+  { "<leader>/", "<cmd>lua Snacks.picker.grep_buffers()<Cr>", desc = "Grep buffers" },
   { "<leader>:", "<cmd>lua Snacks.picker.command_history()<Cr>", desc = "Command History" },
   -- Buffer
   { "<leader>bd", "<cmd>lua Snacks.bufdelete()<Cr>", desc = "[B]uffer [d]elete" },
