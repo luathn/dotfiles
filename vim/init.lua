@@ -26,7 +26,7 @@ require("lazy").setup(plugins, {})
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "qf" },
-  command = [[nnoremap <buffer> q :cclose<CR>:lclose<CR>]]
+  command = [[nnoremap <buffer> gq :cclose<CR>:lclose<CR>]]
 })
 
 vim.api.nvim_create_autocmd("FileType", {
