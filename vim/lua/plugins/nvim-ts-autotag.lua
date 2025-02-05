@@ -1,9 +1,19 @@
 require'nvim-treesitter.configs'.setup {
-  autotag = {
-    enable = true,
-    enable_rename = true,
-    enable_close = true,
-    enable_close_on_slash = false,
-    -- filetypes = { "html" , "xml" },
+  opts = {
+    -- Defaults
+    enable_close = true, -- Auto close tags
+    enable_rename = true, -- Auto rename pairs of tags
+    enable_close_on_slash = false -- Auto close on trailing </
+  },
+  per_filetype = {
+    ["html"] = {
+      enable_close = false
+    }
+  },
+  aliases = {
+    ["js"] = "html",
+    ["jsx"] = "html",
+    ["ts"] = "html",
+    ["tsx"] = "html",
   }
 }

@@ -30,9 +30,7 @@ return {
   {
     "windwp/nvim-ts-autotag",
     event = "VeryLazy",
-    config = function()
-      require("plugins.nvim-ts-autotag")
-    end,
+    opts = {},
   },
   -- LSP
   {
@@ -106,13 +104,6 @@ return {
     keys = mappings.vim_fugitive,
     event = "VeryLazy",
   },
-
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    opts = {},
-  },
   {
     "saghen/blink.cmp",
     dependencies = "rafamadriz/friendly-snippets",
@@ -130,7 +121,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
-      "echasnovski/mini.pick",
     },
   },
   {
@@ -243,6 +233,12 @@ return {
   --   keys = mappings.mini_git,
   -- },
   -- Replaced by mini
+  -- {
+  --   "kylechui/nvim-surround",
+  --   version = "*",
+  --   event = "VeryLazy",
+  --   opts = {},
+  -- },
   -- {
   --   "ibhagwan/fzf-lua",
   --   event = "VeryLazy",
