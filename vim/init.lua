@@ -31,5 +31,5 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "ruby" },
-  command = [[nnoremap <buffer> <leader>rr :TermExec cmd="ruby %"<CR>]]
+  command = [[nnoremap <buffer> <leader>rr :term ruby %<CR>]]
 })
