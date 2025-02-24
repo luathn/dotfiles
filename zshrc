@@ -40,14 +40,7 @@ export EDITOR="nvim"
 export LANG=en_US.UTF-8
 
 # asdf
-case `uname` in
-  Darwin)
-    . /opt/homebrew/opt/asdf/libexec/asdf.sh
-  ;;
-  Linux)
-    . /opt/asdf-vm/asdf.sh
-  ;;
-esac
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 export GOPATH="$(go env GOPATH)"
 export PATH=${GOPATH}/bin:$PATH
