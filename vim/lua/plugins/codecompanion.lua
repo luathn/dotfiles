@@ -7,6 +7,14 @@ local constants = {
 }
 
 return {
+  strategies = {
+    chat = {
+      adapter = "anthropic",
+    },
+    inline = {
+      adapter = "anthropic",
+    },
+  },
   prompt_library = {
     ["Gen Commit Message"] = {
       strategy = "inline",
