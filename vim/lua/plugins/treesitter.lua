@@ -12,6 +12,7 @@ require"nvim-treesitter.configs".setup {
   indent = { enable = true },
   highlight = {
     enable = true,
+    disable = { "yaml", "yml" }
   },
   incremental_selection = {
     enable = true,

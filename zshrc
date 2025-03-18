@@ -69,6 +69,14 @@ zsh-defer source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 zsh-defer source ~/.zsh_local
 
+function ai_helper() {
+  local current_buffer=$BUFFER
+  BUFFER=$(aigen "$current_buffer. just output the bash command and nothing else.")
+  CURSOR=${#BUFFER}
+}
+zle -N ai_helper
+bindkey '^h' ai_helper
+
 # Powerlevel10k
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
