@@ -29,6 +29,7 @@ return {
         name = 'LSP',
         module = 'blink.cmp.sources.lsp',
         min_keyword_length = 2,
+        fallbacks = {},
       },
       buffer = {
         name = 'Buffer',
