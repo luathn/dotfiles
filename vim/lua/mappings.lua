@@ -59,8 +59,8 @@ M.neogit = {
 }
 
 M.grug_far = {
-  { "<leader>ss", "<cmd>lua require('grug-far').grug_far()<cr>", desc = "[S]each open" },
-  { "<leader>sw", "<cmd>lua require('grug-far').grug_far({ startInInsertMode = false, prefills = { search = vim.fn.expand('<cword>') } })<cr>", desc = "[S]each [w]ord" },
+  { "<leader>ss", "<cmd>lua require('grug-far').open({})<cr>", desc = "[S]each open" },
+  { "<leader>sw", "<cmd>lua require('grug-far').open({ startInInsertMode = false, prefills = { search = vim.fn.expand('<cword>') } })<cr>", desc = "[S]each [w]ord" },
   { "<leader>sw", ":<C-u> lua require('grug-far').with_visual_selection({ startInInsertMode = false })<cr>" , mode = "v", desc = "[S]each [w]ord" },
 }
 
