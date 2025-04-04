@@ -55,14 +55,6 @@ return {
     end,
   },
   {
-    "echasnovski/mini.pairs",
-    event = "VeryLazy",
-    version = false,
-    config = function()
-      require("mini.pairs").setup()
-    end
-  },
-  {
     "echasnovski/mini.statusline",
     version = false,
     config = function()
@@ -99,6 +91,11 @@ return {
     end
   },
   -- Base plugins
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+  },
   {
     "tpope/vim-fugitive",
     keys = mappings.vim_fugitive,
