@@ -12,3 +12,4 @@ config/ncmpcpp/*
 
 config/ranger/*
 !config/ranger/rc.conf
+.aider*

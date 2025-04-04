@@ -61,8 +61,13 @@ require("gp").setup({
       endpoint = "https://api.anthropic.com/v1/messages",
       secret = os.getenv("ANTHROPIC_API_KEY"),
     },
+    googleai = {
+      disable = false,
+      endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
+      secret = os.getenv("GEMINI_API_KEY"),
+    },
   },
-  default_chat_agent = "ChatClaude-3-7-Sonnet",
+  default_chat_agent = "ChatGemini-2.5-pro-exp",
   default_command_agent = "ChatClaude-3-7-Sonnet",
   agents = {
     {
@@ -72,6 +77,16 @@ require("gp").setup({
       command = true,
       -- string with model name or table with model name and parameters
       model = { model = "claude-3-7-sonnet-latest", temperature = 0.8, top_p = 1 },
+      -- system prompt (use this to specify the persona/role of the AI)
+      system_prompt = require("gp.defaults").chat_system_prompt,
+    },
+    {
+      provider = "googleai",
+      name = "ChatGemini-2.5-pro-exp",
+      chat = true,
+      command = false,
+      -- string with model name or table with model name and parameters
+      model = { model = "gemini-2.5-pro-exp-03-25", temperature = 1.1, top_p = 1 },
       -- system prompt (use this to specify the persona/role of the AI)
       system_prompt = require("gp.defaults").chat_system_prompt,
     },

@@ -8,6 +8,7 @@ require"nvim-treesitter.configs".setup {
     "lua",
     "html",
     "go",
+    "commonlisp",
   },
   indent = { enable = true },
   highlight = {
