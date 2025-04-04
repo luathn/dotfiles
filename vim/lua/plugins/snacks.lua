@@ -1,4 +1,11 @@
-return {
+local bg = require("core.utils").bg
+local fg = require("core.utils").fg
+local colors = require("catppuccin.palettes").get_palette "frappe"
+
+bg("SnacksPickerInput", colors.base)
+fg("SnacksPickerDir", colors.text)
+
+require("snacks").setup({
   picker = {
     actions = {
       switch_to_buffers = function(picker, _)
@@ -124,4 +131,64 @@ return {
   --     },
   --   },
   -- }
-}
+})
+
+local function read_zsh_history()
+  local history_file = os.getenv("HOME") .. "/.zsh_history"
+  local items = {}
+  local idx = 1
+
+  local file = io.open(history_file, "r")
+  if not file then
+    return items
+  end
+
+  for line in file:lines() do
+    local cmd = line:match(";(.+)$")
+    if cmd then
+      table.insert(items, {
+        idx = idx,
+        score = idx,
+        text = cmd,
+        command = cmd,
+      })
+      idx = idx + 1
+    end
+  end
+
+  file:close()
+  return items
+end
+
+local function zsh_history_picker()
+  local items = read_zsh_history()
+
+  local format = function(item)
+    local ret = {}
+    ret[#ret + 1] = { "", "@string" }
+    ret[#ret + 1] = { " " }
+    ret[#ret + 1] = { item.text or "", "@file" }
+
+    return ret
+  end
+
+  local confirm = function(picker, item)
+    picker:close()
+    if item then
+      vim.schedule(function()
+        vim.cmd("terminal")
+        vim.cmd("startinsert")
+        vim.api.nvim_put({item.command}, "", false, true)
+      end)
+    end
+  end
+
+  return Snacks.picker.pick({
+    items = items,
+    format = format,
+    confirm = confirm,
+    preview = "preview",
+  })
+end
+
+vim.keymap.set('n', '<Leader><CR>', zsh_history_picker, { desc = "Zsh History" })

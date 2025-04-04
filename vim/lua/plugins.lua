@@ -187,14 +187,8 @@ return {
     "folke/snacks.nvim",
     lazy = false,
     keys = mappings.snacks,
-    opts = require("plugins.snacks"),
     init = function()
-      local bg = require("core.utils").bg
-      local fg = require("core.utils").fg
-      local colors = require("catppuccin.palettes").get_palette "frappe"
-
-      bg("SnacksPickerInput", colors.base)
-      fg("SnacksPickerDir", colors.text)
+      require("plugins.snacks")
     end
   },
   -- {
