@@ -38,7 +38,8 @@ return {
     event = "VeryLazy",
     dependencies = {
       { "williamboman/mason.nvim", opts = {} },
-      { "williamboman/mason-lspconfig.nvim", opts = {} },
+      { "williamboman/mason-lspconfig.nvim" },
+      { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
       { "saghen/blink.cmp" },
     },
     config = function()
@@ -91,11 +92,6 @@ return {
     end
   },
   -- Base plugins
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    config = true
-  },
   {
     "tpope/vim-fugitive",
     keys = mappings.vim_fugitive,
@@ -175,13 +171,6 @@ return {
       require("plugins.gp")
     end
   },
-  {
-    "olimorris/codecompanion.nvim",
-    event = "VeryLazy",
-    config = true,
-    keys = mappings.codecompanion,
-    opts = require("plugins.codecompanion")
-  },
   -- Test
   {
     "folke/snacks.nvim",
@@ -202,8 +191,28 @@ return {
         debug = false,              -- enable debug logging
       })
 
-      vim.api.nvim_set_keymap('n', '<leader>Aa', ':AiderOpen --no-auto-commits<CR>', {noremap = true, silent = true})
-      vim.api.nvim_set_keymap('n', '<leader>Am', ':AiderAddModifiedFiles<CR>', {noremap = true, silent = true})
+      vim.api.nvim_set_keymap('n', '<leader>aa', ':AiderOpen --no-auto-commits<CR>', {noremap = true, silent = true})
+      vim.api.nvim_set_keymap('n', '<leader>am', ':AiderAddModifiedFiles<CR>', {noremap = true, silent = true})
+    end
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {},
+    init = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+          ruby = { "rubocop" },
+          -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        },
+        -- format_on_save = {
+        --   -- These options will be passed to conform.format()
+        --   timeout_ms = 1500,
+        --   lsp_format = "fallback",
+        -- },
+      })
+
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end
   },
   -- {

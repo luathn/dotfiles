@@ -22,7 +22,7 @@ return {
   },
   sources = {
     default = {
-      'lsp', 'path', 'snippets', 'buffer', 'codecompanion',
+      'lsp', 'path', 'snippets', 'buffer',
     },
     providers = {
       lsp = {
@@ -39,11 +39,6 @@ return {
       path = {
         name = 'Path',
         module = 'blink.cmp.sources.path',
-      },
-      codecompanion = {
-        name = "CodeCompanion",
-        module = "codecompanion.providers.completion.blink",
-        enabled = true,
       },
     },
   },
