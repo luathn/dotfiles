@@ -88,6 +88,7 @@ local servers = {
   -- solargraph = {},
   ruby_lsp = {},
   ts_ls = {},
+  gopls = {},
   -- vtsls = {},
   eslint = {},
   -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
