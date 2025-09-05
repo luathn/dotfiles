@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Check if llm is installed
+if ! command -v llm &> /dev/null; then
+  echo "Error: llm is not installed. Please install it (e.g., pip install llm)."
+  echo "Also, ensure you have the llm-gemini plugin installed: llm install llm-gemini"
+  exit 1
+fi
+
+# Check if GEMINI_API_KEY is set
+# The llm-gemini plugin likely uses this or GOOGLE_API_KEY, or requires setting via 'llm keys set gemini'
+if [ -z "$GEMINI_API_KEY" ] && [ -z "$GOOGLE_API_KEY" ]; then
+  echo "Error: Neither GEMINI_API_KEY nor GOOGLE_API_KEY environment variable is set."
+  echo "Alternatively, you can set the key using 'llm keys set gemini'."
+  exit 1
+fi
+
+# Function to make the API call using llm
+call_llm_api() {
+  local prompt="$1"
+  local model="gemini-2.0-flash"
+  local response=$(llm -m "$model" "$prompt")
+  echo "$response"
+}
+
+# Main script logic
+main() {
+  # Check if input is provided
+  if [ $# -eq 0 ]; then
+    echo "Error: No input provided."
+    exit 1
+  fi
+
+  # Combine all arguments into a single string
+  local input="$*"
+
+  # Call the API using llm and get the response
+  local result=$(call_llm_api "$input")
+
+  # Output the result
+  echo "$result"
+}
+
+# Run the main function
+main "$@"

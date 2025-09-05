@@ -37,7 +37,10 @@ return {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      { "williamboman/mason.nvim", opts = {} },
+      {
+        "williamboman/mason.nvim",
+        opts = {},
+      },
       { "williamboman/mason-lspconfig.nvim" },
       { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
       { "saghen/blink.cmp" },
@@ -91,6 +94,14 @@ return {
       require("mini.icons").setup()
     end
   },
+  -- {
+  --   'echasnovski/mini.pick',
+  --   version = false,
+  --   keys = mappings.mini_pick,
+  --   config = function()
+  --     require("plugins.mini_pick")
+  --   end
+  -- },
   -- Base plugins
   {
     "tpope/vim-fugitive",
@@ -181,21 +192,6 @@ return {
     end
   },
   {
-    "joshuavial/aider.nvim",
-    config = function()
-      require('aider').setup({
-        -- your configuration comes here
-        -- if you don't want to use the default settings
-        auto_manage_context = true, -- automatically manage buffer context
-        default_bindings = false,    -- use default <leader>A keybindings
-        debug = false,              -- enable debug logging
-      })
-
-      vim.api.nvim_set_keymap('n', '<leader>aa', ':AiderOpen --no-auto-commits<CR>', {noremap = true, silent = true})
-      vim.api.nvim_set_keymap('n', '<leader>am', ':AiderAddModifiedFiles<CR>', {noremap = true, silent = true})
-    end
-  },
-  {
     "stevearc/conform.nvim",
     opts = {},
     init = function()
@@ -203,6 +199,7 @@ return {
         formatters_by_ft = {
           lua = { "stylua" },
           ruby = { "rubocop" },
+          markdown = { "prettier" },
           -- javascript = { "prettierd", "prettier", stop_after_first = true },
         },
         -- format_on_save = {
@@ -215,6 +212,30 @@ return {
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end
   },
+  {
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
+    keys = {
+      { "<leader>a",  nil,                              desc = "AI/Claude Code" },
+      { "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
+      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
+      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
+      { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+      { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
+      { "<leader>as", "<cmd>ClaudeCodeSend<cr>",        mode = "v",                  desc = "Send to Claude" },
+      {
+        "<leader>as",
+        "<cmd>ClaudeCodeTreeAdd<cr>",
+        desc = "Add file",
+        ft = { "NvimTree", "neo-tree", "oil", "minifiles" },
+      },
+      -- Diff management
+      { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
+    },
+  }
   -- {
   --   "hrsh7th/nvim-cmp",
   --   event = "VeryLazy",

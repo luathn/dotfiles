@@ -3,7 +3,6 @@ brew install fzf
 brew install fd
 brew tap homebrew/cask-fonts
 brew install font-jetbrains-mono-nerd-font
-brew install tmux
 brew install asdf
 brew install redis
 brew install imagemagick ffmpeg
@@ -18,18 +17,14 @@ brew install applesimutils
 
 brew install postgresql
 brew install blueutil
-brew install terminal-notifier
 brew install coreutils
 brew install cmake
 brew install libtool
 brew install ripgrep
 brew install translate-shell
 brew install bat
-brew install git-delta
 brew install gnu-sed
 brew install p7zip
-
-# brew install lazygit
 
 # Cask
 brew install --cask slack
@@ -54,3 +49,4 @@ brew install --cask telegram
 # brew install bluesnooze # turn off bluetooth when sleep
 
 # 1password
+# Firefox

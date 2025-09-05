@@ -63,9 +63,11 @@ vim.o.softtabstop = 2
 -- Fold based on indent
 vim.o.foldmethod = "indent"
 -- Deepest fold is 5 levels
-vim.o.foldnestmax = 5
+vim.o.foldnestmax = 1
 -- No fold when start
 vim.o.foldenable = false
+vim.o.foldopen = ""
+vim.o.foldclose = ""
 -- Split below
 vim.o.splitbelow = true
 -- Split right
@@ -91,3 +93,7 @@ vim.o.fillchars = "eob: "
 vim.o.completeopt = "menu,menuone,noselect"
 vim.api.nvim_command("set shortmess+=c")
 vim.o.showmode = false
+
+if vim.fn.has('nvim-0.12') == 1 then
+  vim.o.diffopt = 'internal,filler,closeoff,inline:word,linematch:40'
+end

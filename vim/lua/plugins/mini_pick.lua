@@ -14,7 +14,9 @@ local win_config = function()
   height = math.floor(0.3 * vim.o.lines)
   width = vim.o.columns > 170 and math.floor(0.618 * vim.o.columns) or vim.o.columns
   return {
-    anchor = 'NW', height = height, width = width,
+    anchor = 'NW',
+    height = height,
+    width = width,
     row = math.floor(0.5 * (vim.o.lines - height)),
     col = math.floor(0.5 * (vim.o.columns - width)),
   }
@@ -59,14 +61,14 @@ local grep_files = function()
 end
 
 local open_explorer = function()
- local current = (MiniPick.get_picker_matches() or {}).current
- if current == nil then return end
- local dir_path = vim.fn.fnamemodify(current, ":h")
- MiniPick.stop()
+  local current = (MiniPick.get_picker_matches() or {}).current
+  if current == nil then return end
+  local dir_path = vim.fn.fnamemodify(current, ":h")
+  MiniPick.stop()
 
- vim.schedule(function()
-   require('oil').open(dir_path)
- end)
+  vim.schedule(function()
+    require('oil').open(dir_path)
+  end)
 end
 
 local yank_path = function()
@@ -81,7 +83,7 @@ end
 require('mini.pick').setup({
   window = {
     config = win_config,
-    prompt_cursor = '▏',
+    prompt_caret = '▏',
     prompt_prefix = ' ',
   },
   mappings = {
@@ -99,7 +101,7 @@ require('mini.pick').setup({
     toggle_switch = { char = "<C-;>", func = toggle_switch_picker },
     grep_files    = { char = '<C-o>', func = grep_files },
     pick_stop     = { char = '<Esc>', func = function() MiniPick.stop() end },
-    yank_path     = { char = '<C-y>', func = yank_path }
+    yank_path     = { char = '<C-y>', func = yank_path },
   },
 })
 
@@ -113,8 +115,8 @@ end
 MiniPick.registry.sorted_buffers = function()
   local bufs = vim.tbl_filter(function(buf)
     return vim.api.nvim_buf_is_valid(buf)
-       and vim.api.nvim_buf_get_option(buf, 'buflisted')
-       and vim.api.nvim_buf_get_name(buf) ~= ''
+        and vim.api.nvim_buf_get_option(buf, 'buflisted')
+        and vim.api.nvim_buf_get_name(buf) ~= ''
   end, vim.api.nvim_list_bufs()) or vim.api.nvim_list_bufs()
 
   -- Add lastused and modified to buffers
