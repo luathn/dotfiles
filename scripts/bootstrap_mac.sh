@@ -21,31 +21,26 @@ brew install coreutils
 brew install cmake
 brew install libtool
 brew install ripgrep
-brew install translate-shell
 brew install bat
 brew install gnu-sed
 brew install p7zip
 
-# Cask
-brew install --cask slack
-brew install --cask zoom
-brew install --cask tableplus
-brew install --cask cloudflare-warp
-brew install --cask iina
-brew install --cask alfred
-brew install --cask transmission
-brew install --cask anki
-brew install --cask wezterm
-brew install --cask telegram
+# Just comment
+# brew install translate-shell
 
-# brew install --cask obsidian
-# brew install --cask visual-studio-code
+# Cask
+brew install --cask wezterm
+brew install --cask alfred
+brew install --cask slack
+brew install --cask cloudflare-warp
+
 # brew install --cask iterm2
-# brew install --cask rectangle
-# brew install --cask webtorrent
-# brew install --cask notion
-# brew install --cask background-music
-# brew install --cask teamviewer
+# brew install --cask telegram
+# brew install --cask anki
+# brew install --cask iina
+# brew install --cask transmission
+# brew install --cask tableplus
+# brew install --cask zoom
 # brew install bluesnooze # turn off bluetooth when sleep
 
 # 1password
