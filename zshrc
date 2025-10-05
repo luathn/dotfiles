@@ -77,10 +77,13 @@ function ai_helper() {
 zle -N ai_helper
 bindkey '^h' ai_helper
 
-# Powerlevel10k
-source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# My custom zsh prompt
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats '%b '
+setopt PROMPT_SUBST
+PROMPT='%F{blue}%~%f %F{red}${vcs_info_msg_0_}%f
+$ '
 
 # set history size
 export HISTSIZE=10000

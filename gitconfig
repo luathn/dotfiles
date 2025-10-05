@@ -2,6 +2,9 @@
   name = luathn
   email = luat1203@gmail.com
 
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+
 [includeIf "gitdir:~/workspace/"]
   path = .gitconfig-company
 
@@ -10,7 +13,6 @@
 
 [core]
   editor = nvim
-  pager = delta
   excludesfile = ~/.gitignore_global
 
 [cola]

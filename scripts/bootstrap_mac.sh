@@ -25,14 +25,18 @@ brew install bat
 brew install gnu-sed
 brew install p7zip
 
+# Ruby dependencies
+brew install libyaml
+
 # Just comment
 # brew install translate-shell
 
 # Cask
 brew install --cask wezterm
-brew install --cask alfred
 brew install --cask slack
 brew install --cask cloudflare-warp
+brew install --cask alt-tab
+brew install --cask dbgate
 
 # brew install --cask iterm2
 # brew install --cask telegram
@@ -45,3 +49,4 @@ brew install --cask cloudflare-warp
 
 # 1password
 # Firefox
+# Alfred
