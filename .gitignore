@@ -13,3 +13,15 @@ config/ncmpcpp/*
 config/ranger/*
 !config/ranger/rc.conf
 .aider*
+
+emacs/auto-save-list/*
+emacs/eln-cache/*
+emacs/elpa/*
+emacs/history
+emacs/places
+emacs/projects
+emacs/recentf
+emacs/transient/*
+emacs/url/*
+emacs/eshell
+emacs/tree-sitter

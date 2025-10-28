@@ -1,62 +1,34 @@
-;; Hide UI
+;; Set frame height & width
+; (set-fringe-mode 0)
+
+(add-to-list 'default-frame-alist '(height . 54))
+(add-to-list 'default-frame-alist '(width . 180))
+
+; (add-to-list 'default-frame-alist '(undecorated-round . t))
+; (add-to-list 'default-frame-alist '(internal-border-width . 0))
+
+;; Better default modes
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (menu-bar-mode -1)          ; Disable the menu bar
 
-;; Better default modes
-(electric-pair-mode t)
 (show-paren-mode 1)
-(setq-default indent-tabs-mode nil)
-(save-place-mode t)
-(savehist-mode t)
-(recentf-mode t)
-(global-auto-revert-mode t)
-
-;;(tooltip-mode -1)           ; Disable tooltips
-;;(set-fringe-mode 10)        ; Give some breathing room
-
-;; (setq-default tab-always-indent t)
-;; (setq tab-always-indent t)
-;;(setq tab-width 2)
-;; (setq-default tab-width 2)
-;; (setq indent-line-function 'insert-tab)
-;;(setq js-indent-level 2)
-
-;; (setq-default tab-stop-list nil)
-;;(setq-default evil-shift-width 2)
-
-;; (setq electric-pair-mode t)
-
-;; Eat terminal
-(setq eat-term-name "xterm-256color")
-
-(setq completion-ignore-case t)
-
-;; Dired just open 1 buffer
-(setq dired-kill-when-opening-new-dired-buffer 1)
-
-;; Some general configs
-
-;; Turn off ring bell
-(setq ring-bell-function 'ignore)
-
-;; Turn off blink cursor
+(global-display-line-numbers-mode 1)
+(global-hl-line-mode 1)
 (blink-cursor-mode 0)
 
-;; Set frame height
-(add-to-list 'default-frame-alist '(height . 44))
+;; Set custom file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file 'noerror)
 
-;; Set frame width
-(add-to-list 'default-frame-alist '(width . 180))
-
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-
-(require 'package)
-(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
+(setq package-archives
+  '(("gnu elpa" . "https://elpa.gnu.org/packages/")
+    ("melpa"    . "https://melpa.org/packages/")
+    ("nongnu"   . "https://elpa.nongnu.org/nongnu/"))
+  package-archive-priorities
+  '(("gnu elpa" . 20)
+    ("melpa"    . 15)
+    ("nongnu"   . 0)))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -66,112 +38,40 @@
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
 
-(when (memq window-system '(mac ns x))
+;; MacOS
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns))
+  :config
   (exec-path-from-shell-initialize))
 
-;; (use-package eglot-booster
-;;   :after eglot
-;;   :config
-;;   (eglot-booster-mode)
+(when (memq window-system '(mac ns))
+  (setq mac-option-modifier nil
+        mac-command-modifier 'meta
+        ns-pop-up-frames nil
+        native-comp-async-report-warnings-errors nil))
 
-(with-eval-after-load 'eglot
-  (fset #'jsonrpc--log-event #'ignore)
-  (setq eglot-events-buffer-size 0)
-  ;;(setq eglot-ignored-server-capabilities '(:hoverProvider))
-  ;;(add-to-list 'eglot-stay-out-of 'eldoc-documentation-strategy)
+;; Theme
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-one t)
 )
 
+(use-package catppuccin-theme
+  :ensure t
+  :config
+  ;(load-theme 'catppuccin t)
+  ;(setq catppuccin-flavor 'frappe)
+  ;(catppuccin-reload)
+)
+
+;; Magit
 (use-package magit
   :ensure t
-  :init
-  (message "Loading Magit!")
-  :config
-  (message "Loaded Magit!")) 
-(with-eval-after-load 'magit-log
-  (put 'magit-log-select-mode 'magit-log-default-arguments
-       '("-n256" "--decorate")))
-
-(use-package magit-delta
-  :hook (magit-mode . magit-delta-mode))
-
-;; Enable vertico
-(use-package vertico
-  :init
-  (vertico-mode)
-
-  ;; Different scroll margin
-  ;; (setq vertico-scroll-margin 0)
-
-  ;; Show more candidates
-  ;; (setq vertico-count 20)
-
-  ;; Grow and shrink the Vertico minibuffer
-  ;; (setq vertico-resize t)
-
-  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  (setq vertico-cycle t)
-  :bind (:map vertico-map
-        ("C-k" . kill-whole-line)
-  )
 )
 
-;; Persist history over Emacs restarts. Vertico sorts by history position.
-(use-package savehist
-  :init
-  (savehist-mode))
-
-;; A few more useful configurations...
-(use-package emacs
-  :init
-  ;; Add prompt indicator to `completing-read-multiple'.
-  ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
-  (defun crm-indicator (args)
-    (cons (format "[CRM%s] %s"
-                  (replace-regexp-in-string
-                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-                   crm-separator)
-                  (car args))
-          (cdr args)))
-  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
-
-  ;; Do not allow the cursor in the minibuffer prompt
-  (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-
-  ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
-  ;; Vertico commands are hidden in normal buffers.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
-
-  ;; Enable recursive minibuffers
-  (setq enable-recursive-minibuffers t))
-
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles nil)
-  (completion-category-overrides nil)
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion))))
-  (orderless-matching-styles '(orderless-flex)))
-
-;; Enable rich annotations using the Marginalia package
-(use-package marginalia
-  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
-  ;; available in the *Completions* buffer, add it to the
-  ;; `completion-list-mode-map'.
-  :bind (:map minibuffer-local-map
-         ("M-A" . marginalia-cycle))
-
-  ;; The :init section is always executed.
-  :init
-
-  ;; Marginalia must be activated in the :init section of use-package such that
-  ;; the mode gets enabled right away. Note that this forces loading the
-  ;; package.
-  (marginalia-mode))
-
+;; Evil
 (use-package evil
   :ensure t
   :init
@@ -208,74 +108,33 @@
   :config
   (global-evil-surround-mode 1))
 
-(use-package rg
-  :ensure t
-  :config
-  (rg-define-search rg-project
-    :query ask
-    :format regexp
-    :files "everything"
-    :dir project
-    :menu ("Search" "h" "Project"))
-  (rg-define-search rg-word-project
-    :query point
-    :format regexp
-    :files "everything"
-    :dir project
-    :menu ("Search" "h" "Project"))
-  (rg-define-search rg-dir
-    :query point
-    :format regexp
-    :files "everything"
-    :dir current
-    :menu ("Search" "h" "Project"))
-  (rg-define-search rg-word-dir
-    :query ask
-    :format regexp
-    :files "everything"
-    :dir current
-    :menu ("Search" "h" "Project"))
+;; Enable vertico
+(use-package vertico
+  :custom
+  (vertico-cycle t)
+  :bind 
+  (:map vertico-map
+        ("C-k" . kill-whole-line)
+        ("DEL" . vertico-directory-delete-char)
+  )
+  :init
+  (vertico-mode)
 )
 
-(use-package deadgrep
+(use-package orderless
   :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-pcm-leading-wildcard t)
+  (orderless-matching-styles '(orderless-flex))
 )
-
-(defun evil-collection-deadgrep-setup ()
-  "Set up `evil' bindings for deadgrep."
-  (evil-collection-define-key 'normal 'deadgrep-mode-map
-    ))
-
-(evil-define-key 'normal deadgrep-mode-map
-	"D" 'deadgrep-directory
-	"S" 'deadgrep-search-term
-	)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(gptel color-theme-sanityinc-tomorrow doom-modeline eat vterm smartparens company-fuzzy yasnippet markdown-mode eglot-booster eglot catppuccin-theme deadgrep treesit-auto magit-delta cape company which-key lsp-ui corfu affe fzf exec-path-from-shell lsp-mode evil-collection vertico use-package orderless evil))
- '(package-vc-selected-packages
-   '((eglot-booster :vc-backend Git :url "https://github.com/jdtsmith/eglot-booster"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-;; optional if you want which-key integration
-(use-package which-key
-    :config
-    (which-key-mode))
 
 ;; Example configuration for Consult
 (use-package consult
-  ;; Replace bindings. Lazily loaded due by `use-package'.
+  ;; Replace bindings. Lazily loaded by `use-package'.
   :bind (;; C-c bindings in `mode-specific-map'
+         ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
          ("C-c k" . consult-kmacro)
          ("C-c m" . consult-man)
@@ -286,6 +145,7 @@
          ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
          ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
          ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+         ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
          ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
          ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
          ;; Custom M-# bindings for fast register access
@@ -296,6 +156,7 @@
          ("M-y" . consult-yank-pop)                ;; orig. yank-pop
          ;; M-g bindings in `goto-map'
          ("M-g e" . consult-compile-error)
+         ("M-g r" . consult-grep-match)
          ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
          ("M-g g" . consult-goto-line)             ;; orig. goto-line
          ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
@@ -305,8 +166,8 @@
          ("M-g i" . consult-imenu)
          ("M-g I" . consult-imenu-multi)
          ;; M-s bindings in `search-map'
-         ("M-s d" . consult-find)
-         ("M-s D" . consult-locate)
+         ("M-s d" . consult-find)                  ;; Alternative: consult-fd
+         ("M-s c" . consult-locate)
          ("M-s g" . consult-grep)
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
@@ -333,15 +194,12 @@
   ;; The :init configuration is always executed (Not lazy)
   :init
 
-  ;; Optionally configure the register formatting. This improves the register
-  ;; preview for `consult-register', `consult-register-load',
-  ;; `consult-register-store' and the Emacs built-ins.
-  (setq register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
-
-  ;; Optionally tweak the register preview window.
-  ;; This adds thin lines, sorting and hides the mode line of the window.
+  ;; Tweak the register preview for `consult-register-load',
+  ;; `consult-register-store' and the built-in commands.  This improves the
+  ;; register formatting, adds thin separator lines, register sorting and hides
+  ;; the window mode line.
   (advice-add #'register-preview :override #'consult-register-window)
+  (setq register-preview-delay 0.5)
 
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
@@ -360,7 +218,7 @@
   ;; :preview-key on a per-command basis using the `consult-customize' macro.
   (consult-customize
    consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep
+   consult-ripgrep consult-git-grep consult-grep consult-man
    consult-bookmark consult-recent-file consult-xref
    consult--source-bookmark consult--source-file-register
    consult--source-recent-file consult--source-project-recent-file
@@ -373,205 +231,5 @@
 
   ;; Optionally make narrowing help available in the minibuffer.
   ;; You may want to use `embark-prefix-help-command' or which-key instead.
-  ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
-
-  ;; By default `consult-project-function' uses `project-root' from project.el.
-  ;; Optionally configure a different project root function.
-  ;;;; 1. project.el (the default)
-  ;; (setq consult-project-function #'consult--default-project--function)
-  ;;;; 2. vc.el (vc-root-dir)
-  ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
-  ;;;; 3. locate-dominating-file
-  ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-  ;;;; 4. projectile.el (projectile-project-root)
-  ;; (autoload 'projectile-project-root "projectile")
-  ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
-  ;;;; 5. No project support
-  ;; (setq consult-project-function nil)
-  )
-
-(use-package embark
-  :ensure t
-  :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-  :init
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command)
-  (setq embark-prompter 'embark-completing-read-prompter)
-  ;; Show the Embark target at point via Eldoc. You may adjust the
-  ;; Eldoc strategy, if you want to see the documentation from
-  ;; multiple providers. Beware that using this can be a little
-  ;; jarring since the message shown in the minibuffer can be more
-  ;; than one line, causing the modeline to move up and down:
-
-  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
-  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
-  :config
-  ;; Hide the mode line of the Embark live/completions buffers
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
-
-;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-  :ensure t ; only need to install it, embark loads it after consult if found
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-
-(use-package corfu
-  ;; Optional customizations
-  :custom
-  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)                 ;; Enable auto completion
-  (corfu-auto-delay 0.0)
-  (corfu-auto-prefix 1)
-  ;; (corfu-separator ?\s)          ;; Orderless field separator
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-
-  ;; Enable Corfu only for certain modes.
-  ;; :hook ((prog-mode . corfu-mode)
-  ;;        (shell-mode . corfu-mode)
-  ;;        (eshell-mode . corfu-mode))
-
-  ;; Recommended: Enable Corfu globally.
-  ;; This is recommended since Dabbrev can be used globally (M-/).
-  ;; See also `global-corfu-modes'.
-  :init
-  (global-corfu-mode)
+  ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
 )
-
-;; A few more useful configurations...
-(use-package emacs
-  :init
-  ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 3)
-
-  ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
-  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
-
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
-  (setq tab-always-indent 'complete))
-
-(use-package cape
-  ;; Bind dedicated completion commands
-  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
-  :ensure t
-  :init
-  ;; Add to the global default value of `completion-at-point-functions' which is
-  ;; used by `completion-at-point'.  The order of the functions matters, the
-  ;; first function returning a result wins.  Note that the list of buffer-local
-  ;; completion functions takes precedence over the global list.
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-abbrev)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-)
-
-(advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-(setq completion-category-overrides '((eglot (styles orderless))
-                                      (eglot-capf (styles orderless))))
-
-(defun my/eglot-capf ()
-  (setq-local completion-at-point-functions
-              (list (cape-capf-super
-                     #'eglot-completion-at-point
-                     #'cape-dabbrev
-                     #'cape-abbrev
-                     #'cape-keyword
-                     #'cape-file))))
-
-(add-hook 'eglot-managed-mode-hook #'my/eglot-capf)
-
-(use-package treesit-auto
-  :config
-  (global-treesit-auto-mode))
-
-(use-package vterm
-  :ensure t)
-
-;;; Leader
-(define-prefix-command 'my-leader-map)
-
-(keymap-set evil-motion-state-map "SPC" 'my-leader-map)
-(keymap-set evil-normal-state-map "SPC" 'my-leader-map)
-
-(evil-define-key nil my-leader-map
-    ;; add your bindings here:
-    ","  'consult-project-buffer
-    " "  'project-find-file
-    "
-pf" 'project-find-file
-    "ps" 'project-shell-command
-    "ss" 'rg-project
-    "sw" 'rg-word-project
-    ;; etc.
-)
-
-
-;; Test lsp-mode
-;; (use-package lsp-mode
-;;   :init
-;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-;;          ;; (tsx-ts-mode . lsp)
-;;          ;; if you want which-key integration
-;;          (lsp-mode . lsp-enable-which-key-integration))
-;;   :commands lsp
-;;   :config
-;;   (setq lsp-headerline-breadcrumb-segments nil)
-;; )
-;;
-;; (use-package company
-;; :init
-;;   (add-hook 'after-init-hook 'global-company-mode)
-;; :config
-;;   (setq
-;;     company-minimum-prefix-length 1
-;;     company-idle-delay 0.0
-;;   )
-;; )
-;;
-;; optionally
-;; (use-package lsp-ui :commands lsp-ui-mode)
-
-;; TMP
-
-;(require 'lsp-bridge)
-;; (setq acm-backend-search-file-words-enable-fuzzy-match t)
-;;(setq lsp-bridge-enable-completion-in-string t)
-;;(setq acm-candidate-match-function 'orderless-flex)
-;; (setq acm-backend-lsp-enable-auto-import t)
-;;(setq acm-backend-lsp-candidate-min-length -1)
-;;(setq acm-backend-lsp-match-mode 'fuzzy)
-;; (global-lsp-bridge-mode)
-
-;;(with-eval-after-load 'lsp-bridge
-  ;;(message "==> set evil keys")
-  ;;(evil-define-key 'insert acm-mode-map (kbd "C-n") #'acm-select-next)
-  ;;(evil-define-key 'insert acm-mode-map (kbd "C-p") #'acm-select-prev)
-  ;;(add-hook 'acm-mode-hook #'evil-normalize-keymaps)
-  ;;)
-
-(add-to-list 'load-path "~/.emacs.d/elpa/asdf.el")
-(require 'asdf)
-
-(asdf-enable)
-
-(use-package gptel
-  :ensure t
-)
-
-(global-set-key (kbd "C-c RET") 'gptel-send)
-(global-set-key (kbd "C-c C-<return>") 'gptel-menu)
