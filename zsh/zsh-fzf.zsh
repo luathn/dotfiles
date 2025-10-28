@@ -7,4 +7,5 @@ export FZF_DEFAULT_OPTS='
     --color=fg+:#4d4d4c,bg+:#dce0e8,hl+:#ea76cb
     '
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)

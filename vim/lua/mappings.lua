@@ -29,7 +29,15 @@ M.general = {
   t = {
     ["<esc><esc>"] = { "<c-\\><c-n>"},
     ["jk"]         = { "<c-\\><c-n>"},
-  }
+  },
+  c = {
+    ["<C-b>"]      = { "<Left>" },
+    ["<C-f>"]      = { "<Right>" },
+    ["<M-b>"]      = { "<S-Left>" },
+    ["<M-f>"]      = { "<S-Right>" },
+    ["<C-a>"]      = { "<Home>" },
+    ["<C-e>"]      = { "<End>" },
+  },
 }
 
 M.ruby_on_rails = {
@@ -41,7 +49,7 @@ M.ruby_on_rails = {
 
 M.term = {
   n = {
-    ["<C-/>"] = { "<cmd>lua require('core.term').toggle()<Cr>" }
+    ["<leader>tt"] = { "<cmd>lua require('core.term').toggle()<Cr>" }
   },
 }
 
@@ -54,8 +62,9 @@ M.diffview = {
 M.neogit = {
   { "<leader>gg", ":Neogit<cr>", desc = "[G]it status" },
   { "<leader>gl", ":Neogit log<cr>", desc = "[G]it [l]og" },
+  { "<leader>gL", ":NeogitLog<cr>", desc = "[G]it [L]og current" },
   { "<leader>gb", ":Neogit branch<cr>", desc = "[G]it [b]ranch" },
-  { "<leader>gc", "<cmd>lua require('neogit').action('branch', 'checkout_local_branch')<cr>", desc = "[g]it [c]heckout" },
+  { "<leader>gc", "<cmd>lua require('neogit').action('branch', 'checkout_local_branch')<cr>", desc = "[G]it [c]heckout" },
 }
 
 M.grug_far = {
@@ -144,37 +153,51 @@ M.devdocs = {
   { "<leader>df", "<cmd>DevdocsOpenFloat<cr>", desc = "[d]evdocs open [f]loat" },
 }
 
-M.copilot_chat = {
-  {
-    "<leader>ch",
-    function()
-      local actions = require("CopilotChat.actions")
-      require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions())
-    end,
-    mode = { "n", "v" },
-    desc = "CopilotChat - Prompt actions",
-  }
-}
-
 M.codecompanion = {
   { "<leader>aa", "<cmd>CodeCompanionAction<Cr>", mode = { "n", "v" } },
 }
 
 M.snacks = {
+  -- Picker
   { "<leader><space>", "<cmd>lua Snacks.picker.smart()<Cr>", desc = "Find Files" },
   { "<leader>,", "<cmd>lua Snacks.picker.buffers()<Cr>", desc = "Buffers" },
-  { "<leader>/", "<cmd>lua Snacks.picker.grep_buffers()<Cr>", desc = "Grep buffers" },
-  { "<leader>:", "<cmd>lua Snacks.picker.command_history()<Cr>", desc = "Command History" },
+  { "<leader>/", "<cmd>lua Snacks.picker.lines()<Cr>", desc = "Grep buffers" },
+  { "<leader>:", "<cmd>lua Snacks.picker.commands()<Cr>", desc = "Commands" },
+  { "<leader>sc", "<cmd>lua Snacks.picker.command_history()<Cr>", desc = "Command history" },
+  { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
+  { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+  { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
+  -- Lsp
+  { "<leader>gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+  { "<leader>gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
   -- Buffer
   { "<leader>bd", "<cmd>lua Snacks.bufdelete()<Cr>", desc = "[B]uffer [d]elete" },
   { "<leader>bD", "<cmd>lua Snacks.bufdelete.all()<Cr>", desc = "[B]uffer [D]elete all" },
   { "<leader>bo", "<cmd>lua Snacks.bufdelete.other()<Cr>", desc = "[B]uffer delete [o]ther" },
+  -- Terminal
+  -- { "<leader>tt", function() Snacks.terminal.toggle() end, nowait = true, desc = "[t]erminal [t]oggle" },
+  -- { "<leader>to", function() Snacks.terminal.open() end, nowait = true, desc = "[t]erminal [o]pen" },
+}
+
+M.claudecode = {
+  { "<leader>a",  nil,                              desc = "AI/Claude Code" },
+  { "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
+  { "<C-/>",      "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude", mode = { "n", "t", "i" } },
+  { "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
+  { "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
+  { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+  { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+  { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
+  { "<leader>as", "<cmd>ClaudeCodeSend<cr>",        desc = "Send to Claude", mode = "v" },
+  { "<leader>as", "<cmd>ClaudeCodeTreeAdd<cr>",     desc = "Add file", ft = { "NvimTree", "neo-tree", "oil", "minifiles" } },
+  -- Diff management
+  { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+  { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
 }
 
 return M
 
 -- others
--- map <silent> <leader><cr> :call OpenFloatTerm()<cr>
 -- autocmd Filetype ruby map <leader>rr :!ruby %<cr>
 -- autocmd Filetype python map <leader>rr :!python3 %<cr>
 -- autocmd Filetype go map <leader>rr :!go run %<cr>

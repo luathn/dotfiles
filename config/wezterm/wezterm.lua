@@ -12,11 +12,12 @@ config = {
   use_fancy_tab_bar = false,
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   window_decorations = "RESIZE",
-  -- hide_tab_bar_if_only_one_tab = true,
   color_scheme = 'Catppuccin Frappe',
   inactive_pane_hsb = { saturation = 0.80, brightness = 0.85 },
   font = wezterm.font('JetBrains Mono', { weight = 'Medium', italic = false }),
   font_size = 13,
+  -- use_resize_increments = true,
+  -- hide_tab_bar_if_only_one_tab = true,
 }
 
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }

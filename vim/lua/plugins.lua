@@ -76,6 +76,14 @@ return {
           animation = require("mini.indentscope").gen_animation.none(),
         },
       })
+
+      local disabled_filetypes = { terminal = true, snacks_terminal = true }
+      local disable_in_ft = function(opts)
+        local ft = vim.bo[opts.buf].filetype
+        if disabled_filetypes[ft] then vim.b[opts.buf].miniindentscope_disable = true end
+      end
+      local augroup = vim.api.nvim_create_augroup('MiniIndentScopeDisable', { clear = true })
+      vim.api.nvim_create_autocmd('FileType', { group = augroup, callback = disable_in_ft })
     end
   },
   {
@@ -215,75 +223,84 @@ return {
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
-    config = true,
+    opts = require("plugins.claudecode"),
+    keys = mappings.claudecode,
+    init = function()
+      vim.keymap.set("n", "<leader>a1", function()
+        vim.cmd("ClaudeCodeFocus")
+        vim.api.nvim_feedkeys("1", "n", false)
+        vim.schedule(function()
+          vim.cmd("wincmd p")
+        end)
+      end)
+
+      vim.keymap.set("n", "<leader>a3", function()
+        vim.cmd("ClaudeCodeFocus")
+        vim.api.nvim_feedkeys("3", "n", false)
+        vim.schedule(function()
+          vim.cmd("wincmd p")
+        end)
+      end)
+    end
+  },
+  {
+    "simifalaye/minibuffer.nvim",
+    init = function()
+      if vim.fn.has("nvim-0.12") == 1 then
+        local minibuffer = require("minibuffer")
+
+        vim.ui.select = require("minibuffer.builtin.ui_select")
+        vim.ui.input = require("minibuffer.builtin.ui_input")
+
+        vim.keymap.set("n", "<M-;>", require("minibuffer.builtin.cmdline"))
+        vim.keymap.set("n", "<M-.>", function()
+          minibuffer.resume(true)
+        end)
+        vim.keymap.set("n", "<leader>.", require("minibuffer.examples.files"))
+        vim.keymap.set("n", "<leader>,", require("minibuffer.examples.buffers"))
+        vim.keymap.set("n", "<leader>/", require("minibuffer.examples.live-grep"))
+        vim.keymap.set("n", "<leader>o", function()
+          require("minibuffer.examples.oldfiles")({ cwd = vim.fn.getcwd() })
+        end)
+        vim.keymap.set("n", "<leader>O", require("minibuffer.examples.oldfiles"))
+      end
+    end,
+  },
+  {
+     "maskudo/devdocs.nvim",
+    lazy = false,
+    dependencies = {
+      "folke/snacks.nvim",
+    },
+    cmd = { "DevDocs" },
     keys = {
-      { "<leader>a",  nil,                              desc = "AI/Claude Code" },
-      { "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
-      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
-      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
-      { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-      { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-      { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
-      { "<leader>as", "<cmd>ClaudeCodeSend<cr>",        mode = "v",                  desc = "Send to Claude" },
+      { "<leader>ho", mode = "n", "<cmd>DevDocs get<cr>", desc = "Get Devdocs" },
+      { "<leader>hi", mode = "n", "<cmd>DevDocs install<cr>", desc = "Install Devdocs" },
       {
-        "<leader>as",
-        "<cmd>ClaudeCodeTreeAdd<cr>",
-        desc = "Add file",
-        ft = { "NvimTree", "neo-tree", "oil", "minifiles" },
+        "<leader>hv",
+        mode = "n",
+        function()
+          local devdocs = require("devdocs")
+          local installedDocs = devdocs.GetInstalledDocs()
+          vim.ui.select(installedDocs, {}, function(selected)
+            if not selected then
+              return
+            end
+            local docDir = devdocs.GetDocDir(selected)
+            -- prettify the filename as you wish
+            Snacks.picker.files({ cwd = docDir })
+          end)
+        end,
+        desc = "Get Devdocs",
       },
-      -- Diff management
-      { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
+      { "<leader>hd", mode = "n", "<cmd>DevDocs delete<cr>", desc = "Delete Devdoc" }
+    },
+    opts = {
+      ensure_installed = {
+        "go",
+      },
     },
   },
-  -- {
-  --   "olimorris/codecompanion.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-treesitter/nvim-treesitter",
-  --   },
-  --   opts = {
-  --     adapters = {
-  --       acp = {
-  --         claude_code = function()
-  --           return require("codecompanion.adapters").extend("claude_code", {
-  --             env = {
-  --               CLAUDE_CODE_OAUTH_TOKEN = "CLAUDE_CODE_OAUTH_TOKEN",
-  --             },
-  --           })
-  --         end,
-  --       },
-  --     },
-  --     strategies = {
-  --       chat = {
-  --         adapter = "claude_code",
-  --       },
-  --       inline = {
-  --         adapter = "claude_code",
-  --       },
-  --     },
-  --     -- NOTE: The log_level is in `opts.opts`
-  --     opts = {
-  --       log_level = "DEBUG", -- or "TRACE"
-  --     },
-  --   },
-  -- },
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("plugins.nvim-cmp")
-  --   end,
-  --   dependencies = {
-  --     "hrsh7th/cmp-nvim-lsp",
-  --     "hrsh7th/cmp-buffer",
-  --     "hrsh7th/cmp-path",
-  --     "hrsh7th/cmp-cmdline",
-  --     -- "L3MON4D3/LuaSnip",
-  --     -- "saadparwaiz1/cmp_luasnip",
-  --     -- "rafamadriz/friendly-snippets",
-  --   },
-  -- },
   -- {
   --   "zbirenbaum/copilot.lua",
   --   cmd = "Copilot",
@@ -308,30 +325,12 @@ return {
   --   opts = {},
   -- },
   -- {
-  --   "ibhagwan/fzf-lua",
-  --   event = "VeryLazy",
-  --   -- keys = mappings.fzf_lua,
-  --   config = function()
-  --     require("plugins.fzf-lua")
-  --   end
-  -- },
-  -- {
-  --   "nvim-lualine/lualine.nvim",
-  --   config = function()
-  --     require("plugins.lualine")
-  --   end,
-  -- },
-  -- {
   --   "mfussenegger/nvim-dap",
   --   -- dependencies = "rcarriga/nvim-dap-ui",
   --   keys = require("mappings").nvim_dap,
   --   config = function()
   --     require("plugins.nvim-dap")
   --   end,
-  -- },
-  -- {
-  --   "kevinhwang91/nvim-bqf",
-  --   dependencies = { "junegunn/fzf" },
   -- },
   -- {
   --   "luckasRanarison/nvim-devdocs",

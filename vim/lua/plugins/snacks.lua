@@ -2,11 +2,19 @@ local bg = require("core.utils").bg
 local fg = require("core.utils").fg
 local colors = require("catppuccin.palettes").get_palette "frappe"
 
-bg("SnacksPickerInput", colors.base)
+bg("SnacksPicker", colors.mantle)
+bg("SnacksPickerBorder", colors.mantle)
+fg("SnacksPickerBorder", colors.mantle)
+
 fg("SnacksPickerDir", colors.text)
 
 require("snacks").setup({
   picker = {
+    prompt = "󰘍 ",
+    main = {
+      current = true,
+    },
+    hidden = true,
     actions = {
       switch_to_buffers = function(picker, _)
         local pattern = picker.input.filter.pattern
@@ -18,13 +26,44 @@ require("snacks").setup({
         picker:close()
         Snacks.picker.files({ pattern = pattern })
       end,
+      switch_to_smart = function(picker, _)
+        local pattern = picker.input.filter.pattern
+        picker:close()
+        Snacks.picker.smart({ pattern = pattern })
+      end,
+      open_explorer = function(picker, item)
+        picker:close()
+        local dir = picker:dir()
+        require('oil').open(dir)
+        -- vim.schedule(function()
+        --   require('oil').open(dir_path)
+        -- end)
+      end,
     },
     sources = {
       files = {
+        layout = {
+          preview = false,
+        },
         win = {
           input = {
             keys = {
               ["<c-;>"] = { "switch_to_buffers", mode = { "n", "i" } },
+              ["<c-e>"] = { "open_explorer", mode = { "n", "i" } },
+            },
+          },
+        }
+      },
+      smart = {
+        -- prompt = "Files> ",
+        layout = {
+          preview = false,
+        },
+        win = {
+          input = {
+            keys = {
+              ["<c-;>"] = { "switch_to_buffers", mode = { "n", "i" } },
+              ["<c-e>"] = { "open_explorer", mode = { "n", "i" } },
             },
           },
         }
@@ -34,49 +73,86 @@ require("snacks").setup({
         format = "buffer",
         current = false,
         sort_lastused = true,
+        layout = {
+          preview = "main",
+        },
         win = {
           input = {
             keys = {
               ["<c-x>"] = { "bufdelete", mode = { "n", "i" } },
-              ["<c-;>"] = { "switch_to_files", mode = { "n", "i" } },
+              ["<c-;>"] = { "switch_to_smart", mode = { "n", "i" } },
+              ["<c-e>"] = { "open_explorer", mode = { "n", "i" } },
             },
           },
         },
       },
-      grep_buffers = {
+      lsp_implementations = {
         layout = {
           preview = "main",
-          preset = "ivy",
+        },
+      },
+      grep = {
+        layout = {
+          preview = "main",
         }
       },
       command_history = {
         layout = {
-          preset = "select",
+          preset = "ivy",
+          preview = false,
         }
-      }
+      },
+      commands = {
+        layout = {
+          preview = false,
+        }
+      },
     },
     ui_select = true,
     layout = {
-      preview = false,
-      preset = "select",
+      preview = true,
+      preset = "ivy",
     },
     layouts = {
+      -- Still ivy, just because some other plugins using select
       select = {
         layout = {
-          backdrop = false,
-          width = 0.5,
-          min_width = 100,
-          height = 0.7,
-          min_height = 17,
-          max_height = 17,
           box = "vertical",
-          border = "rounded",
-          title_pos = "center",
-          { win = "input", height = 1, border = "bottom" },
-          { win = "list", border = "none" },
-          { win = "preview", height = 0.5, border = "top" },
-        }
+          backdrop = false,
+          row = -2,
+          width = 0,
+          min_height = 1,
+          max_height = 17,
+          border = "top",
+          title = "{title} {live} {flags}",
+          title_pos = "left",
+          { win = "input", height = 1, border = "none" },
+          {
+            box = "horizontal",
+            { win = "list", border = "none" },
+            { win = "preview", title = "{preview}", width = 0.5, border = "left" },
+          },
+        },
       },
+      ivy = {
+        layout = {
+          box = "vertical",
+          backdrop = false,
+          row = -2,
+          width = 0,
+          min_height = 1,
+          max_height = 17,
+          border = "top",
+          title = "{title} {live} {flags}",
+          title_pos = "left",
+          { win = "input", height = 1, border = "none" },
+          {
+            box = "horizontal",
+            { win = "list", border = "none" },
+            { win = "preview", title = "{preview}", width = 0.5, border = "left" },
+          },
+        },
+      }
     },
     win = {
       -- input window
@@ -95,42 +171,34 @@ require("snacks").setup({
     },
   },
   -- Terminal
-  -- terminal = {
-  --   bo = {
-  --     filetype = "snacks_terminal",
-  --   },
-  --   wo = {},
-  --   keys = {
-  --     gq = "hide",
-  --     gf = function(self)
-  --       local f = vim.fn.findfile(vim.fn.expand("<cfile>"), "**")
-  --       if f == "" then
-  --         Snacks.notify.warn("No file under cursor")
-  --       else
-  --         self:hide()
-  --         vim.schedule(function()
-  --           vim.cmd("e " .. f)
-  --         end)
-  --       end
-  --     end,
-  --     term_normal = {
-  --       "<esc>",
-  --       function(self)
-  --         self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
-  --         if self.esc_timer:is_active() then
-  --           self.esc_timer:stop()
-  --           vim.cmd("stopinsert")
-  --         else
-  --           self.esc_timer:start(200, 0, function() end)
-  --           return "<esc>"
-  --         end
-  --       end,
-  --       mode = "t",
-  --       expr = true,
-  --       desc = "Double escape to normal mode",
-  --     },
-  --   },
-  -- }
+  terminal = {
+    win = {
+      opts = {
+        -- interactive = false,
+        auto_close = false,
+        auto_insert = false,
+        start_insert = false,
+      },
+      bo = {
+        filetype = "snacks_terminal",
+      },
+      wo = {},
+      keys = {
+        gq = "hide",
+        -- gf = function(self)
+        --   local f = vim.fn.findfile(vim.fn.expand("<cfile>"), "**")
+        --   if f == "" then
+        --     Snacks.notify.warn("No file under cursor")
+        --   else
+        --     self:hide()
+        --     vim.schedule(function()
+        --       vim.cmd("e " .. f)
+        --     end)
+        --   end
+        -- end,
+      },
+    }
+  }
 })
 
 local function read_zsh_history()
