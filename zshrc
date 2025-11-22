@@ -67,7 +67,7 @@ zsh-defer source ~/.zsh/zsh-export-path.zsh
 zsh-defer source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 zsh-defer source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-zsh-defer source ~/.zsh_local
+source ~/.zsh_local
 
 function ai_helper() {
   local current_buffer=$BUFFER

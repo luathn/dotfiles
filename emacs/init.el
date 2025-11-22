@@ -17,6 +17,9 @@
 (global-hl-line-mode 1)
 (blink-cursor-mode 0)
 
+;; Fonts
+(set-face-attribute 'default nil :family "JetBrainsMono NF" :height 130)
+
 ;; Set custom file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
@@ -60,10 +63,26 @@
 
 (use-package catppuccin-theme
   :ensure t
-  :config
+  ;:config
   ;(load-theme 'catppuccin t)
   ;(setq catppuccin-flavor 'frappe)
   ;(catppuccin-reload)
+)
+
+;; Lsp
+(use-package eglot
+  :ensure t
+  :hook ((go-ts-mode . eglot-ensure)))
+
+;; Treesitter
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  (treesit-auto-langs '(go ruby python javascript typescript))
+  :config
+  (treesit-auto-add-to-auto-mode-alist '(go ruby python javascript typescript))
+  ;(treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode)
 )
 
 ;; Magit

@@ -3,11 +3,6 @@
 -- vim.g.node_host_prog = home_dir .. node_bin .. "/node"
 -- vim.cmd("let $PATH = '" .. home_dir .. node_bin .. ":' . $PATH")
 
--- Enable extui for minibuffer.nvim plugin
-if vim.fn.has("nvim-0.12") == 1 then
-  require("vim._extui").enable({ enable = true, msg = { target = "msg" } })
-end
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
