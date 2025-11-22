@@ -14,16 +14,19 @@
 
 (show-paren-mode 1)
 (global-display-line-numbers-mode 1)
-(global-hl-line-mode 1)
+;; (global-hl-line-mode 1)
 (blink-cursor-mode 0)
+;; Turn off ring bell
+(setq ring-bell-function 'ignore)
 
 ;; Fonts
-(set-face-attribute 'default nil :family "JetBrainsMono NF" :height 130)
+(set-face-attribute 'default nil :font "JetBrainsMono NF" :height 130 :weight 'light)
 
 ;; Set custom file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
+;; Package manager
 (setq package-archives
   '(("gnu elpa" . "https://elpa.gnu.org/packages/")
     ("melpa"    . "https://melpa.org/packages/")
@@ -46,12 +49,14 @@
   :ensure t
   :if (memq window-system '(mac ns))
   :config
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-copy-env "GEMINI_API_KEY")
+  (exec-path-from-shell-initialize)
+)
 
 (when (memq window-system '(mac ns))
-  (setq mac-option-modifier nil
-        mac-command-modifier 'meta
-        ns-pop-up-frames nil
+  ;; mac-option-modifier nil
+  ;; mac-command-modifier 'meta
+  (setq ns-pop-up-frames nil
         native-comp-async-report-warnings-errors nil))
 
 ;; Theme
@@ -60,14 +65,14 @@
   :config
   (load-theme 'doom-one t)
 )
-
-(use-package catppuccin-theme
-  :ensure t
-  ;:config
-  ;(load-theme 'catppuccin t)
-  ;(setq catppuccin-flavor 'frappe)
-  ;(catppuccin-reload)
-)
+;; (load-theme 'modus-vivendi)
+;; (use-package catppuccin-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'catppuccin t)
+;;   (setq catppuccin-flavor 'frappe)
+;;   (catppuccin-reload)
+;; )
 
 ;; Lsp
 (use-package eglot
@@ -85,9 +90,20 @@
   (global-treesit-auto-mode)
 )
 
+;; Project.el config
+(use-package project
+  :custom
+  (project-switch-commands '((project-find-file "Find file" "f")
+			     (project-find-dir "Find dir" "d")
+			     (project-dired "Dired" "D")
+			     (consult-ripgrep "ripgrep" "g")
+			     (magit-project-status "Magit" "m")))
+)
 ;; Magit
 (use-package magit
   :ensure t
+  :custom
+  (magit-diff-refine-hunk 'all)
 )
 
 ;; Evil
@@ -99,15 +115,25 @@
   ;(setq evil-want-minibuffer t)
   (setq evil-want-C-u-scroll t)
   :config
-  (evil-mode 1))
+  (evil-set-undo-system 'undo-redo)
+  (evil-mode 1)
+)
 
-(evil-set-undo-system 'undo-redo)
+(use-package evil-nerd-commenter
+  :init
+  (setq evilnc-comment-text-object "c")
+  :config
+  (define-key evil-normal-state-map "gc" 'evilnc-comment-operator)
+  ;; (evilnc-default-hotkeys)
+  (evilnc-default-hotkeys nil t)
+)
 
 (use-package evil-collection
   :after evil
   :ensure t
   :config
   (setq evil-collection-magit-want-horizontal-movement t)
+  (define-key evil-normal-state-map (kbd "gI") 'eglot-find-implementation)
   (evil-collection-init)
 )
 
