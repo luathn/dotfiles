@@ -60,14 +60,16 @@ vim.o.smartindent = true
 vim.o.smarttab = true
 -- Number of spaces per Tab
 vim.o.softtabstop = 2
--- Fold based on indent
-vim.o.foldmethod = "indent"
--- Deepest fold is 5 levels
-vim.o.foldnestmax = 1
+
+-- vim.o.foldmethod = "indent"
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldnestmax = 5
 -- No fold when start
 vim.o.foldenable = false
 vim.o.foldopen = ""
 vim.o.foldclose = ""
+
 -- Split below
 vim.o.splitbelow = true
 -- Split right

@@ -9,6 +9,7 @@ end
 
 config = {
   -- UI
+  term = "xterm-256color",
   use_fancy_tab_bar = false,
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   window_decorations = "RESIZE",
@@ -23,35 +24,35 @@ config = {
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 config.keys = {
-  { key = '-', mods = 'CTRL', action = act.DisableDefaultAssignment },
-  { key = '=', mods = 'CTRL', action = act.DisableDefaultAssignment },
-  { key = 'a', mods = 'LEADER|CTRL', action = act.SendKey({ key = 'a', mods = 'CTRL' }) },
-  { key = 'Enter', mods = 'LEADER', action = act.ActivateCopyMode },
-  { key = 'v', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-  { key = 's', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-  { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection('Left') },
-  { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection('Down') },
-  { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection('Up') },
-  { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection('Right') },
-  { key = 'h', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Left') },
-  { key = 'j', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Down') },
-  { key = 'k', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Up') },
-  { key = 'l', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Right') },
+  { key = '-',     mods = 'CTRL',        action = act.DisableDefaultAssignment },
+  { key = '=',     mods = 'CTRL',        action = act.DisableDefaultAssignment },
+  { key = 'a',     mods = 'LEADER|CTRL', action = act.SendKey({ key = 'a', mods = 'CTRL' }) },
+  { key = 'Enter', mods = 'LEADER',      action = act.ActivateCopyMode },
+  { key = 'v',     mods = 'LEADER',      action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+  { key = 's',     mods = 'LEADER',      action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+  { key = 'h',     mods = 'LEADER',      action = act.ActivatePaneDirection('Left') },
+  { key = 'j',     mods = 'LEADER',      action = act.ActivatePaneDirection('Down') },
+  { key = 'k',     mods = 'LEADER',      action = act.ActivatePaneDirection('Up') },
+  { key = 'l',     mods = 'LEADER',      action = act.ActivatePaneDirection('Right') },
+  { key = 'h',     mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Left') },
+  { key = 'j',     mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Down') },
+  { key = 'k',     mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Up') },
+  { key = 'l',     mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Right') },
   -- { key = 'h', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-left') },
   -- { key = 'j', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-down') },
   -- { key = 'k', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-up') },
   -- { key = 'l', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-right') },
-  { key = 'f', mods = 'LEADER', action = act.TogglePaneZoomState },
-  { key = 'z', mods = 'LEADER', action = act.ToggleFullScreen },
-  { key = '/', mods = 'LEADER', action = act.Search { CaseInSensitiveString = 'hash' } },
-  { key = 'm', mods = 'LEADER', action = act.PaneSelect { mode = 'SwapWithActiveKeepFocus' } },
-  { key = '[', mods = 'LEADER', action = act.MoveTabRelative(-1) },
-  { key = ']', mods = 'LEADER', action = act.MoveTabRelative(1) },
-  { key = 'w', mods = 'CMD', action = act.CloseCurrentPane { confirm = true } },
-  { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, timeout_milliseconds = 500 } },
-  { key = '!', mods = 'LEADER', action = act.PaneSelect { mode = 'MoveToNewTab' } },
-  { key = 'n', mods = 'LEADER', action = act.ActivateTabRelative(1) },
-  { key = 'p', mods = 'LEADER', action = act.ActivateTabRelative(-1) },
+  { key = 'f',     mods = 'LEADER',      action = act.TogglePaneZoomState },
+  { key = 'z',     mods = 'LEADER',      action = act.ToggleFullScreen },
+  { key = '/',     mods = 'LEADER',      action = act.Search { CaseInSensitiveString = 'hash' } },
+  { key = 'm',     mods = 'LEADER',      action = act.PaneSelect { mode = 'SwapWithActiveKeepFocus' } },
+  { key = '[',     mods = 'LEADER',      action = act.MoveTabRelative(-1) },
+  { key = ']',     mods = 'LEADER',      action = act.MoveTabRelative(1) },
+  { key = 'w',     mods = 'CMD',         action = act.CloseCurrentPane { confirm = true } },
+  { key = 'r',     mods = 'LEADER',      action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, timeout_milliseconds = 500 } },
+  { key = '!',     mods = 'LEADER',      action = act.PaneSelect { mode = 'MoveToNewTab' } },
+  { key = 'n',     mods = 'LEADER',      action = act.ActivateTabRelative(1) },
+  { key = 'p',     mods = 'LEADER',      action = act.ActivateTabRelative(-1) },
   {
     key = '.',
     mods = 'LEADER',
@@ -141,6 +142,18 @@ config.keys = {
       )
     end),
   },
+  {
+    key = "t",
+    mods = "LEADER",
+    action = act.PromptInputLine {
+      description = "Rename Tab",
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end),
+    },
+  },
 }
 
 -- CTRL+CMD + number to move to that position
@@ -154,19 +167,19 @@ end
 
 config.key_tables = {
   resize_pane = {
-    { key = 'h', action = act.AdjustPaneSize { 'Left', 2 } },
-    { key = 'l', action = act.AdjustPaneSize { 'Right', 2 } },
-    { key = 'k', action = act.AdjustPaneSize { 'Up', 2 } },
-    { key = 'j', action = act.AdjustPaneSize { 'Down', 2 } },
+    { key = 'h',      action = act.AdjustPaneSize { 'Left', 2 } },
+    { key = 'l',      action = act.AdjustPaneSize { 'Right', 2 } },
+    { key = 'k',      action = act.AdjustPaneSize { 'Up', 2 } },
+    { key = 'j',      action = act.AdjustPaneSize { 'Down', 2 } },
     { key = 'Escape', action = 'PopKeyTable' },
   },
   search_mode = {
     { key = 'Escape', mods = 'NONE', action = act.CopyMode 'Close' },
-    { key = 'n', mods = 'CTRL', action = act.CopyMode 'NextMatch' },
-    { key = 'p', mods = 'CTRL', action = act.CopyMode 'PriorMatch' },
-    { key = 'r', mods = 'CTRL', action = act.CopyMode 'CycleMatchType' },
-    { key = 'u', mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
-    { key = 'w', mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
+    { key = 'n',      mods = 'CTRL', action = act.CopyMode 'NextMatch' },
+    { key = 'p',      mods = 'CTRL', action = act.CopyMode 'PriorMatch' },
+    { key = 'r',      mods = 'CTRL', action = act.CopyMode 'CycleMatchType' },
+    { key = 'u',      mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
+    { key = 'w',      mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
   }
 }
 

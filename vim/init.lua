@@ -40,21 +40,3 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, "n", "<leader>rr", ":sp | term go run %<CR>", { noremap = true, silent = true })
   end,
 })
-
--- Auto close term when exits
--- vim.api.nvim_create_autocmd("TermClose", {
---   pattern = "*",
---   callback = function(args)
---     -- If the terminal exited with a non-zero code, just show a message and stop
---     if vim.v.event.status ~= 0 then
---       return
---     end
---
---     -- Otherwise, auto-close the terminal buffer safely
---     vim.schedule(function()
---       if vim.api.nvim_buf_is_valid(args.buf) then
---         vim.api.nvim_buf_delete(args.buf, {})
---       end
---     end)
---   end,
--- })

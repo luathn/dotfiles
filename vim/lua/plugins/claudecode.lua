@@ -35,7 +35,7 @@ return {
   diff_opts = {
     auto_close_on_accept = true,
     layout = "vertical",
-    open_in_new_tab = false,
+    open_in_new_tab = true,
     keep_terminal_focus = false, -- If true, moves focus back to terminal after diff opens
   },
 }

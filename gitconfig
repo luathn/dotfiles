@@ -13,7 +13,7 @@
 
 [core]
   editor = nvim
-  excludesfile = ~/.gitignore_global
+  excludesFile = ~/.gitignore
 
 [cola]
   spellcheck = false

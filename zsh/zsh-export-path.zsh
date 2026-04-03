@@ -28,3 +28,6 @@ eval "$(zoxide init zsh)"
 
 # Openjdk
 # export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+# Added by Antigravity
+export PATH="$PATH:$HOME/.antigravity/antigravity/bin"

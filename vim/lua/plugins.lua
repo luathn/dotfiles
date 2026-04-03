@@ -8,7 +8,7 @@ return {
     event = "VeryLazy",
     dependencies = {
       { "Wansmer/treesj", keys = mappings.treesj, config = function() require("plugins.treesj") end },
-      -- {"nvim-treesitter/nvim-treesitter-textobjects"},
+      {"nvim-treesitter/nvim-treesitter-textobjects"},
       -- {"folke/ts-comments.nvim", opts = {}},
       -- {"windwp/nvim-ts-autotag", opts = {}},
     },
@@ -198,7 +198,7 @@ return {
         "nvim-neotest/nvim-nio",
       },
     },
-    lazy = true,
+    -- lazy = true,
     keys = mappings.dap,
     config = function() require("plugins.dap") end,
   },

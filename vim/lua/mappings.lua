@@ -159,7 +159,7 @@ M.codecompanion = {
 
 M.snacks = {
   -- Picker
-  { "<leader><space>", "<cmd>lua Snacks.picker.smart()<Cr>",               desc = "Find Files" },
+  { "<leader><space>", "<cmd>lua Snacks.picker.files()<Cr>",               desc = "Find Files" },
   { "<leader>,",       "<cmd>lua Snacks.picker.buffers()<Cr>",             desc = "Buffers" },
   { "<leader>/",       "<cmd>lua Snacks.picker.lines()<Cr>",               desc = "Grep buffers" },
   { "<leader>:",       "<cmd>lua Snacks.picker.commands()<Cr>",            desc = "Commands" },

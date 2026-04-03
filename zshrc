@@ -45,7 +45,7 @@ bindkey "^w" backward-kill-word
 bindkey "^n" history-search-forward
 bindkey "^p" history-search-backward
 bindkey "^ " autosuggest-accept
-# bindkey "jk" vi-cmd-mode
+bindkey "jk" vi-cmd-mode
 
 export EDITOR="nvim"
 

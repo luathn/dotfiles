@@ -80,7 +80,7 @@ require("snacks").setup({
           input = {
             keys = {
               ["<c-x>"] = { "bufdelete", mode = { "n", "i" } },
-              ["<c-;>"] = { "switch_to_smart", mode = { "n", "i" } },
+              ["<c-;>"] = { "switch_to_files", mode = { "n", "i" } },
               ["<c-e>"] = { "open_explorer", mode = { "n", "i" } },
             },
           },

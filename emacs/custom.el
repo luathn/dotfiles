@@ -10,11 +10,11 @@
      default))
  '(package-selected-packages
    '(catppuccin-theme chatgpt-shell consult cyberpunk-theme diff-ansi
-		      doom-themes eldoc-box embark-consult
-		      evil-collection evil-escape evil-nerd-commenter
-		      evil-surround exec-path-from-shell gotest magit
-		      orderless treesit-auto vertico vertico-buffer
-		      vterm)))
+		      difftastic doom-modeline doom-themes eldoc-box
+		      embark-consult evil-collection evil-escape
+		      evil-nerd-commenter evil-surround
+		      exec-path-from-shell gotest magit orderless
+		      treesit-auto vertico vertico-buffer vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
