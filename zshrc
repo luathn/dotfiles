@@ -41,11 +41,12 @@ bindkey "^b" backward-char
 bindkey "^f" forward-char
 bindkey "^u" kill-whole-line
 bindkey "^w" backward-kill-word
-# bindkey "^s" history-incremental-search-backward
 bindkey "^n" history-search-forward
 bindkey "^p" history-search-backward
 bindkey "^ " autosuggest-accept
-bindkey "jk" vi-cmd-mode
+bindkey '^?' backward-delete-char
+bindkey "^s" history-incremental-search-backward
+# bindkey "jk" vi-cmd-mode
 
 export EDITOR="nvim"
 
@@ -134,3 +135,8 @@ DISABLE_AUTO_TITLE="true"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/luathn/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

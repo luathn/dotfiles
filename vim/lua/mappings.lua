@@ -23,11 +23,14 @@ M.general = {
     ["<C-w>+"]     = { "<C-w>5+" },
     ["<C-w>m"]     = { "<C-w>5+<C-w>15>" },
   },
+  x = {
+    ["<CR>"] = { "<cmd>lua require('vim.treesitter._select').select_parent(vim.v.count1)<CR>" },
+    ["<BS>"] = { "<cmd>lua require('vim.treesitter._select').select_child(vim.v.count1)<CR>" }
+  },
   i = {
     ["jk"] = { "<Esc>" },
   },
   t = {
-    ["<esc><esc>"] = { "<c-\\><c-n>" },
     ["jk"]         = { "<c-\\><c-n>" },
   },
   c = {
@@ -167,6 +170,7 @@ M.snacks = {
   { "<leader>sr",      function() Snacks.picker.resume() end,              desc = "Resume" },
   { "<leader>su",      function() Snacks.picker.undo() end,                desc = "Undo History" },
   { "<leader>sg",      function() Snacks.picker.grep() end,                desc = "Grep" },
+  { "<leader>sm",      "<cmd>lua Snacks.picker.marks()<Cr>",               desc = "Marks" },
   -- Lsp
   { "<leader>gr",      function() Snacks.picker.lsp_references() end,      nowait = true,                   desc = "References" },
   { "<leader>gI",      function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
@@ -182,6 +186,7 @@ M.snacks = {
 M.claudecode = {
   { "<leader>a",  nil,                              desc = "AI/Claude Code" },
   { "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
+  { "<leader>aa", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
   { "<C-/>",      "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude",      mode = { "n", "t", "i" } },
   { "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
   { "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
@@ -206,6 +211,10 @@ M.dap = {
   { "<leader>de", function() require("dapui").eval() end,            desc = "Evaluate Expression" },
   { "<leader>dd", function() require("dapui").toggle() end,          desc = "Toggle" },
   { "<leader>dt", function() require("dap-go").debug_test() end,     desc = "Debug test" },
+}
+
+M.undotree = {
+  { "<leader>u", function() require("undotree").open({ command = math.floor(vim.api.nvim_win_get_width(0) / 3) .. "vnew" }) end, { desc = "[U]ndotree toggle" } }
 }
 
 return M

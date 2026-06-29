@@ -67,8 +67,8 @@ require("gp").setup({
       secret = os.getenv("GEMINI_API_KEY"),
     },
   },
-  default_chat_agent = "ChatGemini-2.0-flash",
-  default_command_agent = "ChatGemini-2.0-flash",
+  default_chat_agent = "ChatGemini-2.5-flash",
+  default_command_agent = "ChatGemini-2.5-flash",
   agents = {
     {
       provider = "anthropic",
@@ -82,11 +82,11 @@ require("gp").setup({
     },
     {
       provider = "googleai",
-      name = "ChatGemini-2.0-flash",
+      name = "ChatGemini-2.5-flash",
       chat = true,
       command = false,
       -- string with model name or table with model name and parameters
-      model = { model = "gemini-2.0-flash", temperature = 1.1, top_p = 1 },
+      model = { model = "gemini-2.5-flash-lite", temperature = 1.1, top_p = 1 },
       -- system prompt (use this to specify the persona/role of the AI)
       system_prompt = require("gp.defaults").chat_system_prompt,
     },

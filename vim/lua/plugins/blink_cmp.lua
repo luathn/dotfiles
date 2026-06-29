@@ -52,4 +52,7 @@ return {
     },
   },
   signature = { enabled = true },
+  fuzzy = {
+    implementation = 'lua',
+  },
 }

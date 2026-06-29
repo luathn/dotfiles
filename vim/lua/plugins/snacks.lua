@@ -39,6 +39,16 @@ require("snacks").setup({
         --   require('oil').open(dir_path)
         -- end)
       end,
+      paste_path = function(picker)
+        local item = picker:current()
+        if not item then return end
+
+        local path = item.file or item.text
+        if path then
+          picker:close()
+          vim.api.nvim_put({ path }, "c", true, true)
+        end
+      end,
     },
     sources = {
       files = {
@@ -49,7 +59,6 @@ require("snacks").setup({
           input = {
             keys = {
               ["<c-;>"] = { "switch_to_buffers", mode = { "n", "i" } },
-              ["<c-e>"] = { "open_explorer", mode = { "n", "i" } },
             },
           },
         }
@@ -63,7 +72,6 @@ require("snacks").setup({
           input = {
             keys = {
               ["<c-;>"] = { "switch_to_buffers", mode = { "n", "i" } },
-              ["<c-e>"] = { "open_explorer", mode = { "n", "i" } },
             },
           },
         }
@@ -81,7 +89,6 @@ require("snacks").setup({
             keys = {
               ["<c-x>"] = { "bufdelete", mode = { "n", "i" } },
               ["<c-;>"] = { "switch_to_files", mode = { "n", "i" } },
-              ["<c-e>"] = { "open_explorer", mode = { "n", "i" } },
             },
           },
         },
@@ -129,7 +136,7 @@ require("snacks").setup({
           { win = "input", height = 1, border = "none" },
           {
             box = "horizontal",
-            { win = "list", border = "none" },
+            { win = "list",    border = "none" },
             { win = "preview", title = "{preview}", width = 0.5, border = "left" },
           },
         },
@@ -148,7 +155,7 @@ require("snacks").setup({
           { win = "input", height = 1, border = "none" },
           {
             box = "horizontal",
-            { win = "list", border = "none" },
+            { win = "list",    border = "none" },
             { win = "preview", title = "{preview}", width = 0.5, border = "left" },
           },
         },
@@ -161,8 +168,10 @@ require("snacks").setup({
           ["<Esc>"] = { "close", mode = { "n", "i" } },
           ["<c-g>"] = { "close", mode = { "n", "i" } },
           ["<c-l>"] = { "toggle_live", mode = { "i", "n" } },
+          ["<c-e>"] = { "open_explorer", mode = { "n", "i" } },
+          ["<a-p>"] = { "paste_path", mode = { "n", "i" } },
         },
-      }
+      },
     },
     formatters = {
       file = {
@@ -246,7 +255,7 @@ local function zsh_history_picker()
       vim.schedule(function()
         vim.cmd("terminal")
         vim.cmd("startinsert")
-        vim.api.nvim_put({item.command}, "", false, true)
+        vim.api.nvim_put({ item.command }, "", false, true)
       end)
     end
   end

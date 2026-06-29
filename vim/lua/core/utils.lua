@@ -45,4 +45,23 @@ M.load_mappings = function(section, mapping_opts, source_mappings)
   end)
 end
 
+M.load_keys = function(keys)
+  for _, key in ipairs(keys) do
+    local lhs = key[1]
+    local rhs = key[2]
+    if rhs then
+      local mode = key.mode or "n"
+      local opts = { desc = key.desc, noremap = true, silent = true }
+      if key.ft then
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = key.ft,
+          callback = function() vim.keymap.set(mode, lhs, rhs, opts) end,
+        })
+      else
+        vim.keymap.set(mode, lhs, rhs, opts)
+      end
+    end
+  end
+end
+
 return M

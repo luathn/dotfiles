@@ -35,7 +35,6 @@ brew install libyaml
 brew install --cask wezterm
 brew install --cask slack
 brew install --cask cloudflare-warp
-brew install --cask alt-tab
 brew install --cask dbgate
 
 # brew install --cask iterm2
