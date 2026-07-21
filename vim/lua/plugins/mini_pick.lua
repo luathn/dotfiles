@@ -100,7 +100,7 @@ require('mini.pick').setup({
     switch        = { char = "<C-'>", func = switch_picker },
     toggle_switch = { char = "<C-;>", func = toggle_switch_picker },
     grep_files    = { char = '<C-o>', func = grep_files },
-    pick_stop     = { char = '<Esc>', func = function() MiniPick.stop() end },
+    -- pick_stop     = { char = '<Esc>', func = function() MiniPick.stop() end },
     yank_path     = { char = '<C-y>', func = yank_path },
   },
 })

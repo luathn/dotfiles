@@ -1,30 +1,24 @@
 local load_keys = require("core.utils").load_keys
 local mappings = require("mappings")
 
--- Core
-vim.cmd("packadd nvim.undotree")
+-- Builtin
+vim.cmd("packadd nvim.undotree") -- Saved at ~/.local/state/nvim/undo
 load_keys(mappings.undotree)
 
 vim.cmd("packadd nvim.difftool")
 
--- Utility
+-- Util
 vim.pack.add({ "https://github.com/nvim-lua/plenary.nvim" })
 
--- UIs
+-- UI
 vim.pack.add({ "https://github.com/catppuccin/nvim" })
-require("catppuccin").setup({ no_bold = true })
+require("catppuccin").setup({})
 vim.cmd.colorscheme("catppuccin-frappe")
 
 vim.pack.add({ "https://github.com/echasnovski/mini.icons" })
 require("mini.icons").setup()
 
--- vim.pack.add({ "https://github.com/echasnovski/mini.statusline" })
--- require("plugins.mini_statusline")
-
-vim.pack.add({ 'https://github.com/nvim-mini/mini.pick' })
-require('plugins.mini_pick')
-load_keys(mappings.mini_pick)
-
+-- Editor
 -- Treesitter
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" })
@@ -116,9 +110,19 @@ vim.keymap.set("n", "<leader>a3", function()
   vim.schedule(function() vim.cmd("wincmd p") end)
 end)
 
+-- Test
+
 -- Deprecated
+-- vim.pack.add({ 'https://github.com/nvim-mini/mini.pick' })
+-- require('plugins.mini_pick')
+-- load_keys(mappings.mini_pick)
+
 -- vim.pack.add({ "https://github.com/echasnovski/mini.cursorword" })
 -- require("mini.cursorword").setup({ delay = 500 })
 
 -- vim.pack.add({ "https://github.com/echasnovski/mini.indentscope" })
 -- require("plugins.mini_indentscope")
+
+-- vim.pack.add({ "https://github.com/echasnovski/mini.statusline" })
+-- require("plugins.mini_statusline")
+

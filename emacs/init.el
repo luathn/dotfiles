@@ -11,6 +11,7 @@
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (menu-bar-mode -1)          ; Disable the menu bar
+(savehist-mode t)
 
 (show-paren-mode 1)
 (global-display-line-numbers-mode 1)
@@ -29,12 +30,10 @@
 ;; Package manager
 (setq package-archives
   '(("gnu elpa" . "https://elpa.gnu.org/packages/")
-    ("melpa"    . "https://melpa.org/packages/")
-    ("nongnu"   . "https://elpa.nongnu.org/nongnu/"))
+    ("melpa"    . "https://melpa.org/packages/"))
   package-archive-priorities
   '(("gnu elpa" . 20)
-    ("melpa"    . 15)
-    ("nongnu"   . 0)))
+    ("melpa"    . 25)))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -59,12 +58,21 @@
   (setq ns-pop-up-frames nil
         native-comp-async-report-warnings-errors nil))
 
-;; Theme
+;; UI packages
 (use-package doom-themes
   :ensure t
   :config
   (load-theme 'doom-one t)
 )
+
+(use-package doom-modeline
+  :ensure t
+  :init
+  (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-project-name t)
+)
+
 ;; (load-theme 'modus-vivendi)
 ;; (use-package catppuccin-theme
 ;;   :ensure t
@@ -77,15 +85,30 @@
 ;; Lsp
 (use-package eglot
   :ensure t
-  :hook ((go-ts-mode . eglot-ensure)))
+  :custom
+  (eglot-ignored-server-capabilities '(:documentHighlightProvider))
+  :hook ((go-ts-mode . eglot-ensure))
+  :config
+  (define-key evil-normal-state-map (kbd "K") 
+    (lambda () 
+      (interactive)
+      (call-interactively 'eldoc-print-current-symbol-info)))
+)
+
+(with-eval-after-load 'eglot
+  ; (fset #'jsonrpc--log-event #'ignore)
+  ; (remove-hook 'eldoc-display-functions 'eldoc-display-in-echo-area) ; Hide eldoc in minibuffer
+  ;; (setq eglot-events-buffer-size 0)
+  ;; (add-to-list 'eglot-stay-out-of 'eldoc-documentation-strategy)
+)
 
 ;; Treesitter
 (use-package treesit-auto
   :custom
   (treesit-auto-install 'prompt)
-  (treesit-auto-langs '(go ruby python javascript typescript))
+  (treesit-auto-langs '(go ruby lua python javascript typescript))
   :config
-  (treesit-auto-add-to-auto-mode-alist '(go ruby python javascript typescript))
+  (treesit-auto-add-to-auto-mode-alist '(go ruby lua python javascript typescript))
   ;(treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode)
 )
@@ -98,13 +121,31 @@
 			     (project-dired "Dired" "D")
 			     (consult-ripgrep "ripgrep" "g")
 			     (magit-project-status "Magit" "m")))
+  :config
+  (setq project-mode-line t)
 )
+
 ;; Magit
 (use-package magit
   :ensure t
   :custom
   (magit-diff-refine-hunk 'all)
 )
+
+;; Ediff
+(use-package ediff
+  :custom
+  (ediff-window-setup-function 'ediff-setup-windows-plain)
+)
+;
+; (defun ediff-copy-both-to-C ()
+;   (interactive)
+;   (ediff-copy-diff ediff-current-difference nil 'C nil
+;                    (concat
+;                     (ediff-get-region-contents ediff-current-difference 'A ediff-control-buffer)
+;                     (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
+; (defun add-d-to-ediff-mode-map () (define-key ediff-mode-map "d" 'ediff-copy-both-to-C))
+; (add-hook 'ediff-keymap-setup-hook 'add-d-to-ediff-mode-map)
 
 ;; Evil
 (use-package evil
@@ -114,10 +155,19 @@
   (setq evil-want-keybinding nil)
   ;(setq evil-want-minibuffer t)
   (setq evil-want-C-u-scroll t)
+  (setq evil-search-module 'isearch)
   :config
   (evil-set-undo-system 'undo-redo)
+  (evil-select-search-module evil-search-module 'isearch)
   (evil-mode 1)
 )
+
+;; (use-package evil-anzu
+;;   :after evil
+;;   :ensure t
+;;   :init
+;;   (global-anzu-mode)
+;; )
 
 (use-package evil-nerd-commenter
   :init
@@ -135,6 +185,8 @@
   (setq evil-collection-magit-want-horizontal-movement t)
   (define-key evil-normal-state-map (kbd "gI") 'eglot-find-implementation)
   (evil-collection-init)
+  (with-eval-after-load 'evil-collection-magit
+    (evil-define-key 'normal magit-mode-map (kbd "p") nil))
 )
 
 (use-package evil-escape
@@ -155,24 +207,76 @@
 
 ;; Enable vertico
 (use-package vertico
-  :custom
-  (vertico-cycle t)
   :bind 
   (:map vertico-map
         ("C-k" . kill-whole-line)
         ("DEL" . vertico-directory-delete-char)
+        ("M-[" . vertico-repeat-previous)
+	("M-]" . vertico-repeat-next)
+	("M-V" . vertico-multiform-vertical)
+	("M-G" . vertico-multiform-grid)
+	("M-F" . vertico-multiform-flat)
+	("M-R" . vertico-multiform-reverse)
+	("M-U" . vertico-multiform-unobtrusive)
+	("M-U" . vertico-multiform-buffer)
   )
+  :custom
+  (vertico-cycle t)
+  (vertico-multiform-categories
+    '((consult-grep buffer)))
+  :hook
+  (minibuffer-setup-hook . vertico-repeat-save)
   :init
   (vertico-mode)
+  (global-set-key "\M-R" #'vertico-repeat)
+  (vertico-multiform-mode 1)
+)
+
+(use-package embark
+  :ensure t
+  :bind
+  (("C-." . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  :init
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  ;; Show the Embark target at point via Eldoc. You may adjust the
+  ;; Eldoc strategy, if you want to see the documentation from
+  ;; multiple providers. Beware that using this can be a little
+  ;; jarring since the message shown in the minibuffer can be more
+  ;; than one line, causing the modeline to move up and down:
+
+  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+  ;; Add Embark to the mouse context menu. Also enable `context-menu-mode'.
+  ;; (context-menu-mode 1)
+  ;; (add-hook 'context-menu-functions #'embark-context-menu 100)
+
+  :config
+  ;; ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none))))
+)
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :ensure t ; only need to install it, embark loads it after consult if found
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode)
 )
 
 (use-package orderless
   :ensure t
   :custom
   (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles partial-completion))))
-  (completion-pcm-leading-wildcard t)
-  (orderless-matching-styles '(orderless-flex))
+  ;; (completion-category-overrides '((file (styles partial-completion))))
+  ;; (completion-pcm-leading-wildcard t)
+  (orderless-matching-styles '(orderless-literal))
 )
 
 ;; Example configuration for Consult
@@ -265,8 +369,8 @@
    consult-theme :preview-key '(:debounce 0.2 any)
    consult-ripgrep consult-git-grep consult-grep consult-man
    consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark consult--source-file-register
-   consult--source-recent-file consult--source-project-recent-file
+   consult-source-bookmark consult-source-file-register
+   consult-source-recent-file consult-source-project-recent-file
    ;; :preview-key "M-."
    :preview-key '(:debounce 0.4 any))
 
@@ -277,4 +381,32 @@
   ;; Optionally make narrowing help available in the minibuffer.
   ;; You may want to use `embark-prefix-help-command' or which-key instead.
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
+)
+
+;; Test
+(use-package consult-rg-files
+  :load-path "~/code/consult-rg-files/"
+)
+
+(use-package deadgrep
+  :ensure t
+)
+
+(use-package rg
+  :ensure t
+)
+
+(use-package claude-code-ide
+  :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
+  :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
+  :config
+  (claude-code-ide-emacs-tools-setup))
+
+(use-package ghostel
+  :ensure t)
+
+(use-package evil-ghostel
+  :ensure t
+  :after (ghostel evil)
+  :hook (ghostel-mode . evil-ghostel-mode)
 )

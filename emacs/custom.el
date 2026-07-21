@@ -9,12 +9,14 @@
      "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
      default))
  '(package-selected-packages
-   '(catppuccin-theme chatgpt-shell consult cyberpunk-theme diff-ansi
-		      difftastic doom-modeline doom-themes eldoc-box
-		      embark-consult evil-collection evil-escape
-		      evil-nerd-commenter evil-surround
-		      exec-path-from-shell gotest magit orderless
-		      treesit-auto vertico vertico-buffer vterm)))
+   '(affe better-jumper claude-code-ide deadgrep doom-modeline
+	  doom-themes embark-consult evil-collection evil-escape
+	  evil-ghostel evil-nerd-commenter evil-surround
+	  exec-path-from-shell magit orderless projectile rg
+	  treesit-auto vertico vterm))
+ '(package-vc-selected-packages
+   '((claude-code-ide :url
+		      "https://github.com/manzaltu/claude-code-ide.el"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

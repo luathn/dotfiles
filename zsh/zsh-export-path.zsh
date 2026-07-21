@@ -31,3 +31,5 @@ eval "$(zoxide init zsh)"
 
 # Added by Antigravity
 export PATH="$PATH:$HOME/.antigravity/antigravity/bin"
+
+export PATH="/Applications/Emacs.app/Contents/MacOS:$PATH"
