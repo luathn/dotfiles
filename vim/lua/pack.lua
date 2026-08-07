@@ -15,9 +15,6 @@ vim.pack.add({ "https://github.com/catppuccin/nvim" })
 require("catppuccin").setup({})
 vim.cmd.colorscheme("catppuccin-frappe")
 
-vim.pack.add({ "https://github.com/echasnovski/mini.icons" })
-require("mini.icons").setup()
-
 -- Editor
 -- Treesitter
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
@@ -126,3 +123,5 @@ end)
 -- vim.pack.add({ "https://github.com/echasnovski/mini.statusline" })
 -- require("plugins.mini_statusline")
 
+-- vim.pack.add({ "https://github.com/echasnovski/mini.icons" })
+-- require("mini.icons").setup()

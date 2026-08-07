@@ -120,6 +120,11 @@ require("snacks").setup({
       preview = true,
       preset = "ivy",
     },
+    icons = {
+      files = {
+        enabled = false,
+      }
+    },
     layouts = {
       -- Still ivy, just because some other plugins using select
       select = {
