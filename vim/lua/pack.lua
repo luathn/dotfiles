@@ -56,9 +56,6 @@ vim.pack.add({ "https://github.com/TimUntersberger/neogit" })
 load_keys(mappings.neogit)
 require("plugins.neogit")
 
--- vim.pack.add({'https://github.com/akinsho/git-conflict.nvim'})
--- require('git-conflict').setup()
-
 -- Navigation & UI
 vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
 load_keys(mappings.oil)
@@ -125,3 +122,7 @@ end)
 
 -- vim.pack.add({ "https://github.com/echasnovski/mini.icons" })
 -- require("mini.icons").setup()
+
+-- vim.pack.add({'https://github.com/akinsho/git-conflict.nvim'})
+-- require('git-conflict').setup()
+
