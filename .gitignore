@@ -1,5 +1,7 @@
 vim/plugged
 vim/.netrwhist
+Session.vim
+
 .directory
 tags
 
@@ -25,3 +27,8 @@ emacs/transient/*
 emacs/url/*
 emacs/eshell
 emacs/tree-sitter
+emacs/.local/
+emacs/bookmarks.eld
+emacs/projectile-bookmarks.eld
+emacs/projects.eld
+emacs/tramp
