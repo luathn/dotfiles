@@ -44,6 +44,10 @@
       "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
       "src": "https://github.com/williamboman/mason.nvim"
     },
+    "mini-git": {
+      "rev": "62aa54f41c50181dceff90b55f989efe69ad198c",
+      "src": "https://github.com/nvim-mini/mini-git"
+    },
     "mini.cursorword": {
       "rev": "8dcf45bc820f3c5f778960ba55206938246b70b7",
       "src": "https://github.com/echasnovski/mini.cursorword"

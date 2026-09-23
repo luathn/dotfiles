@@ -1,26 +1,27 @@
--- local win_config = function()
---   height = 18
---   width = vim.o.columns
---
---   return {
---     anchor = 'NW',
---     height = height,
---     width = width,
---     row = vim.o.lines - height - 4,
---     col = vim.o.columns - width,
---   }
--- end
 local win_config = function()
-  height = math.floor(0.3 * vim.o.lines)
-  width = vim.o.columns > 170 and math.floor(0.618 * vim.o.columns) or vim.o.columns
+  height = 18
+  width = vim.o.columns
+
   return {
     anchor = 'NW',
     height = height,
     width = width,
-    row = math.floor(0.5 * (vim.o.lines - height)),
-    col = math.floor(0.5 * (vim.o.columns - width)),
+    row = vim.o.lines - height - 4,
+    col = vim.o.columns - width,
   }
 end
+
+-- local win_config = function()
+--   height = math.floor(0.3 * vim.o.lines)
+--   width = vim.o.columns > 170 and math.floor(0.618 * vim.o.columns) or vim.o.columns
+--   return {
+--     anchor = 'NW',
+--     height = height,
+--     width = width,
+--     row = math.floor(0.5 * (vim.o.lines - height)),
+--     col = math.floor(0.5 * (vim.o.columns - width)),
+--   }
+-- end
 
 -- Custom functions
 local wipeout_cur = function()
@@ -80,7 +81,9 @@ local yank_path = function()
   vim.fn.setreg('*', path)
 end
 
-require('mini.pick').setup({
+local pick = require('mini.pick')
+pick.setup({
+  source = { show = pick.default_show },
   window = {
     config = win_config,
     prompt_caret = '▏',

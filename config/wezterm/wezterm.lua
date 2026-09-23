@@ -17,7 +17,8 @@ config = {
   inactive_pane_hsb = { saturation = 0.80, brightness = 0.85 },
   font = wezterm.font('JetBrains Mono', { weight = 'Medium', italic = false }),
   font_size = 13,
-  -- use_resize_increments = true,
+  use_resize_increments = true,
+  -- default_cursor_style = 'BlinkingBar',
   -- hide_tab_bar_if_only_one_tab = true,
 }
 
@@ -40,10 +41,6 @@ config.keys = {
   { key = 'j',     mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Down') },
   { key = 'k',     mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Up') },
   { key = 'l',     mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Right') },
-  -- { key = 'h', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-left') },
-  -- { key = 'j', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-down') },
-  -- { key = 'k', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-up') },
-  -- { key = 'l', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-right') },
   { key = 'f',     mods = 'LEADER',      action = act.TogglePaneZoomState },
   { key = 'z',     mods = 'LEADER',      action = act.ToggleFullScreen },
   { key = '/',     mods = 'LEADER',      action = act.Search { CaseInSensitiveString = 'hash' } },

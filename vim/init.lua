@@ -1,7 +1,6 @@
 require("settings")
 require("pack")
 require("core.utils").load_mappings("general")
-require("core.utils").load_mappings("ruby_on_rails")
 require("core.utils").load_mappings("term")
 
 vim.api.nvim_create_autocmd("FileType", {

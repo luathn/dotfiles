@@ -51,7 +51,7 @@ M.load_keys = function(keys)
     local rhs = key[2]
     if rhs then
       local mode = key.mode or "n"
-      local opts = { desc = key.desc, noremap = true, silent = true }
+      local opts = { desc = key.desc, noremap = true, silent = false }
       if key.ft then
         vim.api.nvim_create_autocmd("FileType", {
           pattern = key.ft,

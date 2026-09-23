@@ -16,6 +16,22 @@ require("snacks").setup({
     },
     hidden = true,
     actions = {
+      -- Open files with a relative path instead of absolute.
+      -- files/grep/git/smart sources all attach an absolute item.cwd,
+      -- which the default jump action joins with item.file before
+      -- calling bufadd(), so buffers end up with an absolute name.
+      -- Splits/vsplits/tabs/drop all indirect through "confirm" too
+      -- (see actions.lua M.split/M.vsplit/...), so this one override
+      -- covers all of them for every source.
+      confirm = function(picker, item, action)
+        for _, it in ipairs(picker:selected({ fallback = true })) do
+          if it.cwd and it.file then
+            it._path = nil
+            it.cwd = nil
+          end
+        end
+        return require("snacks.picker.actions").jump(picker, item, action)
+      end,
       switch_to_buffers = function(picker, _)
         local pattern = picker.input.filter.pattern
         picker:close()
@@ -47,6 +63,12 @@ require("snacks").setup({
         if path then
           picker:close()
           vim.api.nvim_put({ path }, "c", true, true)
+        end
+      end,
+      git_show_file = function(picker, item)
+        picker:close()
+        if item and item.commit then
+          vim.cmd("Git show " .. item.commit .. ":%")
         end
       end,
     },
@@ -113,6 +135,23 @@ require("snacks").setup({
         layout = {
           preview = false,
         }
+      },
+      git_log_file = {
+        -- finder = "git_log",
+        -- format = "git_log",
+        -- preview = "git_show",
+        -- current_file = true,
+        -- follow = true,
+        -- confirm = "git_show_file",
+        -- sort = { fields = { "score:desc", "idx" } },
+        win = {
+          input = {
+            keys = {
+              ["<c-s>"] = { "bufdelete", mode = { "n", "i" } },
+              ["<c-;>"] = { "switch_to_files", mode = { "n", "i" } },
+            },
+          },
+        },
       },
     },
     ui_select = true,
