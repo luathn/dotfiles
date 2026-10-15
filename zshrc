@@ -72,7 +72,7 @@ source ~/.zsh_local
 
 function ai_helper() {
   local current_buffer=$BUFFER
-  BUFFER=$(aigen "$current_buffer. just output the bash command and nothing else.")
+  BUFFER=$(~/dotfiles/aigen "$current_buffer. just output the bash command and nothing else.")
   CURSOR=${#BUFFER}
 }
 zle -N ai_helper

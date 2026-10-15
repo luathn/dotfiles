@@ -12,17 +12,9 @@
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"
     },
-    "diffs.nvim": {
-      "rev": "7ab445c39224160203ae692d3c883e2f51f2d442",
-      "src": "https://github.com/barrettruth/diffs.nvim"
-    },
     "diffview.nvim": {
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
       "src": "https://github.com/sindrets/diffview.nvim"
-    },
-    "friendly-snippets": {
-      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
-      "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gp.nvim": {
       "rev": "c37f154b97690c4925fef4e35ffdbf2c844b5f4e",
@@ -48,29 +40,17 @@
       "rev": "62aa54f41c50181dceff90b55f989efe69ad198c",
       "src": "https://github.com/nvim-mini/mini-git"
     },
-    "mini.cursorword": {
-      "rev": "8dcf45bc820f3c5f778960ba55206938246b70b7",
-      "src": "https://github.com/echasnovski/mini.cursorword"
-    },
-    "mini.icons": {
-      "rev": "5b9076dae1bfbe47ba4a14bc8b967cde0ab5d77e",
-      "src": "https://github.com/echasnovski/mini.icons"
-    },
-    "mini.indentscope": {
-      "rev": "065c7713fb4cd0124fe1462f15f27feeb8b04406",
-      "src": "https://github.com/echasnovski/mini.indentscope"
-    },
     "mini.pick": {
       "rev": "1ffba38c7221669d3da7792d4bbe1c9761075f4d",
       "src": "https://github.com/nvim-mini/mini.pick"
     },
-    "mini.statusline": {
-      "rev": "8c3829d4ef02b693f68e43fc131b433f11049b2b",
-      "src": "https://github.com/echasnovski/mini.statusline"
-    },
     "mini.surround": {
       "rev": "d205d1741d1fcc1f3117b4e839bf00f74ad72fa2",
       "src": "https://github.com/echasnovski/mini.surround"
+    },
+    "minibuffer.nvim": {
+      "rev": "c7f7d5d9eddec273204b1cce90963879179bed1a",
+      "src": "https://github.com/simifalaye/minibuffer.nvim"
     },
     "neogit": {
       "rev": "5a7fca171e3ad07380745d573d791e95268b8f3f",
@@ -127,10 +107,6 @@
     "treesj": {
       "rev": "26bc2a8432ba3ea79ed6aa346fba780a3d372570",
       "src": "https://github.com/Wansmer/treesj"
-    },
-    "vim-fugitive": {
-      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
-      "src": "https://github.com/tpope/vim-fugitive"
     },
     "vim-test": {
       "rev": "36c501a89696e5ec18fb653e958957d0826e5c0b",

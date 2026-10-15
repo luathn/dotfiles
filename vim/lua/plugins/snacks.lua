@@ -154,7 +154,7 @@ require("snacks").setup({
         },
       },
     },
-    ui_select = true,
+    ui_select = false,
     layout = {
       preview = true,
       preset = "ivy",

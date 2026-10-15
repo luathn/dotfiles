@@ -11,6 +11,7 @@ brew install gnupg
 brew install libjpg libpng libtiff webp
 brew install mysql
 brew install jq
+brew install terminal-notifier
 
 brew tap wix/brew
 brew install applesimutils

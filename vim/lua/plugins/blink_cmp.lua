@@ -52,6 +52,7 @@ return {
     },
   },
   signature = { enabled = true },
+  cmdline = { enabled = true },
   fuzzy = {
     implementation = 'lua',
   },

@@ -32,7 +32,6 @@ require("mason").setup({})
 
 vim.pack.add({ "https://github.com/williamboman/mason-lspconfig.nvim" })
 vim.pack.add({ "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" })
-vim.pack.add({ "https://github.com/rafamadriz/friendly-snippets" })
 
 vim.pack.add({ "https://github.com/saghen/blink.cmp" })
 require("blink.cmp").setup(require("plugins.blink_cmp"))
@@ -104,44 +103,16 @@ end)
 -- Test
 vim.pack.add({ 'https://github.com/nvim-mini/mini-git' })
 load_keys(mappings.mini_git)
-require('plugins.deprecated.mini_git')
+require('plugins.mini_git')
 
-local map_local = vim.schedule_wrap(function(data)
-  if not vim.api.nvim_buf_is_valid(data.buf) then return end
-  local buf_name = vim.api.nvim_buf_get_name(data.buf)
-  if not vim.startswith(buf_name, 'minigit://') then return end
-  vim.keymap.set({ 'n' }, 'q', "<Cmd>q<CR>", { buffer = data.buf, desc = 'Quit mini git window' })
-  vim.keymap.set({ 'n', 'x' }, '<CR>', "<Cmd>lua MiniGit.show_at_cursor({ split='vertical' })<CR>",
-    { buffer = data.buf, desc = 'Show at cursor' })
-  vim.keymap.set({ 'n', 'x' }, '<leader>gs', "<Cmd>lua MiniGit.show_diff_source({ split='vertical' })<CR>",
-    { buffer = data.buf, desc = 'Show diff source' })
-end)
--- Alternative is to map for `User` `MiniGitCommandSplit` event, but
--- it would not trigger when buffer is created with `show_xxx()` functions
-vim.api.nvim_create_autocmd('BufNew', { callback = map_local })
-
-vim.keymap.set('x', '<leader>gl', "<Cmd>lua MiniGit.show_range_history({ split='vertical' })<CR>",
-  { desc = 'Show range history' })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.pick' })
+require('plugins.mini_pick')
+load_keys(mappings.mini_pick)
+--
+require("vim._core.ui2").enable({ enable = true, msg = { targets = "msg" } })
+vim.pack.add({ "https://github.com/simifalaye/minibuffer.nvim" })
+require('plugins.minibuffer')
 
 -- Deprecated
--- vim.pack.add({ 'https://github.com/nvim-mini/mini.pick' })
--- require('plugins.mini_pick')
--- load_keys(mappings.mini_pick)
-
--- vim.pack.add({ "https://github.com/echasnovski/mini.cursorword" })
--- require("mini.cursorword").setup({ delay = 500 })
-
--- vim.pack.add({ "https://github.com/echasnovski/mini.indentscope" })
--- require("plugins.mini_indentscope")
-
--- vim.pack.add({ "https://github.com/echasnovski/mini.statusline" })
--- require("plugins.mini_statusline")
-
--- vim.pack.add({ "https://github.com/echasnovski/mini.icons" })
--- require("mini.icons").setup()
-
 -- vim.pack.add({'https://github.com/akinsho/git-conflict.nvim'})
 -- require('git-conflict').setup()
-
--- vim.pack.add({ "https://github.com/tpope/vim-fugitive" })
--- load_keys(mappings.vim_fugitive)

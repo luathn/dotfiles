@@ -92,23 +92,32 @@ M.treesj = {
 }
 
 M.mini_pick = {
-  { "<leader>ff", "<cmd>Pick files<cr>",                             desc = "" },
+  { "<leader>bf", "<cmd>Pick files<cr>",                             desc = "" },
   { "<leader>bb", "<cmd>lua MiniPick.registry.sorted_buffers()<cr>", desc = "" },
-  { "<leader>fr", "<cmd>Pick resume<CR>",                            mode = "n", desc = "[r]esum" },
-  { "<leader>fg", "<cmd>Pick grep<cr>",                              desc = "" },
-  { "<leader>fl", "<cmd>Pick grep_live<cr>",                         desc = "" },
+  { "<leader>br", "<cmd>Pick resume<CR>",                            mode = "n", desc = "[r]esum" },
+  { "<leader>bg", "<cmd>Pick grep<cr>",                              desc = "" },
+  { "<leader>bl", "<cmd>Pick grep_live<cr>",                         desc = "" },
 }
 
 M.mini_git = {
-  { "<leader>gB", ":Git blame -- %<cr>",      desc = "[G]it [b]lame" },
+  {
+    "<leader>gB",
+    function()
+      local line, topline = vim.fn.line("."), vim.fn.line("w0")
+      vim.cmd("Git blame -- %")
+      vim.fn.winrestview({ topline = topline })
+      vim.api.nvim_win_set_cursor(0, { line, 0 })
+    end,
+    desc = "[G]it [b]lame",
+  },
   { "<leader>gs", ":Git show :%<left><left>", desc = "[G]it [s]how" },
 }
 
 M.snacks = {
   -- Picker
-  { "<leader><space>", "<cmd>lua Snacks.picker.files()<Cr>",               desc = "Find Files" },
-  { "<leader>,",       "<cmd>lua Snacks.picker.buffers()<Cr>",             desc = "Buffers" },
-  { "<leader>/",       "<cmd>lua Snacks.picker.lines()<Cr>",               desc = "Grep buffers" },
+  { "<leader>ff", "<cmd>lua Snacks.picker.files()<Cr>",               desc = "Find Files" },
+  { "<leader>fb",       "<cmd>lua Snacks.picker.buffers()<Cr>",             desc = "Buffers" },
+  { "<leader>f/",       "<cmd>lua Snacks.picker.lines()<Cr>",               desc = "Grep buffers" },
   { "<leader>:",       "<cmd>lua Snacks.picker.commands()<Cr>",            desc = "Commands" },
   { "<leader>sc",      "<cmd>lua Snacks.picker.command_history()<Cr>",     desc = "Command history" },
   { "<leader>sr",      function() Snacks.picker.resume() end,              desc = "Resume" },

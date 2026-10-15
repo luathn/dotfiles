@@ -81,12 +81,20 @@ local yank_path = function()
   vim.fn.setreg('*', path)
 end
 
+local make_home_end = function(direction)
+  return function()
+    local key = MiniPick.get_picker_opts().mappings['caret_' .. direction]
+    local n = #MiniPick.get_picker_query()
+    vim.api.nvim_input(string.rep(key, n))
+  end
+end
+
 local pick = require('mini.pick')
 pick.setup({
   source = { show = pick.default_show },
   window = {
     config = win_config,
-    prompt_caret = '▏',
+    prompt_caret = '|',
     prompt_prefix = ' ',
   },
   mappings = {
@@ -94,17 +102,20 @@ pick.setup({
     caret_right   = '<C-f>',
     choose_marked = '<C-CR>',
     paste         = '<C-r>',
-    stop          = '<C-g>',
+    stop          = '<esc>',
     scroll_left   = '<C-h>',
     scroll_down   = '<C-j>',
     scroll_up     = '<C-k>',
     scroll_right  = '<C-l>',
-    explorer      = { char = '<C-e>', func = open_explorer },
+    toggle_info   = '<C-i>',
+    -- explorer      = { char = '<C-e>', func = open_explorer },
     switch        = { char = "<C-'>", func = switch_picker },
     toggle_switch = { char = "<C-;>", func = toggle_switch_picker },
     grep_files    = { char = '<C-o>', func = grep_files },
-    pick_stop     = { char = '<C-g>', func = function() MiniPick.stop() end },
+    -- pick_stop     = { char = '<C-g>', func = function() MiniPick.stop() end },
     yank_path     = { char = '<C-y>', func = yank_path },
+    caret_home    = { char = '<C-a>', func = make_home_end('left') },
+    caret_end     = { char = '<C-e>', func = make_home_end('right') },
   },
 })
 

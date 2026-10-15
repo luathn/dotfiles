@@ -79,7 +79,7 @@ neogit.setup {
     diffview = true,
     mini_pick = false,
     fzf_lua = false,
-    snacks = true,
+    snacks = false,
   },
   sections = {
     -- Reverting/Cherry Picking

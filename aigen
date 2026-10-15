@@ -18,7 +18,7 @@ fi
 # Function to make the API call using llm
 call_llm_api() {
   local prompt="$1"
-  local model="gemini-2.0-flash"
+  local model="gemini-2.5-flash"
   local response=$(llm -m "$model" "$prompt")
   echo "$response"
 }
