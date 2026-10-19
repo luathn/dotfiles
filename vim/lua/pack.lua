@@ -19,11 +19,9 @@ vim.cmd.colorscheme("catppuccin-frappe")
 -- Treesitter
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" })
-require("plugins.treesitter")
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter-context" })
-require("plugins.treesitter-context")
 vim.pack.add({ "https://github.com/Wansmer/treesj" })
-require("plugins.treesj")
+require("plugins.treesitter")
 load_keys(mappings.treesj)
 
 -- LSP & completion

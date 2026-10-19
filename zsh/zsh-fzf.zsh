@@ -3,8 +3,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='
     --inline-info
     --bind ctrl-o:toggle-all
-    --color=hl:#ea76cb
-    --color=fg+:#4d4d4c,bg+:#dce0e8,hl+:#ea76cb
+    --layout="reverse"
     '
 
 # Set up fzf key bindings and fuzzy completion
