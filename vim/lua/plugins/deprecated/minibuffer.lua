@@ -1,4 +1,5 @@
 vim.g.minibuffer = {
+  -- select = { layout = "sidebar", width = 0.4 },  -- default is layout = "bottom"
   dynamic_window_resize = true, -- Shrink other windows when the minibuffer is expanded
   keymaps = {
     ["<c-g>"] = "cancel",

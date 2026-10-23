@@ -50,6 +50,10 @@ vim.pack.add({ "https://github.com/TimUntersberger/neogit" })
 load_keys(mappings.neogit)
 require("plugins.neogit")
 
+vim.pack.add({ 'https://github.com/nvim-mini/mini-git' })
+load_keys(mappings.mini_git)
+require('plugins.mini_git')
+
 -- Navigation & UI
 vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
 load_keys(mappings.oil)
@@ -60,9 +64,6 @@ load_keys(mappings.snacks)
 require("plugins.snacks")
 
 -- Code tools
-vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
-require("plugins.conform")
-
 vim.pack.add({ "https://github.com/MagicDuck/grug-far.nvim" })
 load_keys(mappings.grug_far)
 require("plugins.grug_far")
@@ -99,18 +100,19 @@ vim.keymap.set("n", "<leader>a3", function()
 end)
 
 -- Test
-vim.pack.add({ 'https://github.com/nvim-mini/mini-git' })
-load_keys(mappings.mini_git)
-require('plugins.mini_git')
-
 vim.pack.add({ 'https://github.com/nvim-mini/mini.pick' })
-require('plugins.mini_pick')
+require('plugins.deprecated.mini_pick')
 load_keys(mappings.mini_pick)
---
-require("vim._core.ui2").enable({ enable = true, msg = { targets = "msg" } })
-vim.pack.add({ "https://github.com/simifalaye/minibuffer.nvim" })
-require('plugins.minibuffer')
+
+vim.opt.rtp:prepend(vim.fn.expand("~/code/nvimtico"))
+vim.g.nvimtico_ui_select = true
+vim.keymap.set("n", "<leader><space>", "<cmd>Tico files<cr>")
+vim.keymap.set("n", "<leader>,", "<cmd>Tico buffers<cr>")
+vim.keymap.set("n", "<leader>/", "<cmd>Tico grep<cr>")
 
 -- Deprecated
 -- vim.pack.add({'https://github.com/akinsho/git-conflict.nvim'})
 -- require('git-conflict').setup()
+
+-- vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
+-- require("plugins.conform")
