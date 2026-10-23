@@ -1,3 +1,5 @@
+require("mason").setup({})
+
 local lsp_mappings = {
   n = {
     ["gd"]         = { vim.lsp.buf.definition, "Go to [d]efinition" },

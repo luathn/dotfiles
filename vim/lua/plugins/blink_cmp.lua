@@ -1,4 +1,4 @@
-return {
+require("blink.cmp").setup({
   keymap = {
     preset = 'enter',
     ['<Tab>'] = {
@@ -56,4 +56,4 @@ return {
   fuzzy = {
     implementation = 'lua',
   },
-}
+})

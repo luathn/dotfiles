@@ -24,18 +24,16 @@ vim.pack.add({ "https://github.com/Wansmer/treesj" })
 require("plugins.treesitter")
 load_keys(mappings.treesj)
 
--- LSP & completion
-vim.pack.add({ "https://github.com/williamboman/mason.nvim" })
-require("mason").setup({})
+-- Completion
+vim.pack.add({ "https://github.com/saghen/blink.cmp" })
+require("plugins.blink_cmp")
 
+-- LSP
+vim.pack.add({ "https://github.com/williamboman/mason.nvim" })
 vim.pack.add({ "https://github.com/williamboman/mason-lspconfig.nvim" })
 vim.pack.add({ "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" })
-
-vim.pack.add({ "https://github.com/saghen/blink.cmp" })
-require("blink.cmp").setup(require("plugins.blink_cmp"))
-
 vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
-require("plugins.nvim-lspconfig")
+require("plugins.lsp")
 
 -- Mini
 vim.pack.add({ "https://github.com/echasnovski/mini.surround" })
@@ -76,7 +74,6 @@ require("plugins.vim_test")
 vim.pack.add({ "https://github.com/nvim-neotest/nvim-nio" })
 vim.pack.add({ "https://github.com/rcarriga/nvim-dap-ui" })
 vim.pack.add({ "https://github.com/leoluz/nvim-dap-go" })
-
 vim.pack.add({ "https://github.com/mfussenegger/nvim-dap" })
 load_keys(mappings.dap)
 require("plugins.dap")
