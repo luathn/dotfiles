@@ -1,9 +1,9 @@
-return {
+require("claudecode").setup({
   -- Server Configuration
   port_range = { min = 10000, max = 65535 },
   auto_start = true,
-  log_level = "info", -- "trace", "debug", "info", "warn", "error"
-  terminal_cmd = nil, -- Custom terminal command (default: "claude")
+  log_level = "info",   -- "trace", "debug", "info", "warn", "error"
+  terminal_cmd = nil,   -- Custom terminal command (default: "claude")
   -- For local installations: "~/.claude/local/claude"
   -- For native binary: use output from 'which claude'
 
@@ -17,9 +17,9 @@ return {
 
   -- Terminal Configuration
   terminal = {
-    split_side = "right", -- "left" or "right"
+    split_side = "right",   -- "left" or "right"
     split_width_percentage = 0.45,
-    provider = "native", -- "auto", "snacks", "native", "external", "none", or custom provider table
+    provider = "native",    -- "auto", "snacks", "native", "external", "none", or custom provider table
     snacks_win_opts = {},
     -- Provider-specific options
     provider_opts = {
@@ -36,6 +36,17 @@ return {
     auto_close_on_accept = true,
     layout = "vertical",
     open_in_new_tab = true,
-    keep_terminal_focus = false, -- If true, moves focus back to terminal after diff opens
+    keep_terminal_focus = false,   -- If true, moves focus back to terminal after diff opens
   },
-}
+})
+
+vim.keymap.set("n", "<leader>a1", function()
+  vim.cmd("ClaudeCodeFocus")
+  vim.api.nvim_feedkeys("1", "n", false)
+  vim.schedule(function() vim.cmd("wincmd p") end)
+end)
+vim.keymap.set("n", "<leader>a3", function()
+  vim.cmd("ClaudeCodeFocus")
+  vim.api.nvim_feedkeys("3", "n", false)
+  vim.schedule(function() vim.cmd("wincmd p") end)
+end)

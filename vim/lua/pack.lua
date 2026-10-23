@@ -84,17 +84,7 @@ require("plugins.dap")
 -- AI
 vim.pack.add({ "https://github.com/coder/claudecode.nvim" })
 load_keys(mappings.claudecode)
-require("claudecode").setup(require("plugins.claudecode"))
-vim.keymap.set("n", "<leader>a1", function()
-  vim.cmd("ClaudeCodeFocus")
-  vim.api.nvim_feedkeys("1", "n", false)
-  vim.schedule(function() vim.cmd("wincmd p") end)
-end)
-vim.keymap.set("n", "<leader>a3", function()
-  vim.cmd("ClaudeCodeFocus")
-  vim.api.nvim_feedkeys("3", "n", false)
-  vim.schedule(function() vim.cmd("wincmd p") end)
-end)
+require("plugins.claudecode")
 
 -- Test
 vim.pack.add({ 'https://github.com/nvim-mini/mini.pick' })
