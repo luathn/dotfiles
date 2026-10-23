@@ -93,10 +93,3 @@ vim.g.nvimtico_ui_select = true
 vim.keymap.set("n", "<leader><space>", "<cmd>Tico files<cr>")
 vim.keymap.set("n", "<leader>,", "<cmd>Tico buffers<cr>")
 vim.keymap.set("n", "<leader>/", "<cmd>Tico grep<cr>")
-
--- Deprecated
--- vim.pack.add({'https://github.com/akinsho/git-conflict.nvim'})
--- require('git-conflict').setup()
-
--- vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
--- require("pack.conform")
