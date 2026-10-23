@@ -5,16 +5,6 @@ require("core.utils").load_mappings("general")
 require("core.utils").load_mappings("term")
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "qf" },
-  command = [[nnoremap <buffer> q :cclose<CR>:lclose<CR>]]
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "nvim-undotree" },
-  command = [[nnoremap <buffer> q :q<CR>]]
-})
-
-vim.api.nvim_create_autocmd("FileType", {
   pattern = { "ruby" },
   command = [[nnoremap <buffer> <leader>rr :term ruby %<CR>]]
 })
