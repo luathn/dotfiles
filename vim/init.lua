@@ -48,7 +48,7 @@ vim.o.foldclose = ""
 -- vim.o.splitbelow = true
 -- vim.o.splitright = true
 
-require("core.llm")
+require("llm")
 require("pack")
 require("core.utils").load_mappings("general")
 require("core.utils").load_mappings("term")
