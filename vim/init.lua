@@ -1,4 +1,5 @@
 require("settings")
+require("core.llm")
 require("pack")
 require("core.utils").load_mappings("general")
 require("core.utils").load_mappings("term")

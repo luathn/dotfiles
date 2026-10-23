@@ -61,6 +61,7 @@ M.neogit = {
   { "<leader>gL", ":NeogitLog<cr>",                                                           desc = "[G]it [L]og current" },
   { "<leader>gb", ":Neogit branch<cr>",                                                       desc = "[G]it [b]ranch" },
   { "<leader>gc", "<cmd>lua require('neogit').action('branch', 'checkout_local_branch')<cr>", desc = "[G]it [c]heckout" },
+  { "<leader>gm", "<cmd>AiCommit<cr>",                                                        desc = "[G]it commit [m]essage" },
 }
 
 M.grug_far = {

@@ -82,9 +82,6 @@ load_keys(mappings.dap)
 require("plugins.dap")
 
 -- AI
-vim.pack.add({ "https://github.com/robitx/gp.nvim" })
-require("plugins.gp")
-
 vim.pack.add({ "https://github.com/coder/claudecode.nvim" })
 load_keys(mappings.claudecode)
 require("claudecode").setup(require("plugins.claudecode"))
