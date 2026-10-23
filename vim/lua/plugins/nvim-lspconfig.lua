@@ -38,12 +38,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Diagnostic Config
 -- See :help vim.diagnostic.Opts
--- vim.diagnostic.config {
---   severity_sort = true,
---   float = { border = 'rounded', source = 'if_many' },
---   underline = { severity = vim.diagnostic.severity.ERROR },
---   virtual_text = false,
--- }
+vim.diagnostic.config {
+  -- severity_sort = true,
+  -- float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = vim.diagnostic.severity.ERROR },
+  virtual_text = false,
+}
 
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 
