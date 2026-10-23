@@ -35,10 +35,6 @@ vim.pack.add({ "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" })
 vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
 require("pack.lsp")
 
--- Mini
-vim.pack.add({ "https://github.com/echasnovski/mini.surround" })
-require("pack.mini_surround")
-
 -- Git
 vim.pack.add({ "https://github.com/sindrets/diffview.nvim" })
 load_keys(mappings.diffview)
@@ -52,7 +48,7 @@ vim.pack.add({ 'https://github.com/nvim-mini/mini-git' })
 load_keys(mappings.mini_git)
 require('pack.mini_git')
 
--- Navigation & UI
+-- Navigation
 vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
 load_keys(mappings.oil)
 require("pack.oil")
@@ -61,16 +57,19 @@ vim.pack.add({ "https://github.com/folke/snacks.nvim" })
 load_keys(mappings.snacks)
 require("pack.snacks")
 
--- Code tools
 vim.pack.add({ "https://github.com/MagicDuck/grug-far.nvim" })
 load_keys(mappings.grug_far)
 require("pack.grug_far")
+
+-- Tools
+vim.pack.add({ "https://github.com/echasnovski/mini.surround" })
+require("pack.mini_surround")
 
 vim.pack.add({ "https://github.com/vim-test/vim-test" })
 load_keys(mappings.vim_test)
 require("pack.vim_test")
 
--- DAP
+-- Debug
 vim.pack.add({ "https://github.com/nvim-neotest/nvim-nio" })
 vim.pack.add({ "https://github.com/rcarriga/nvim-dap-ui" })
 vim.pack.add({ "https://github.com/leoluz/nvim-dap-go" })
