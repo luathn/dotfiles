@@ -50,6 +50,7 @@ vim.o.foldclose = ""
 
 require("llm")
 require("pack")
+require("safe-quit")
 require("core.utils").load_mappings("general")
 require("core.utils").load_mappings("term")
 
