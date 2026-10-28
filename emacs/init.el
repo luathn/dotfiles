@@ -240,7 +240,7 @@
          ;; C-x bindings in `ctl-x-map'
          ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
          ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ("C-x p b" . consult-project-buffer))     ;; orig. project-switch-to-buffer
   :init
   (advice-add #'register-preview :override #'consult-register-window)
   (setq register-preview-delay 0.5)
