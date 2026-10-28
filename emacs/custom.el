@@ -10,10 +10,10 @@
      default))
  '(package-selected-packages
    '(affe better-jumper claude-code-ide deadgrep doom-modeline
-	  doom-themes embark-consult evil-collection evil-escape
-	  evil-ghostel evil-nerd-commenter evil-surround
-	  exec-path-from-shell magit orderless projectile rg
-	  treesit-auto vertico vterm))
+	  doom-themes embark embark-consult emms evil evil-collection
+	  evil-escape evil-ghostel evil-nerd-commenter evil-surround
+	  exec-path-from-shell ghostel listen magit mpv orderless
+	  projectile rg treesit-auto vertico vterm vundo))
  '(package-vc-selected-packages
    '((claude-code-ide :url
 		      "https://github.com/manzaltu/claude-code-ide.el"))))
