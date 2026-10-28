@@ -12,6 +12,7 @@ brew install libjpg libpng libtiff webp
 brew install mysql
 brew install jq
 brew install terminal-notifier
+brew install mpv
 
 brew tap wix/brew
 brew install applesimutils
@@ -25,11 +26,9 @@ brew install ripgrep
 brew install bat
 brew install gnu-sed
 brew install p7zip
+brew install ghostscript
 
-# Ruby dependencies
-brew install libyaml
-
-# Just comment
+# brew install libyaml
 # brew install translate-shell
 
 # Cask
