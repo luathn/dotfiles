@@ -65,57 +65,6 @@
   (load-theme 'doom-one t)
 )
 
-;; Lsp
-(use-package eglot
-  :ensure t
-  :custom
-  (eglot-ignored-server-capabilities '(:documentHighlightProvider))
-  (eglot-sync-connect 0)
-  :hook ((go-ts-mode . eglot-ensure))
-  :config
-  (define-key evil-normal-state-map (kbd "K") 
-    (lambda () 
-      (interactive)
-      (call-interactively 'eldoc-print-current-symbol-info)))
-)
-
-(with-eval-after-load 'eglot
-  ; (fset #'jsonrpc--log-event #'ignore)
-  ; (remove-hook 'eldoc-display-functions 'eldoc-display-in-echo-area) ; Hide eldoc in minibuffer
-  ;; (setq eglot-events-buffer-size 0)
-  ;; (add-to-list 'eglot-stay-out-of 'eldoc-documentation-strategy)
-)
-
-;; Treesitter
-(use-package treesit-auto
-  :custom
-  (treesit-auto-install 'prompt)
-  (treesit-auto-langs '(go ruby lua python javascript typescript))
-  :config
-  (treesit-auto-add-to-auto-mode-alist '(go ruby lua python javascript typescript))
-  ;(treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode)
-)
-
-;; Project.el config
-(use-package project
-  :custom
-  (project-switch-commands '((project-find-file "Find file" "f")
-			     (project-find-dir "Find dir" "d")
-			     (project-dired "Dired" "D")
-			     (consult-ripgrep "ripgrep" "g")
-			     (magit-project-status "Magit" "m")))
-  :config
-  (setq project-mode-line t)
-)
-
-;; Magit
-(use-package magit
-  :ensure t
-  :custom
-  (magit-diff-refine-hunk 'all)
-)
-
 ;; Evil
 (use-package evil
   :ensure t
@@ -173,6 +122,57 @@
   :ensure t
   :config
   (global-evil-surround-mode 1))
+
+;; Lsp
+(use-package eglot
+  :ensure t
+  :custom
+  (eglot-ignored-server-capabilities '(:documentHighlightProvider))
+  (eglot-sync-connect 0)
+  :hook ((go-ts-mode . eglot-ensure))
+  :config
+  (define-key evil-normal-state-map (kbd "K") 
+    (lambda () 
+      (interactive)
+      (call-interactively 'eldoc-print-current-symbol-info)))
+)
+
+(with-eval-after-load 'eglot
+  ; (fset #'jsonrpc--log-event #'ignore)
+  ; (remove-hook 'eldoc-display-functions 'eldoc-display-in-echo-area) ; Hide eldoc in minibuffer
+  ;; (setq eglot-events-buffer-size 0)
+  ;; (add-to-list 'eglot-stay-out-of 'eldoc-documentation-strategy)
+)
+
+;; Treesitter
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  (treesit-auto-langs '(go ruby lua python javascript typescript))
+  :config
+  (treesit-auto-add-to-auto-mode-alist '(go ruby lua python javascript typescript))
+  ;(treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode)
+)
+
+;; Project.el config
+(use-package project
+  :custom
+  (project-switch-commands '((project-find-file "Find file" "f")
+			     (project-find-dir "Find dir" "d")
+			     (project-dired "Dired" "D")
+			     (consult-ripgrep "ripgrep" "g")
+			     (magit-project-status "Magit" "m")))
+  :config
+  (setq project-mode-line t)
+)
+
+;; Magit
+(use-package magit
+  :ensure t
+  :custom
+  (magit-diff-refine-hunk 'all)
+)
 
 ;; Enable vertico
 (use-package vertico
