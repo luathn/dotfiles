@@ -83,10 +83,6 @@ load_keys(mappings.claudecode)
 require("pack.claudecode")
 
 -- Test
-vim.pack.add({ 'https://github.com/nvim-mini/mini.pick' })
-require('pack.deprecated.mini_pick')
-load_keys(mappings.mini_pick)
-
 vim.opt.rtp:prepend(vim.fn.expand("~/code/nvimtico"))
 vim.g.nvimtico_ui_select = true
 vim.keymap.set("n", "<leader><space>", "<cmd>Tico files<cr>")
