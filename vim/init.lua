@@ -6,6 +6,8 @@ vim.opt.undofile = true -- Save undo history
 vim.opt.updatetime = 100
 vim.api.nvim_command("set whichwrap+=<,>,h,l")
 vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end) -- Use the OS clipboard by default
+vim.o.splitbelow = true
+vim.o.splitright = true
 
 -- UI
 vim.o.number = true
@@ -45,8 +47,6 @@ vim.o.foldclose = ""
 
 -- Deprecated
 -- vim.o.mouse = "a"
--- vim.o.splitbelow = true
--- vim.o.splitright = true
 
 require("llm")
 require("pack")
