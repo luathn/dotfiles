@@ -95,7 +95,6 @@ require('mason-lspconfig').setup {
 
 -- configure Swift serve here since it is not installed via Mason
 vim.lsp.config("sourcekit", {
-  -- capabilities = capabilities,
   capabilities = {
     workspace = {
       didChangeWatchedFiles = {

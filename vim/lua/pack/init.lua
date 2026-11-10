@@ -18,7 +18,6 @@ vim.cmd.colorscheme("catppuccin-frappe")
 -- Editor
 -- Treesitter
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
-vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" })
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter-context" })
 vim.pack.add({ "https://github.com/Wansmer/treesj" })
 require("pack.treesitter")
