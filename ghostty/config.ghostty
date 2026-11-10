@@ -1,0 +1,12 @@
+theme = catppuccin-frappe.conf
+# Cursor style
+# cursor-style = block
+# cursor-style-blink = false
+# shell-integration-features = no-cursor
+
+# Force Ghostty to always snap and resize in whole line
+window-step-resize = true
+
+# Set padding
+# window-padding-x = 00
+# window-padding-y = 00
