@@ -51,10 +51,6 @@ vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
 load_keys(mappings.oil)
 require("pack.oil")
 
-vim.pack.add({ "https://github.com/folke/snacks.nvim" })
-load_keys(mappings.snacks)
-require("pack.snacks")
-
 vim.pack.add({ "https://github.com/MagicDuck/grug-far.nvim" })
 load_keys(mappings.grug_far)
 require("pack.grug_far")
