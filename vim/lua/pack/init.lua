@@ -69,8 +69,7 @@ load_keys(mappings.vim_test)
 require("pack.vim_test")
 
 -- Debug
-vim.pack.add({ "https://github.com/nvim-neotest/nvim-nio" })
-vim.pack.add({ "https://github.com/rcarriga/nvim-dap-ui" })
+vim.pack.add({ "https://github.com/igorlfs/nvim-dap-view" })
 vim.pack.add({ "https://github.com/leoluz/nvim-dap-go" })
 vim.pack.add({ "https://github.com/mfussenegger/nvim-dap" })
 load_keys(mappings.dap)

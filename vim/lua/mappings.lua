@@ -162,8 +162,9 @@ M.dap = {
   { "<leader>do", function() require("dap").step_out() end,          desc = "Step [o]ut" },
   { "<leader>dn", function() require("dap").step_over() end,         desc = "Step [n]ext" },
   { "<leader>di", function() require("dap").step_into() end,         desc = "Step [i]nto" },
-  { "<leader>de", function() require("dapui").eval() end,            desc = "Evaluate Expression" },
-  { "<leader>dd", function() require("dapui").toggle() end,          desc = "Toggle" },
+  { "<leader>de", function() require("dap-view").hover() end,        desc = "Evaluate Expression" },
+  { "<leader>dw", function() require("dap-view").add_expr() end,     desc = "Add to [w]atch" },
+  { "<leader>dd", function() require("dap-view").toggle() end,       desc = "Toggle" },
   { "<leader>dt", function() require("dap-go").debug_test() end,     desc = "Debug test" },
 }
 

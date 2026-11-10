@@ -1,22 +1,13 @@
 local dap = require("dap")
-local dapui = require("dapui")
 local dapgo = require('dap-go')
 
-dapui.setup({})
-
--- Auto open UI
-dap.listeners.before.attach.dapui_config = function()
-  dapui.open()
-end
-dap.listeners.before.launch.dapui_config = function()
-  dapui.open()
-end
-dap.listeners.before.event_terminated.dapui_config = function()
-  dapui.close()
-end
-dap.listeners.before.event_exited.dapui_config = function()
-  dapui.close()
-end
+-- Opens on session start, closes when it ends
+require("dap-view").setup({
+  auto_toggle = true,
+  hover = {
+    border = "single",
+  },
+})
 
 -- Setup for Golang
 dap.configurations.go = {
