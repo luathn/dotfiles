@@ -8,17 +8,9 @@
       "rev": "432121f0f5b9bda041030d1e9e83b7ba3a93dd8f",
       "src": "https://github.com/coder/claudecode.nvim"
     },
-    "conform.nvim": {
-      "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
-      "src": "https://github.com/stevearc/conform.nvim"
-    },
     "diffview.nvim": {
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
       "src": "https://github.com/sindrets/diffview.nvim"
-    },
-    "gp.nvim": {
-      "rev": "c37f154b97690c4925fef4e35ffdbf2c844b5f4e",
-      "src": "https://github.com/robitx/gp.nvim"
     },
     "grug-far.nvim": {
       "rev": "dc4684e163971bb1f5bfb93fbd4bb3e892bf9b15",
@@ -40,17 +32,9 @@
       "rev": "62aa54f41c50181dceff90b55f989efe69ad198c",
       "src": "https://github.com/nvim-mini/mini-git"
     },
-    "mini.pick": {
-      "rev": "1ffba38c7221669d3da7792d4bbe1c9761075f4d",
-      "src": "https://github.com/nvim-mini/mini.pick"
-    },
     "mini.surround": {
       "rev": "d205d1741d1fcc1f3117b4e839bf00f74ad72fa2",
       "src": "https://github.com/echasnovski/mini.surround"
-    },
-    "minibuffer.nvim": {
-      "rev": "c7f7d5d9eddec273204b1cce90963879179bed1a",
-      "src": "https://github.com/simifalaye/minibuffer.nvim"
     },
     "neogit": {
       "rev": "5a7fca171e3ad07380745d573d791e95268b8f3f",
