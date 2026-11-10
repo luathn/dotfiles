@@ -11,6 +11,8 @@ M.general = {
     ["gyf"]        = { ":let @+=expand('%:p')<cr>", "[Y]ank [f]ull [p]ath" },
     ["<leader>tc"] = { ":tabnew<cr>", "[T]ab [c]reate" },
     ["<leader>tx"] = { ":tabclose<cr>", "[T]ab close [x]" },
+    ["<leader>bd"] = { function() vim.cmd("bdelete") end, "[B]uffer [d]elete" },
+    ["<leader>bD"] = { function() vim.cmd("%bdelete") end, "[B]uffer [D]elete all" },
     ["<esc>"]      = { ":noh<cr><esc>", "[/] No highlight" },
     ["<leader>oq"] = { ":copen<CR>", "[O]pen [q]uickfix" },
     ["<leader>ol"] = { ":lopen<CR>", "[O]pen [l]ocation list" },
