@@ -79,9 +79,6 @@ local servers = {
   lua_ls = {},
 }
 
-local ensure_installed = vim.tbl_keys(servers or {})
-require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
 -- mason-lspconfig v2 dropped `handlers`, so apply configs directly;
 -- it still calls vim.lsp.enable() for installed servers (automatic_enable)
 for server_name, server in pairs(servers) do
@@ -90,7 +87,7 @@ for server_name, server in pairs(servers) do
 end
 
 require('mason-lspconfig').setup {
-  ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+  ensure_installed = vim.tbl_keys(servers),
 }
 
 -- configure Swift serve here since it is not installed via Mason

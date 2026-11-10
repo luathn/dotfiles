@@ -30,7 +30,6 @@ require("pack.blink_cmp")
 -- LSP
 vim.pack.add({ "https://github.com/mason-org/mason.nvim" })
 vim.pack.add({ "https://github.com/mason-org/mason-lspconfig.nvim" })
-vim.pack.add({ "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" })
 vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
 require("pack.lsp")
 
