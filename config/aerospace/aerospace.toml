@@ -218,3 +218,11 @@ gaps.outer.right =      0
     alt-shift-j = ['join-with down', 'mode main']
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
+
+####### Customs
+
+# Pin workspaces to specific monitors
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+    8 = ['built-in', 'secondary']
+    9 = ['built-in', 'secondary']
