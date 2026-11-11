@@ -113,27 +113,27 @@ M.mini_git = {
     desc = "[G]it [b]lame",
   },
   { "<leader>gs", ":Git show :%<left><left>", desc = "[G]it [s]how" },
-  { "<leader>gl", ":Git log --oneline<cr>",   desc = "[G]it [l]og" },
+  { "<leader>gl", ":Git log --oneline",       desc = "[G]it [l]og" },
 }
 
 M.snacks = {
   -- Picker
   { "<leader>ff", "<cmd>lua Snacks.picker.files()<Cr>",               desc = "Find Files" },
-  { "<leader>fb",       "<cmd>lua Snacks.picker.buffers()<Cr>",             desc = "Buffers" },
-  { "<leader>f/",       "<cmd>lua Snacks.picker.lines()<Cr>",               desc = "Grep buffers" },
-  { "<leader>:",       "<cmd>lua Snacks.picker.commands()<Cr>",            desc = "Commands" },
-  { "<leader>sc",      "<cmd>lua Snacks.picker.command_history()<Cr>",     desc = "Command history" },
-  { "<leader>sr",      function() Snacks.picker.resume() end,              desc = "Resume" },
-  { "<leader>su",      function() Snacks.picker.undo() end,                desc = "Undo History" },
-  { "<leader>sg",      function() Snacks.picker.grep() end,                desc = "Grep" },
-  { "<leader>sm",      "<cmd>lua Snacks.picker.marks()<Cr>",               desc = "Marks" },
+  { "<leader>fb", "<cmd>lua Snacks.picker.buffers()<Cr>",             desc = "Buffers" },
+  { "<leader>f/", "<cmd>lua Snacks.picker.lines()<Cr>",               desc = "Grep buffers" },
+  { "<leader>:",  "<cmd>lua Snacks.picker.commands()<Cr>",            desc = "Commands" },
+  { "<leader>sc", "<cmd>lua Snacks.picker.command_history()<Cr>",     desc = "Command history" },
+  { "<leader>sr", function() Snacks.picker.resume() end,              desc = "Resume" },
+  { "<leader>su", function() Snacks.picker.undo() end,                desc = "Undo History" },
+  { "<leader>sg", function() Snacks.picker.grep() end,                desc = "Grep" },
+  { "<leader>sm", "<cmd>lua Snacks.picker.marks()<Cr>",               desc = "Marks" },
   -- Lsp
-  { "<leader>gr",      function() Snacks.picker.lsp_references() end,      nowait = true,                   desc = "References" },
-  { "<leader>gI",      function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+  { "<leader>gr", function() Snacks.picker.lsp_references() end,      nowait = true,                   desc = "References" },
+  { "<leader>gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
   -- Buffer
-  { "<leader>bd",      "<cmd>lua Snacks.bufdelete()<Cr>",                  desc = "[B]uffer [d]elete" },
-  { "<leader>bD",      "<cmd>lua Snacks.bufdelete.all()<Cr>",              desc = "[B]uffer [D]elete all" },
-  { "<leader>bo",      "<cmd>lua Snacks.bufdelete.other()<Cr>",            desc = "[B]uffer delete [o]ther" },
+  { "<leader>bd", "<cmd>lua Snacks.bufdelete()<Cr>",                  desc = "[B]uffer [d]elete" },
+  { "<leader>bD", "<cmd>lua Snacks.bufdelete.all()<Cr>",              desc = "[B]uffer [D]elete all" },
+  { "<leader>bo", "<cmd>lua Snacks.bufdelete.other()<Cr>",            desc = "[B]uffer delete [o]ther" },
   -- Terminal
   -- { "<leader>tt", function() Snacks.terminal.toggle() end, nowait = true, desc = "[t]erminal [t]oggle" },
   -- { "<leader>to", function() Snacks.terminal.open() end, nowait = true, desc = "[t]erminal [o]pen" },
