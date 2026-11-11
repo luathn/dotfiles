@@ -59,8 +59,7 @@ M.diffview = {
 
 M.neogit = {
   { "<leader>gg", ":Neogit<cr>",                                                              desc = "[G]it status" },
-  { "<leader>gl", ":Neogit log<cr>",                                                          desc = "[G]it [l]og" },
-  { "<leader>gL", ":NeogitLog<cr>",                                                           desc = "[G]it [L]og current" },
+  { "<leader>gL", ":Neogit log<cr>",                                                          desc = "[G]it [l]og" },
   { "<leader>gb", ":Neogit branch<cr>",                                                       desc = "[G]it [b]ranch" },
   { "<leader>gc", "<cmd>lua require('neogit').action('branch', 'checkout_local_branch')<cr>", desc = "[G]it [c]heckout" },
   { "<leader>gm", "<cmd>AiCommit<cr>",                                                        desc = "[G]it commit [m]essage" },
@@ -114,6 +113,7 @@ M.mini_git = {
     desc = "[G]it [b]lame",
   },
   { "<leader>gs", ":Git show :%<left><left>", desc = "[G]it [s]how" },
+  { "<leader>gl", ":Git log --oneline<cr>",   desc = "[G]it [l]og" },
 }
 
 M.snacks = {
