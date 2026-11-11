@@ -38,7 +38,7 @@ vim.pack.add({ "https://github.com/sindrets/diffview.nvim" })
 load_keys(mappings.diffview)
 require("pack.diffview")
 
-vim.pack.add({ "https://github.com/TimUntersberger/neogit" })
+vim.pack.add({ "https://github.com/neogitorg/neogit" })
 load_keys(mappings.neogit)
 require("pack.neogit")
 

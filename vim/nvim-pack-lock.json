@@ -33,8 +33,8 @@
       "src": "https://github.com/echasnovski/mini.surround"
     },
     "neogit": {
-      "rev": "5a7fca171e3ad07380745d573d791e95268b8f3f",
-      "src": "https://github.com/TimUntersberger/neogit"
+      "rev": "ba2f33b64b996ff5530c4c45a3c432fb63aaa95b",
+      "src": "https://github.com/neogitorg/neogit"
     },
     "nvim": {
       "rev": "16408d203973da7e43fab87c6f9d3bf7fa98fa8b",
