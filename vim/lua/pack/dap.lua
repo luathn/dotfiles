@@ -1,14 +1,6 @@
 local dap = require("dap")
 local dapgo = require('dap-go')
 
--- Opens on session start, closes when it ends
-require("dap-view").setup({
-  auto_toggle = true,
-  hover = {
-    border = "single",
-  },
-})
-
 -- Setup for Golang
 dap.configurations.go = {
   {

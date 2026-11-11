@@ -48,10 +48,6 @@
       "rev": "b4421153ead5d726603b02743ea40cf26a51ed5f",
       "src": "https://github.com/leoluz/nvim-dap-go"
     },
-    "nvim-dap-view": {
-      "rev": "bfaf50b3f513f78d8ab3e5fe02128dda05be4945",
-      "src": "https://github.com/igorlfs/nvim-dap-view"
-    },
     "nvim-lspconfig": {
       "rev": "8e2084bf5e40c79c1f42210a6ef96a0a4793a763",
       "src": "https://github.com/neovim/nvim-lspconfig"

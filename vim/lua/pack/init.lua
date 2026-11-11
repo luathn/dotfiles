@@ -61,7 +61,6 @@ require("pack.vim_test")
 
 -- Debug
 vim.pack.add({ "https://github.com/mfussenegger/nvim-dap" })
-vim.pack.add({ "https://github.com/igorlfs/nvim-dap-view" })
 vim.pack.add({ "https://github.com/leoluz/nvim-dap-go" })
 load_keys(mappings.dap)
 require("pack.dap")

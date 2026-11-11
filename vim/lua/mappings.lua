@@ -157,17 +157,24 @@ M.claudecode = {
 }
 
 M.dap = {
-  { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-  { "<leader>dc", function() require("dap").continue() end,          desc = "Continue" },
-  { "<leader>dC", function() require("dap").run_to_cursor() end,     desc = "Run to Cursor" },
-  { "<leader>dT", function() require("dap").terminate() end,         desc = "Terminate" },
-  { "<leader>do", function() require("dap").step_out() end,          desc = "Step [o]ut" },
-  { "<leader>dn", function() require("dap").step_over() end,         desc = "Step [n]ext" },
-  { "<leader>di", function() require("dap").step_into() end,         desc = "Step [i]nto" },
-  { "<leader>de", function() require("dap-view").hover() end,        desc = "Evaluate Expression" },
-  { "<leader>dw", function() require("dap-view").add_expr() end,     desc = "Add to [w]atch" },
-  { "<leader>dd", function() require("dap-view").toggle() end,       desc = "Toggle" },
-  { "<leader>dt", function() require("dap-go").debug_test() end,     desc = "Debug test" },
+  { "<leader>db", function() require("dap").toggle_breakpoint() end,  desc = "Toggle Breakpoint" },
+  { "<leader>dc", function() require("dap").continue() end,           desc = "Continue" },
+  { "<leader>dC", function() require("dap").run_to_cursor() end,      desc = "Run to Cursor" },
+  { "<leader>dT", function() require("dap").terminate() end,          desc = "Terminate" },
+  { "<leader>do", function() require("dap").step_out() end,           desc = "Step [o]ut" },
+  { "<leader>dn", function() require("dap").step_over() end,          desc = "Step [n]ext" },
+  { "<leader>di", function() require("dap").step_into() end,          desc = "Step [i]nto" },
+  { "<leader>dl", function() require("dap").run_last() end,           desc = "Run [l]ast" },
+  { "<leader>dd", function() require("dap").repl.toggle() end,        desc = "Toggle REPL" },
+  { "<leader>dt", function() require("dap-go").debug_test() end,      desc = "Debug test" },
+  { "<leader>de", function() require("dap.ui.widgets").preview() end, desc = "[E]valuate Expression", mode = { "n", "v" } },
+  {
+    "<leader>ds",
+    function()
+      local w = require("dap.ui.widgets"); w.sidebar(w.scopes).open()
+    end,
+    desc = "[S]copes"
+  },
 }
 
 M.undotree = {
