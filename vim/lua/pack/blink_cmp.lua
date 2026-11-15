@@ -43,6 +43,9 @@ require("blink.cmp").setup({
     },
   },
   completion = {
+    menu = {
+      auto_show_delay_ms = 350,
+    },
     keyword = {
       range = 'full',
     },
