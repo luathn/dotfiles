@@ -13,6 +13,7 @@ brew install mysql
 brew install jq
 brew install terminal-notifier
 brew install mpv
+brew install yt-dlp
 
 brew tap wix/brew
 brew install applesimutils

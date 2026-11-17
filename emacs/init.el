@@ -62,7 +62,7 @@
 (use-package doom-themes
   :ensure t
   :config
-  (load-theme 'doom-one t)
+  (load-theme 'doom-one-light t)
 )
 
 ;; Evil
@@ -77,15 +77,21 @@
   :config
   (evil-set-undo-system 'undo-redo)
   (evil-select-search-module evil-search-module 'isearch)
+  ;; Leader key
+  (evil-set-leader '(normal visual motion) (kbd "SPC"))
+  (evil-define-key '(normal visual motion) 'global
+    (kbd "<leader>ff") 'find-file
+    (kbd "<leader>tc") 'tab-new
+    (kbd "<leader>tq") 'tab-close
+  )
+  ;; evil-collection-unimpaired binds these too, but its minor mode is never
+  ;; enabled in buffers that skip major mode hooks (EgtMMS playlist, *GNU Emacs*)
+  (evil-define-key '(normal motion) 'global
+    (kbd "[b") 'evil-prev-buffer
+    (kbd "]b") 'evil-next-buffer
+  )
   (evil-mode 1)
 )
-
-;; (use-package evil-anzu
-;;   :after evil
-;;   :ensure t
-;;   :init
-;;   (global-anzu-mode)
-;; )
 
 (use-package evil-nerd-commenter
   :init
@@ -99,6 +105,9 @@
 (use-package evil-collection
   :after evil
   :ensure t
+  :init
+  ;; Keep SPC free for the evil leader key
+  (setq evil-collection-key-blacklist '("SPC"))
   :config
   (setq evil-collection-magit-want-horizontal-movement t)
   (define-key evil-normal-state-map (kbd "gI") 'eglot-find-implementation)
@@ -112,7 +121,12 @@
   :config
   (setq-default evil-escape-key-sequence "jk")
   (setq-default evil-escape-delay 0.2)
-  (setq evil-escape-excluded-major-modes (append evil-collection-magit-emacs-to-evil-collection-magit-state-modes '(ibuffer-mode)))
+  (setq evil-escape-excluded-major-modes '(ibuffer-mode))
+  ;; The magit mode list only exists once evil-collection-magit is loaded
+  (with-eval-after-load 'evil-collection-magit
+    (setq evil-escape-excluded-major-modes
+          (append evil-collection-magit-emacs-to-evil-collection-magit-state-modes
+                  evil-escape-excluded-major-modes)))
   (setq evil-escape-excluded-states '(visual))
   :init
   (evil-escape-mode)
@@ -151,12 +165,15 @@
   (treesit-auto-langs '(go ruby lua python javascript typescript))
   :config
   (treesit-auto-add-to-auto-mode-alist '(go ruby lua python javascript typescript))
-  ;(treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode)
 )
 
 ;; Project.el config
 (use-package project
+  :init
+  (evil-define-key '(normal visual motion) 'global
+    (kbd "<leader>SPC") 'project-find-file
+    (kbd "<leader>pp") 'project-switch-project)
   :custom
   (project-switch-commands '((project-find-file "Find file" "f")
 			     (project-find-dir "Find dir" "d")
@@ -170,6 +187,9 @@
 ;; Magit
 (use-package magit
   :ensure t
+  :init
+  (evil-define-key '(normal visual motion) 'global
+    (kbd "<leader>gg") 'magit-status)
   :custom
   (magit-diff-refine-hunk 'all)
 )
@@ -182,12 +202,9 @@
         ("DEL" . vertico-directory-delete-char)
         ("M-[" . vertico-repeat-previous)
 	("M-]" . vertico-repeat-next)
-	("M-V" . vertico-multiform-vertical)
-	("M-G" . vertico-multiform-grid)
-	("M-F" . vertico-multiform-flat)
-	("M-R" . vertico-multiform-reverse)
-	("M-U" . vertico-multiform-unobtrusive)
-	("M-U" . vertico-multiform-buffer)
+	("C-v" . my/embark-open-in-vsplit)
+	("C-s" . my/embark-open-in-split-below)
+	("C-o" . my/embark-open-in-other-window)
   )
   :custom
   (vertico-cycle t)
@@ -211,6 +228,36 @@
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
+  (defun my/embark-open-in-split (window-fn)
+    "Open the current minibuffer candidate in the window returned by WINDOW-FN."
+    (require 'embark)
+    (let* ((target (or (car (embark--targets)) (user-error "No target found")))
+           (open (pcase (plist-get target :type)
+                   ('file #'find-file)
+                   ('buffer #'switch-to-buffer)
+                   ('bookmark #'bookmark-jump)
+                   (type (user-error "Cannot open %s in a split" type)))))
+      (embark--act (lambda ()
+                     (interactive)
+                     (select-window (funcall window-fn))
+                     (call-interactively open))
+                   target t)))
+  (defun my/embark-open-in-vsplit ()
+    "Open the current minibuffer candidate in a vertical split."
+    (interactive)
+    (my/embark-open-in-split #'split-window-right))
+  (defun my/embark-open-in-split-below ()
+    "Open the current minibuffer candidate in a horizontal split."
+    (interactive)
+    (my/embark-open-in-split #'split-window-below))
+  (defun my/embark-open-in-other-window ()
+    "Open the current minibuffer candidate in the other window.
+Split to the right when there is only one window."
+    (interactive)
+    (my/embark-open-in-split
+     (lambda ()
+       (let ((win (next-window)))
+         (if (eq win (selected-window)) (split-window-right) win)))))
   :config
   ;; ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
@@ -228,8 +275,6 @@
   :ensure t
   :custom
   (completion-styles '(orderless basic))
-  ;; (completion-category-overrides '((file (styles partial-completion))))
-  ;; (completion-pcm-leading-wildcard t)
   (orderless-matching-styles '(orderless-flex))
 )
 
@@ -242,19 +287,13 @@
          ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
          ("C-x p b" . consult-project-buffer))     ;; orig. project-switch-to-buffer
   :init
-  (advice-add #'register-preview :override #'consult-register-window)
-  (setq register-preview-delay 0.5)
+  (evil-define-key '(normal visual motion) 'global
+    (kbd "<leader>bb") 'consult-buffer
+    (kbd "<leader>.") 'consult-buffer
+    (kbd "<leader>,") 'consult-project-buffer
+    (kbd "<leader>sg") 'consult-ripgrep)
   :config
-  (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep consult-man
-   consult-bookmark consult-recent-file consult-xref
-   consult-source-bookmark consult-source-file-register
-   consult-source-recent-file consult-source-project-recent-file
-   ;; :preview-key "M-."
-   :preview-key '(:debounce 0.4 any))
-  ;; Optionally configure the narrowing key.
-  ;; Both < and C-+ work reasonably well.
+  (setq consult-preview-key "C-<return>")
   (setq consult-narrow-key "<") ;; "C-+"
 )
 
@@ -282,29 +321,82 @@
   :hook (ghostel-mode . evil-ghostel-mode)
 )
 
-(use-package better-jumper
-  :ensure t
-  ; :config
-  ; (with-eval-after-load 'evil-maps
-  ;   (define-key evil-motion-state-map (kbd "C-o") 'better-jumper-jump-backward)
-  ;   (define-key evil-motion-state-map (kbd "<C-i>") 'better-jumper-jump-forward))
-  :init
-  (better-jumper-mode +1)
-  (global-set-key [remap evil-jump-forward]  #'better-jumper-jump-forward)
-  (global-set-key [remap evil-jump-backward] #'better-jumper-jump-backward)
-  (global-set-key [remap xref-pop-marker-stack] #'better-jumper-jump-backward)
-  (global-set-key [remap xref-go-back] #'better-jumper-jump-backward)
-  (global-set-key [remap xref-go-forward] #'better-jumper-jump-forward)
-)
-
 ;; Config docview
-(setq doc-view-resolution 300)
+(setq doc-view-resolution 200)
 
 ;; Music
 (use-package emms
   :ensure t
+  :init
+  (evil-define-key '(normal visual motion) 'global
+    (kbd "<leader>mm") 'emms
+    (kbd "<leader>mx") 'emms-pause
+    (kbd "<leader>m<") 'emms-seek-backward
+    (kbd "<leader>m>") 'emms-seek-forward)
+  :custom
+  (emms-seek-seconds 3)
   :config
-  ;; (require 'emms-setup)
-  ;; (emms-all)
+  (emms-all)
+  (emms-default-players)
   (setq emms-player-list '(emms-player-mpv))
+  (defvar-keymap emms-seek-repeat-map
+    :repeat t
+    "<" #'emms-seek-backward
+    ">" #'emms-seek-forward)
+  (repeat-mode 1)
 )
+
+(use-package corfu
+  :custom
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-delay 0.3)
+  (corfu-auto-prefix 2)
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  :init
+  (global-corfu-mode)
+)
+
+(use-package cape
+  :ensure t
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+)
+
+(advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+(setq completion-category-overrides '((eglot (styles orderless))
+                                      (eglot-capf (styles orderless))))
+
+(defun my/eglot-capf ()
+  (setq-local completion-at-point-functions
+              (list (cape-capf-super
+                     #'eglot-completion-at-point
+                     #'cape-dabbrev
+                     #'cape-file))))
+
+(add-hook 'eglot-managed-mode-hook #'my/eglot-capf)
+
+(setq newsticker-url-list
+      '(("Reddit Emacs" "https://www.reddit.com/r/emacs.rss" nil nil nil)))
+
+;; (use-package better-jumper
+;;   :ensure t
+;;   :config
+;;   (with-eval-after-load 'evil-maps
+;;     (define-key evil-motion-state-map (kbd "C-o") 'better-jumper-jump-backward)
+;;     (define-key evil-motion-state-map (kbd "<C-i>") 'better-jumper-jump-forward))
+;;   :init
+;;   (better-jumper-mode +1)
+;;   (global-set-key [remap evil-jump-forward]  #'better-jumper-jump-forward)
+;;   (global-set-key [remap evil-jump-backward] #'better-jumper-jump-backward)
+;;   (global-set-key [remap xref-pop-marker-stack] #'better-jumper-jump-backward)
+;;   (global-set-key [remap xref-go-back] #'better-jumper-jump-backward)
+;;   (global-set-key [remap xref-go-forward] #'better-jumper-jump-forward)
+;; )
+
+;; (use-package evil-anzu
+;;   :after evil
+;;   :ensure t
+;;   :init
+;;   (global-anzu-mode)
+;; )
