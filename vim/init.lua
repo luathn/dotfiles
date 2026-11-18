@@ -67,12 +67,14 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function() vim.hl.hl_op() end,
+  callback = function() vim.hl.on_yank() end,
 })
 
-vim.api.nvim_create_autocmd("TextPutPost", {
-  callback = function() vim.hl.hl_op() end,
-})
+if vim.fn.has("nvim-0.13") == 1 then
+  vim.api.nvim_create_autocmd("TextPutPost", {
+    callback = function() vim.hl_op() end,
+  })
+end
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "qf" },
