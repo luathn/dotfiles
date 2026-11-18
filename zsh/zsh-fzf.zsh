@@ -7,4 +7,6 @@ export FZF_DEFAULT_OPTS='
     '
 
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+if (( $+commands[fzf] )); then
+    source <(fzf --zsh)
+fi
