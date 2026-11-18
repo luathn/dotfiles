@@ -22,7 +22,7 @@ require("pack.mini_surround")
 vim.cmd("packadd nvim.undotree") -- Saved at ~/.local/state/nvim/undo
 load_keys(mappings.undotree)
 
-vim.pack.add({ "https://github.com/saghen/blink.cmp" })
+vim.pack.add({{src = "https://github.com/saghen/blink.cmp", version = "v1.10.2" }})
 require("pack.blink_cmp")
 
 vim.pack.add({ "https://github.com/mason-org/mason.nvim" })
