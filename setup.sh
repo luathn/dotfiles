@@ -18,14 +18,3 @@ ln -s -f ~/dotfiles/ssh/config ~/.ssh/config
 
 rm -r -f ~/.config/nvim
 ln -s -f ~/dotfiles/vim ~/.config/nvim
-
-# ln -s -f ~/dotfiles/Xresources ~/.Xresources
-
-# rm -r -f ~/.fonts
-# ln -s -f ~/dotfiles/fonts ~/.fonts
-
-# nvim +PlugInstall +qall
-
-# ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf
-# ln -s -f ~/dotfiles/ctags ~/.ctags
-
