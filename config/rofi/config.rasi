@@ -1,6 +1,106 @@
+
+configuration {
+    modi: "drun,window";
+    show-icons: true;
+    icon-theme: "Adwaita";
+    font: "JetBrains Mono 11";
+    drun-display-format: "{name}";
+    matching: "fuzzy";
+    sorting-method: "fzf";
+}
+
+/* Catppuccin Frappé */
+
 * {
-  background-color: #181818;
-  border-color: #222222;
-  text-color: #bbbbbb;
-  spacing: 0;
+    bg: #303446;
+    surface: #414559;
+    fg: #c6d0f5;
+    blue: #8caaee;
+    muted: #838ba7;
+
+    background-color: @bg;
+    text-color: @fg;
+}
+
+window {
+    width: 40%;
+    border: 2px;
+    border-color: @blue;
+    border-radius: 12px;
+    background-color: @bg;
+    padding: 12px;
+}
+
+mainbox {
+    background-color: @bg;
+    spacing: 10px;
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    background-color: @surface;
+    border-radius: 8px;
+    padding: 10px;
+    spacing: 8px;
+    children: [ prompt, entry ];
+    fixed-height: true;
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @blue;
+}
+
+entry {
+    background-color: transparent;
+    text-color: @fg;
+    placeholder: "Search...";
+    placeholder-color: @muted;
+}
+
+listview {
+    background-color: @bg;
+    columns: 1;
+    lines: 8;
+    spacing: 3px;
+    fixed-height: true;
+    scrollbar: false;
+}
+
+element {
+    background-color: @bg;
+    text-color: @fg;
+    border-radius: 6px;
+    padding: 8px;
+    spacing: 8px;
+}
+
+element normal.normal {
+    background-color: @bg;
+    text-color: @fg;
+}
+
+element alternate.normal {
+    background-color: @bg;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @blue;
+    text-color: #232634;
+}
+
+element-icon {
+    size: 24px;
+    background-color: transparent;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+}
+
+scrollbar {
+    background-color: @bg;
+    handle-color: @blue;
 }
