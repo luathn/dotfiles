@@ -4,7 +4,7 @@
   signingkey = ~/.ssh/id_ed25519.pub
 
 [url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+  insteadOf = https://github.com/
 
 [includeIf "gitdir:~/workspace/"]
   path = .gitconfig-company
@@ -35,7 +35,7 @@
   format = ssh
 
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 [tag]
   gpgsign = true
