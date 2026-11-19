@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term foot
+set $term footclient
 # Your preferred application launcher
 set $menu wmenu-run
 
@@ -239,5 +239,7 @@ bindsym $mod+r mode "resize"
 bar {
     swaybar_command waybar
 }
+
+exec foot --server
 
 include /etc/sway/config.d/*
