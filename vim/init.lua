@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 if vim.fn.has("nvim-0.13") == 1 then
   vim.api.nvim_create_autocmd("TextPutPost", {
-    callback = function() vim.hl_op() end,
+    callback = function() vim.hl.hl_op({}) end,
   })
 end
 
