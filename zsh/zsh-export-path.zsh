@@ -22,7 +22,10 @@ fi
 export PATH="$PATH:$HOME/.cargo/bin"
 
 # Go
-export PATH=$PATH:/usr/local/go/bin
+if command -v go 1>/dev/null 2>&1; then
+  export GOPATH="$(go env GOPATH)"
+  export PATH="${GOPATH}/bin:$PATH"
+fi
 
 # Openjdk
 # export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

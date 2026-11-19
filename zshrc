@@ -22,6 +22,9 @@ export PATH=$HOME/.local/bin:$PATH
 # Add homebrew
 export PATH=/opt/homebrew/bin:$PATH
 
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
 # Key binding #################################################################
 stty -ixon
 
@@ -44,12 +47,6 @@ export EDITOR="nvim"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
-
-# asdf
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-export GOPATH="$(go env GOPATH)"
-export PATH=${GOPATH}/bin:$PATH
 
 alias ls="ls --color=auto"
 alias gst="git status"
