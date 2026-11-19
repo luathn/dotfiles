@@ -1,6 +1,7 @@
 [user]
   name = luathn
   email = luat1203@gmail.com
+  signingkey = ~/.ssh/id_ed25519.pub
 
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
@@ -22,20 +23,26 @@
   line-numbers = true
   side-by-side = false
   light = true
-  ;syntax-theme = discord
-  ;plus-style = 'white "#455052"'
-  ;minus-style = 'white "#514251"'
 
 [merge]
   conflictstyle = diff3
 
-; [interactive]
-;   diffFilter = delta --color-only
 [push]
   default = current
+
 [gpg]
   program = gpg
+  format = ssh
+
 [commit]
+	gpgsign = true
+
+[tag]
   gpgsign = true
-[credential]
-	helper = osxkeychain
+
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed_signers
+
+# OS-specific settings. Git ignores this file if it does not exist.
+[include]
+  path = ~/.gitconfig-os

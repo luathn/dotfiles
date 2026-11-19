@@ -9,6 +9,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 ln -s -f ~/dotfiles/gitconfig ~/.gitconfig
+if [ "$(uname)" = "Darwin" ]; then
+  git config --file ~/.gitconfig-os credential.helper osxkeychain
+fi
 ln -s -f ~/dotfiles/gitignore_global ~/.gitignore_global
 
 ln -s -f ~/dotfiles/ssh/config ~/.ssh/config
