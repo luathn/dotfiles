@@ -91,6 +91,12 @@ chars = "\u001B[13;2u"
 key = "Return"
 mods = "Shift"
 
+# Send CSI-u codes so tmux can pass Ctrl+/ to nvim
+[[keyboard.bindings]]
+chars = "\u001B[47;5u"
+key = "Slash"
+mods = "Control"
+
 [scrolling]
 history = 10000
 
