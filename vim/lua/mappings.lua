@@ -47,7 +47,7 @@ M.general = {
 
 M.term = {
   n = {
-    ["<leader>tt"] = { "<cmd>lua require('core.term').toggle()<Cr>" }
+    ["<leader><CR>"] = { "<cmd>terminal<Cr><cmd>startinsert<Cr>", "Open new terminal" },
   },
 }
 
