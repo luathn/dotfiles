@@ -87,7 +87,7 @@ for server_name, server in pairs(servers) do
 end
 
 require('mason-lspconfig').setup {
-  ensure_installed = vim.tbl_keys(servers),
+  -- ensure_installed = vim.tbl_keys(servers),
 }
 
 -- configure Swift serve here since it is not installed via Mason
