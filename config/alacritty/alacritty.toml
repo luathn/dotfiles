@@ -101,12 +101,12 @@ mods = "Control"
 history = 10000
 
 [window]
+resize_increments = true
 dynamic_padding = true
-decorations = 'Full'
 
 [window.dimensions]
-columns = 90
-lines = 25
+columns = 150
+lines = 50
 
 [window.padding]
 x = 0
