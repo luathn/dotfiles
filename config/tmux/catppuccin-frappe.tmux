@@ -1,5 +1,3 @@
-# Catppuccin Frappe (simple)
-
 # Status bar
 set -g status-style bg="#626880",fg="#C6D0F5"
 set -g status-left-length 40
@@ -18,12 +16,7 @@ set -g window-status-current-style default
 set -g pane-border-style fg="#414559"
 set -g pane-active-border-style fg="#99D1DB"
 
-# Clock mode
-set -g clock-mode-colour "#99D1DB"
-set -g clock-mode-style 24
-
 # Messages and mode
-# The prompt covers the full status line (width=100%), so the tabs do not show next to the prompt text.
 set -g message-style bg="#626880",fg="#C6D0F5",fill="#626880",width=100%
 set -g message-command-style bg="#626880",fg="#C6D0F5",fill="#626880",width=100%
 set -g mode-style bg="#99D1DB",fg="#292C3C"
