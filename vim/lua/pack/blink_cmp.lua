@@ -21,42 +21,16 @@ require("blink.cmp").setup({
     },
   },
   sources = {
-    default = {
-      'lsp', 'path', 'buffer',
-    },
+    default = { 'lsp', 'path', 'buffer' },
     providers = {
-      lsp = {
-        name = 'LSP',
-        module = 'blink.cmp.sources.lsp',
-        min_keyword_length = 2,
-        fallbacks = {},
-      },
-      buffer = {
-        name = 'Buffer',
-        module = 'blink.cmp.sources.buffer',
-        fallbacks = {},
-      },
-      path = {
-        name = 'Path',
-        module = 'blink.cmp.sources.path',
-      },
+      lsp = { min_keyword_length = 2, fallbacks = {} },
     },
   },
   completion = {
-    menu = {
-      auto_show_delay_ms = 350,
-    },
-    keyword = {
-      range = 'full',
-    },
-    list = {
-      max_items = 20,
-      selection = { preselect = false, auto_insert = true },
-    },
+    menu = { auto_show_delay_ms = 350 },
+    keyword = { range = 'full' },
+    list = { max_items = 20, selection = { preselect = false } },
   },
   signature = { enabled = true },
-  cmdline = { enabled = true },
-  fuzzy = {
-    implementation = 'lua',
-  },
+  fuzzy = { implementation = 'lua' },
 })
