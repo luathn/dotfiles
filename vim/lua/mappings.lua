@@ -61,7 +61,6 @@ M.neogit = {
   { "<leader>gg", ":Neogit<cr>",                                                              desc = "[G]it status" },
   { "<leader>gL", ":Neogit log<cr>",                                                          desc = "[G]it [l]og" },
   { "<leader>gb", ":Neogit branch<cr>",                                                       desc = "[G]it [b]ranch" },
-  { "<leader>gc", "<cmd>lua require('neogit').action('branch', 'checkout_local_branch')<cr>", desc = "[G]it [c]heckout" },
   { "<leader>gm", "<cmd>AiCommit<cr>",                                                        desc = "[G]it commit [m]essage" },
 }
 
