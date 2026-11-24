@@ -18,8 +18,5 @@ neogit.setup {
       ["w"] = false,
       ["W"] = "WorktreePopup",
     },
-    status = {
-      ["R"] = "ShowRefs",
-    },
   },
 }
