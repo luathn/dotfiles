@@ -4,28 +4,14 @@ require("oil").setup({
     timeout_ms = 2000,
     autosave_changes = false,
   },
-  use_default_keymaps = false,
   view_options = {
     show_hidden = true,
   },
   keymaps = {
-    ["g?"] = "actions.show_help",
-    ["<CR>"] = "actions.select",
     ["<C-v>"] = { "actions.select", opts = { vertical = true } },
     ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
-    ["<C-t>"] = { "actions.select", opts = { tab = true } },
-    ["<C-p>"] = "actions.preview",
-    ["<C-c>"] = { "actions.close", mode = "n" },
-    ["q"] = "actions.close",
+    ["q"] = { "actions.close", mode = "n" },
     ["<C-r>"] = "actions.refresh",
-    ["-"] = "actions.parent",
-    ["_"] = "actions.open_cwd",
-    ["gcd"] = "actions.cd",
-    ["~"] = "actions.tcd",
-    ["gs"] = "actions.change_sort",
-    ["gx"] = "actions.open_external",
-    ["g."] = "actions.toggle_hidden",
-    ["g\\"] = "actions.toggle_trash",
     ["<leader>ss"] = {
       callback = function()
         local dir = require("oil").get_current_dir()
