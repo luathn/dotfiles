@@ -57,7 +57,6 @@ require("pack.grug_far")
 -- Tools
 vim.pack.add({ "https://github.com/vim-test/vim-test" })
 load_keys(mappings.vim_test)
-require("pack.vim_test")
 
 -- Debug
 vim.pack.add({ "https://github.com/mfussenegger/nvim-dap" })
