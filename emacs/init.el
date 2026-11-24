@@ -373,10 +373,10 @@ Split to the right when there is only one window."
 
 (defun my/eglot-capf ()
   (setq-local completion-at-point-functions
-              (list (cape-capf-super
+              (list #'cape-file
+                    (cape-capf-super
                      #'eglot-completion-at-point
-                     #'cape-dabbrev
-                     #'cape-file))))
+                     #'cape-dabbrev))))
 
 (add-hook 'eglot-managed-mode-hook #'my/eglot-capf)
 
