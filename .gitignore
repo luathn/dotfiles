@@ -33,5 +33,6 @@ emacs/projectile-bookmarks.eld
 emacs/projects.eld
 emacs/tramp
 emacs/emms/
-emacs/bookmarks.eld~
 emacs/newsticker
+emacs/backups
+emacs/autosaves

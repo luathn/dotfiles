@@ -29,6 +29,10 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
+;; Keep backup (file~) and auto-save (#file#) files out of project folders
+(setq backup-directory-alist `(("." . ,(expand-file-name "backups/" user-emacs-directory))))
+(setq auto-save-file-name-transforms `((".*" ,(expand-file-name "autosaves/" user-emacs-directory) t)))
+
 ;; Package manager
 (setq package-archives
   '(("gnu elpa" . "https://elpa.gnu.org/packages/")
