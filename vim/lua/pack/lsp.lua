@@ -26,11 +26,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
     end
 
-    local function client_supports_method(client, method, bufnr)
-      return client:supports_method(method, bufnr)
-    end
-
-    if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
       map('<leader>ch', function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
       end, '[T]oggle Inlay [H]ints')
@@ -39,56 +35,44 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- Diagnostic Config
--- See :help vim.diagnostic.Opts
 vim.diagnostic.config {
-  -- severity_sort = true,
-  -- float = { border = 'rounded', source = 'if_many' },
   underline = { severity = vim.diagnostic.severity.ERROR },
-  virtual_text = false,
 }
 
-local capabilities = require('blink.cmp').get_lsp_capabilities()
-
--- Enable the following language servers
-local servers = {
-  ruby_lsp = {},
-  ts_ls = {},
-  gopls = {
-    settings = {
-      gopls = {
-        analyses = {
-          unusedparams = true,
-        },
-        staticcheck = true,
-        gofumpt = false,
-        hints = {
-          assignVariableTypes = true,
-          compositeLiteralFields = true,
-          compositeLiteralTypes = true,
-          constantValues = true,
-          functionTypeParameters = true,
-          parameterNames = true,
-          rangeVariableTypes = true,
-        },
+-- blink.cmp adds its capabilities to all servers via vim.lsp.config('*')
+vim.lsp.config("gopls", {
+  settings = {
+    gopls = {
+      staticcheck = true,
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
       },
     },
   },
-  -- vtsls = {},
-  eslint = {},
-  -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-  lua_ls = {},
-}
+})
 
--- mason-lspconfig v2 dropped `handlers`, so apply configs directly;
--- it still calls vim.lsp.enable() for installed servers (automatic_enable)
-for server_name, server in pairs(servers) do
-  server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-  vim.lsp.config(server_name, server)
-end
+-- Not installed via Mason: Mason's ruby-lsp always runs with the Ruby that
+-- installed it. The asdf shim picks the project's Ruby from .tool-versions.
+-- Install once for each Ruby version: `gem install ruby-lsp && asdf reshim ruby`
+vim.lsp.config("ruby_lsp", {
+  cmd = function(dispatchers, config)
+    return vim.lsp.rpc.start(
+      { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
+      dispatchers,
+      { cwd = config.root_dir }
+    )
+  end,
+})
+vim.lsp.enable("ruby_lsp")
 
-require('mason-lspconfig').setup {
-  -- ensure_installed = vim.tbl_keys(servers),
-}
+-- mason-lspconfig calls vim.lsp.enable() for servers installed by Mason
+require('mason-lspconfig').setup {}
 
 -- configure Swift serve here since it is not installed via Mason
 vim.lsp.config("sourcekit", {
@@ -100,3 +84,9 @@ vim.lsp.config("sourcekit", {
     },
   },
 })
+
+vim.api.nvim_create_user_command(
+  "LspLog",
+  function() vim.cmd.edit(vim.lsp.log.get_filename()) end,
+  {desc = "Show LSP log"}
+)
