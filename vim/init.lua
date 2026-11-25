@@ -45,14 +45,9 @@ vim.o.foldenable = false
 vim.o.foldopen = ""
 vim.o.foldclose = ""
 
--- Deprecated
--- vim.o.mouse = "a"
-
 require("llm")
 require("pack")
-require("safe-quit")
 require("core.utils").load_mappings("general")
-require("core.utils").load_mappings("term")
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "ruby" },

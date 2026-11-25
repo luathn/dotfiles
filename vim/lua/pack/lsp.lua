@@ -6,7 +6,6 @@ local lsp_mappings = {
     ["<leader>cd"] = { vim.diagnostic.open_float, "Show line diagnostic" },
     ["<leader>cl"] = { vim.diagnostic.setloclist, "Show diagnostic in loc[l]ist" },
     ["<leader>cq"] = { vim.diagnostic.setqflist, "Show diagnostic in loc[l]ist" },
-
     ["<leader>cf"] = { vim.lsp.buf.format, "[C]ode format" },
   },
   v = {

@@ -4,26 +4,27 @@ local silent_noremap = { silent = true, noremap = true }
 
 M.general = {
   n = {
-    ["gp"]         = { "`[v`]" },
-    ["gyn"]        = { ":let @+=expand('%:t')<cr>", "[Y]ank [n]ame" },
-    ["gys"]        = { ":let @+=expand('%')<cr>", "[Y]ank [s]hort [p]ath" },
-    ["gyp"]        = { ":let @+=expand('%:h')<cr>", "[Y]ank [s]hort [p]ath" },
-    ["gyf"]        = { ":let @+=expand('%:p')<cr>", "[Y]ank [f]ull [p]ath" },
-    ["<leader>tc"] = { ":tabnew<cr>", "[T]ab [c]reate" },
-    ["<leader>tx"] = { ":tabclose<cr>", "[T]ab close [x]" },
-    ["<leader>bd"] = { function() vim.cmd("bdelete") end, "[B]uffer [d]elete" },
-    ["<leader>bD"] = { function() vim.cmd("%bdelete") end, "[B]uffer [D]elete all" },
-    ["<esc>"]      = { ":noh<cr><esc>", "[/] No highlight" },
-    ["<leader>oq"] = { ":copen<CR>", "[O]pen [q]uickfix" },
-    ["<leader>ol"] = { ":lopen<CR>", "[O]pen [l]ocation list" },
-    ["<C-.>"]      = { "" },
-    ["<C-w>."]     = { "<C-w>10>" },
-    ["<C-w><C-.>"] = { "<C-w>10>" },
-    ["<C-w>,"]     = { "<C-w>10<" },
-    ["<C-w><C-,>"] = { "<C-w>10<" },
-    ["<C-w>-"]     = { "<C-w>5-" },
-    ["<C-w>+"]     = { "<C-w>5+" },
-    ["<C-w>m"]     = { "<C-w>5+<C-w>15>" },
+    ["gp"]           = { "`[v`]" },
+    ["gyn"]          = { ":let @+=expand('%:t')<cr>", "[Y]ank [n]ame" },
+    ["gys"]          = { ":let @+=expand('%')<cr>", "[Y]ank [s]hort [p]ath" },
+    ["gyp"]          = { ":let @+=expand('%:h')<cr>", "[Y]ank [s]hort [p]ath" },
+    ["gyf"]          = { ":let @+=expand('%:p')<cr>", "[Y]ank [f]ull [p]ath" },
+    ["<leader>tc"]   = { ":tabnew<cr>", "[T]ab [c]reate" },
+    ["<leader>tx"]   = { ":tabclose<cr>", "[T]ab close [x]" },
+    ["<leader>bd"]   = { function() vim.cmd("bdelete") end, "[B]uffer [d]elete" },
+    ["<leader>bD"]   = { function() vim.cmd("%bdelete") end, "[B]uffer [D]elete all" },
+    ["<esc>"]        = { ":noh<cr><esc>", "[/] No highlight" },
+    ["<leader>oq"]   = { ":copen<CR>", "[O]pen [q]uickfix" },
+    ["<leader>ol"]   = { ":lopen<CR>", "[O]pen [l]ocation list" },
+    ["<C-.>"]        = { "" },
+    ["<C-w>."]       = { "<C-w>10>" },
+    ["<C-w><C-.>"]   = { "<C-w>10>" },
+    ["<C-w>,"]       = { "<C-w>10<" },
+    ["<C-w><C-,>"]   = { "<C-w>10<" },
+    ["<C-w>-"]       = { "<C-w>5-" },
+    ["<C-w>+"]       = { "<C-w>5+" },
+    ["<C-w>m"]       = { "<C-w>5+<C-w>15>" },
+    ["<leader><CR>"] = { "<cmd>terminal<Cr><cmd>startinsert<Cr>", "Open new terminal" },
   },
   x = {
     ["<CR>"] = { "<cmd>lua require('vim.treesitter._select').select_parent(vim.v.count1)<CR>" },
@@ -45,12 +46,6 @@ M.general = {
   },
 }
 
-M.term = {
-  n = {
-    ["<leader><CR>"] = { "<cmd>terminal<Cr><cmd>startinsert<Cr>", "Open new terminal" },
-  },
-}
-
 M.diffview = {
   { "<leader>gd", ":DiffviewOpen ",                                                         desc = "[G]it [d]iff" },
   { "<leader>gh", "<cmd>DiffviewFileHistory %<Cr>",                                         desc = "[G]it [h]istory" },
@@ -58,10 +53,10 @@ M.diffview = {
 }
 
 M.neogit = {
-  { "<leader>gg", ":Neogit<cr>",                                                              desc = "[G]it status" },
-  { "<leader>gL", ":Neogit log<cr>",                                                          desc = "[G]it [l]og" },
-  { "<leader>gb", ":Neogit branch<cr>",                                                       desc = "[G]it [b]ranch" },
-  { "<leader>gm", "<cmd>AiCommit<cr>",                                                        desc = "[G]it commit [m]essage" },
+  { "<leader>gg", ":Neogit<cr>",        desc = "[G]it status" },
+  { "<leader>gL", ":Neogit log<cr>",    desc = "[G]it [l]og" },
+  { "<leader>gb", ":Neogit branch<cr>", desc = "[G]it [b]ranch" },
+  { "<leader>gm", "<cmd>AiCommit<cr>",  desc = "[G]it commit [m]essage" },
 }
 
 M.grug_far = {
