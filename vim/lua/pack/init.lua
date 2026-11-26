@@ -1,4 +1,4 @@
-local load_keys = require("core.utils").load_keys
+local load_keys = require("utils").load_keys
 local mappings = require("mappings")
 
 -- Util

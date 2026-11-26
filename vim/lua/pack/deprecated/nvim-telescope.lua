@@ -112,8 +112,8 @@ _G.current_buffer = {
   search_dirs = { vim.fn.expand("%:h") }
 }
 
-local fg_bg = require("core.utils").fg_bg
-local bg = require("core.utils").bg
+local fg_bg = require("utils").fg_bg
+local bg = require("utils").bg
 local colors = require("colors").get()
 
 bg("TelescopeNormal", colors.bg_dark)

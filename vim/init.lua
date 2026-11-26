@@ -47,7 +47,7 @@ vim.o.foldclose = ""
 
 require("llm")
 require("pack")
-require("core.utils").load_mappings("general")
+require("utils").load_mappings("general")
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "ruby" },

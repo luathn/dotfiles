@@ -174,9 +174,9 @@ MiniPick.registry.sorted_buffers = function()
 end
 
 -- UI
--- local fg_bg = require("core.utils").fg_bg
--- local bg = require("core.utils").bg
--- local fg = require("core.utils").fg
+-- local fg_bg = require("utils").fg_bg
+-- local bg = require("utils").bg
+-- local fg = require("utils").fg
 -- local colors = require("colors").get()
 --
 -- bg("MiniPickNormal", colors.bg)

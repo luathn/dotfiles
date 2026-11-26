@@ -16,7 +16,7 @@ local lsp_mappings = {
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
   callback = function(event)
-    require("core.utils").load_mappings("lsp", { buffer = event.buf }, lsp_mappings)
+    require("utils").load_mappings("lsp", { buffer = event.buf }, lsp_mappings)
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
 

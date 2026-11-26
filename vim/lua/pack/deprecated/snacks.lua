@@ -1,5 +1,5 @@
-local bg = require("core.utils").bg
-local fg = require("core.utils").fg
+local bg = require("utils").bg
+local fg = require("utils").fg
 local colors = require("catppuccin.palettes").get_palette "frappe"
 
 bg("SnacksPicker", colors.mantle)
