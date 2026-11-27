@@ -1,3 +1,5 @@
+vim.pack.add({ "https://github.com/nvim-mini/mini-git" })
+
 require('mini.git').setup({
   command = {
     split = "auto",
@@ -20,3 +22,12 @@ vim.api.nvim_create_autocmd('BufNew', { callback = map_local })
 
 vim.keymap.set('x', '<leader>gl', "<Cmd>lua MiniGit.show_range_history({ split='vertical' })<CR>",
   { desc = 'Show range history' })
+
+vim.keymap.set("n", "<leader>gB", function()
+  local line, topline = vim.fn.line("."), vim.fn.line("w0")
+  vim.cmd("Git blame -- %")
+  vim.fn.winrestview({ topline = topline })
+  vim.api.nvim_win_set_cursor(0, { line, 0 })
+end, { desc = "[G]it [b]lame" })
+vim.keymap.set("n", "<leader>gs", ":Git show :%<left><left>", { desc = "[G]it [s]how" })
+vim.keymap.set("n", "<leader>gl", ":Git log --oneline", { desc = "[G]it [l]og" })

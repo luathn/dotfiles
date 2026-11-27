@@ -1,3 +1,9 @@
+vim.pack.add({
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/nvim-treesitter/nvim-treesitter-context",
+  "https://github.com/Wansmer/treesj",
+})
+
 local parsers = {
   "ruby",
   "typescript",
@@ -52,3 +58,6 @@ require('treesj').setup({
   use_default_keymaps = false,
   max_join_length = 2000,
 })
+
+vim.keymap.set("n", "gS", function() require("treesj").toggle() end, { desc = "Toggle [S]plit/Join" })
+vim.keymap.set("n", "gs", function() require("treesj").toggle() end, { desc = "Toggle [s]plit/join" })

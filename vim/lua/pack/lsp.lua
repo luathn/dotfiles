@@ -1,22 +1,20 @@
-require("mason").setup({})
+vim.pack.add({
+  "https://github.com/mason-org/mason.nvim",
+  "https://github.com/mason-org/mason-lspconfig.nvim",
+  "https://github.com/neovim/nvim-lspconfig",
+})
 
-local lsp_mappings = {
-  n = {
-    ["gd"]         = { vim.lsp.buf.definition, "Go to [d]efinition" },
-    ["<leader>cd"] = { vim.diagnostic.open_float, "Show line diagnostic" },
-    ["<leader>cl"] = { vim.diagnostic.setloclist, "Show diagnostic in loc[l]ist" },
-    ["<leader>cq"] = { vim.diagnostic.setqflist, "Show diagnostic in loc[l]ist" },
-    ["<leader>cf"] = { vim.lsp.buf.format, "[C]ode format" },
-  },
-  v = {
-    ["<leader>cf"] = { vim.lsp.buf.format, "[C]ode format" },
-  }
-}
+require("mason").setup({})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
   callback = function(event)
-    require("utils").load_mappings("lsp", { buffer = event.buf }, lsp_mappings)
+    local opts = function(desc) return { buffer = event.buf, desc = desc } end
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to [d]efinition"))
+    vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, opts("Show line diagnostic"))
+    vim.keymap.set("n", "<leader>cl", vim.diagnostic.setloclist, opts("Show diagnostic in loc[l]ist"))
+    vim.keymap.set("n", "<leader>cq", vim.diagnostic.setqflist, opts("Show diagnostic in [q]uickfix"))
+    vim.keymap.set({ "n", "v" }, "<leader>cf", vim.lsp.buf.format, opts("[C]ode format"))
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
 

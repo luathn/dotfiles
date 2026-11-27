@@ -45,10 +45,7 @@ vim.o.foldenable = false
 vim.o.foldopen = ""
 vim.o.foldclose = ""
 
-require("llm")
-require("pack")
-require("utils").load_mappings("general")
-
+-- Autocmds
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "ruby" },
   command = [[nnoremap <buffer> <leader>rr :term ruby %<CR>]]
@@ -75,3 +72,38 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "qf" },
   command = [[nnoremap <buffer> q :cclose<CR>:lclose<CR>]]
 })
+
+require("keymaps")
+require("llm")
+
+-- Plugins
+vim.pack.add({ "https://github.com/nvim-lua/plenary.nvim" }) -- Shared dependency
+
+vim.pack.add({ "https://github.com/catppuccin/nvim" })
+require("catppuccin").setup({})
+vim.cmd.colorscheme("catppuccin-frappe")
+
+-- Editor
+require("pack.treesitter")
+require("pack.mini_surround")
+require("pack.undotree")
+require("pack.blink_cmp")
+require("pack.lsp")
+
+-- Git
+vim.cmd("packadd nvim.difftool")
+require("pack.diffview")
+require("pack.neogit")
+require("pack.mini_git")
+
+-- Navigation
+require("pack.oil")
+require("pack.grug_far")
+
+-- Tools
+require("pack.vim_test")
+require("pack.dap")
+require("pack.claudecode")
+
+-- Test
+require("pack.nvimtico")

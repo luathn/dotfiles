@@ -1,3 +1,5 @@
+vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
+
 require("oil").setup({
   cleanup_delay_ms = 10000,
   lsp_file_methods = {
@@ -33,3 +35,5 @@ require("oil").setup({
     },
   },
 })
+
+vim.keymap.set("n", "-", function() require("oil").open() end, { desc = "Open parent directory" })
