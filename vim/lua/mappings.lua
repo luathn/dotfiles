@@ -1,7 +1,5 @@
 local M = {}
 
-local silent_noremap = { silent = true, noremap = true }
-
 M.general = {
   n = {
     ["gp"]           = { "`[v`]" },
@@ -69,11 +67,6 @@ M.oil = {
   { "-", "<cmd>lua require('oil').open()<cr>", desc = "Open parent directory" },
 }
 
-M.vim_fugitive = {
-  { "<leader>gB", ":Git blame<cr>", desc = "[G]it [b]lame" },
-  { "<leader>ge", ":Gedit",         desc = "[G]it [e]dit" },
-}
-
 M.vim_test = {
   { "<leader>tn", ":TestNearest<CR>", desc = "[T]est [n]earest" },
   { "<leader>tf", ":TestFile<CR>",    desc = "[T]est [f]ile" },
@@ -128,26 +121,18 @@ M.snacks = {
   { "<leader>bd", "<cmd>lua Snacks.bufdelete()<Cr>",                  desc = "[B]uffer [d]elete" },
   { "<leader>bD", "<cmd>lua Snacks.bufdelete.all()<Cr>",              desc = "[B]uffer [D]elete all" },
   { "<leader>bo", "<cmd>lua Snacks.bufdelete.other()<Cr>",            desc = "[B]uffer delete [o]ther" },
-  -- Terminal
-  -- { "<leader>tt", function() Snacks.terminal.toggle() end, nowait = true, desc = "[t]erminal [t]oggle" },
-  -- { "<leader>to", function() Snacks.terminal.open() end, nowait = true, desc = "[t]erminal [o]pen" },
 }
 
 M.claudecode = {
-  { "<leader>a",  nil,                              desc = "AI/Claude Code" },
-  { "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
-  { "<leader>aa", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
   { "<C-/>",      "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude",      mode = { "n", "t", "i" } },
+  { "<leader>aa", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
   { "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
   { "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
-  { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+  { "<leader>ac", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
   { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
   { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
   { "<leader>as", "<cmd>ClaudeCodeSend<cr>",        desc = "Send to Claude",     mode = "v" },
   { "<leader>as", "<cmd>ClaudeCodeTreeAdd<cr>",     desc = "Add file",           ft = { "NvimTree", "neo-tree", "oil", "minifiles" } },
-  -- Diff management
-  -- { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-  -- { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
 }
 
 M.dap = {
