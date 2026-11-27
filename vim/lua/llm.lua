@@ -1,6 +1,6 @@
 -- Small OpenRouter client, and a command that generates a commit title from the
--- staged changes and inserts it at the top of the current buffer (e.g. the
--- Neogit commit message buffer).
+-- staged changes (or the last commit) and inserts it at the top of the current
+-- buffer (e.g. the Neogit commit message buffer).
 local M = {}
 
 local url = "https://openrouter.ai/api/v1/chat/completions"
@@ -51,10 +51,20 @@ function M.call(messages, opts, on_done)
   end))
 end
 
-function M.generate()
+-- Get the staged diff. If nothing is staged (e.g. amend or reword the last
+-- commit), use the diff of the last commit.
+local function get_diff()
   local diff = vim.fn.system({ "git", "diff", "--staged" })
-  if vim.v.shell_error ~= 0 or diff == "" then
-    vim.notify("No staged changes", vim.log.levels.WARN)
+  if vim.v.shell_error == 0 and diff ~= "" then return diff end
+
+  diff = vim.fn.system({ "git", "show", "--format=", "HEAD" })
+  if vim.v.shell_error == 0 and diff ~= "" then return diff end
+end
+
+function M.insert_commit_title()
+  local diff = get_diff()
+  if not diff then
+    vim.notify("No staged changes and no last commit", vim.log.levels.WARN)
     return
   end
 
@@ -65,7 +75,7 @@ function M.generate()
   }
   local opts = { temperature = 0.5, max_tokens = 40, reasoning = { enabled = false } }
 
-  vim.notify("Generating commit message...")
+  vim.notify("Generating commit title...")
   M.call(messages, opts, function(content)
     if not vim.api.nvim_buf_is_valid(buf) then return end
     local text = vim.trim(content):gsub("^`+", ""):gsub("`+$", "")
@@ -73,6 +83,6 @@ function M.generate()
   end)
 end
 
-vim.api.nvim_create_user_command("AiCommit", M.generate, { desc = "Generate commit title from staged diff" })
+vim.api.nvim_create_user_command("AiCommit", M.insert_commit_title, { desc = "Insert an AI commit title from the staged diff or the last commit" })
 
 return M
