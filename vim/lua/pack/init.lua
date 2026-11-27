@@ -57,6 +57,10 @@ require("pack.grug_far")
 -- Tools
 vim.pack.add({ "https://github.com/vim-test/vim-test" })
 load_keys(mappings.vim_test)
+vim.api.nvim_exec([[
+  let test#strategy = "neovim_sticky"
+  let test#neovim#term_position = "vert"
+]], true)
 
 -- Debug
 vim.pack.add({ "https://github.com/mfussenegger/nvim-dap" })
